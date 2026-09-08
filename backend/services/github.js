@@ -107,6 +107,16 @@ async function localDelete(p) {
 }
 
 export async function getFile(p) {
+  // A path with a not-yet-pushed queued write (see the debounce queue below)
+  // means THIS process just changed it locally and hasn't committed it to
+  // GitHub yet — trust the local copy instead of re-fetching the pre-change
+  // version from GitHub, or a just-saved item would vanish from the very
+  // next list/read until the debounce timer fires.
+  if (pendingWrites.has(p)) {
+    const local = await localGet(p);
+    if (local) return local;
+  }
+
   // Locally, the project `data/` folder is the source of truth.
   if (!isVercel) {
     const local = await localGet(p);
@@ -314,6 +324,11 @@ async function putToGithub(p, body, attempt = 0) {
 }
 
 export async function getBinary(p) {
+  if (pendingWrites.has(p)) {
+    const local = await localGetBinary(p);
+    if (local) return local;
+  }
+
   if (!hasGithubConfig()) return localGetBinary(p);
 
   try {
@@ -405,6 +420,129 @@ export async function deleteBinary(p, { message, author } = {}) {
     }
     return { ok: true, githubSynced: false };
   }
+}
+
+/* ============================================================
+   DEBOUNCED / BATCHED GITHUB PUSH QUEUE
+   ------------------------------------------------------------
+   putFileQueued / putBinaryQueued / deleteFileQueued / deleteBinaryQueued
+   write to the local mirror IMMEDIATELY (so the request returns fast and
+   getFile/getBinary above see the change right away), but hold off on the
+   actual GitHub commit. Every further queued write resets a single shared
+   15s timer; only once nothing new comes in for 15s does everything queued
+   up get pushed, one commit per path. Uploading several files back-to-back
+   (e.g. one PDF per line item in a group) collapses into far fewer commits
+   than the old "commit on every request" behaviour.
+   A path written twice before the flush only keeps the LAST write (Map
+   overwrite) — no point committing an intermediate version nobody sees.
+   If GitHub isn't configured this degrades to local-only, same as before.
+
+   CAVEAT — this app is deployed on Vercel serverless functions, which are
+   not guaranteed to stay warm for the full 15s: if the instance handling
+   an upload is recycled before the timer fires, that queued push is lost
+   from THIS process's memory (the local mirror it wrote to is `/tmp`,
+   which doesn't survive a cold start either). Two things bound the damage:
+     1) MAX_PENDING below forces an early flush once enough changes have
+        piled up, so the exposure window shrinks under heavy activity
+        instead of growing.
+     2) flushGithubQueue() is exported so it can be called from an admin
+        "sync now" action or a periodic cron hitting a small route — worth
+        wiring up if silent data loss on an unlucky cold start is a
+        concern (Vercel Cron on the Hobby tier only fires once a day, so a
+        real safety net needs a Pro plan cron, or an external pinger).
+   ============================================================ */
+const pendingWrites = new Map(); // path -> { kind, ...write-specific fields }
+let flushTimer = null;
+const DEBOUNCE_MS = 15_000;
+const MAX_PENDING = 25;
+
+function scheduleFlush() {
+  if (flushTimer) clearTimeout(flushTimer);
+  if (pendingWrites.size >= MAX_PENDING) {
+    flushTimer = null;
+    flushGithubQueue().catch(e => console.error('[githubQueue] forced flush failed:', e.message));
+    return;
+  }
+  flushTimer = setTimeout(() => {
+    flushTimer = null;
+    flushGithubQueue().catch(e => console.error('[githubQueue] flush failed:', e.message));
+  }, DEBOUNCE_MS);
+  // Don't let this pending timer keep a local `node server.js` process
+  // alive on its own if everything else has finished.
+  if (typeof flushTimer.unref === 'function') flushTimer.unref();
+}
+
+export async function putFileQueued(p, contentObject, { message, author } = {}) {
+  await localPut(p, contentObject).catch(() => {});
+  if (!hasGithubConfig()) return { ok: true };
+  pendingWrites.set(p, { kind: 'file', contentObject, message, author });
+  scheduleFlush();
+  return { ok: true, queued: true };
+}
+
+export async function putBinaryQueued(p, buffer, { message, author } = {}) {
+  await localPutBinary(p, buffer).catch(() => {});
+  if (!hasGithubConfig()) return { ok: true };
+  pendingWrites.set(p, { kind: 'binary', buffer, message, author });
+  scheduleFlush();
+  return { ok: true, queued: true };
+}
+
+export async function deleteFileQueued(p, { message, author } = {}) {
+  await localDelete(p);
+  if (!hasGithubConfig()) return { ok: true };
+  pendingWrites.set(p, { kind: 'delete-file', message, author });
+  scheduleFlush();
+  return { ok: true, queued: true };
+}
+
+export async function deleteBinaryQueued(p, { message, author } = {}) {
+  await localDeleteBinary(p);
+  if (!hasGithubConfig()) return { ok: true };
+  pendingWrites.set(p, { kind: 'delete-binary', message, author });
+  scheduleFlush();
+  return { ok: true, queued: true };
+}
+
+// Pushes everything currently queued, one commit per path. A path whose
+// push fails (network blip, 409 exhausted, etc.) is put back on the queue
+// and re-scheduled instead of being silently dropped.
+export async function flushGithubQueue() {
+  if (flushTimer) { clearTimeout(flushTimer); flushTimer = null; }
+  if (!pendingWrites.size) return { flushed: 0, failed: 0 };
+
+  const entries = Array.from(pendingWrites.entries());
+  pendingWrites.clear();
+
+  let flushed = 0;
+  const failures = [];
+  for (const [p, entry] of entries) {
+    try {
+      if (entry.kind === 'file') {
+        await putFile(p, entry.contentObject, { message: entry.message, author: entry.author });
+      } else if (entry.kind === 'binary') {
+        await putBinary(p, entry.buffer, { message: entry.message, author: entry.author });
+      } else if (entry.kind === 'delete-file') {
+        await deleteFile(p, { message: entry.message, author: entry.author });
+      } else if (entry.kind === 'delete-binary') {
+        await deleteBinary(p, { message: entry.message, author: entry.author });
+      }
+      flushed++;
+    } catch (e) {
+      console.error(`[githubQueue] push failed for ${p}:`, e.message);
+      failures.push([p, entry]);
+    }
+  }
+
+  if (failures.length) {
+    for (const [p, entry] of failures) pendingWrites.set(p, entry);
+    scheduleFlush();
+  }
+  return { flushed, failed: failures.length };
+}
+
+export function pendingQueueSize() {
+  return pendingWrites.size;
 }
 
 /* ============================================================

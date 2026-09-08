@@ -72,14 +72,15 @@ export const templatesApi = {
   reorderGroups: (order) => jsonRequest('PUT', '/api/templates/groups/reorder', { order }),
   reorderPdfs: (groupId, order) => jsonRequest('PUT', '/api/templates/reorder', { groupId, order }),
 
-  create: ({ title, subtitle, groupId, file }) =>
+  create: ({ title, subtitle, groupId, file, sheetId }) =>
     fileToBase64(file).then(dataBase64 =>
       jsonRequest('POST', '/api/templates', {
         title,
         subtitle: subtitle || '',
         groupId,
         filename: file.name,
-        dataBase64
+        dataBase64,
+        sheetId
       })
     ),
 

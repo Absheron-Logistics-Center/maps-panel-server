@@ -70,14 +70,15 @@ export const pdfsApi = {
   reorderGroups: (order) => jsonRequest('PUT', '/api/pdfs/groups/reorder', { order }),
   reorderPdfs: (groupId, order) => jsonRequest('PUT', '/api/pdfs/reorder', { groupId, order }),
 
-  create: ({ title, subtitle, groupId, file }) =>
+  create: ({ title, subtitle, groupId, file, sheetId }) =>
     fileToBase64(file).then(dataBase64 =>
       jsonRequest('POST', '/api/pdfs', {
         title,
         subtitle: subtitle || '',
         groupId,
         filename: file.name,
-        dataBase64
+        dataBase64,
+        sheetId
       })
     ),
 

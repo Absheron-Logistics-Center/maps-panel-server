@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { getFile, putFile, deleteFile, getBinary, putBinary, deleteBinary, attribution } from '../services/github.js';
+import {
+  getFile, putFileQueued as putFile, deleteFile, getBinary,
+  putBinaryQueued as putBinary, deleteBinaryQueued as deleteBinary, attribution
+} from '../services/github.js';
 import { syncFromItem } from '../services/sheetsStore.js';
 
 const router = Router();
@@ -7,13 +10,26 @@ const dataPath = () => (process.env.DATA_PATH || 'data').replace(/^\/|\/$/g, '')
 
 // Uploads used to be accepted with no server-side check at all — any file
 // type, any size (bounded only by the raw express.json body limit, which
-// just produced an ugly generic error). Enforce PDF-only + a sane max size
-// here so bad uploads get a clear 400 instead of silently going through or
-// blowing up further down the line.
+// just produced an ugly generic error). Enforce an allowed-type + sane max
+// size here so bad uploads get a clear 400 instead of silently going
+// through or blowing up further down the line.
 const MAX_PDF_BYTES = 20 * 1024 * 1024; // 20MB
+const ALLOWED_EXT = ['pdf', 'doc', 'docx', 'xls', 'xlsx'];
+const MIME_BY_EXT = {
+  pdf: 'application/pdf',
+  doc: 'application/msword',
+  docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  xls: 'application/vnd.ms-excel',
+  xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+};
+function extOf(filename) {
+  const m = /\.([a-z0-9]+)$/i.exec(filename || '');
+  return m ? m[1].toLowerCase() : '';
+}
 function validateUpload(filename, buf) {
-  if (filename && !/\.pdf$/i.test(filename)) {
-    return 'Yalnız PDF fayl qəbul olunur';
+  const ext = extOf(filename);
+  if (!ext || !ALLOWED_EXT.includes(ext)) {
+    return 'Yalnız PDF, Word (doc/docx) və ya Excel (xls/xlsx) fayl qəbul olunur';
   }
   if (buf.length > MAX_PDF_BYTES) {
     return `Fayl çox böyükdür (maks. ${MAX_PDF_BYTES / (1024 * 1024)}MB)`;
@@ -23,7 +39,7 @@ function validateUpload(filename, buf) {
 
 const pdfIndexPath     = () => `${dataPath()}/templates/index.json`;
 const pdfArchivePath   = () => `${dataPath()}/templates/archive.json`;
-const pdfFilePathFiles = (id) => `${dataPath()}/templates/pdf/pdf-${id}.pdf`;
+const pdfFilePathFiles = (id, ext = 'pdf') => `${dataPath()}/templates/pdf/pdf-${id}.${ext}`;
 const pdfFilePathLegacy  = (id) => `${dataPath()}/pdfs/files/pdf-${id}.pdf`;
 const pdfFilePathLegacy2 = (id) => `${dataPath()}/files/files/pdf-${id}.pdf`;
 
@@ -174,7 +190,7 @@ router.delete('/group/:gid', requireAdmin, async (req, res, next) => {
 
     const inGroup = idx.pdfs.filter(p => allGroupIds.includes(Number(p.groupId)));
     for (const p of inGroup) {
-      await deleteBinary(pdfFilePathFiles(p.id), attribution(req.user, `Delete pdf ${p.id} (group ${gid})`)).catch(() => {});
+      await deleteBinary(pdfFilePathFiles(p.id, extOf(p.filename)), attribution(req.user, `Delete pdf ${p.id} (group ${gid})`)).catch(() => {});
       await deleteBinary(pdfFilePathLegacy(p.id)).catch(() => {});
       await deleteBinary(pdfFilePathLegacy2(p.id)).catch(() => {});
     }
@@ -312,12 +328,13 @@ router.get('/:id/file', async (req, res, next) => {
     }
     if (!meta) return res.status(404).json({ error: 'PDF not found' });
 
-    let bin = await getBinary(pdfFilePathFiles(id));
+    const ext = extOf(meta.filename) || 'pdf';
+    let bin = await getBinary(pdfFilePathFiles(id, ext));
     if (!bin) bin = await getBinary(pdfFilePathLegacy(id));
     if (!bin) bin = await getBinary(pdfFilePathLegacy2(id));
     if (!bin) return res.status(404).json({ error: 'PDF file missing' });
 
-    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Type', MIME_BY_EXT[ext] || 'application/octet-stream');
     res.setHeader('Content-Disposition', `inline; filename="${encodeURIComponent(meta.filename || `pdf-${id}.pdf`)}"`);
     res.setHeader('Content-Length', bin.length);
     res.send(bin);
@@ -342,7 +359,7 @@ router.post('/', requireAdmin, async (req, res, next) => {
     const buf = Buffer.from(dataBase64, 'base64');
     const uploadError = validateUpload(filename, buf);
     if (uploadError) return res.status(400).json({ error: uploadError });
-    await putBinary(pdfFilePathFiles(newId), buf, attribution(req.user, `Add pdf ${newId}`));
+    await putBinary(pdfFilePathFiles(newId, extOf(filename)), buf, attribution(req.user, `Add pdf ${newId}`));
 
     const entry = {
       id: newId,
@@ -387,7 +404,10 @@ router.put('/:id', requireAdmin, async (req, res, next) => {
       const buf = Buffer.from(dataBase64, 'base64');
       const uploadError = validateUpload(filename, buf);
       if (uploadError) return res.status(400).json({ error: uploadError });
-      await putBinary(pdfFilePathFiles(id), buf, attribution(req.user, `Replace pdf ${id}`));
+      const oldExt = extOf(idx.pdfs[i].filename);
+      const newExt = extOf(filename) || oldExt;
+      await putBinary(pdfFilePathFiles(id, newExt), buf, attribution(req.user, `Replace pdf ${id}`));
+      if (newExt !== oldExt) await deleteBinary(pdfFilePathFiles(id, oldExt)).catch(() => {});
       updated.size = buf.length;
       updated.uploadedAt = new Date().toISOString();
     }
@@ -408,8 +428,9 @@ router.delete('/:id', requireAdmin, async (req, res, next) => {
   try {
     const id = Number(req.params.id);
     const idx = await readIndex();
+    const existing = (idx.pdfs || []).find(p => Number(p.id) === id);
     idx.pdfs = (idx.pdfs || []).filter(p => Number(p.id) !== id);
-    await deleteBinary(pdfFilePathFiles(id), attribution(req.user, `Delete pdf ${id}`)).catch(() => {});
+    await deleteBinary(pdfFilePathFiles(id, extOf(existing?.filename)), attribution(req.user, `Delete pdf ${id}`)).catch(() => {});
     await deleteBinary(pdfFilePathLegacy(id)).catch(() => {});
     await deleteBinary(pdfFilePathLegacy2(id)).catch(() => {});
     await writeIndex(idx, `Remove pdf ${id} from index`, req.user);

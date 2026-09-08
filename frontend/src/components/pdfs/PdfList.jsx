@@ -921,6 +921,7 @@ export default function PdfList({
           pdf={modal.pdf}
           groups={groups.filter(g => !isTempId(g.id))}
           defaultGroupId={modal.defaultGroupId}
+          sheetOptions={modal.mode === 'create' ? sheetOptions : null}
           onClose={() => setModal(null)}
           onSave={handleModalSave}
         />
