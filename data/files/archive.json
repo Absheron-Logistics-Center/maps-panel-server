@@ -1,14 +1,3 @@
 {
-  "items": [
-    {
-      "id": 2,
-      "title": "Sənəd 2",
-      "subtitle": "ALM-X1-C1",
-      "filename": "pdf-2.pdf",
-      "size": 25953,
-      "groupId": 1,
-      "groupName": "Ümumi 2",
-      "archivedAt": "2026-07-06T07:02:19.908Z"
-    }
-  ]
+  "items": []
 }

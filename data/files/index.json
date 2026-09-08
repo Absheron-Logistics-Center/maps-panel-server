@@ -1,141 +1,7 @@
 {
-  "groups": [
-    {
-      "id": 1,
-      "name": "Anbar logistikası şöbəsi"
-    },
-    {
-      "id": 2,
-      "name": "Biznes departamenti"
-    },
-    {
-      "id": 3,
-      "name": "Beynəlxalq daşımalar departamenti"
-    },
-    {
-      "id": 4,
-      "name": "Daxili audit departamenti"
-    },
-    {
-      "id": 5,
-      "name": "Daxili daşımalar departamenti"
-    },
-    {
-      "id": 6,
-      "name": "Əməliyyatların konfiqurasiyası və transformasiya departamenti"
-    },
-    {
-      "id": 7,
-      "name": "Hüquq departamenti"
-    },
-    {
-      "id": 8,
-      "name": "İnformasiya texnologiyaları şöbəsi"
-    },
-    {
-      "id": 9,
-      "name": "İnsan resursları və inzibati departament"
-    },
-    {
-      "id": 10,
-      "name": "Keyfiyyətə nəzarət və SƏTƏM şöbəsi"
-    },
-    {
-      "id": 11,
-      "name": "Layihələrin idarə olunması departamenti"
-    },
-    {
-      "id": 12,
-      "name": "Marketinq və Kommunikasiya departamenti"
-    },
-    {
-      "id": 13,
-      "name": "Maliyyə departamenti"
-    },
-    {
-      "id": 14,
-      "name": "Manevra və planlama ofisi"
-    },
-    {
-      "id": 15,
-      "name": "Risklərə nəzarət və monitorinq şöbəsi"
-    },
-    {
-      "id": 16,
-      "name": "Sahə əməliyyatları ofisi"
-    },
-    {
-      "id": 17,
-      "name": "Təchizat şöbəsi"
-    },
-    {
-      "id": 18,
-      "name": "Təhlükəsizlik şöbəsi"
-    },
-    {
-      "id": 19,
-      "name": "Təmir və texnikaya nəzarət şöbəsi"
-    },
-    {
-      "id": 20,
-      "name": "Təsərrüfat şöbəsi"
-    },
-    {
-      "id": 21,
-      "name": "TIR Park və minik avtomobillərinin dayanacağı şöbəsi"
-    },
-    {
-      "id": 22,
-      "name": "Vahid pəncərə departamenti"
-    },
-    {
-      "id": 23,
-      "name": "MB BROKER MMC"
-    },
-    {
-      "id": 24,
-      "name": "Abşeron Express MMC"
-    },
-    {
-      "id": 25,
-      "name": "Ümumi siyasət və sertifikatlar",
-      "parentId": null
-    },
-    {
-      "id": 26,
-      "name": "Anbar logistikası şöbəsi / SƏ / Konteyner əməliyyatları şöbəsi"
-    },
-    {
-      "id": 27,
-      "name": "İctimaiyyətlə əlaqələr və marketinq şöbəsi"
-    },
-    {
-      "id": 28,
-      "name": "İnfrastruktur şöbəsi"
-    },
-    {
-      "id": 29,
-      "name": "KN və SƏTƏM şöbəsi"
-    },
-    {
-      "id": 30,
-      "name": "Marketin və kommunikasiya departamenti"
-    },
-    {
-      "id": 31,
-      "name": "Ümumi təyinatlı"
-    },
-    {
-      "id": 32,
-      "name": "Abşeron Biznes Park"
-    },
-    {
-      "id": 33,
-      "name": "MB Broker"
-    }
-  ],
   "pdfs": [
     {
+<<<<<<< HEAD
       "id": 2,
       "title": "ALM İMS Siyasəti",
       "subtitle": "",
@@ -210,17 +76,20 @@
     },
     {
       "id": 10,
+=======
+      "id": 1,
+>>>>>>> ca4920d27a27918bba71109a62dba8b7fa9a60ff
       "title": "Anbar logistikası şöbəsi əsasnaməsi",
       "subtitle": "",
-      "filename": "",
-      "size": 0,
+      "filename": "grapefruit.pdf",
+      "size": 43108,
       "noFile": true,
       "groupId": 1,
       "status": "progress",
-      "uploadedAt": "2026-09-03T07:32:29.805Z"
+      "uploadedAt": "2026-09-08T06:46:31.300Z"
     },
     {
-      "id": 11,
+      "id": 2,
       "title": "Anbar xidməti işçi təlimatlar",
       "subtitle": "İT/BD/01",
       "filename": "",
@@ -228,10 +97,10 @@
       "noFile": true,
       "groupId": 1,
       "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:32:31.027Z"
+      "uploadedAt": "2026-09-03T12:19:13.858Z"
     },
     {
-      "id": 12,
+      "id": 3,
       "title": "3 PL anbar idarəetmə prosesi",
       "subtitle": "PS/İMS/3PL/01",
       "filename": "",
@@ -239,32 +108,32 @@
       "noFile": true,
       "groupId": 1,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:32.301Z"
+      "uploadedAt": "2026-09-03T12:19:15.110Z"
     },
     {
-      "id": 13,
+      "id": 4,
       "title": "Anbar idarəetmә prosesi",
       "subtitle": "PS/İMS/BD/02",
-      "filename": "",
-      "size": 0,
+      "filename": "01.02.2020_PR.İMS.02 - Anbarın idarəedilməsi  proseduru.pdf",
+      "size": 1850591,
       "noFile": true,
       "groupId": 1,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:33.469Z"
+      "status": "progress",
+      "uploadedAt": "2026-09-08T06:39:49.953Z"
     },
     {
-      "id": 14,
+      "id": 5,
       "title": "Anbarın idarəedilməsi proseduru",
       "subtitle": "Pr/İMS/KAB/02",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 26,
+      "groupId": 2,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:34.688Z"
+      "uploadedAt": "2026-09-03T12:19:18.044Z"
     },
     {
-      "id": 15,
+      "id": 6,
       "title": "Beynəlxalq yükdaşımada idxal əməliyyatlarının təşkili prosesi",
       "subtitle": "ALC-İMS-PRC-ITRN -1/1",
       "filename": "",
@@ -272,10 +141,10 @@
       "noFile": true,
       "groupId": 3,
       "status": "progress",
-      "uploadedAt": "2026-09-03T07:32:36.133Z"
+      "uploadedAt": "2026-09-03T12:19:19.480Z"
     },
     {
-      "id": 16,
+      "id": 7,
       "title": "Beynəlxalq yükdaşımada ixrac əməliyyatlarının təşkili prosesi",
       "subtitle": "ALC-İMS-PRC-ITRN -2/1",
       "filename": "",
@@ -283,10 +152,10 @@
       "noFile": true,
       "groupId": 3,
       "status": "progress",
-      "uploadedAt": "2026-09-03T07:32:37.248Z"
+      "uploadedAt": "2026-09-03T12:19:20.664Z"
     },
     {
-      "id": 17,
+      "id": 8,
       "title": "Beynəlxalq yükdaşıma xidmətləri üzrə gəlir və xərclərin tanınması prosesi",
       "subtitle": "ALC-İMS-PRC-FINC-1/1",
       "filename": "",
@@ -294,10 +163,10 @@
       "noFile": true,
       "groupId": 3,
       "status": "progress",
-      "uploadedAt": "2026-09-03T07:32:38.386Z"
+      "uploadedAt": "2026-09-03T12:19:21.913Z"
     },
     {
-      "id": 18,
+      "id": 9,
       "title": "Beynəlxalq yükdaşımada tranzit əməliyyatlarının təşkili prosesi",
       "subtitle": "ALC-İMS-PRC-ITRN-3/1",
       "filename": "",
@@ -305,10 +174,10 @@
       "noFile": true,
       "groupId": 3,
       "status": "progress",
-      "uploadedAt": "2026-09-03T07:32:39.439Z"
+      "uploadedAt": "2026-09-03T12:19:23.515Z"
     },
     {
-      "id": 19,
+      "id": 10,
       "title": "Beynəlxalq daşımalar departamentinin əsasnaməsi",
       "subtitle": "ALM-İMS-BDD-001",
       "filename": "",
@@ -316,10 +185,10 @@
       "noFile": true,
       "groupId": 3,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:40.624Z"
+      "uploadedAt": "2026-09-03T12:19:24.695Z"
     },
     {
-      "id": 20,
+      "id": 11,
       "title": "Beynəlxalq daşıma prosesi",
       "subtitle": "",
       "filename": "",
@@ -327,1295 +196,1412 @@
       "noFile": true,
       "groupId": 3,
       "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:32:41.929Z"
+      "uploadedAt": "2026-09-03T12:19:26.749Z"
     },
     {
-      "id": 21,
+      "id": 12,
       "title": "Biznes Departamentinin Əsasnaməsi",
       "subtitle": "Ə/ALM/17",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 2,
+      "groupId": 4,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:43.065Z"
+      "uploadedAt": "2026-09-03T12:19:27.986Z"
     },
     {
-      "id": 22,
+      "id": 13,
       "title": "Xidmətlərin satişi proseduru",
       "subtitle": "PR/İMS/BD/02",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 2,
+      "groupId": 4,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:44.347Z"
+      "uploadedAt": "2026-09-03T12:19:29.328Z"
     },
     {
-      "id": 23,
+      "id": 14,
       "title": "İşgüzar görüşlərin idarəedilməsi proseduru",
       "subtitle": "PR/BD/ 01",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 2,
+      "groupId": 4,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:45.502Z"
+      "uploadedAt": "2026-09-03T12:19:30.643Z"
     },
     {
-      "id": 24,
+      "id": 15,
       "title": "Xidmət növlərinin idarəedilməsi prosesi",
       "subtitle": "PS/BD/01",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 2,
+      "groupId": 4,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:46.677Z"
+      "uploadedAt": "2026-09-03T12:19:31.956Z"
     },
     {
-      "id": 25,
+      "id": 16,
       "title": "Daxili audit xidməti haqqinda əsasnamə",
       "subtitle": "",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 4,
+      "groupId": 5,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:48.045Z"
+      "uploadedAt": "2026-09-03T12:19:33.382Z"
     },
     {
-      "id": 26,
+      "id": 17,
       "title": "Daxili audit proseduru",
       "subtitle": "PR/İMS/01",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 4,
+      "groupId": 5,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:49.266Z"
+      "uploadedAt": "2026-09-03T12:19:34.935Z"
     },
     {
-      "id": 27,
+      "id": 18,
       "title": "Daxili Daşimalar Departamentinin Əsasnaməsi",
       "subtitle": "ALM-İMS-DDD-001",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 5,
+      "groupId": 6,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:50.526Z"
+      "uploadedAt": "2026-09-03T12:19:36.114Z"
     },
     {
-      "id": 28,
+      "id": 19,
       "title": "Daxili Daşima Xidməti Prosesi",
       "subtitle": "İMS/PS/DD/01",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 5,
+      "groupId": 6,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:51.671Z"
+      "uploadedAt": "2026-09-03T12:19:37.467Z"
     },
     {
-      "id": 29,
+      "id": 20,
       "title": "Əməliyyatlarin Konfiqurasiyasi Və Transformasiya Departamentinin Əsasnaməsi",
       "subtitle": "ALM-İMS-ƏKTD-001",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 6,
+      "groupId": 7,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:53.878Z"
+      "uploadedAt": "2026-09-03T12:19:38.904Z"
     },
     {
-      "id": 30,
+      "id": 21,
       "title": "Anbar proseslərinin proqram təminatı və sayım prosesinin təşkili proseduru",
       "subtitle": "",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 6,
+      "groupId": 7,
       "status": "progress",
-      "uploadedAt": "2026-09-03T07:32:55.469Z"
+      "uploadedAt": "2026-09-03T12:19:40.433Z"
     },
     {
-      "id": 31,
+      "id": 22,
       "title": "Hüquq departamentinin əsasnaməsi",
       "subtitle": "ALM-İMS-HD-001",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 7,
+      "groupId": 8,
       "status": "progress",
-      "uploadedAt": "2026-09-03T07:32:56.751Z"
+      "uploadedAt": "2026-09-03T12:19:41.982Z"
     },
     {
-      "id": 32,
+      "id": 23,
       "title": "Müqavilələrin idarə olunması proseduru",
       "subtitle": "ALC-IMS-PRD-LEGD-1/1",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 7,
+      "groupId": 8,
       "status": "notdone",
-      "uploadedAt": "2026-09-03T07:32:57.856Z"
+      "uploadedAt": "2026-09-03T12:19:43.257Z"
     },
     {
-      "id": 33,
+      "id": 24,
       "title": "Marketinq araşdirma proseduru",
       "subtitle": "Pr/MK/01",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 27,
+      "groupId": 9,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:32:59.200Z"
+      "uploadedAt": "2026-09-03T12:19:46.109Z"
     },
     {
-      "id": 34,
+      "id": 25,
       "title": "Marketinq kommunikasiya proseduru",
       "subtitle": "PR/MK/02",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 27,
+      "groupId": 9,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:01.434Z"
+      "uploadedAt": "2026-09-03T12:19:47.636Z"
     },
     {
-      "id": 35,
+      "id": 26,
       "title": "Müştəri məmnunluğunun ölçülməsi və şikayətlərin araşdirilmasi proseduru",
       "subtitle": "PR/İMS/MK/03",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 27,
+      "groupId": 9,
       "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:33:03.007Z"
+      "uploadedAt": "2026-09-03T12:19:49.171Z"
     },
     {
-      "id": 36,
+      "id": 27,
       "title": "Xidmət sorğularin cavablandirilmasi proseduru",
       "subtitle": "PR/İMS/MK/04",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 27,
+      "groupId": 9,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:04.362Z"
+      "uploadedAt": "2026-09-03T12:19:50.451Z"
     },
     {
-      "id": 37,
+      "id": 28,
       "title": "İctimaiyyətlə əlaqələr və marketinq şöbəsi əsasnaməsi",
       "subtitle": "",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 27,
+      "groupId": 9,
       "status": "progress",
-      "uploadedAt": "2026-09-03T07:33:05.454Z"
+      "uploadedAt": "2026-09-03T12:19:51.652Z"
     },
     {
-      "id": 38,
+      "id": 29,
       "title": "İnformasiya Texnologiyalari Şöbəsinin Əsasnaməsi",
       "subtitle": "Ə/ALM/13",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 8,
+      "groupId": 10,
       "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:07.082Z"
+      "uploadedAt": "2026-09-03T12:19:53.386Z"
     },
     {
-      "id": 39,
+      "id": 30,
       "title": "Mərkəz daxilində İT xidmətlərinin təmini proseduru",
       "subtitle": "",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 8,
+      "groupId": 10,
       "status": "progress",
-      "uploadedAt": "2026-09-03T07:33:08.654Z"
+      "uploadedAt": "2026-09-03T12:19:55.961Z"
+    },
+    {
+      "id": 31,
+      "title": "İnfrastruktur şöbəsinin əsasnaməsi",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 11,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:19:57.295Z"
+    },
+    {
+      "id": 32,
+      "title": "Müştəri Cəlbi Və Satiş Üzrə Mükafatlandirma Qaydasi",
+      "subtitle": "ALM-İMS",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:19:59.054Z"
+    },
+    {
+      "id": 33,
+      "title": "Davamiyyətə Nəzarət Və İcazə Proseduru",
+      "subtitle": "ALM-İMS-İRİD-004",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:00.803Z"
+    },
+    {
+      "id": 34,
+      "title": "\"Abşeron Logistika” Mmc-də İş Fəaliyyətinin İdarə Olunmasi Qaydasi",
+      "subtitle": "AM-İMS-İRİD-R1",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:02.539Z"
+    },
+    {
+      "id": 35,
+      "title": "İşə Qəbul Prosesi",
+      "subtitle": "PS/İMS/İR/01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:20:04.526Z"
+    },
+    {
+      "id": 36,
+      "title": "Təlim Proseduru",
+      "subtitle": "PR/İMS/İR/03",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:20:06.051Z"
+    },
+    {
+      "id": 37,
+      "title": "Korporativ Davraniş Və Biznes Etika Məcəlləsi",
+      "subtitle": "ALM-IMS-İRİD-003",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:08.039Z"
+    },
+    {
+      "id": 38,
+      "title": "Vəzifə Kateqoriyalari Üzrə Səriştə Tələbi",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:20:09.309Z"
+    },
+    {
+      "id": 39,
+      "title": "Satiş Üzrə Mükafatlandirma Qaydasi",
+      "subtitle": "ALM-İMS-İRİD",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:11.408Z"
     },
     {
       "id": 40,
-      "title": "İnfrastruktur şöbəsinin əsasnaməsi",
+      "title": "İnsan Resurslari Və İnzibati Departamentin Əsasnaməsi",
+      "subtitle": "ALM-İMS-İRİD-001",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:13.033Z"
+    },
+    {
+      "id": 41,
+      "title": "Sənədləşdirilmiş İnformasiyanin İdarəedilməsi Proseduru",
+      "subtitle": "PR/İMS/İİ/01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:14.685Z"
+    },
+    {
+      "id": 42,
+      "title": "Sənəd dövriyyəsi proseduru",
+      "subtitle": "PR/İMS/İİ/02",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:16.266Z"
+    },
+    {
+      "id": 43,
+      "title": "Adaptasiya proseduru",
+      "subtitle": "PR/İMS/İR/02",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:20:18.132Z"
+    },
+    {
+      "id": 44,
+      "title": "İclaslarin keçirilməsi proseduru",
+      "subtitle": "PR/İMS/İİ/04",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:19.901Z"
+    },
+    {
+      "id": 45,
+      "title": "İnsan resursları və inzibati departamentin əsasnaməsi",
+      "subtitle": "ALC-IMS-S-HRAD-001",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "notdone",
+      "uploadedAt": "2026-09-03T12:20:21.583Z"
+    },
+    {
+      "id": 46,
+      "title": "İşə qəbul və adaptasiya proseduru",
+      "subtitle": "ALM-IMS-PRD-IRID-01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:20:22.999Z"
+    },
+    {
+      "id": 47,
+      "title": "Təlim və İnkişaf Proseduru",
+      "subtitle": "ALC-IMS-PRC-HRAD-002",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:20:24.589Z"
+    },
+    {
+      "id": 48,
+      "title": "Mərkəz daxilində Arxiv və kargüzarlıq proseslərinin təmini proseduru",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:20:26.156Z"
+    },
+    {
+      "id": 49,
+      "title": "İR sənədləşmə prosesləri",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 12,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:20:27.691Z"
+    },
+    {
+      "id": 50,
+      "title": "Keyfiyyətə Nəzarət və SƏTƏM şöbəsinin ƏSASNAMƏSİ",
+      "subtitle": "ALC-İMS-S-QHSE - 1/2",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:20:29.097Z"
+    },
+    {
+      "id": 51,
+      "title": "Kimyəvi və təhlükəli hesab edilən maddələrin saxlanması və istifadəsi Proseduru",
+      "subtitle": "İMS/SƏTƏM/09",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:30.911Z"
+    },
+    {
+      "id": 52,
+      "title": "İzləmə və ölçmə cihazlarinin izlənməsi və kalibrasiyasi proseduru",
+      "subtitle": "PR/IMS/İD/03",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:32.375Z"
+    },
+    {
+      "id": 53,
+      "title": "Tənzimləyici tədbirlər proseduru",
+      "subtitle": "PR/İMS/ 02",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:33.738Z"
+    },
+    {
+      "id": 54,
+      "title": "Fəaliyyətin planlanmasi proseduru",
+      "subtitle": "PR/İMS/ 01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:35.477Z"
+    },
+    {
+      "id": 55,
+      "title": "Bədbəxt hadisələrin qeydi, ölçülməsi və izlənməsi proseduru",
+      "subtitle": "İMS/SƏTƏМ/01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:37.001Z"
+    },
+    {
+      "id": 56,
+      "title": "Təhlükələrin müəyyən edilməsi və risk qiyməltəndirmə proseduru",
+      "subtitle": "İMS/SƏTƏM/02",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:38.759Z"
+    },
+    {
+      "id": 57,
+      "title": "Fərdi və kollektiv mühafizə vasitələrinə nəzarəт proseduru",
+      "subtitle": "İMS/SƏTƏM/03",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:40.336Z"
+    },
+    {
+      "id": 58,
+      "title": "İlk tibbi yardimin təşkili proseduru",
+      "subtitle": "İMS/SƏTƏM/04",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:20:41.758Z"
+    },
+    {
+      "id": 59,
+      "title": "Təhlükəsiz iş üsullarinin üzrə təlim proseduru",
+      "subtitle": "İMS/SƏTƏM/05",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:43.333Z"
+    },
+    {
+      "id": 60,
+      "title": "Tullantilarin idarəedilməsi proseduru",
+      "subtitle": "İMS/SƏTƏM/06",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:44.806Z"
+    },
+    {
+      "id": 61,
+      "title": "Fövqəladə hallara hazirliq proseduru",
+      "subtitle": "İMS/SƏTƏM/07",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:20:46.324Z"
+    },
+    {
+      "id": 62,
+      "title": "Ekoloji təhlükələrin qiymətləndirilməsi proseduru",
+      "subtitle": "İMS/SƏTƏM/08",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:47.603Z"
+    },
+    {
+      "id": 63,
+      "title": "Mülki Müdafiə Planı və Fövqəladə Hallara Hazırlıq Proseduru",
+      "subtitle": "ALM-IMS-PL/PRD-QHSE-07",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "notdone",
+      "uploadedAt": "2026-09-03T12:20:49.455Z"
+    },
+    {
+      "id": 64,
+      "title": "Qəzaların ləğvi planı",
+      "subtitle": "ALM-IMS-PL-QHSE-10",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "notdone",
+      "uploadedAt": "2026-09-03T12:20:50.936Z"
+    },
+    {
+      "id": 65,
+      "title": "İlklin tibbi yardımın təşkili proseduru",
+      "subtitle": "ALM-IMS-PRD-QHSE-04",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 13,
+      "status": "notdone",
+      "uploadedAt": "2026-09-03T12:20:52.242Z"
+    },
+    {
+      "id": 66,
+      "title": "Normayaratma fəaliyyətinin təşkili və aparılması prosesi",
+      "subtitle": "ALC-İMS-PRC-PMOD-1/3",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 14,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:20:53.545Z"
+    },
+    {
+      "id": 67,
+      "title": "Layihələrin idaeə edilməsi prosedur qaydaları",
+      "subtitle": "PR/LİO/01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 14,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:55.229Z"
+    },
+    {
+      "id": 68,
+      "title": "Layihələrin İdarə Olunmasi Ofisinin Əsasnaməsi",
+      "subtitle": "ALM-İMS-LİOO-001",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 14,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:56.547Z"
+    },
+    {
+      "id": 69,
+      "title": "Məlumatların açıqlanması proseduru",
+      "subtitle": "ALM-İMS-LİOO-002",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 14,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:20:58.148Z"
+    },
+    {
+      "id": 70,
+      "title": "Korrupsiyaya qarşı mübarizə siyasəti",
+      "subtitle": "ALC-IMS-POL-AC-1/1",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 14,
+      "status": "notdone",
+      "uploadedAt": "2026-09-03T12:21:00.022Z"
+    },
+    {
+      "id": 71,
+      "title": "Büdcə Hazirlanmasi Plani",
+      "subtitle": "ALC-İMS-Pİ-FİNC-001",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 15,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:01.702Z"
+    },
+    {
+      "id": 72,
+      "title": "Maliyyə departamentinin əsasnaməsi",
+      "subtitle": "Ə/ALM/16",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 15,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:21:03.118Z"
+    },
+    {
+      "id": 73,
+      "title": "Maliyyə hesabatlılığı və təhlil proseslərinin tənzimlənməsi proseduru",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 15,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:04.779Z"
+    },
+    {
+      "id": 74,
+      "title": "Mühasibatlıqla bağlı proseslərin tənzimlənməsi proseduru",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 15,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:06.183Z"
+    },
+    {
+      "id": 75,
+      "title": "Vaqonların Mərkəzə qəbulu proseduru",
+      "subtitle": "ALC-İMS-PRD-YOPU -1/3",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 16,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:08.025Z"
+    },
+    {
+      "id": 76,
+      "title": "Dəmir Yolu ilə idxal olunan vaqon yüklərinin təhvil verilməsi prosesi",
+      "subtitle": "ALC-İMS_PRC-TRMS-1/3",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 16,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:09.548Z"
+    },
+    {
+      "id": 77,
+      "title": "Dəmir yolu ilə idxal olunan konteyner yüklərinin təhvil verilmə prosesi",
+      "subtitle": "ALC-İMS_PRC-TRMS-2/3",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 16,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:11.146Z"
+    },
+    {
+      "id": 78,
+      "title": "Mərkəzdən DY ilə ixrac edilən yüklər üzrə sənədləşmə proseduru",
+      "subtitle": "ALC-İMS-PRD-SWIN -2/1",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 16,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:12.972Z"
+    },
+    {
+      "id": 79,
+      "title": "Yüklü və boş vaqonların Mərkəzdən göndərilməsi proseduru",
+      "subtitle": "ALC-İMS-PRD-YOPU -2/3",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 16,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:14.655Z"
+    },
+    {
+      "id": 80,
+      "title": "Manevra və Planlama Şöbəsinin Əsasnaməsi",
+      "subtitle": "Ə/ALM/02",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 16,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:21:16.148Z"
+    },
+    {
+      "id": 81,
+      "title": "Manevra və Planlama Bölməsi Üzrə Işçi Təlimatlar",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 16,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:21:17.523Z"
+    },
+    {
+      "id": 82,
+      "title": "Boş qatarin mərkəzdən göndərilməsi prosesi",
+      "subtitle": "PS/İMS / MP/02",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 16,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:21:18.883Z"
+    },
+    {
+      "id": 83,
+      "title": "Müştəri məmnuniyyətinin ölçülməsi və şikayətlərin idarə edilməsi prosesi",
+      "subtitle": "ALC-İMS_PRC-MCD-1/2",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 17,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:20.555Z"
+    },
+    {
+      "id": 84,
+      "title": "Risklərə nəzarət və monitorinq şöbəsinin əsasnaməsi",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 18,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:21.931Z"
+    },
+    {
+      "id": 85,
+      "title": "Risklərə nəzarət və monitorinq proseslərinin təşkili",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 18,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:23.454Z"
+    },
+    {
+      "id": 86,
+      "title": "Konteyner sahəsinin idarəedilməsi proseduru",
+      "subtitle": "PR/İMS / KAB/ 01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 19,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:21:24.756Z"
+    },
+    {
+      "id": 87,
+      "title": "Yük əməliyyatlarinda texnika və işçi qüvvəsindən istifadə proseduru",
+      "subtitle": "PR/İMS/YƏ/01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 19,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:21:26.417Z"
+    },
+    {
+      "id": 88,
+      "title": "Konteyner və Anbar şöbəsinin əsasnaməsi",
+      "subtitle": "Ə/ALM/03",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 19,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:21:28.002Z"
+    },
+    {
+      "id": 89,
+      "title": "Kran əməliyyatlari şöbəsinin əsasnaməsi",
+      "subtitle": "9/ALM/04",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 19,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:21:29.687Z"
+    },
+    {
+      "id": 90,
+      "title": "Yükləmə boşaltma şöbəsinin əsasnaməsi",
+      "subtitle": "9/ALM/05",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 19,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:21:31.403Z"
+    },
+    {
+      "id": 91,
+      "title": "Avtokar əməliyyatlari şöbəsinin əsasnaməsi",
+      "subtitle": "9/ALM/06",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 19,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:21:33.192Z"
+    },
+    {
+      "id": 92,
+      "title": "Konteyner yüklərinin yük alana verilməsi prosesi",
+      "subtitle": "PS/İMS/KAB /01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 19,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:21:35.306Z"
+    },
+    {
+      "id": 93,
+      "title": "Vaqon yüklərinin yük sahibinə verilməsi prosesi",
+      "subtitle": "PS/YƏ /01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 19,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:21:36.729Z"
+    },
+    {
+      "id": 94,
+      "title": "Yükləmə boşaltma əməliyyatlarinda təhlükəsizlik tələbləri",
+      "subtitle": "İT/YBƏ /01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 19,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:21:38.188Z"
+    },
+    {
+      "id": 95,
+      "title": "Yüklərin vaqona yüklənməsi prosesi",
+      "subtitle": "PS / İMS /YƏ /02",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 19,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:21:40.060Z"
+    },
+    {
+      "id": 96,
+      "title": "Yüklü qatarin qəbulu prosesi",
+      "subtitle": "PS/İMS/MP/01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 19,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:21:42.407Z"
+    },
+    {
+      "id": 97,
+      "title": "Sahə əməliyyatları ofisinin əsasnaməsi",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 19,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:44.190Z"
+    },
+    {
+      "id": 98,
+      "title": "Satınalma Prosesi",
+      "subtitle": "ALC-İMS-PRC-PROC-1/3",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 20,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:46.455Z"
+    },
+    {
+      "id": 99,
+      "title": "Satinalma proseduru",
+      "subtitle": "İMS/PR/TŞ/01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 20,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:21:48.413Z"
+    },
+    {
+      "id": 100,
+      "title": "Tender prosesi",
+      "subtitle": "ALC-IMS-PRC-PROC- 002",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 20,
+      "status": "notdone",
+      "uploadedAt": "2026-09-03T12:21:49.792Z"
+    },
+    {
+      "id": 101,
+      "title": "Təchizat şöbəsinin əsasnaməsi",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 20,
+      "status": "notdone",
+      "uploadedAt": "2026-09-03T12:21:51.316Z"
+    },
+    {
+      "id": 102,
+      "title": "ALM Inzibati binasına və yük həyətinə buraxılış rejimi haqqında təlimat",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 21,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:21:53.194Z"
+    },
+    {
+      "id": 103,
+      "title": "Mühafizə və təhlükəsizlik şöbəsinin əsasnaməsi",
+      "subtitle": "Ə/ALM/15",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 21,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:21:54.713Z"
+    },
+    {
+      "id": 104,
+      "title": "Texnikalarin istismarina nəzarət proseduru",
+      "subtitle": "PR/İD/02",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 22,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:21:56.431Z"
+    },
+    {
+      "id": 105,
+      "title": "Təmir və texnikaya nəzarət şöbəsinin əsasnaməsi",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 22,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:21:58.031Z"
+    },
+    {
+      "id": 106,
+      "title": "Tir parkin idarəedilməsi proseduru",
+      "subtitle": "PR/ İMS/TP/01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 23,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:21:59.849Z"
+    },
+    {
+      "id": 107,
+      "title": "Minik avtomobil dayanacağinin idarəedilməsi proseduru",
+      "subtitle": "PR/İMS/TP/02",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 23,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:22:01.231Z"
+    },
+    {
+      "id": 108,
+      "title": "Tırpark və Minik avtomobilləri dayanacağının idaeə edilməsi proseduru",
+      "subtitle": "ALM-IMS-PRD-TP-01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 23,
+      "status": "notdone",
+      "uploadedAt": "2026-09-03T12:22:02.827Z"
+    },
+    {
+      "id": 109,
+      "title": "TIR Park və minik avtomobillərinin dayanacağı şöbəsinin əsasnaməsi",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 23,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:22:04.343Z"
+    },
+    {
+      "id": 110,
+      "title": "Korporativ elektron poçtdan istifadə proseduru",
+      "subtitle": "ALC-İMS-PRD-İT -1/1",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 24,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:22:05.949Z"
+    },
+    {
+      "id": 111,
+      "title": "Süni intellekt platformasından istifadə təlimatı",
+      "subtitle": "ALC-İMS-İ-PMOD -2/1",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 24,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:22:07.297Z"
+    },
+    {
+      "id": 112,
+      "title": "Korporativ normativ aktlarin idarəedilməsi prosesi",
+      "subtitle": "PS / İMS/ 01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 24,
+      "status": "cancelled",
+      "uploadedAt": "2026-09-03T12:22:08.902Z"
+    },
+    {
+      "id": 113,
+      "title": "İnteqrasiya edilmiş Menecment Sistemi siyasəti",
+      "subtitle": "İMS/01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 24,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:22:10.383Z"
+    },
+    {
+      "id": 114,
+      "title": "Narkotik və Alkoqol siyasəti",
+      "subtitle": "İMS/SƏTƏM/03",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 24,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:22:12.114Z"
+    },
+    {
+      "id": 115,
+      "title": "Nəqliyyat idarəetmə siyasəti",
+      "subtitle": "İMS/SƏTƏM/01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 24,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:22:13.587Z"
+    },
+    {
+      "id": 116,
+      "title": "Tütünçəkmə siyasəti",
+      "subtitle": "İMS/SƏTƏM/02",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 24,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:22:14.965Z"
+    },
+    {
+      "id": 117,
+      "title": "Texniki təhlükəsizlik bəyannaməsinin hesabat-izahat vərəqi",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 24,
+      "status": "notdone",
+      "uploadedAt": "2026-09-03T12:22:16.521Z"
+    },
+    {
+      "id": 118,
+      "title": "Texniki təhlükəsizlik bəyannaməsi",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 24,
+      "status": "notdone",
+      "uploadedAt": "2026-09-03T12:22:18.340Z"
+    },
+    {
+      "id": 119,
+      "title": "Güzəşt Proseduru",
+      "subtitle": "ALM-IMS-PRD-BD-03",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 24,
+      "status": "notdone",
+      "uploadedAt": "2026-09-03T12:22:19.791Z"
+    },
+    {
+      "id": 120,
+      "title": "Mərkəzdə dəmir yolu ilə daxil olan yüklər üzrə sənədləşmə proseduru",
+      "subtitle": "ALC-İMS-PRD-SWIN -1/1",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 25,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:22:21.371Z"
+    },
+    {
+      "id": 121,
+      "title": "Vahid Pəncərə Əməliyyat İşçi Təlimatı",
+      "subtitle": "İT/VP/01",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 25,
+      "status": "renew",
+      "uploadedAt": "2026-09-03T12:22:22.987Z"
+    },
+    {
+      "id": 122,
+      "title": "Vahid pəncərə departamentinin əsasnaməsi",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 25,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:22:24.636Z"
+    },
+    {
+      "id": 123,
+      "title": "Debitor borcların idarə edilməsi proseduru",
+      "subtitle": "AE-PRD-1/1",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 26,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:22:26.097Z"
+    },
+    {
+      "id": 124,
+      "title": "Ekspedisiya xidmətlərinin göstərilməsi proseduru",
+      "subtitle": "AE-PRD-2/1",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 26,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:22:27.522Z"
+    },
+    {
+      "id": 125,
+      "title": "Abşeron biznes park rezidentləri üçün ilkin təhlükəsizlik və sətəm tələbləri",
+      "subtitle": "ALC-IMS-I-QHSE-1/1",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 27,
+      "status": "notdone",
+      "uploadedAt": "2026-09-03T12:22:29.029Z"
+    },
+    {
+      "id": 126,
+      "title": "Abşeron biznes park-da istehsalat və qeyri-istehsalat yönümlüsahələr üzrə rezidentlik verilməsi qaydaları",
+      "subtitle": "",
+      "filename": "",
+      "size": 0,
+      "noFile": true,
+      "groupId": 27,
+      "status": "progress",
+      "uploadedAt": "2026-09-03T12:22:30.767Z"
+    },
+    {
+      "id": 127,
+      "title": "Qeyri tranzit əməliyyatlarının təşkili proseduru",
       "subtitle": "",
       "filename": "",
       "size": 0,
       "noFile": true,
       "groupId": 28,
       "status": "progress",
-      "uploadedAt": "2026-09-03T07:33:10.072Z"
-    },
-    {
-      "id": 41,
-      "title": "Müştəri Cəlbi Və Satiş Üzrə Mükafatlandirma Qaydasi",
-      "subtitle": "ALM-İMS",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:12.295Z"
-    },
-    {
-      "id": 42,
-      "title": "Davamiyyətə Nəzarət Və İcazə Proseduru",
-      "subtitle": "ALM-İMS-İRİD-004",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:13.788Z"
-    },
-    {
-      "id": 43,
-      "title": "\"Abşeron Logistika” Mmc-də İş Fəaliyyətinin İdarə Olunmasi Qaydasi",
-      "subtitle": "AM-İMS-İRİD-R1",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:15.070Z"
-    },
-    {
-      "id": 44,
-      "title": "İşə Qəbul Prosesi",
-      "subtitle": "PS/İMS/İR/01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:33:16.491Z"
-    },
-    {
-      "id": 45,
-      "title": "Təlim Proseduru",
-      "subtitle": "PR/İMS/İR/03",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:33:17.840Z"
-    },
-    {
-      "id": 46,
-      "title": "Korporativ Davraniş Və Biznes Etika Məcəlləsi",
-      "subtitle": "ALM-IMS-İRİD-003",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:20.066Z"
-    },
-    {
-      "id": 47,
-      "title": "Vəzifə Kateqoriyalari Üzrə Səriştə Tələbi",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:33:21.477Z"
-    },
-    {
-      "id": 48,
-      "title": "Satiş Üzrə Mükafatlandirma Qaydasi",
-      "subtitle": "ALM-İMS-İRİD",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:22.750Z"
-    },
-    {
-      "id": 49,
-      "title": "İnsan Resurslari Və İnzibati Departamentin Əsasnaməsi",
-      "subtitle": "ALM-İMS-İRİD-001",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:23.971Z"
-    },
-    {
-      "id": 50,
-      "title": "Sənədləşdirilmiş İnformasiyanin İdarəedilməsi Proseduru",
-      "subtitle": "PR/İMS/İİ/01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:25.418Z"
-    },
-    {
-      "id": 51,
-      "title": "Sənəd dövriyyəsi proseduru",
-      "subtitle": "PR/İMS/İİ/02",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:26.673Z"
-    },
-    {
-      "id": 52,
-      "title": "Adaptasiya proseduru",
-      "subtitle": "PR/İMS/İR/02",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:33:27.967Z"
-    },
-    {
-      "id": 53,
-      "title": "İclaslarin keçirilməsi proseduru",
-      "subtitle": "PR/İMS/İİ/04",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:29.228Z"
-    },
-    {
-      "id": 54,
-      "title": "İnsan resursları və inzibati departamentin əsasnaməsi",
-      "subtitle": "ALC-IMS-S-HRAD-001",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "notdone",
-      "uploadedAt": "2026-09-03T07:33:30.635Z"
-    },
-    {
-      "id": 55,
-      "title": "İşə qəbul və adaptasiya proseduru",
-      "subtitle": "ALM-IMS-PRD-IRID-01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:33:31.893Z"
-    },
-    {
-      "id": 56,
-      "title": "Təlim və İnkişaf Proseduru",
-      "subtitle": "ALC-IMS-PRC-HRAD-002",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:33:33.146Z"
-    },
-    {
-      "id": 57,
-      "title": "Mərkəz daxilində Arxiv və kargüzarlıq proseslərinin təmini proseduru",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:33:34.429Z"
-    },
-    {
-      "id": 58,
-      "title": "İR sənədləşmə prosesləri",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 9,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:33:35.900Z"
-    },
-    {
-      "id": 59,
-      "title": "Keyfiyyətə Nəzarət və SƏTƏM şöbəsinin ƏSASNAMƏSİ",
-      "subtitle": "ALC-İMS-S-QHSE - 1/2",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:33:37.190Z"
-    },
-    {
-      "id": 60,
-      "title": "Kimyəvi və təhlükəli hesab edilən maddələrin saxlanması və istifadəsi Proseduru",
-      "subtitle": "İMS/SƏTƏM/09",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:38.650Z"
-    },
-    {
-      "id": 61,
-      "title": "İzləmə və ölçmə cihazlarinin izlənməsi və kalibrasiyasi proseduru",
-      "subtitle": "PR/IMS/İD/03",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:39.886Z"
-    },
-    {
-      "id": 62,
-      "title": "Tənzimləyici tədbirlər proseduru",
-      "subtitle": "PR/İMS/ 02",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:41.402Z"
-    },
-    {
-      "id": 63,
-      "title": "Fəaliyyətin planlanmasi proseduru",
-      "subtitle": "PR/İMS/ 01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:42.705Z"
-    },
-    {
-      "id": 64,
-      "title": "Bədbəxt hadisələrin qeydi, ölçülməsi və izlənməsi proseduru",
-      "subtitle": "İMS/SƏTƏМ/01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:43.970Z"
-    },
-    {
-      "id": 65,
-      "title": "Təhlükələrin müəyyən edilməsi və risk qiyməltəndirmə proseduru",
-      "subtitle": "İMS/SƏTƏM/02",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:45.253Z"
-    },
-    {
-      "id": 66,
-      "title": "Fərdi və kollektiv mühafizə vasitələrinə nəzarəт proseduru",
-      "subtitle": "İMS/SƏTƏM/03",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:46.663Z"
-    },
-    {
-      "id": 67,
-      "title": "İlk tibbi yardimin təşkili proseduru",
-      "subtitle": "İMS/SƏTƏM/04",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:33:47.897Z"
-    },
-    {
-      "id": 68,
-      "title": "Təhlükəsiz iş üsullarinin üzrə təlim proseduru",
-      "subtitle": "İMS/SƏTƏM/05",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:49.137Z"
-    },
-    {
-      "id": 69,
-      "title": "Tullantilarin idarəedilməsi proseduru",
-      "subtitle": "İMS/SƏTƏM/06",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:50.471Z"
-    },
-    {
-      "id": 70,
-      "title": "Fövqəladə hallara hazirliq proseduru",
-      "subtitle": "İMS/SƏTƏM/07",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:33:51.930Z"
-    },
-    {
-      "id": 71,
-      "title": "Ekoloji təhlükələrin qiymətləndirilməsi proseduru",
-      "subtitle": "İMS/SƏTƏM/08",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:33:54.281Z"
-    },
-    {
-      "id": 72,
-      "title": "Mülki Müdafiə Planı və Fövqəladə Hallara Hazırlıq Proseduru",
-      "subtitle": "ALM-IMS-PL/PRD-QHSE-07",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "notdone",
-      "uploadedAt": "2026-09-03T07:33:55.629Z"
-    },
-    {
-      "id": 73,
-      "title": "Qəzaların ləğvi planı",
-      "subtitle": "ALM-IMS-PL-QHSE-10",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "notdone",
-      "uploadedAt": "2026-09-03T07:33:57.097Z"
-    },
-    {
-      "id": 74,
-      "title": "İlklin tibbi yardımın təşkili proseduru",
-      "subtitle": "ALM-IMS-PRD-QHSE-04",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 29,
-      "status": "notdone",
-      "uploadedAt": "2026-09-03T07:33:58.582Z"
-    },
-    {
-      "id": 75,
-      "title": "Normayaratma fəaliyyətinin təşkili və aparılması prosesi",
-      "subtitle": "ALC-İMS-PRC-PMOD-1/3",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 11,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:33:59.980Z"
-    },
-    {
-      "id": 76,
-      "title": "Layihələrin idaeə edilməsi prosedur qaydaları",
-      "subtitle": "PR/LİO/01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 11,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:34:01.500Z"
-    },
-    {
-      "id": 77,
-      "title": "Layihələrin İdarə Olunmasi Ofisinin Əsasnaməsi",
-      "subtitle": "ALM-İMS-LİOO-001",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 11,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:34:03.029Z"
-    },
-    {
-      "id": 78,
-      "title": "Məlumatların açıqlanması proseduru",
-      "subtitle": "ALM-İMS-LİOO-002",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 11,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:34:04.767Z"
-    },
-    {
-      "id": 79,
-      "title": "Korrupsiyaya qarşı mübarizə siyasəti",
-      "subtitle": "ALC-IMS-POL-AC-1/1",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 11,
-      "status": "notdone",
-      "uploadedAt": "2026-09-03T07:34:06.182Z"
-    },
-    {
-      "id": 80,
-      "title": "Büdcə Hazirlanmasi Plani",
-      "subtitle": "ALC-İMS-Pİ-FİNC-001",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 13,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:08.440Z"
-    },
-    {
-      "id": 81,
-      "title": "Maliyyə departamentinin əsasnaməsi",
-      "subtitle": "Ə/ALM/16",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 13,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:34:10.517Z"
-    },
-    {
-      "id": 82,
-      "title": "Maliyyə hesabatlılığı və təhlil proseslərinin tənzimlənməsi proseduru",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 13,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:12.102Z"
-    },
-    {
-      "id": 83,
-      "title": "Mühasibatlıqla bağlı proseslərin tənzimlənməsi proseduru",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 13,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:13.636Z"
-    },
-    {
-      "id": 84,
-      "title": "Vaqonların Mərkəzə qəbulu proseduru",
-      "subtitle": "ALC-İMS-PRD-YOPU -1/3",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 14,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:15.143Z"
-    },
-    {
-      "id": 85,
-      "title": "Dəmir Yolu ilə idxal olunan vaqon yüklərinin təhvil verilməsi prosesi",
-      "subtitle": "ALC-İMS_PRC-TRMS-1/3",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 14,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:16.783Z"
-    },
-    {
-      "id": 86,
-      "title": "Dəmir yolu ilə idxal olunan konteyner yüklərinin təhvil verilmə prosesi",
-      "subtitle": "ALC-İMS_PRC-TRMS-2/3",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 14,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:18.473Z"
-    },
-    {
-      "id": 87,
-      "title": "Mərkəzdən DY ilə ixrac edilən yüklər üzrə sənədləşmə proseduru",
-      "subtitle": "ALC-İMS-PRD-SWIN -2/1",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 14,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:20.034Z"
-    },
-    {
-      "id": 88,
-      "title": "Yüklü və boş vaqonların Mərkəzdən göndərilməsi proseduru",
-      "subtitle": "ALC-İMS-PRD-YOPU -2/3",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 14,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:21.626Z"
-    },
-    {
-      "id": 89,
-      "title": "Manevra və Planlama Şöbəsinin Əsasnaməsi",
-      "subtitle": "Ə/ALM/02",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 14,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:34:23.461Z"
-    },
-    {
-      "id": 90,
-      "title": "Manevra və Planlama Bölməsi Üzrə Işçi Təlimatlar",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 14,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:34:24.819Z"
-    },
-    {
-      "id": 91,
-      "title": "Boş qatarin mərkəzdən göndərilməsi prosesi",
-      "subtitle": "PS/İMS / MP/02",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 14,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:34:26.269Z"
-    },
-    {
-      "id": 92,
-      "title": "Müştəri məmnuniyyətinin ölçülməsi və şikayətlərin idarə edilməsi prosesi",
-      "subtitle": "ALC-İMS_PRC-MCD-1/2",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 30,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:27.768Z"
-    },
-    {
-      "id": 93,
-      "title": "Risklərə nəzarət və monitorinq şöbəsinin əsasnaməsi",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 15,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:29.303Z"
-    },
-    {
-      "id": 94,
-      "title": "Risklərə nəzarət və monitorinq proseslərinin təşkili",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 15,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:30.887Z"
-    },
-    {
-      "id": 95,
-      "title": "Konteyner sahəsinin idarəedilməsi proseduru",
-      "subtitle": "PR/İMS / KAB/ 01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 16,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:34:32.383Z"
-    },
-    {
-      "id": 96,
-      "title": "Yük əməliyyatlarinda texnika və işçi qüvvəsindən istifadə proseduru",
-      "subtitle": "PR/İMS/YƏ/01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 16,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:34:34.113Z"
-    },
-    {
-      "id": 97,
-      "title": "Konteyner və Anbar şöbəsinin əsasnaməsi",
-      "subtitle": "Ə/ALM/03",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 16,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:34:36.011Z"
-    },
-    {
-      "id": 98,
-      "title": "Kran əməliyyatlari şöbəsinin əsasnaməsi",
-      "subtitle": "9/ALM/04",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 16,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:34:37.957Z"
-    },
-    {
-      "id": 99,
-      "title": "Yükləmə boşaltma şöbəsinin əsasnaməsi",
-      "subtitle": "9/ALM/05",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 16,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:34:39.443Z"
-    },
-    {
-      "id": 100,
-      "title": "Avtokar əməliyyatlari şöbəsinin əsasnaməsi",
-      "subtitle": "9/ALM/06",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 16,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:34:41.352Z"
-    },
-    {
-      "id": 101,
-      "title": "Konteyner yüklərinin yük alana verilməsi prosesi",
-      "subtitle": "PS/İMS/KAB /01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 16,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:34:43.304Z"
-    },
-    {
-      "id": 102,
-      "title": "Vaqon yüklərinin yük sahibinə verilməsi prosesi",
-      "subtitle": "PS/YƏ /01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 16,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:34:45.857Z"
-    },
-    {
-      "id": 103,
-      "title": "Yükləmə boşaltma əməliyyatlarinda təhlükəsizlik tələbləri",
-      "subtitle": "İT/YBƏ /01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 16,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:34:48.003Z"
-    },
-    {
-      "id": 104,
-      "title": "Yüklərin vaqona yüklənməsi prosesi",
-      "subtitle": "PS / İMS /YƏ /02",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 16,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:34:49.542Z"
-    },
-    {
-      "id": 105,
-      "title": "Yüklü qatarin qəbulu prosesi",
-      "subtitle": "PS/İMS/MP/01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 16,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:34:51.109Z"
-    },
-    {
-      "id": 106,
-      "title": "Sahə əməliyyatları ofisinin əsasnaməsi",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 16,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:52.497Z"
-    },
-    {
-      "id": 107,
-      "title": "Satınalma Prosesi",
-      "subtitle": "ALC-İMS-PRC-PROC-1/3",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 17,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:34:54.089Z"
-    },
-    {
-      "id": 108,
-      "title": "Satinalma proseduru",
-      "subtitle": "İMS/PR/TŞ/01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 17,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:34:56.349Z"
-    },
-    {
-      "id": 109,
-      "title": "Tender prosesi",
-      "subtitle": "ALC-IMS-PRC-PROC- 002",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 17,
-      "status": "notdone",
-      "uploadedAt": "2026-09-03T07:34:57.983Z"
-    },
-    {
-      "id": 110,
-      "title": "Təchizat şöbəsinin əsasnaməsi",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 17,
-      "status": "notdone",
-      "uploadedAt": "2026-09-03T07:34:59.528Z"
-    },
-    {
-      "id": 111,
-      "title": "ALM Inzibati binasına və yük həyətinə buraxılış rejimi haqqında təlimat",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 18,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:35:01.020Z"
-    },
-    {
-      "id": 112,
-      "title": "Mühafizə və təhlükəsizlik şöbəsinin əsasnaməsi",
-      "subtitle": "Ə/ALM/15",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 18,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:35:02.583Z"
-    },
-    {
-      "id": 113,
-      "title": "Texnikalarin istismarina nəzarət proseduru",
-      "subtitle": "PR/İD/02",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 19,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:35:04.244Z"
-    },
-    {
-      "id": 114,
-      "title": "Təmir və texnikaya nəzarət şöbəsinin əsasnaməsi",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 19,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:06.155Z"
-    },
-    {
-      "id": 115,
-      "title": "Tir parkin idarəedilməsi proseduru",
-      "subtitle": "PR/ İMS/TP/01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 21,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:35:07.899Z"
-    },
-    {
-      "id": 116,
-      "title": "Minik avtomobil dayanacağinin idarəedilməsi proseduru",
-      "subtitle": "PR/İMS/TP/02",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 21,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:35:09.683Z"
-    },
-    {
-      "id": 117,
-      "title": "Tırpark və Minik avtomobilləri dayanacağının idaeə edilməsi proseduru",
-      "subtitle": "ALM-IMS-PRD-TP-01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 21,
-      "status": "notdone",
-      "uploadedAt": "2026-09-03T07:35:11.488Z"
-    },
-    {
-      "id": 118,
-      "title": "TIR Park və minik avtomobillərinin dayanacağı şöbəsinin əsasnaməsi",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 21,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:12.997Z"
-    },
-    {
-      "id": 119,
-      "title": "Korporativ elektron poçtdan istifadə proseduru",
-      "subtitle": "ALC-İMS-PRD-İT -1/1",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 31,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:14.586Z"
-    },
-    {
-      "id": 120,
-      "title": "Süni intellekt platformasından istifadə təlimatı",
-      "subtitle": "ALC-İMS-İ-PMOD -2/1",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 31,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:16.143Z"
-    },
-    {
-      "id": 121,
-      "title": "Korporativ normativ aktlarin idarəedilməsi prosesi",
-      "subtitle": "PS / İMS/ 01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 31,
-      "status": "cancelled",
-      "uploadedAt": "2026-09-03T07:35:18.044Z"
-    },
-    {
-      "id": 122,
-      "title": "İnteqrasiya edilmiş Menecment Sistemi siyasəti",
-      "subtitle": "İMS/01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 31,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:19.421Z"
-    },
-    {
-      "id": 123,
-      "title": "Narkotik və Alkoqol siyasəti",
-      "subtitle": "İMS/SƏTƏM/03",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 31,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:20.901Z"
-    },
-    {
-      "id": 124,
-      "title": "Nəqliyyat idarəetmə siyasəti",
-      "subtitle": "İMS/SƏTƏM/01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 31,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:23.455Z"
-    },
-    {
-      "id": 125,
-      "title": "Tütünçəkmə siyasəti",
-      "subtitle": "İMS/SƏTƏM/02",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 31,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:24.930Z"
-    },
-    {
-      "id": 126,
-      "title": "Texniki təhlükəsizlik bəyannaməsinin hesabat-izahat vərəqi",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 31,
-      "status": "notdone",
-      "uploadedAt": "2026-09-03T07:35:26.478Z"
-    },
-    {
-      "id": 127,
-      "title": "Texniki təhlükəsizlik bəyannaməsi",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 31,
-      "status": "notdone",
-      "uploadedAt": "2026-09-03T07:35:28.193Z"
+      "uploadedAt": "2026-09-03T12:22:32.367Z"
     },
     {
       "id": 128,
-      "title": "Güzəşt Proseduru",
-      "subtitle": "ALM-IMS-PRD-BD-03",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 31,
-      "status": "notdone",
-      "uploadedAt": "2026-09-03T07:35:29.937Z"
-    },
-    {
-      "id": 129,
-      "title": "Mərkəzdə dəmir yolu ilə daxil olan yüklər üzrə sənədləşmə proseduru",
-      "subtitle": "ALC-İMS-PRD-SWIN -1/1",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 22,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:31.487Z"
-    },
-    {
-      "id": 130,
-      "title": "Vahid Pəncərə Əməliyyat İşçi Təlimatı",
-      "subtitle": "İT/VP/01",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 22,
-      "status": "renew",
-      "uploadedAt": "2026-09-03T07:35:32.972Z"
-    },
-    {
-      "id": 131,
-      "title": "Vahid pəncərə departamentinin əsasnaməsi",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 22,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:34.507Z"
-    },
-    {
-      "id": 132,
-      "title": "Debitor borcların idarə edilməsi proseduru",
-      "subtitle": "AE-PRD-1/1",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 24,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:36.211Z"
-    },
-    {
-      "id": 133,
-      "title": "Ekspedisiya xidmətlərinin göstərilməsi proseduru",
-      "subtitle": "AE-PRD-2/1",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 24,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:37.657Z"
-    },
-    {
-      "id": 134,
-      "title": "Abşeron biznes park rezidentləri üçün ilkin təhlükəsizlik və sətəm tələbləri",
-      "subtitle": "ALC-IMS-I-QHSE-1/1",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 32,
-      "status": "notdone",
-      "uploadedAt": "2026-09-03T07:35:39.131Z"
-    },
-    {
-      "id": 135,
-      "title": "Abşeron biznes park-da istehsalat və qeyri-istehsalat yönümlüsahələr üzrə rezidentlik verilməsi qaydaları",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 32,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:40.891Z"
-    },
-    {
-      "id": 136,
-      "title": "Qeyri tranzit əməliyyatlarının təşkili proseduru",
-      "subtitle": "",
-      "filename": "",
-      "size": 0,
-      "noFile": true,
-      "groupId": 33,
-      "status": "progress",
-      "uploadedAt": "2026-09-03T07:35:43.852Z"
-    },
-    {
-      "id": 137,
       "title": "Tranzit əməliyyatlarının təşkili proseduru",
       "subtitle": "",
       "filename": "",
       "size": 0,
       "noFile": true,
-      "groupId": 33,
+      "groupId": 28,
       "status": "progress",
+<<<<<<< HEAD
       "uploadedAt": "2026-09-03T07:35:45.547Z"
+=======
+      "uploadedAt": "2026-09-03T12:22:34.203Z"
+>>>>>>> ca4920d27a27918bba71109a62dba8b7fa9a60ff
     }
   ],
-  "files": []
+  "groups": [
+    {
+      "id": 1,
+      "name": "Anbar logistikası şöbəsi"
+    },
+    {
+      "id": 2,
+      "name": "Anbar logistikası şöbəsi / SƏ / Konteyner əməliyyatları şöbəsi"
+    },
+    {
+      "id": 3,
+      "name": "Beynəlxalq daşımalar departamenti"
+    },
+    {
+      "id": 4,
+      "name": "Biznes departamenti"
+    },
+    {
+      "id": 5,
+      "name": "Daxili audit departamenti"
+    },
+    {
+      "id": 6,
+      "name": "Daxili daşımalar departamenti"
+    },
+    {
+      "id": 7,
+      "name": "Əməliyyatların konfiqurasiyası və transformasiya departamenti"
+    },
+    {
+      "id": 8,
+      "name": "Hüquq departamenti"
+    },
+    {
+      "id": 9,
+      "name": "İctimaiyyətlə əlaqələr və marketinq şöbəsi"
+    },
+    {
+      "id": 10,
+      "name": "İnformasiya texnologiyaları şöbəsi"
+    },
+    {
+      "id": 11,
+      "name": "İnfrastruktur şöbəsi"
+    },
+    {
+      "id": 12,
+      "name": "İnsan resursları və inzibati departament"
+    },
+    {
+      "id": 13,
+      "name": "KN və SƏTƏM şöbəsi"
+    },
+    {
+      "id": 14,
+      "name": "Layihələrin idarə olunması departamenti"
+    },
+    {
+      "id": 15,
+      "name": "Maliyyə departamenti"
+    },
+    {
+      "id": 16,
+      "name": "Manevra və planlama ofisi"
+    },
+    {
+      "id": 17,
+      "name": "Marketin və kommunikasiya departamenti"
+    },
+    {
+      "id": 18,
+      "name": "Risklərə nəzarət və monitorinq şöbəsi"
+    },
+    {
+      "id": 19,
+      "name": "Sahə əməliyyatları ofisi"
+    },
+    {
+      "id": 20,
+      "name": "Təchizat şöbəsi"
+    },
+    {
+      "id": 21,
+      "name": "Təhlükəsizlik şöbəsi"
+    },
+    {
+      "id": 22,
+      "name": "Təmir və texnikaya nəzarət şöbəsi"
+    },
+    {
+      "id": 23,
+      "name": "TIR Park və minik avtomobillərinin dayanacağı şöbəsi"
+    },
+    {
+      "id": 24,
+      "name": "Ümumi təyinatlı"
+    },
+    {
+      "id": 25,
+      "name": "Vahid pəncərə departamenti"
+    },
+    {
+      "id": 26,
+      "name": "Abşeron Express MMC"
+    },
+    {
+      "id": 27,
+      "name": "Abşeron Biznes Park"
+    },
+    {
+      "id": 28,
+      "name": "MB Broker"
+    }
+  ]
 }

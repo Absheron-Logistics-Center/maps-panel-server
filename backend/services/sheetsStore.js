@@ -6,21 +6,31 @@
     pdfs      → data/files/sheets.json      (Normativ Sənədlər)
     templates → data/templates/sheets.json  (Şablonlar)
 
-  Two-way sync with the section's own catalog (diagrams / pdfs / templates):
+  Sync with the section's own catalog (diagrams / pdfs / templates) is
+  deliberately one-way for *creation* — only manual, chevron-driven linking
+  creates the other side:
     - item → sheet: syncFromItem() upserts the sheet row whenever an item's
       title/subtitle/status/struktur changes (called from processes.js /
-      pdfs.js / templates.js).
+      pdfs.js / templates.js). Creating a diagram/pdf/template in Home
+      always keeps its hesabat row in step.
     - sheet → item: syncRowToTarget() runs whenever a sheet row is created
       or edited (routes/sheets.js). It matches an existing item by the
-      triple (title + strukturAdi + subtitle/nömrə). If found, only the
-      status is pushed across (never creates a duplicate). If nothing
-      matches, a new item is auto-created (status defaults to the kind's
-      first status, "Planlaşdırılır") so it immediately shows up in the
-      section's own list.
+      triple (title + strukturAdi + subtitle/nömrə) or an explicit link,
+      and only pushes a status change across — it never auto-creates a new
+      diagram/pdf/template just because someone typed a row into hesabat.
+      A hesabat-only row becomes a real item only when a user in
+      Home/Sənədlər/Şablonlar explicitly picks it via the "Sheets-dən seç"
+      chevron.
+    - deleting a hesabat row (deleteSheetRow) also removes its linked item
+      from the section's own list via deleteLinkedItem() — the two stay in
+      sync in both directions for deletes, even though creates are one-way.
 */
 
-import { getFile as mongoGet, putFile as mongoPut, attribution } from './store.js';
-import { getFile as githubGet, putFile as githubPut } from './github.js';
+import { getFile as mongoGet, putFile as mongoPut, deleteFile as mongoDelete, attribution } from './store.js';
+import {
+  getFile as githubGet, putFile as githubPut,
+  deleteBinaryQueued as githubDeleteBinary
+} from './github.js';
 
 const dataPath = () => (process.env.DATA_PATH || 'data').replace(/^\/|\/$/g, '');
 
@@ -34,10 +44,6 @@ export const ALLOWED_STATUS_BY_KIND = {
 };
 // Back-compat flat list (used by a couple of older call sites / legacy routes).
 export const ALLOWED_STATUS = ['progress', 'prep', 'notdone', 'sign', 'done', 'cancelled', 'renew'];
-
-// A row created purely from the Sheet (no explicit status typed) is
-// considered "just queued" — defaults to the first status in the kind's list.
-const DEFAULT_SYNC_STATUS = 'progress';
 
 // Extra hand-typed fields shown only for the pdfs / templates sheets
 // (Normativ Sənədlər / Şablonlar): sənədin növü, nəşr, təsdiq tarixi,
@@ -90,6 +96,26 @@ function indexPath(kind) {
 }
 function processBodyPath(id) {
   return `${dataPath()}/diagrams/processes/process-${id}.json`;
+}
+// Section (Home / Sənədlər / Şablonlar) archive.json lives next to that
+// section's own index.json — same folder either way.
+function archivePath(kind) {
+  const rel = kind === 'templates' ? 'templates' : (kind === 'diagrams' ? 'diagrams' : 'files');
+  return `${dataPath()}/${rel}/archive.json`;
+}
+// pdfs/templates binary files can live under a couple of legacy paths —
+// mirrors pdfFilePathFiles/Legacy/Legacy2 in routes/pdfs.js & templates.js.
+function pdfBinaryPaths(kind, id, ext) {
+  const rel = kind === 'templates' ? 'templates' : 'files';
+  return [
+    `${dataPath()}/${rel}/pdf/pdf-${id}.${ext || 'pdf'}`,
+    `${dataPath()}/pdfs/files/pdf-${id}.pdf`,
+    `${dataPath()}/files/files/pdf-${id}.pdf`
+  ];
+}
+function extOf(filename) {
+  const m = /\.([a-z0-9]+)$/i.exec(filename || '');
+  return m ? m[1].toLowerCase() : '';
 }
 
 function nextId(list) {
@@ -357,36 +383,20 @@ function groupNameOf(entry, groups) {
   return g?.name ? String(g.name) : '';
 }
 
-// Find (or create) the group whose name matches strukturAdi. Returns the
-// group id; mutates `groups` in place when a new one is created.
-function resolveGroupId(groups, strukturAdi) {
-  const wanted = norm(strukturAdi);
-  if (wanted) {
-    const hit = groups.find(g => norm(g.name) === wanted);
-    if (hit) return Number(hit.id);
-  }
-  if (!groups.length) {
-    const g = { id: 1, name: strukturAdi || 'Ümumi' };
-    groups.push(g);
-    return g.id;
-  }
-  if (wanted) {
-    const g = { id: nextId(groups), name: strukturAdi };
-    groups.push(g);
-    return g.id;
-  }
-  return Number(groups[0].id);
-}
-
 /**
  * Called whenever a Sheets row (diagrams / pdfs / templates) is created or
- * edited. Matches an existing item by (title + strukturAdi + subtitle). If
- * found, only pushes a status change across (never duplicates). If nothing
- * matches, auto-creates a new item so it shows up in the section's own list
- * right away, with status defaulting to "Planlaşdırılır".
+ * edited. Matches an existing item by (title + strukturAdi + subtitle) —
+ * or by an explicit link (itemId/processId) — and pushes a status change
+ * across when matched. Deliberately does NOT create a new diagram/pdf/
+ * template when nothing matches: typing a fresh row straight into Sheets
+ * (hesabat) must stay a plain row. A real item only gets linked to it when
+ * someone in Home/Sənədlər/Şablonlar explicitly picks that row via the
+ * "Sheets-dən seç" chevron (or creates one with that sheetId) — manual,
+ * never automatic.
  *
- * Returns { itemId, created, status } or null when there was nothing to
- * sync (blank title) or sync is disabled.
+ * Returns { itemId, created: false, status } when an existing item was
+ * matched/updated, or null when nothing matched, the row is blank, or sync
+ * is disabled.
  */
 export async function syncRowToTarget(kind, row, user) {
   assertKind(kind);
@@ -433,36 +443,8 @@ export async function syncRowToTarget(kind, row, user) {
     return { itemId: Number(entry.id), created: false, status: entry.status ?? null };
   }
 
-  // Nothing matched — auto-create so it shows up in the section list.
-  const gid = resolveGroupId(groups, strukturAdi);
-  const newId = nextId(list);
-  const status = targetStatus == null ? DEFAULT_SYNC_STATUS : targetStatus;
-
-  if (kind === 'diagrams') {
-    const process = {
-      id: newId, title, subtitle,
-      width: 1600, height: 600,
-      lanes: [], nodes: [], edges: []
-    };
-    await mongoPut(processBodyPath(newId), process, attribution(user, `Auto-create process ${newId} from sheet`));
-    list.push({ id: newId, title, subtitle, groupId: gid, status });
-  } else {
-    // pdfs / templates — no binary file yet; it's a placeholder entry until
-    // someone uploads the actual document from the section page.
-    list.push({
-      id: newId,
-      title,
-      subtitle,
-      filename: '',
-      size: 0,
-      noFile: true,
-      groupId: gid,
-      status,
-      uploadedAt: new Date().toISOString()
-    });
-  }
-  await writeIndexFile(kind, idx, `Auto-create ${kind} item ${newId} from sheet`, user);
-  return { itemId: newId, created: true, status };
+  // Nothing matched — leave it as a plain hesabat row. No auto-create.
+  return null;
 }
 
 export async function createSheetRow(kind, { title, subtitle, status, strukturAdi, order, ...rest }, user) {
@@ -549,6 +531,53 @@ export async function updateSheetRow(kind, id, patch, user) {
   return normalizeRow(row);
 }
 
+/**
+ * Remove the item (diagram / pdf / template) a sheet row was linked to —
+ * called from deleteSheetRow() so that deleting a row in Sheets (hesabat)
+ * also removes it from the section's own list (Home / Normativ Sənədlər /
+ * Şablonlar) instead of leaving an orphaned entry sitting there. Best
+ * effort: index removal is what actually matters for the UI; file/archive
+ * cleanup is attempted but never allowed to fail the whole operation.
+ */
+export async function deleteLinkedItem(kind, itemId, user) {
+  const meta = assertKind(kind);
+  const id = Number(itemId);
+  if (!Number.isFinite(id)) return { removed: false };
+
+  const idxFile = await readIndexFile(kind);
+  const idx = (idxFile && idxFile.content && typeof idxFile.content === 'object') ? idxFile.content : null;
+  if (!idx) return { removed: false };
+  const list = Array.isArray(idx[meta.indexKey]) ? idx[meta.indexKey] : [];
+  const entry = list.find(p => Number(p.id) === id);
+  if (!entry) return { removed: false };
+
+  idx[meta.indexKey] = list.filter(p => Number(p.id) !== id);
+  await writeIndexFile(kind, idx, `Remove ${kind} item ${id} (deleted from sheets)`, user);
+
+  if (kind === 'diagrams') {
+    await mongoDelete(processBodyPath(id)).catch(() => {});
+  } else {
+    for (const p of pdfBinaryPaths(kind, id, extOf(entry.filename))) {
+      await githubDeleteBinary(p, attribution(user, `Remove ${kind} item ${id} file`)).catch(() => {});
+    }
+  }
+
+  // also drop it from the archive, in case it was archived
+  try {
+    const arcPath = archivePath(kind);
+    const arcFile = kind === 'diagrams' ? await mongoGet(arcPath) : await githubGet(arcPath);
+    const arc = (arcFile && arcFile.content && Array.isArray(arcFile.content.items)) ? arcFile.content : null;
+    if (arc && arc.items.some(a => Number(a.id) === id)) {
+      arc.items = arc.items.filter(a => Number(a.id) !== id);
+      const msg = `Remove ${kind} item ${id} from archive`;
+      if (kind === 'diagrams') await mongoPut(arcPath, arc, attribution(user, msg));
+      else await githubPut(arcPath, arc, attribution(user, msg));
+    }
+  } catch (e) { console.error(`[sheets delete -> ${kind} archive]`, e.message); }
+
+  return { removed: true };
+}
+
 export async function deleteSheetRow(kind, id, user) {
   assertKind(kind);
   const sheets = await readSheets(kind);
@@ -567,6 +596,16 @@ export async function deleteSheetRow(kind, id, user) {
     sheets.deletedItemIds = [...sheets.deletedItemIds, Number(linkedItemId)];
   }
   await writeSheets(kind, sheets, `Delete ${kind} sheet row ${id}`, user);
+
+  // A row linked to a real diagram/pdf/template must take that item down
+  // with it — otherwise Home/Sənədlər/Şablonlar keeps showing something
+  // that was just deleted from the report (hesabat).
+  if (linkedItemId != null) {
+    await deleteLinkedItem(kind, linkedItemId, user).catch((e) => {
+      console.error(`[sheets delete -> ${kind} item]`, e.message);
+    });
+  }
+
   return { ok: true };
 }
 
