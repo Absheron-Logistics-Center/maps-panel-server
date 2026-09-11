@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { config as loadEnv } from 'dotenv';
 
@@ -23,6 +24,14 @@ import { diagnose as diagnoseMongo } from './services/store.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+const isVercel = !!(process.env.VERCEL === '1' || process.env.VERCEL_ENV || process.env.NOW_REGION);
+
+// Self-hosting under a path prefix (e.g. behind IIS/Apache at
+// http://server/maps-panel alongside other apps on the same box) — set
+// BASE_PATH=/maps-panel in .env. Empty by default so Vercel deployments
+// (which serve from the domain root) are completely unaffected.
+const BASE_PATH = (process.env.BASE_PATH || '').replace(/\/+$/, '');
+const mount = (p) => (BASE_PATH + p) || '/';
  
 // CORS
 // Origins are normalized (trailing slash + case) so a small mismatch like
@@ -64,32 +73,64 @@ app.use(express.json({
 console.log('SERVER LOADED');
 
 // HEALTH
-app.get(['/api/health', '/health'], (_req, res) => {
+app.get([mount('/api/health'), mount('/health')], (_req, res) => {
   res.json({
     ok: true,
-    ts: Date.now()
+    ts: Date.now(),
+    // Vercel's serverless functions can't reliably handle large PDF
+    // uploads (request size/time limits), so file upload is server-only.
+    // Diagrams (Mongo) and Sheets editing work the same everywhere.
+    uploadsEnabled: !isVercel
   });
 });
 
-// DEBUG — public, no secrets. Tells you why data isn't loading on Vercel.
-app.get(['/api/debug', '/debug'], async (_req, res) => {
+// DEBUG — public, no secrets. Tells you why data isn't loading on Vercel,
+// or why the frontend isn't being served on your self-hosted server.
+app.get([mount('/api/debug'), mount('/debug')], async (_req, res) => {
   const out = {};
   try { out.github = await diagnose(); } catch (e) { out.github = { error: e.message }; }
   try { out.mongo = await diagnoseMongo(); } catch (e) { out.mongo = { error: e.message }; }
+  const distDir = path.join(__dirname, '..', 'frontend', 'dist');
+  const indexHtml = path.join(distDir, 'index.html');
+  out.frontend = {
+    BASE_PATH: BASE_PATH || '(empty — root)',
+    SERVE_FRONTEND: process.env.SERVE_FRONTEND || '(not set)',
+    distDir,
+    distDirExists: fs.existsSync(distDir),
+    indexHtmlExists: fs.existsSync(indexHtml),
+    distDirContents: fs.existsSync(distDir) ? fs.readdirSync(distDir) : null
+  };
   res.json(out);
 });
 
 // PUBLIC ROUTES
-app.use(['/api', '/'], authRouter);
+app.use([mount('/api'), mount('/')], authRouter);
 
 // PROTECTED ROUTES
-app.use(['/api/processes', '/processes'], requireAuth, processesRouter);
-app.use(['/api/pdfs', '/pdfs'], requireAuth, pdfsRouter);
-app.use(['/api/templates', '/templates'], requireAuth, templatesRouter);
-app.use(['/api/settings', '/settings'], requireAuth, settingsRouter);
-app.use(['/api/labels', '/labels'], requireAuth, labelsRouter);
-app.use(['/api/sheets', '/sheets'], requireAuth, sheetsRouter);
-app.use(['/api/ai', '/ai'], requireAuth, aiRouter);
+app.use([mount('/api/processes'), mount('/processes')], requireAuth, processesRouter);
+app.use([mount('/api/pdfs'), mount('/pdfs')], requireAuth, pdfsRouter);
+app.use([mount('/api/templates'), mount('/templates')], requireAuth, templatesRouter);
+app.use([mount('/api/settings'), mount('/settings')], requireAuth, settingsRouter);
+app.use([mount('/api/labels'), mount('/labels')], requireAuth, labelsRouter);
+app.use([mount('/api/sheets'), mount('/sheets')], requireAuth, sheetsRouter);
+app.use([mount('/api/ai'), mount('/ai')], requireAuth, aiRouter);
+
+// SELF-HOSTED FRONTEND — Vercel builds+serves the frontend separately
+// (see vercel.json's static-build); that never sets SERVE_FRONTEND, so
+// this whole block is a no-op there. On your own server, set
+// SERVE_FRONTEND=1 and this Express app serves the built frontend
+// (frontend/dist, built with `npm run build` after setting
+// VITE_API_URL=<BASE_PATH>/api and vite's `base` to <BASE_PATH>/) plus
+// the API, both under BASE_PATH, from this one process.
+if (process.env.SERVE_FRONTEND === '1') {
+  const distDir = path.join(__dirname, '..', 'frontend', 'dist');
+  const apiPrefix = mount('/api');
+  app.use(mount('/'), express.static(distDir));
+  app.get(mount('/*'), (req, res, next) => {
+    if (req.path.startsWith(apiPrefix)) return next(); // let it fall through to the 404 JSON handler
+    res.sendFile(path.join(distDir, 'index.html'));
+  });
+}
 
 // 404 — show the URL Express actually saw, so we can debug from Vercel logs
 app.use((req, res) => {
@@ -111,11 +152,10 @@ app.use((err, _req, res, _next) => {
 });
 
 
-// LOCAL ONLY
 if (process.env.VERCEL !== '1') {
-  app.listen(PORT, () => {
+  app.listen(PORT, '0.0.0.0', () => {
     console.log(
-      `Backend running on http://localhost:${PORT}`
+      `Backend running on http://172.25.60.81:${PORT}`
     );
   });
 }

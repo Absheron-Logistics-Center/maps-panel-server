@@ -3,10 +3,19 @@ import {
   getFile, putFileQueued as putFile, deleteFile, getBinary,
   putBinaryQueued as putBinary, deleteBinaryQueued as deleteBinary, attribution
 } from '../services/github.js';
-import { syncFromItem } from '../services/sheetsStore.js';
+import { syncFromItem, removeSheetRowsForDeletedItems } from '../services/sheetsStore.js';
 
 const router = Router();
 const dataPath = () => (process.env.DATA_PATH || 'data').replace(/^\/|\/$/g, '');
+
+// Same restriction as pdfs.js — file upload is server-only, not on Vercel.
+const isVercel = !!(process.env.VERCEL === '1' || process.env.VERCEL_ENV || process.env.NOW_REGION);
+function blockUploadOnVercel(req, res, next) {
+  if (isVercel && req.body?.dataBase64) {
+    return res.status(403).json({ error: 'Fayl yükləmə Vercel-də deaktivdir. Daxili serverdən istifadə edin.' });
+  }
+  next();
+}
 
 // Uploads used to be accepted with no server-side check at all — any file
 // type, any size (bounded only by the raw express.json body limit, which
@@ -47,7 +56,7 @@ const pdfFilePathLegacy2 = (id) => `${dataPath()}/files/files/pdf-${id}.pdf`;
 async function readArchive() {
   const file = await getFile(pdfArchivePath());
   const c = file ? file.content : null;
-  return (c && Array.isArray(c.items)) ? c : { items: [] };
+  return (c && Array.isArray(c.items)) ? { ...c, items: c.items.filter(Boolean) } : { items: [] };
 }
 // `user` is the logged-in panel admin (req.user) — gets stamped onto the commit
 // so GitHub shows who made the change instead of just the token owner.
@@ -189,6 +198,12 @@ router.delete('/group/:gid', requireAdmin, async (req, res, next) => {
     const allGroupIds = collectIds(gid);
 
     const inGroup = idx.pdfs.filter(p => allGroupIds.includes(Number(p.groupId)));
+    const deletedGroupNames = idx.groups
+      .filter(g => allGroupIds.includes(Number(g.id)))
+      .map(g => String(g.name || '').trim())
+      .filter(Boolean);
+    const groupNameById = new Map(idx.groups.map(g => [Number(g.id), String(g.name || '').trim()]));
+    const deletedItemIds = inGroup.map(p => Number(p.id));
     for (const p of inGroup) {
       await deleteBinary(pdfFilePathFiles(p.id, extOf(p.filename)), attribution(req.user, `Delete pdf ${p.id} (group ${gid})`)).catch(() => {});
       await deleteBinary(pdfFilePathLegacy(p.id)).catch(() => {});
@@ -197,6 +212,9 @@ router.delete('/group/:gid', requireAdmin, async (req, res, next) => {
     idx.pdfs = idx.pdfs.filter(p => !allGroupIds.includes(Number(p.groupId)));
     idx.groups = idx.groups.filter(g => !allGroupIds.includes(Number(g.id)));
     await writeIndex(idx, `Delete pdf group ${gid} (+ subgroups)`, req.user);
+    await removeSheetRowsForDeletedItems('templates', deletedItemIds, deletedGroupNames, req.user, inGroup.map(p => ({ ...p, strukturAdi: groupNameById.get(Number(p.groupId)) || '' }))).catch((e) =>
+      console.error('[template group delete -> sheets]', e.message)
+    );
     res.json({ ok: true, deletedPdfs: inGroup.length, deletedGroups: allGroupIds.length });
   } catch (e) { next(e); }
 });
@@ -343,7 +361,7 @@ router.get('/:id/file', async (req, res, next) => {
 
 /* =========================== PDF CRUD =========================== */
 // Create — MUST belong to a group
-router.post('/', requireAdmin, async (req, res, next) => {
+router.post('/', requireAdmin, blockUploadOnVercel, async (req, res, next) => {
   try {
     const { title, subtitle, filename, dataBase64, groupId } = req.body || {};
     if (!title || !dataBase64) {
@@ -384,7 +402,7 @@ router.post('/', requireAdmin, async (req, res, next) => {
   } catch (e) { next(e); }
 });
 
-router.put('/:id', requireAdmin, async (req, res, next) => {
+router.put('/:id', requireAdmin, blockUploadOnVercel, async (req, res, next) => {
   try {
     const id = Number(req.params.id);
     const { title, subtitle, filename, dataBase64, groupId } = req.body || {};
@@ -429,8 +447,12 @@ router.delete('/:id', requireAdmin, async (req, res, next) => {
     const id = Number(req.params.id);
     const idx = await readIndex();
     const existing = (idx.pdfs || []).find(p => Number(p.id) === id);
+    const existingGroupName = idx.groups.find(g => Number(g.id) === Number(existing?.groupId))?.name || '';
     idx.pdfs = (idx.pdfs || []).filter(p => Number(p.id) !== id);
     await deleteBinary(pdfFilePathFiles(id, extOf(existing?.filename)), attribution(req.user, `Delete pdf ${id}`)).catch(() => {});
+    await removeSheetRowsForDeletedItems('templates', [id], [], req.user, existing ? [{ ...existing, strukturAdi: existingGroupName }] : []).catch((e) =>
+      console.error('[template delete -> sheets]', e.message)
+    );
     await deleteBinary(pdfFilePathLegacy(id)).catch(() => {});
     await deleteBinary(pdfFilePathLegacy2(id)).catch(() => {});
     await writeIndex(idx, `Remove pdf ${id} from index`, req.user);

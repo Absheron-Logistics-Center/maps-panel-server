@@ -6,24 +6,23 @@
     pdfs      → data/files/sheets.json      (Normativ Sənədlər)
     templates → data/templates/sheets.json  (Şablonlar)
 
-  Sync with the section's own catalog (diagrams / pdfs / templates) is
-  deliberately one-way for *creation* — only manual, chevron-driven linking
-  creates the other side:
+  Sync with the section's own catalog is one-way for creation:
+  Home → Sheets is automatic; Sheets → Home only happens through an explicit
+  manual link. Deletion of an explicitly linked row still removes its linked
+  Home item:
     - item → sheet: syncFromItem() upserts the sheet row whenever an item's
       title/subtitle/status/struktur changes (called from processes.js /
       pdfs.js / templates.js). Creating a diagram/pdf/template in Home
       always keeps its hesabat row in step.
-    - sheet → item: syncRowToTarget() runs whenever a sheet row is created
-      or edited (routes/sheets.js). It matches an existing item by the
-      triple (title + strukturAdi + subtitle/nömrə) or an explicit link,
-      and only pushes a status change across — it never auto-creates a new
-      diagram/pdf/template just because someone typed a row into hesabat.
-      A hesabat-only row becomes a real item only when a user in
-      Home/Sənədlər/Şablonlar explicitly picks it via the "Sheets-dən seç"
-      chevron.
+    - sheet → item: syncRowToTarget() only matches an existing item by the
+      triple (title + strukturAdi + subtitle/nömrə) or an explicit link and
+      can push status changes across. It NEVER creates a Home folder or
+      diagram/document/template from a Sheets row. Excel imports therefore
+      cannot populate Home; the admin must explicitly create/link the real
+      Home item.
     - deleting a hesabat row (deleteSheetRow) also removes its linked item
-      from the section's own list via deleteLinkedItem() — the two stay in
-      sync in both directions for deletes, even though creates are one-way.
+      from the section's own list via deleteLinkedItem() — both directions
+      stay in sync for deletes too.
 */
 
 import { getFile as mongoGet, putFile as mongoPut, deleteFile as mongoDelete, attribution } from './store.js';
@@ -378,73 +377,49 @@ function norm(s) {
   return String(s || '').trim().toLowerCase();
 }
 
-function groupNameOf(entry, groups) {
-  const g = groups.find(x => Number(x.id) === Number(entry?.groupId));
-  return g?.name ? String(g.name) : '';
-}
-
 /**
  * Called whenever a Sheets row (diagrams / pdfs / templates) is created or
- * edited. Matches an existing item by (title + strukturAdi + subtitle) —
- * or by an explicit link (itemId/processId) — and pushes a status change
- * across when matched. Deliberately does NOT create a new diagram/pdf/
- * template when nothing matches: typing a fresh row straight into Sheets
- * (hesabat) must stay a plain row. A real item only gets linked to it when
- * someone in Home/Sənədlər/Şablonlar explicitly picks that row via the
- * "Sheets-dən seç" chevron (or creates one with that sheetId) — manual,
- * never automatic.
+ * edited. It only acts on an EXPLICIT itemId/processId link and can push a
+ * status change across when that linked Home item exists.
  *
- * Returns { itemId, created: false, status } when an existing item was
- * matched/updated, or null when nothing matched, the row is blank, or sync
- * is disabled.
+ * IMPORTANT: this direction is intentionally NON-CREATING. A Sheets row
+ * imported from Excel remains a Sheets/report row only. Its Struktur adı
+ * NEVER creates a Home folder, and its title NEVER creates a Home
+ * diagram/document/template. The admin creates the real Home item manually
+ * and can explicitly link it using "Sheets-dən seç".
  */
 export async function syncRowToTarget(kind, row, user) {
   assertKind(kind);
   if (!AUTO_SYNC_ENABLED) return null;
   const title = (row.title || '').trim();
-  const strukturAdi = (row.strukturAdi || '').trim();
-  const subtitle = (row.subtitle || '').trim();
-  if (!title) return null; // nothing worth syncing for a blank row
+  if (!title) return null;
 
   const meta = SHEET_KINDS[kind];
   const idxFile = await readIndexFile(kind);
   const idx = (idxFile && idxFile.content && typeof idxFile.content === 'object') ? idxFile.content : {};
   const list = Array.isArray(idx[meta.indexKey]) ? idx[meta.indexKey] : [];
-  const groups = Array.isArray(idx.groups) ? idx.groups : [];
-  idx[meta.indexKey] = list;
-  idx.groups = groups;
-
   const targetStatus = normalizeStatus(kind, row.status);
 
-  // 1) Already linked to an item? Prefer that — never re-match by text once linked.
-  let entry = null;
+  // Only an explicit itemId/processId link is allowed to cross from Sheets
+  // back into Home. Do NOT match by title/structure/subtitle: an Excel import
+  // can contain the same text as an existing Home item, but it must remain an
+  // independent Sheets row until the admin manually links it from Home.
   const linkedId = row.itemId ?? row.processId;
-  if (linkedId != null) {
-    entry = list.find(p => Number(p.id) === Number(linkedId)) || null;
-  }
-  // 2) Otherwise match by the triple: name + struktur adı + nömrə.
-  if (!entry) {
-    entry = list.find(p =>
-      norm(p.title) === norm(title) &&
-      norm(groupNameOf(p, groups)) === norm(strukturAdi) &&
-      norm(p.subtitle) === norm(subtitle)
-    ) || null;
-  }
+  if (linkedId == null || linkedId === '') return null;
 
-  if (entry) {
-    let changed = false;
-    if (targetStatus !== (entry.status ?? null)) {
-      if (targetStatus === null) delete entry.status; else entry.status = targetStatus;
-      changed = true;
-    }
-    if (changed) {
-      await writeIndexFile(kind, idx, `Sync ${kind} item ${entry.id} status from sheet`, user);
-    }
-    return { itemId: Number(entry.id), created: false, status: entry.status ?? null };
-  }
+  const entry = list.find(p => Number(p.id) === Number(linkedId)) || null;
+  if (!entry) return null;
 
-  // Nothing matched — leave it as a plain hesabat row. No auto-create.
-  return null;
+  let changed = false;
+  if (targetStatus !== (entry.status ?? null)) {
+    if (targetStatus === null) delete entry.status;
+    else entry.status = targetStatus;
+    changed = true;
+  }
+  if (changed) {
+    await writeIndexFile(kind, idx, `Sync ${kind} item ${entry.id} status from sheet`, user);
+  }
+  return { itemId: Number(entry.id), created: false, status: entry.status ?? null };
 }
 
 export async function createSheetRow(kind, { title, subtitle, status, strukturAdi, order, ...rest }, user) {
@@ -474,7 +449,7 @@ export async function createSheetRow(kind, { title, subtitle, status, strukturAd
   }
   if (item.status == null) delete item.status;
 
-  // Sheet → item sync: match-or-create in the section's own list.
+  // Sheet → item sync: match an existing Home item only; never create Home content.
   try {
     const sync = await syncRowToTarget(kind, item, user);
     if (sync?.itemId != null) {
@@ -517,8 +492,8 @@ export async function updateSheetRow(kind, id, patch, user) {
     row.processId = v;
   }
 
-  // Sheet → item sync: title/strukturAdi/subtitle/status edits all flow
-  // through here — match-or-create, then push the status across.
+  // Sheet → item sync: edits may match an existing Home item and push status
+  // across, but never create Home content.
   try {
     const sync = await syncRowToTarget(kind, row, user);
     if (sync?.itemId != null) {
@@ -578,6 +553,134 @@ export async function deleteLinkedItem(kind, itemId, user) {
   return { removed: true };
 }
 
+/**
+ * Remove Sheets rows when a real Home item or its group is deleted.
+ * This ONLY removes rows from the Sheets catalog; it never deletes the
+ * Home item itself. It also removes old empty-folder placeholder rows that
+ * were saved with only `strukturAdi` and no explicit itemId/processId.
+ */
+export async function removeSheetRowsForDeletedItems(kind, itemIds = [], groupNames = [], user, deletedEntries = []) {
+  assertKind(kind);
+  const ids = new Set((Array.isArray(itemIds) ? itemIds : [])
+    .map(Number).filter(Number.isFinite));
+  const names = new Set((Array.isArray(groupNames) ? groupNames : [])
+    .map(norm).filter(Boolean));
+  const entries = Array.isArray(deletedEntries) ? deletedEntries : [];
+  if (!ids.size && !names.size && !entries.length) return { removed: 0 };
+
+  const sheets = await readSheets(kind);
+  const before = sheets.items.length;
+  const removedIds = [];
+
+  function sameDeletedEntry(row) {
+    if (row.itemId != null || row.processId != null) return false;
+    const title = norm(row.title);
+    const subtitle = norm(row.subtitle);
+    const structure = norm(row.strukturAdi);
+    if (!title || !structure) return false;
+    return entries.some(entry => {
+      const entryTitle = norm(entry?.title);
+      const entrySubtitle = norm(entry?.subtitle);
+      const entryStructure = norm(entry?.strukturAdi);
+      return entryTitle === title
+        && entrySubtitle === subtitle
+        && entryStructure === structure;
+    });
+  }
+
+  sheets.items = sheets.items.filter(row => {
+    const linkedId = row.itemId != null ? row.itemId : row.processId;
+    if (linkedId != null && ids.has(Number(linkedId))) {
+      removedIds.push(Number(linkedId));
+      return false;
+    }
+
+    // Old/auto-created empty-folder rows have no item link and contain only
+    // the folder name. Remove them when the real Home folder disappears.
+    // Status is deliberately ignored: older builds could leave these rows
+    // marked "cancelled", and they must still disappear with the folder.
+    const isUnlinked = linkedId == null;
+    const structure = norm(row.strukturAdi);
+    const isFolderPlaceholder = isUnlinked && structure && names.has(structure)
+      && !(row.title || '').trim()
+      && !(row.subtitle || '').trim()
+      && !(row.docType || '').trim()
+      && !(row.edition || '').trim()
+      && !(row.approvalDate || '').trim()
+      && !(row.protocol || '').trim()
+      && !(row.pageCount || '').trim();
+    if (isFolderPlaceholder || sameDeletedEntry(row)) return false;
+    return true;
+  });
+
+  const removed = before - sheets.items.length;
+  if (!removed) return { removed: 0 };
+
+  const deletedItemIds = new Set(sheets.deletedItemIds || []);
+  for (const id of removedIds) deletedItemIds.add(id);
+  sheets.deletedItemIds = [...deletedItemIds];
+  await writeSheets(kind, sheets, `Remove ${removed} ${kind} sheet row(s) after Home deletion`, user);
+  return { removed };
+}
+
+/**
+ * Delete a Home group when an admin deletes its folder-only Sheets row.
+ * This is intentionally name-based because those rows represent groups,
+ * not real documents/items, and therefore have no itemId.
+ */
+export async function deleteHomeGroupByName(kind, groupName, user) {
+  const meta = assertKind(kind);
+  const wanted = norm(groupName);
+  if (!wanted) return { removed: false };
+
+  const idxFile = await readIndexFile(kind);
+  const idx = (idxFile && idxFile.content && typeof idxFile.content === 'object') ? idxFile.content : null;
+  if (!idx) return { removed: false };
+  const groups = Array.isArray(idx.groups) ? idx.groups : [];
+  const root = groups.find(g => norm(g?.name) === wanted);
+  if (!root) return { removed: false };
+
+  const allGroupIds = [Number(root.id)];
+  let frontier = [Number(root.id)];
+  while (frontier.length) {
+    const children = groups.filter(g => frontier.includes(Number(g.parentId)));
+    const childIds = children.map(g => Number(g.id));
+    allGroupIds.push(...childIds);
+    frontier = childIds;
+  }
+  const groupSet = new Set(allGroupIds);
+  const list = Array.isArray(idx[meta.indexKey]) ? idx[meta.indexKey] : [];
+  const inGroup = list.filter(item => groupSet.has(Number(item.groupId)));
+
+  if (kind === 'diagrams') {
+    for (const item of inGroup) await mongoDelete(processBodyPath(item.id)).catch(() => {});
+  } else {
+    for (const item of inGroup) {
+      for (const path of pdfBinaryPaths(kind, item.id, extOf(item.filename))) {
+        await githubDeleteBinary(path, attribution(user, `Remove ${kind} item ${item.id} (group deleted from sheets)`)).catch(() => {});
+      }
+    }
+  }
+
+  idx[meta.indexKey] = list.filter(item => !groupSet.has(Number(item.groupId)));
+  idx.groups = groups.filter(g => !groupSet.has(Number(g.id)));
+  await writeIndexFile(kind, idx, `Delete ${kind} group ${root.id} from sheets`, user);
+
+  // Remove the corresponding report rows as part of the same operation.
+  await removeSheetRowsForDeletedItems(
+    kind,
+    inGroup.map(item => Number(item.id)),
+    allGroupIds.map(id => groups.find(g => Number(g.id) === id)?.name).filter(Boolean),
+    user,
+    inGroup.map(item => ({
+      ...item,
+      strukturAdi: groups.find(g => Number(g.id) === Number(item.groupId))?.name || ''
+    }))
+  );
+
+  return { removed: true, deletedItems: inGroup.length, deletedGroups: allGroupIds.length };
+}
+
 export async function deleteSheetRow(kind, id, user) {
   assertKind(kind);
   const sheets = await readSheets(kind);
@@ -596,6 +699,25 @@ export async function deleteSheetRow(kind, id, user) {
     sheets.deletedItemIds = [...sheets.deletedItemIds, Number(linkedItemId)];
   }
   await writeSheets(kind, sheets, `Delete ${kind} sheet row ${id}`, user);
+
+  // Folder-only Sheets rows represent a Home group. Deleting that row must
+  // therefore delete the corresponding group from the main page as well.
+  const rowTitle = (row?.title || '').trim();
+  const rowSubtitle = (row?.subtitle || '').trim();
+  const isFolderRow = linkedItemId == null
+    && !!norm(row?.strukturAdi)
+    && !rowTitle
+    && !rowSubtitle
+    && !row?.docType
+    && !row?.edition
+    && !row?.approvalDate
+    && !row?.protocol
+    && !row?.pageCount;
+  if (isFolderRow) {
+    await deleteHomeGroupByName(kind, row.strukturAdi, user).catch((e) => {
+      console.error(`[sheets delete -> ${kind} group]`, e.message);
+    });
+  }
 
   // A row linked to a real diagram/pdf/template must take that item down
   // with it — otherwise Home/Sənədlər/Şablonlar keeps showing something

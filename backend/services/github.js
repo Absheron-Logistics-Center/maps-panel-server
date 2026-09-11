@@ -117,12 +117,16 @@ export async function getFile(p) {
     if (local) return local;
   }
 
-  // Locally, the project `data/` folder is the source of truth.
-  if (!isVercel) {
-    const local = await localGet(p);
-    if (local) return local;
-  }
-
+  // No GitHub credentials configured at all — e.g. a fully standalone local
+  // deployment with GITHUB_TOKEN left blank on purpose. The local `data/`
+  // folder is the only copy that exists, so it's the source of truth by
+  // necessity. Once GitHub IS configured (on Vercel or on your own server),
+  // GitHub is always the source of truth and local is just a write-through
+  // mirror/offline fallback below — this used to also trust the local copy
+  // first on a non-Vercel deploy even when GitHub was configured, which is
+  // why the self-hosted server and Vercel could silently drift apart: the
+  // server kept re-serving its own stale local cache instead of ever
+  // re-checking GitHub for a path it already had.
   if (!hasGithubConfig()) return localGet(p);
 
   try {
