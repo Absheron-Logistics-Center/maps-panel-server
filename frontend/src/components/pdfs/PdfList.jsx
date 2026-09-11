@@ -92,6 +92,10 @@ export default function PdfList({
   const tempIdRef = useRef(-1);
   function nextTempId() { return tempIdRef.current--; }
   function isTempId(id) { return typeof id === 'number' && id < 0; }
+  // Set when an edit lands while saveAll() is already mid-request — tells
+  // saveAll to immediately run itself again once the in-flight save
+  // finishes, instead of the newer edit getting silently dropped.
+  const pendingAutoSaveRef = useRef(false);
 
   // warn before leaving the tab with unsaved folder changes
   useEffect(() => {
@@ -103,6 +107,19 @@ export default function PdfList({
     window.addEventListener('beforeunload', onBeforeUnload);
     return () => window.removeEventListener('beforeunload', onBeforeUnload);
   }, [dirty]);
+
+  // Auto-save staged folder changes (create/rename/move/reorder/delete) a
+  // short moment after the last edit. This used to require a manual click
+  // on "Hamısını yadda saxla" because every save was a GitHub commit
+  // (rate-limited, so batching mattered). Writes now land straight on
+  // local disk — there's no reason to make the admin do that by hand
+  // anymore. The button still works too, as a manual/fallback trigger.
+  useEffect(() => {
+    if (!dirty) return;
+    const t = setTimeout(() => { saveAll(); }, 1200);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dirty, groups, pdfs]);
 
   // ---- drag & drop ordering ----
   const groupDrag = useRef(null);
@@ -137,7 +154,7 @@ export default function PdfList({
       const list = data.pdfs || []; // keep stored order (drag & drop reordering)
       setGroups(gs);
       setPdfs(list);
-      setArchived(data.archived || []);
+      setArchived((data.archived || []).filter(Boolean));
       // all groups start CLOSED the first time we see them
       setExpanded(prev => {
         const o = { ...prev };
@@ -492,7 +509,11 @@ export default function PdfList({
   }
 
   async function saveAll() {
-    if (!dirty || saving) return;
+    // A save already in flight while another edit lands (e.g. auto-save
+    // firing mid-request) — queue one more run right after this one
+    // finishes instead of dropping the newer changes.
+    if (saving) { pendingAutoSaveRef.current = true; return; }
+    if (!dirty) return;
     setSaving(true);
     setSaveError('');
     try {
@@ -502,6 +523,10 @@ export default function PdfList({
       setSaveError(e.message || 'Yadda saxlanmadı');
     } finally {
       setSaving(false);
+      if (pendingAutoSaveRef.current) {
+        pendingAutoSaveRef.current = false;
+        saveAll();
+      }
     }
   }
 
@@ -862,7 +887,7 @@ export default function PdfList({
           {!loading && !error && childGroupsOf(null).map((g) => renderGroup(g, 0))}
 
           {isAdmin && !loading && !error && archived.length > 0 && (() => {
-            const items = archived.filter(matches);
+            const items = archived.filter(Boolean).filter(matches);
             if (q && items.length === 0) return null;
             const isOpen = q ? true : archiveOpen;
             return (

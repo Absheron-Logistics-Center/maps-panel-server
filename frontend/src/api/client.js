@@ -33,9 +33,18 @@ async function request(method, path, body) {
     body: body ? JSON.stringify(body) : undefined
   });
 
-  // 401 → clear stale token
+  // 401 -> the token is stale/invalid (e.g. server restarted with a new
+  // JWT_SECRET, or the session just expired). Clearing the token alone isn't
+  // enough: whichever screen is currently mounted has no reason to know to
+  // bail out, so it keeps rendering with whatever partial data it already
+  // had — that's what was crashing instead of cleanly returning to login.
+  // A hard reload is the simplest thing that's always correct here: next
+  // boot, App.jsx's own check finds no token and shows Login directly.
   if (res.status === 401) {
     setToken(null);
+    localStorage.removeItem('role');
+    localStorage.removeItem('username');
+    if (path !== '/api/me') window.location.reload();
     const err = new Error('Unauthorized');
     err.status = 401;
     throw err;
@@ -61,6 +70,7 @@ const SHEET_KINDS = new Set(['diagrams', 'pdfs', 'templates']);
 export const api = {
   login: (username, password) => request('POST', '/api/login', { username, password }),
   me:    () => request('GET',  '/api/me'),
+  getHealth: () => request('GET', '/api/health'),
   // Returns { groups, processes }
   listProcesses: () => request('GET', '/api/processes'),
   getProcess:    (id) => request('GET', `/api/processes/${id}`),
@@ -109,6 +119,7 @@ export const api = {
     }
     return request('DELETE', `/api/sheets/diagrams/${kindOrId}`);
   },
+  deleteSheetGroup: (kind = 'diagrams', name) => request('DELETE', `/api/sheets/${kind}/group`, { name }),
   // Bulk-remove rows that were auto-populated from diagrams/pdfs/templates
   // (old backfill / auto-sync). Hand-typed blank rows are untouched.
   clearLinkedSheets: (kind = 'diagrams') => request('DELETE', `/api/sheets/${kind}/linked`),
@@ -120,3 +131,12 @@ export const api = {
   setLabel: (id, text) => request('PUT', '/api/labels', { id, text }),
   resetLabel: (id) => request('DELETE', `/api/labels/${encodeURIComponent(id)}`)
 };
+
+// File upload (PDFs/templates) only works on the self-hosted server — Vercel's
+// serverless functions can't reliably handle it. `/api/health` reports which
+// mode we're in; components that render an upload button should check this
+// (via the useUploadsEnabled hook below) and hide/disable it when false.
+export let uploadsEnabled = true;
+export const uploadsEnabledReady = api.getHealth()
+  .then((h) => { uploadsEnabled = h?.uploadsEnabled !== false; return uploadsEnabled; })
+  .catch(() => true); // if health check fails for some other reason, don't block uploads on that

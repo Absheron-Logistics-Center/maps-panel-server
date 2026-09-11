@@ -277,9 +277,6 @@ export default function SheetsPage({
   // used when a linked row's own Struktur adı text is empty (see
   // effectiveStrukturAdi below).
   const [itemStrukturMap, setItemStrukturMap] = useState({});
-  // № header: trash only after hovering 4s (avoids accidental reveal)
-  const [nTrashReady, setNTrashReady] = useState(false);
-  const nHoverTimerRef = useRef(null);
   const committingRef = useRef(new Set());
   const importInputRef = useRef(null);
   // Folder names already seeded into a blank slot's Struktur adı, so every
@@ -302,9 +299,6 @@ export default function SheetsPage({
     return () => clearInterval(id);
   }, []);
 
-  useEffect(() => () => {
-    if (nHoverTimerRef.current) clearTimeout(nHoverTimerRef.current);
-  }, []);
 
   // Overlay only for cold load / import / bulk busy — not silent background refresh.
   const showLoadOverlay = (loading && !cachedSheets(kind)) || importBusy || busy;
@@ -393,7 +387,6 @@ export default function SheetsPage({
     setHiddenBlankOrders(new Set());
     setColFilters({});
     setOpenColFilter(null);
-    setNTrashReady(false);
     seededGroupsRef.current = new Set();
     autoSeededRef.current = {};
     try {
@@ -578,16 +571,6 @@ export default function SheetsPage({
 
   const closeColFilter = useCallback(() => setOpenColFilter(null), []);
 
-  function armNTrash() {
-    if (nHoverTimerRef.current) clearTimeout(nHoverTimerRef.current);
-    nHoverTimerRef.current = setTimeout(() => setNTrashReady(true), 4000);
-  }
-  function disarmNTrash() {
-    if (nHoverTimerRef.current) clearTimeout(nHoverTimerRef.current);
-    nHoverTimerRef.current = null;
-    setNTrashReady(false);
-  }
-
   function renderColHeader(key, label, className) {
     const opts = colOptions[key] || [];
     return (
@@ -681,18 +664,29 @@ export default function SheetsPage({
 
   // Remove one blank slot from the pool. Always leaves at least one blank
   // row visible on the sheet so there's somewhere left to type.
-  function removeBlankSlot(order) {
+  async function removeBlankSlot(order) {
     if (!isAdmin || visibleBlankCount <= 1) return;
-    // If this slot was one of the auto-filled "empty folder" placeholders,
-    // remember that folder was dismissed (persisted) so it doesn't reappear
-    // on the next load, not just for the rest of this session.
     const seededName = autoSeededRef.current[order];
+
+    // A seeded Struktur adı is not merely a visual placeholder: it represents
+    // an existing Home folder. Deleting that row must delete the Home folder.
     if (seededName) {
-      dismissedFoldersRef.current.add(seededName);
+      if (!confirm(`"${seededName}" qrupunu əsas səhifədən də silmək istəyirsiniz?`)) return;
+      setBusy(true);
       try {
-        localStorage.setItem(dismissedFolderKey, JSON.stringify([...dismissedFoldersRef.current]));
-      } catch { /* localStorage unavailable — dismissal just won't survive a reload */ }
+        await api.deleteSheetGroup(kind, seededName);
+        dismissedFoldersRef.current.add(seededName);
+        try {
+          localStorage.setItem(dismissedFolderKey, JSON.stringify([...dismissedFoldersRef.current]));
+        } catch { /* ignore */ }
+      } catch (e) {
+        alert('Xəta: ' + (e.message || 'Qrup silinmədi'));
+        return;
+      } finally {
+        setBusy(false);
+      }
     }
+
     setHiddenBlankOrders(prev => new Set(prev).add(order));
     delete autoSeededRef.current[order];
     setBlankDrafts(prev => {
@@ -701,6 +695,11 @@ export default function SheetsPage({
       delete cp[order];
       return cp;
     });
+    if (seededName) {
+      // Refresh both sides so the deleted group cannot be reseeded into a
+      // blank slot by the sectionGroups effect.
+      await load({ silent: true });
+    }
   }
 
   async function patchRow(id, patch) {
@@ -1093,33 +1092,7 @@ export default function SheetsPage({
                 <table className="sheets-table">
                   <thead>
                     <tr>
-                      <th className="col-n">
-                        {isAdmin && items.length > 0 ? (
-                          <button
-                            type="button"
-                            className={`sheets-col-n-clear ${nTrashReady ? 'trash-ready' : ''}`}
-                            title={nTrashReady ? tByText('Hamısını sil') : '№'}
-                            aria-label={nTrashReady ? tByText('Hamısını sil') : '№'}
-                            disabled={busy || importBusy || loadUi.show}
-                            onMouseEnter={armNTrash}
-                            onMouseLeave={disarmNTrash}
-                            onFocus={armNTrash}
-                            onBlur={disarmNTrash}
-                            onClick={(e) => {
-                              if (!nTrashReady) {
-                                e.preventDefault();
-                                return;
-                              }
-                              handleClearAll();
-                            }}
-                          >
-                            <span className="sheets-col-n-label">№</span>
-                            <Trash2 size={12} strokeWidth={2.25} className="sheets-col-n-trash" aria-hidden />
-                          </button>
-                        ) : (
-                          '№'
-                        )}
-                      </th>
+                      <th className="col-n">№</th>
                       {columns.map(c => renderColHeader(c.field, tByText(c.label), c.cls))}
                       {withStatus && renderColHeader('status', tByText('Status'), 'col-status')}
                       {showDate && renderColHeader('date', tByText('Date'), 'col-date')}

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { X, Loader2, ChevronDown } from '../icons.jsx';
+import { uploadsEnabled, uploadsEnabledReady } from '../../api/client.js';
 
 // Flattens a flat groups array (with optional parentId) into depth-first
 // order, so a plain <select> can show nested groups with indentation.
@@ -47,6 +48,8 @@ export default function PdfFormModal({ mode, pdf, groups = [], defaultGroupId, s
   const [file, setFile] = useState(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [canUpload, setCanUpload] = useState(uploadsEnabled);
+  useEffect(() => { uploadsEnabledReady.then(setCanUpload); }, []);
   const sheetMenuRef = useRef(null);
 
   const MAX_FILE_BYTES = 20 * 1024 * 1024; // 20MB
@@ -122,7 +125,7 @@ export default function PdfFormModal({ mode, pdf, groups = [], defaultGroupId, s
     setError('');
     if (!title.trim()) { setError('Başlıq daxil edin'); return; }
     if (!groupId) { setError('Qrup seçin'); return; }
-    if (!isEdit && !file) { setError('Fayl seçin'); return; }
+    if (!isEdit && !file && canUpload) { setError('Fayl seçin'); return; }
 
     setSaving(true);
     try {
@@ -212,11 +215,20 @@ export default function PdfFormModal({ mode, pdf, groups = [], defaultGroupId, s
 
           <div className="pdf-field">
             <label>{isEdit ? 'Faylı dəyişdir (məcburi deyil)' : 'Fayl (PDF, Word, Excel)'}</label>
-            <input type="file" accept={ACCEPT_ATTR} onChange={pickFile} />
-            {isEdit && pdf?.filename && !file && (
-              <div className="pdf-field-hint">Hazırkı: {pdf.filename}</div>
+            {canUpload ? (
+              <>
+                <input type="file" accept={ACCEPT_ATTR} onChange={pickFile} />
+                {isEdit && pdf?.filename && !file && (
+                  <div className="pdf-field-hint">Hazırkı: {pdf.filename}</div>
+                )}
+                {file && <div className="pdf-field-hint">Seçildi: {file.name}</div>}
+              </>
+            ) : (
+              <div className="pdf-field-hint">
+                Fayl yükləmə bu saytda deaktivdir — daxili serverdən (http://172.25.60.81:4000) istifadə edin.
+                {isEdit && pdf?.filename && ` Hazırkı fayl: ${pdf.filename}`}
+              </div>
             )}
-            {file && <div className="pdf-field-hint">Seçildi: {file.name}</div>}
           </div>
 
           {error && <div className="pdf-modal-error">{error}</div>}
