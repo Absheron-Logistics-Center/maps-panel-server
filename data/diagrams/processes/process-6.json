@@ -1,0 +1,461 @@
+{
+  "id": 6,
+  "title": "Terminal prosesləri ilə əlaqədar boş yük avtomobillərinin Tırparka girişi və Mərkəzdən çıxışı",
+  "subtitle": "ALM-IMS-PRD-TP-01",
+  "width": 2200,
+  "height": 1140,
+  "lanes": [
+    {
+      "id": "lane-1783503975650",
+      "label": "Sürücü",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1783503985323",
+      "label": "Tırpark giriş məntəqəsi",
+      "y": 180,
+      "h": 160
+    },
+    {
+      "id": "lane-1783503998395",
+      "label": "Sahə əməliyyatları ofisi",
+      "y": 340,
+      "h": 160
+    },
+    {
+      "id": "lane-1783504000260",
+      "label": "Tırpark çıxış məntəqəsi",
+      "y": 500,
+      "h": 160
+    },
+    {
+      "id": "lane-1783504008035",
+      "label": "NBM giriş-çıxış məntəqəsi",
+      "y": 660,
+      "h": 160
+    },
+    {
+      "id": "lane-1783504014619",
+      "label": "Gömrük əməkdaşı",
+      "y": 820,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 70,
+      "y": 60,
+      "laneId": "lane-1783503975650",
+      "w": 240,
+      "h": 80,
+      "text": "Yük avtomobili ilə Tırpark girişinə yaxınlaşır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 70,
+      "y": 220,
+      "laneId": "lane-1783503985323",
+      "w": 240,
+      "h": 70,
+      "text": "Avtomobil məlumatlarını UDPAS-a daxil edir.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 360,
+      "y": 220,
+      "laneId": "lane-1783503985323",
+      "w": 200,
+      "h": 70,
+      "text": "Giriş dirəyini açır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 500,
+      "y": 70,
+      "laneId": "lane-1783503975650",
+      "w": 240,
+      "h": 70,
+      "text": "Avtomobili Tırparkda Xəttlənmiş sahədə saxlayır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 495,
+      "y": 380,
+      "laneId": "lane-1783503998395",
+      "w": 250,
+      "h": 70,
+      "text": "Avtomobili əməliyyat sahəsinə çağırır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 495,
+      "y": 550,
+      "laneId": "lane-1783504000260",
+      "w": 250,
+      "h": 70,
+      "text": "Xidmət haqqını hesablayır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 790,
+      "y": 70,
+      "laneId": "lane-1783503975650",
+      "w": 220,
+      "h": 70,
+      "text": "Müvafiq ödənişi həyata keçirir.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 790,
+      "y": 550,
+      "laneId": "lane-1783504000260",
+      "w": 220,
+      "h": 70,
+      "text": "Ödənişi qeydiyyata alır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1070,
+      "y": 550,
+      "laneId": "lane-1783504000260",
+      "w": 220,
+      "h": 70,
+      "text": "Çıxış dirəyini açır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1060,
+      "y": 70,
+      "laneId": "lane-1783503975650",
+      "w": 240,
+      "h": 70,
+      "text": "Avtomobillə NBM girişinə yaxınlaşır",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1250,
+      "y": 714,
+      "laneId": "lane-1783504008035",
+      "w": 200,
+      "h": 70,
+      "text": "Giriş icazəsini yoxlayır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "solid",
+      "x": 1485,
+      "y": 714,
+      "laneId": "lane-1783504008035",
+      "w": 200,
+      "h": 70,
+      "text": "Uyğunluq olduqda giriş dirəyini açır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "style": "solid",
+      "x": 1480,
+      "y": 380,
+      "laneId": "lane-1783503998395",
+      "w": 210,
+      "h": 70,
+      "text": "Yüklənmə əməliyyatını icra edir.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "type": "rect",
+      "style": "solid",
+      "x": 1730,
+      "y": 380,
+      "laneId": "lane-1783503998395",
+      "w": 230,
+      "h": 70,
+      "text": "Əməliyyatın tamamlanmasını UDPAS-da təsdiqləyir.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "type": "rect",
+      "style": "solid",
+      "x": 1710,
+      "y": 880,
+      "laneId": "lane-1783504014619",
+      "w": 270,
+      "h": 70,
+      "text": "Əməliyyatın tamamlanmasını WhatsApp qrupunda təsdiqləyir.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "type": "rect",
+      "style": "solid",
+      "x": 2070,
+      "y": 70,
+      "laneId": "lane-1783503975650",
+      "w": 290,
+      "h": 70,
+      "text": "Avtomobili NBM çıxışına yaxınlaşdırır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "type": "rect",
+      "style": "solid",
+      "x": 2240,
+      "y": 704,
+      "laneId": "lane-1783504008035",
+      "w": 310,
+      "h": 80,
+      "text": " Avtomobilin Terminal, Gömrük və Vergi sistemində çıxış icazələri yoxlanılır",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "type": "rect",
+      "style": "solid",
+      "x": 2660,
+      "y": 704,
+      "laneId": "lane-1783504008035",
+      "w": 270,
+      "h": 80,
+      "text": "Uyğunluq olduqda çıxış dirəyini açır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "type": "pill",
+      "style": "solid",
+      "x": 2650,
+      "y": 70,
+      "laneId": "lane-1783503975650",
+      "w": 290,
+      "h": 70,
+      "text": "Avtomobil Mərkəz ərazisini tərk edir",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "top",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 14,
+      "to": 15,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 15,
+      "to": 16,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 16,
+      "to": 17,
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": 17,
+      "to": 18,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 18,
+      "to": 19,
+      "s": "top",
+      "e": "bottom"
+    }
+  ]
+}

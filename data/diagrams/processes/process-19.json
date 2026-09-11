@@ -1,0 +1,340 @@
+{
+  "id": 19,
+  "title": "MÜŞTƏRİ SORĞUSUNUN QƏBULU (Qeyri-tranzit əməliyyatlar)",
+  "subtitle": "MB-İMS-PRD-001",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1785479692506",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 204
+    },
+    {
+      "id": "lane-1785479703261",
+      "label": "Koordinator",
+      "y": 224,
+      "h": 340
+    },
+    {
+      "id": "lane-1785479710891",
+      "label": "Bəyannaməçi",
+      "y": 564,
+      "h": 270
+    }
+  ],
+  "nodes": [
+    {
+      "id": "",
+      "type": "pill",
+      "style": "stroke",
+      "x": 70,
+      "y": 89,
+      "laneId": "lane-1785479692506",
+      "w": 90,
+      "h": 90,
+      "text": "\n",
+      "info": {
+        "general": [
+          ""
+        ],
+        "generalColor": "#f7f7f7",
+        "risksColor": "#ffffff",
+        "risks": []
+      },
+      "color": "#111827"
+    },
+    {
+      "id": 1,
+      "type": "rect",
+      "style": "solid",
+      "x": 235,
+      "y": 64,
+      "laneId": "lane-1785479692506",
+      "w": 240,
+      "h": 140,
+      "text": "Müştəri \ntərəfindən xidmətə və xidmət haqqına dair sorğu\nverilməsi\n\n\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": ".",
+      "type": "pill",
+      "style": "stroke",
+      "x": 880,
+      "y": 64,
+      "laneId": "lane-1785479692506",
+      "w": 90,
+      "h": 90,
+      "text": "",
+      "info": {
+        "general": [
+          ""
+        ]
+      },
+      "color": "#dc2626"
+    },
+    {
+      "id": "..",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1430,
+      "y": 65,
+      "laneId": "lane-1785479692506",
+      "w": 210,
+      "h": 80,
+      "text": "Keçid: Bəyanetmə fəaliyyəti biznes prosesinə keçid",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1070,
+      "y": 60,
+      "laneId": "lane-1785479692506",
+      "w": 260,
+      "h": 90,
+      "text": "Müştəri tərəfindən sifarişin təsdiqi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.1",
+      "type": "diamond",
+      "style": "solid",
+      "x": 571,
+      "y": 34,
+      "laneId": "lane-1785479692506",
+      "w": 230,
+      "h": 150,
+      "text": "Xidmət haqqının\ntəsdiqi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 235,
+      "y": 254,
+      "laneId": "lane-1785479703261",
+      "w": 240,
+      "h": 80,
+      "text": "Şirkətin xidmət tarifləri barədə Müştəriyə məlumat\nverilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 235,
+      "y": 404,
+      "laneId": "lane-1785479703261",
+      "w": 220,
+      "h": 140,
+      "text": "Müştərinin gömrük tarixçəsinin\naydınlaşdırılması (gömrük güzəştlərindən yararlanmaq imkanının ölçülməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 576,
+      "y": 244,
+      "laneId": "lane-1785479703261",
+      "w": 220,
+      "h": 70,
+      "text": "Müştəri ilə müqavilə rəsmiləşdirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 576,
+      "y": 404,
+      "laneId": "lane-1785479703261",
+      "w": 200,
+      "h": 140,
+      "text": "Müştəridən mala dair invoysun alınması (zəruri hallarda nəqliyyat xərcinə\ndair məlumatların da həmçinin\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1370,
+      "y": 319,
+      "laneId": "lane-1785479703261",
+      "w": 200,
+      "h": 100,
+      "text": "Hesablanmış gömrük ödənişləri barədə müştəriyə məlumat təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 930,
+      "y": 294,
+      "laneId": "lane-1785479703261",
+      "w": 200,
+      "h": 150,
+      "text": "İnvoysa və ya digər zəruri məlumatlara əsasən, malın\nHS kodunun müəyyənləşdirilməsi üçün bəyannaməçiyə təqdim edilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 220,
+      "y": 684,
+      "laneId": "lane-1785479710891",
+      "w": 220,
+      "h": 120,
+      "text": "İnvoysa əsasən malın HS kodunun dəqiqləşdirilməsi\n(əgər invoysda qeyd edilməyibsə)\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 571,
+      "y": 674,
+      "laneId": "lane-1785479710891",
+      "w": 250,
+      "h": 140,
+      "text": "8.\tHS koda uyğun olaraq, invoys dəyəri və nəqliyyat xərclərinə əsasən müvafiq\ngömrük ödənişlərinin\nhesablanması və koordinatora məlumat verilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      },
+      "color": "#3a7894"
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": "1.1",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "",
+      "to": 1,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "1.1",
+      "to": ".",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": "..",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "1.1",
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    }
+  ],
+  "status": null
+}

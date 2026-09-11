@@ -1,0 +1,434 @@
+{
+  "id": 15,
+  "title": "Yüklərin konteynerlə Mərkəzdən ixrac edilməsi zamanı sənədləşləşdirmə prosesinin icrasına dair iş axınI",
+  "subtitle": "ALM-İMS-PRD-VPD-003",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1784974060894",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1784974090667",
+      "label": "VPD-nin Müştəri xidməti şöbəsi",
+      "y": 180,
+      "h": 160
+    },
+    {
+      "id": "lane-1784974104877",
+      "label": "VPD-nin Müştəri xidməti şöbəsinin Xəzinəsi",
+      "y": 340,
+      "h": 160
+    },
+    {
+      "id": "lane-1784974115159",
+      "label": "VPD-nin Əməliyyatlar və koordinasiya şöbəsi",
+      "y": 500,
+      "h": 590
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 97.01041603088379,
+      "y": 50,
+      "laneId": "lane-1784974060894",
+      "w": 280,
+      "h": 100,
+      "text": "Naryad” və “İnstruksiya” sənədlərinin VPD-yə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 82.01041603088379,
+      "y": 540,
+      "laneId": "lane-1784974115159",
+      "w": 310,
+      "h": 110,
+      "text": "«Naryad» sənədinin yoxlanışı, uyğunluq təşkil etdikdə müştəriyə təsdiq məlumatların göndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 515,
+      "y": 50,
+      "laneId": "lane-1784974060894",
+      "w": 300,
+      "h": 100,
+      "text": "Yükə dair sənəd toplusunun təqdim edilməsi və yüklərin/konteyner(lər)in Mərkəzə gəlməsinin təmin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 500,
+      "y": 550,
+      "laneId": "lane-1784974115159",
+      "w": 330,
+      "h": 110,
+      "text": "Konteynerin platformaya yüklənməsinə icazənin mövcudluğunun daşıyıcıdan məlumatları dəqiqləşdirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 505,
+      "y": 740,
+      "laneId": "lane-1784974115159",
+      "w": 320,
+      "h": 120,
+      "text": "SƏO-nin Konteyner əməliyyatları şöbəsindən yüklənəcək konteynerin ölçüsünə uyğun olaraq hansı konteynerin hansı platformaya yüklənməsi barədə məlumatın alınması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 510,
+      "y": 950,
+      "laneId": "lane-1784974115159",
+      "w": 310,
+      "h": 120,
+      "text": "Zəruri məlumatların proqrama əlavə edilməsi, SMGS yük qaiməsinin və vaqon/ konteyner vərəqəsinin tərtib olunması, habelə onların müştəriyə təhvil verilməsi\n \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 910,
+      "y": 45,
+      "laneId": "lane-1784974060894",
+      "w": 300,
+      "h": 100,
+      "text": "Gömrük rəsmiləşdirilməsinin həyata keçirilməsi\n \n\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 910,
+      "y": 220,
+      "laneId": "lane-1784974090667",
+      "w": 300,
+      "h": 90,
+      "text": "Cəmiyyət tərəfindən göstəriləcək xidmətlərə dair sifariş sənədinin hazırlanması\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1295,
+      "y": 220,
+      "laneId": "lane-1784974090667",
+      "w": 310,
+      "h": 90,
+      "text": "Müştərini ödənişin icrası üçün Mərkəzin xəzinəsinə yönləndirilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1300,
+      "y": 45,
+      "laneId": "lane-1784974060894",
+      "w": 300,
+      "h": 90,
+      "text": "Ödənişin həyata keçirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1660,
+      "y": 370,
+      "laneId": "lane-1784974104877",
+      "w": 270,
+      "h": 100,
+      "text": "Ödənişin qəbul edilməsi və ödənişə dair məlumatların “UDPAS” proqramında emal edilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "solid",
+      "x": 995,
+      "y": 540,
+      "laneId": "lane-1784974115159",
+      "w": 270,
+      "h": 100,
+      "text": "Yükə dair sənədlərin çeşidlənməsi və emalı\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "style": "solid",
+      "x": 1480,
+      "y": 680,
+      "laneId": "lane-1784974115159",
+      "w": 290,
+      "h": 90,
+      "text": "Digər sənədlərin MPO-ya təhvil verilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "A1",
+      "type": "rect",
+      "style": "stroke",
+      "x": 87.01041603088379,
+      "y": 730,
+      "laneId": "lane-1784974115159",
+      "w": 300,
+      "h": 110,
+      "text": "Platformanın Mərkəzin müvafiq yoluna gətirilməsi üçün MPO-ya müraciətin edilməsi\n \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "12.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 995,
+      "y": 680,
+      "laneId": "lane-1784974115159",
+      "w": 270,
+      "h": 90,
+      "text": "SMGS yük qaiməsinin 5-ci elektron nüsxəsinin proqrama əlavə edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "12.2",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 995,
+      "y": 810,
+      "laneId": "lane-1784974115159",
+      "w": 270,
+      "h": 90,
+      "text": "SMGS yük qaiməsinin 4-cü nüsxənin müştəriyə təhvil verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "12.3",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 995,
+      "y": 945,
+      "laneId": "lane-1784974115159",
+      "w": 270,
+      "h": 90,
+      "text": "SMGS yük qaiməsinin 5-ci nüsxəsinin ADY-yə təhvil verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "B1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1480,
+      "y": 540,
+      "laneId": "lane-1784974115159",
+      "w": 280,
+      "h": 100,
+      "text": "Sənədləşmə işlərin bitməsinə dair SƏO-nin məlumatlandırılması və zəruri hallarda plombun təhvil verilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 9,
+      "to": 10,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 12,
+      "to": "12.1",
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": "12.1",
+      "to": "12.2",
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": "12.2",
+      "to": "12.3",
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": 12,
+      "to": "B1",
+      "s": "right",
+      "e": "left",
+      "color": "#16a34a"
+    },
+    {
+      "from": "12.3",
+      "to": 13,
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": 4,
+      "to": "A1",
+      "s": "left",
+      "e": "right",
+      "color": "#ea580c"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "bottom",
+      "e": "top"
+    }
+  ],
+  "status": "done"
+}

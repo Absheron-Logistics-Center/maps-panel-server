@@ -1,0 +1,262 @@
+{
+  "id": 17,
+  "title": "Boş vaqonların Mərkəzdən göndərilməsi prosesinin iş axını",
+  "subtitle": "ALM-İMS-MPO-003",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1785143426338",
+      "label": "Vahid pəncərə departamenti",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1785143452385",
+      "label": "Manevra və planlama ofisi",
+      "y": 180,
+      "h": 520
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 75,
+      "y": 24,
+      "laneId": "lane-1785143426338",
+      "w": 290,
+      "h": 110,
+      "text": "Boş vaqonların göndərilməsi üçün geri dönüş sənədləri və vaqonların yerləşmə cədvəlinin MPO-ya təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 80,
+      "y": 200,
+      "laneId": "lane-1785143452385",
+      "w": 280,
+      "h": 80,
+      "text": "Vaqonların yerləşmə cədvəlinə əsasən marşrutun müəyyən edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 80,
+      "y": 320,
+      "laneId": "lane-1785143452385",
+      "w": 280,
+      "h": 80,
+      "text": "Daxili dəmir yolu xətlərindəki vaqonların ərazidən çıxarılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 95,
+      "y": 440,
+      "laneId": "lane-1785143452385",
+      "w": 250,
+      "h": 80,
+      "text": "Vaqonların Mərkəzin qəbul-göndərmə parkında qatar tərkibinə qoşulması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 100,
+      "y": 590,
+      "laneId": "lane-1785143452385",
+      "w": 240,
+      "h": 90,
+      "text": "Natura vərəqəsinin tərtib edilməsi və ümumi baxışın keçirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 510,
+      "y": 190,
+      "laneId": "lane-1785143452385",
+      "w": 300,
+      "h": 90,
+      "text": "Qatar tərkibinin göndərilməyə hazır olması barədə ADY əməkdaşlarının məlumatlandırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 515,
+      "y": 320,
+      "laneId": "lane-1785143452385",
+      "w": 290,
+      "h": 70,
+      "text": "Yol dəyişdiricinin tənzimlənməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 515,
+      "y": 430,
+      "laneId": "lane-1785143452385",
+      "w": 290,
+      "h": 90,
+      "text": "Lokomotiv gəldikdən sonra sənədlərin Lokomotiv briqadasına təhvil verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 515,
+      "y": 580,
+      "laneId": "lane-1785143452385",
+      "w": 290,
+      "h": 90,
+      "text": "Natura vərəqəsinin surətinin VPD-nin Müştəri xidmətləri şöbəsinə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 930,
+      "y": 30,
+      "laneId": "lane-1785143426338",
+      "w": 240,
+      "h": 70,
+      "text": "Natura vərəqəsinə əsasən məlumatların proqrama emalı",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "pill",
+      "style": "solid",
+      "x": 930,
+      "y": 200,
+      "laneId": "lane-1785143452385",
+      "w": 240,
+      "h": 100,
+      "text": "Proqram üzərindən vaqonların Mərkəzdən göndərilməsi əməliyyatının tamamlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "left"
+    }
+  ],
+  "status": "done"
+}

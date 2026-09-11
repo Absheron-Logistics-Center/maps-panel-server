@@ -1,0 +1,336 @@
+{
+  "id": 23,
+  "title": "BROKER FƏALİYYƏTİ (Qeyri-tranzit/Tır idxalı_İpək Yolu Terminalı, BBGİ)",
+  "subtitle": "MB-İMS-PRD-004",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1785485220787",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1785485225351",
+      "label": "Koordinator",
+      "y": 180,
+      "h": 160
+    },
+    {
+      "id": "lane-1785485229103",
+      "label": "Broker",
+      "y": 340,
+      "h": 201
+    },
+    {
+      "id": "lane-1785485236099",
+      "label": "Gömrük orqanı",
+      "y": 541,
+      "h": 219
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "rect",
+      "style": "solid",
+      "x": 410,
+      "y": 200,
+      "laneId": "lane-1785485225351",
+      "w": 200,
+      "h": 100,
+      "text": "Brokerə əməliyyat barədə məlumat\nverilməsi və GB-nin yönləndirilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 110,
+      "y": 406,
+      "laneId": "lane-1785485229103",
+      "w": 200,
+      "h": 70,
+      "text": "GB-nin gömrük orqanına təqdimi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 110,
+      "y": 605,
+      "laneId": "lane-1785485236099",
+      "w": 200,
+      "h": 120,
+      "text": "Yükün buraxılışda\nolub-olmamasının yoxlanması və GB-nin möhürlə təsdiq\nedilməsi \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 720,
+      "y": 406,
+      "laneId": "lane-1785485229103",
+      "w": 220,
+      "h": 80,
+      "text": "Yük inspektoru ilə yükə baxış keçirilməsi və buraxılışa verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 1390,
+      "y": 406,
+      "laneId": "lane-1785485229103",
+      "w": 240,
+      "h": 80,
+      "text": "Yükə dair terminal xidmətləri ödənişlərinin təmini",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 1390,
+      "y": 40,
+      "laneId": "lane-1785485220787",
+      "w": 240,
+      "h": 80,
+      "text": " Yükün terminal ərazisini tərk etməsi\n\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "3.1b",
+      "type": "rect",
+      "style": "solid",
+      "x": 405,
+      "y": 371,
+      "laneId": "lane-1785485229103",
+      "w": 210,
+      "h": 150,
+      "text": "Yük inspektorunun təyin edilməsi üçün onlayn növbə götürülməsi və təyin edilmiş yük inspektoru və tarix barədə məlumat əldə edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 110,
+      "y": 210,
+      "laneId": "lane-1785485225351",
+      "w": 210,
+      "h": 80,
+      "text": "Keçid: Bəyanetmə fəaliyyəti (QT) biznes prosesi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": ".",
+      "type": "diamond",
+      "style": "solid",
+      "x": 435,
+      "y": 590,
+      "laneId": "lane-1785485236099",
+      "w": 150,
+      "h": 150,
+      "text": "Qrupaj yük",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "3.1a",
+      "type": "rect",
+      "style": "solid",
+      "x": 710,
+      "y": 605,
+      "laneId": "lane-1785485236099",
+      "w": 210,
+      "h": 120,
+      "text": "Yükün gömrük anbarında və ya müştərinin öz\nanbarında açılmasının müəyyənləşdirilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "diamond",
+      "style": "solid",
+      "x": 1000,
+      "y": 590,
+      "laneId": "lane-1785485236099",
+      "w": 150,
+      "h": 150,
+      "text": "Yükün Müştərinin anbarında açılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "4.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 1040,
+      "y": 406,
+      "laneId": "lane-1785485229103",
+      "w": 240,
+      "h": 80,
+      "text": "Yükün digər nəqliyyat vasitəsinə yüklənməsinin təşkili (Yük qrupaj olarsa)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "",
+      "type": "pill",
+      "style": "stroke",
+      "x": 1170,
+      "y": 40,
+      "laneId": "lane-1785485220787",
+      "w": 80,
+      "h": 80,
+      "text": "",
+      "info": {
+        "general": [
+          ""
+        ]
+      },
+      "color": "#16a34a"
+    }
+  ],
+  "edges": [
+    {
+      "from": 2,
+      "to": 1,
+      "s": "top",
+      "e": "bottom",
+      "arrow": "start"
+    },
+    {
+      "from": "1.1",
+      "to": 1,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": ".",
+      "to": "3.1b",
+      "s": "top",
+      "e": "bottom",
+      "label": "Bəli"
+    },
+    {
+      "from": 3,
+      "to": ".",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "3.1b",
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": ".",
+      "to": "3.1a",
+      "s": "right",
+      "e": "left",
+      "label": "Xeyr"
+    },
+    {
+      "from": "3.1a",
+      "to": 7,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 7,
+      "to": 4,
+      "s": "top",
+      "e": "bottom",
+      "label": "Xeyr"
+    },
+    {
+      "from": 4,
+      "to": "4.1",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "4.1",
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 6,
+      "to": "",
+      "s": "left",
+      "e": "right"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 5,
+      "s": "right",
+      "e": "bottom",
+      "label": "Bəli"
+    }
+  ],
+  "status": null
+}

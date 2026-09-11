@@ -1,0 +1,290 @@
+{
+  "id": 8,
+  "title": "Terminal prosesləri ilə əlaqədar dolu yük avtomobillərinin Mərkəzə girişi və çıxışı iş axışı",
+  "subtitle": "ALM-İMS-PRD-TP-001",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1784280581443",
+      "label": "Sürücü",
+      "y": 20,
+      "h": 230
+    },
+    {
+      "id": "lane-1784280602524",
+      "label": "Dayanacaq üzrə məsul əməkdaş",
+      "y": 250,
+      "h": 240
+    },
+    {
+      "id": "lane-1784280613332",
+      "label": "Şöbə müdiri",
+      "y": 490,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 110,
+      "y": 60,
+      "laneId": "lane-1784280581443",
+      "w": 330,
+      "h": 50,
+      "text": "Avtomobil ilə dayanacaq girişinə yaxınlaşır",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 110,
+      "y": 260,
+      "laneId": "lane-1784280602524",
+      "w": 330,
+      "h": 70,
+      "text": "Avtomobil nömrəsinin güzəşt siyahısında olub olmamasını yoxlayır",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 110,
+      "y": 400,
+      "laneId": "lane-1784280602524",
+      "w": 330,
+      "h": 70,
+      "text": "Avtomobili dayanacağa buraxır",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 560,
+      "y": 60,
+      "laneId": "lane-1784280581443",
+      "w": 240,
+      "h": 70,
+      "text": "Avtomobiili ayrılmış ( xətlənmiş ) sahədə saxlayır",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 560,
+      "y": 160,
+      "laneId": "lane-1784280581443",
+      "w": 240,
+      "h": 70,
+      "text": "Çıxış üçün mətəqəyə yaxınlaşır",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 800,
+      "y": 270,
+      "laneId": "lane-1784280602524",
+      "w": 220,
+      "h": 70,
+      "text": "Avtomobil nömrəsini yenidən yoxlayır",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 800,
+      "y": 400,
+      "laneId": "lane-1784280602524",
+      "w": 220,
+      "h": 70,
+      "text": "Ödənişli istifadə halında məbləğ bildirilir",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1080,
+      "y": 150,
+      "laneId": "lane-1784280581443",
+      "w": 200,
+      "h": 70,
+      "text": "Müvafiq ödənişi həyata keçirir",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1080,
+      "y": 270,
+      "laneId": "lane-1784280602524",
+      "w": 200,
+      "h": 70,
+      "text": "Ödənişi qeydiyyata alır",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1080,
+      "y": 400,
+      "laneId": "lane-1784280602524",
+      "w": 200,
+      "h": 70,
+      "text": "Çıxış dirəyini açır",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1365,
+      "y": 140,
+      "laneId": "lane-1784280581443",
+      "w": 210,
+      "h": 70,
+      "text": "Avtomobili dayanacaqdan çıxarır",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "pill",
+      "style": "solid",
+      "x": 1335,
+      "y": 510,
+      "laneId": "lane-1784280613332",
+      "w": 270,
+      "h": 80,
+      "text": "Gün sonunda yığılmış ödənişlər şöbə müdirinə təhvil verilir",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "left"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "bottom",
+      "e": "top"
+    }
+  ],
+  "status": null
+}

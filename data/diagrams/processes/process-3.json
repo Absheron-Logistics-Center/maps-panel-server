@@ -1,0 +1,386 @@
+{
+  "id": 3,
+  "title": "Yüklərin saxlanc anbarına qəbulu üzrə iş axını",
+  "subtitle": "ALM-İMS-PRD-003",
+  "width": 2200,
+  "height": 1140,
+  "lanes": [
+    {
+      "id": "lane-1784623585168",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1784623591488",
+      "label": "BD",
+      "y": 180,
+      "h": 160
+    },
+    {
+      "id": "lane-1784623598576",
+      "label": "BDD",
+      "y": 340,
+      "h": 160
+    },
+    {
+      "id": "lane-1784623605456",
+      "label": "ƏKTD",
+      "y": 500,
+      "h": 340
+    },
+    {
+      "id": "lane-1784623617560",
+      "label": "ALŞ",
+      "y": 840,
+      "h": 160
+    },
+    {
+      "id": "lane-1784623626914",
+      "label": "SƏO",
+      "y": 1000,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 100,
+      "y": 70,
+      "laneId": "lane-1784623585168",
+      "w": 290,
+      "h": 70,
+      "text": "3PL xidmətindən istifadə edilməsi üçün BD-yə müraciətin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "2.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 70,
+      "y": 220,
+      "laneId": "lane-1784623591488",
+      "w": 350,
+      "h": 80,
+      "text": "Sorğunun qəbulu, emalı, müştəri ilə əməkdaşlıq münasibətlərin rəsmiləşdirilməsi və zəruri məlumatların ƏKTD-yə göndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 110,
+      "y": 660,
+      "laneId": "lane-1784623605456",
+      "w": 270,
+      "h": 100,
+      "text": "Sorğunun qəbulu, emalı, müştəri ilə əlaqənin qurulması və yükə dair zəruri sənədlərin sorğulanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "2.2",
+      "type": "rect",
+      "style": "solid",
+      "x": 445,
+      "y": 360,
+      "laneId": "lane-1784623598576",
+      "w": 290,
+      "h": 120,
+      "text": "Sorğunun qəbulu, emalı, müştəri ilə əməkdaşlıq münasibətlərin rəsmiləşdirilməsi və zəruri məlumatların ƏKTD-yə göndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 455,
+      "y": 710,
+      "laneId": "lane-1784623605456",
+      "w": 270,
+      "h": 110,
+      "text": "“udpas”da “mal qəbulu” sənədinin hazırlanması (“WMS” ilə avtomatik inteqrasiya)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 800,
+      "y": 65,
+      "laneId": "lane-1784623585168",
+      "w": 380,
+      "h": 80,
+      "text": "Yükün mərkəzinə çatmasına 3 gün qalmış yükə dair məlumatların (packing list və s.) ƏKTD-yə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 455,
+      "y": 570,
+      "laneId": "lane-1784623605456",
+      "w": 270,
+      "h": 110,
+      "text": "Təqdim edilmiş məlumatlara əsasən gələn yüklərlə bağlı “udpas”a məlumatların əlavə edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 835,
+      "y": 520,
+      "laneId": "lane-1784623605456",
+      "w": 240,
+      "h": 80,
+      "text": "Yüklərin aşırılması üçün ALŞ-yə müraciət edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1220,
+      "y": 530,
+      "laneId": "lane-1784623605456",
+      "w": 350,
+      "h": 90,
+      "text": "Yüklərin anbara qəbuluna dair “WMS”də qeydlərin aparılması (mal ehtiyyatın yaranması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1280,
+      "y": 670,
+      "laneId": "lane-1784623605456",
+      "w": 230,
+      "h": 80,
+      "text": "Cəmiyyət tərəfindən həyata keçiriləcək işlərə dair  “sIfariş”in yazılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "pill",
+      "style": "solid",
+      "x": 1710,
+      "y": 520,
+      "laneId": "lane-1784623605456",
+      "w": 310,
+      "h": 110,
+      "text": "“mal qəbulu” və “mal ehtiyyatı” sənədlərinin müştəriyə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1285,
+      "y": 885,
+      "laneId": "lane-1784623617560",
+      "w": 220,
+      "h": 70,
+      "text": "Yüklərin anbara fiziki qəbulu",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 840,
+      "y": 880,
+      "laneId": "lane-1784623617560",
+      "w": 230,
+      "h": 80,
+      "text": "Yüklərin Mərkəzə gəldikdə yükaşırılması və anbara çatdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "7.2",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 900,
+      "y": 1025,
+      "laneId": "lane-1784623626914",
+      "w": 270,
+      "h": 70,
+      "text": "Yükaşırma prosesin icrasi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.2",
+      "type": "pill",
+      "style": "solid",
+      "x": 440,
+      "y": 70,
+      "laneId": "lane-1784623585168",
+      "w": 300,
+      "h": 70,
+      "text": "3PL xidmətindən istifadə edilməsi üçün BDD-yə müraciətin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "7.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 830,
+      "y": 650,
+      "laneId": "lane-1784623605456",
+      "w": 250,
+      "h": 80,
+      "text": "Zərurət olduqda SƏO-dan əlavə resursun sifariş edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": "2.1",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "2.1",
+      "to": 3,
+      "s": "bottom",
+      "e": "top",
+      "arrow": "end"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "1.2",
+      "to": "2.2",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": "7.1",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "7.1",
+      "to": "7.2",
+      "s": "left",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "7.1",
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    }
+  ],
+  "status": "done"
+}

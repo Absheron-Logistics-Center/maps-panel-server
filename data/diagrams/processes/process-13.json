@@ -1,0 +1,415 @@
+{
+  "id": 13,
+  "title": "Dəmir yolu ilə Mərkəzə daxil olan yüklərin sənədləşməsi zamanı həyata keçirilən proseslərin iş axını",
+  "subtitle": "ALM-İMS-PRD-VPD-001",
+  "width": 2200,
+  "height": 960,
+  "lanes": [
+    {
+      "id": "lane-1784965930773",
+      "label": "MPO",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1784965954963",
+      "label": "VPD-nin Əməliyyatlar və koordinasiya şöbəsi",
+      "y": 180,
+      "h": 280
+    },
+    {
+      "id": "lane-1784965993330",
+      "label": "Müştəri",
+      "y": 460,
+      "h": 160
+    },
+    {
+      "id": "lane-1784966007231",
+      "label": "VPD-nin Müştəri xidməti şöbəsi",
+      "y": 620,
+      "h": 180
+    },
+    {
+      "id": "lane-1784966024104",
+      "label": "VPD-nin Müştəri xidməti şöbəsinin Xəzinəsi",
+      "y": 800,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 2,
+      "type": "pill",
+      "style": "solid",
+      "x": 590,
+      "y": 50,
+      "laneId": "lane-1784965930773",
+      "w": 246,
+      "h": 90,
+      "text": "\nYükə dair sənədlərin VPD-yə\ntəhvil verilməsİ\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 102,
+      "y": 210,
+      "laneId": "lane-1784965954963",
+      "w": 230,
+      "h": 80,
+      "text": "3\nYükə dair sənədlərin qəbul\nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 102,
+      "y": 320,
+      "laneId": "lane-1784965954963",
+      "w": 230,
+      "h": 80,
+      "text": "4\nYükə dair sənədlərin\nçeşidlənməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 400,
+      "y": 210,
+      "laneId": "lane-1784965954963",
+      "w": 290,
+      "h": 100,
+      "text": "\nYükə dair sənədlərin emal edilməsi və müvafiq məlumatların proqrama daxil edilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 400,
+      "y": 340,
+      "laneId": "lane-1784965954963",
+      "w": 290,
+      "h": 100,
+      "text": "\nMüştəri ilə əlaqə yaradılması və yükün Mərkəzə çatması barədə məlumat verilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.1",
+      "type": "subprocess",
+      "style": "dashed",
+      "x": 790,
+      "y": 210,
+      "laneId": "lane-1784965954963",
+      "w": 260,
+      "h": 100,
+      "text": "5.1\nSMGS yük nəqliyyat qaiməsinin 1-ci və 2-ci nüsxələrinin möhürlənməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.2",
+      "type": "subprocess",
+      "style": "dashed",
+      "x": 1150,
+      "y": 210,
+      "laneId": "lane-1784965954963",
+      "w": 270,
+      "h": 100,
+      "text": "5.2\nSMGS yük nəqliyyat qaiməsinin 2-ci və 3-cü nüsxələrinin ADY-yə təhvil verilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 400,
+      "y": 515,
+      "laneId": "lane-1784965993330",
+      "w": 290,
+      "h": 70,
+      "text": "\nMərkəzə gəlməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 795,
+      "y": 500,
+      "laneId": "lane-1784965993330",
+      "w": 240,
+      "h": 100,
+      "text": "\n\nGömrük rəsmiləşdirilməsinin\nhəyata keçirilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "solid",
+      "x": 1170,
+      "y": 500,
+      "laneId": "lane-1784965993330",
+      "w": 250,
+      "h": 70,
+      "text": "\nÖdənişin həyata keçirilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 405,
+      "y": 660,
+      "laneId": "lane-1784966007231",
+      "w": 280,
+      "h": 100,
+      "text": "\nYükə dair sənədlərin gömrük rəsmiləşdirilməsi məqsədilə müştəriyə təqdim edilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 790,
+      "y": 680,
+      "laneId": "lane-1784966007231",
+      "w": 250,
+      "h": 100,
+      "text": "\nCəmiyyət tərəfindən\ngöstəriləcək xidmətlərə dair\nsifariş sənədinin hazırlanması\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1165,
+      "y": 680,
+      "laneId": "lane-1784966007231",
+      "w": 260,
+      "h": 100,
+      "text": "\nMüştərinin ödənişin icrası üçün\nMərkəzin xəzinəsinə\n         yönləndirilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "13.1",
+      "type": "subprocess",
+      "style": "dashed",
+      "x": 1680,
+      "y": 670,
+      "laneId": "lane-1784966007231",
+      "w": 300,
+      "h": 90,
+      "text": "13.1\nMüştərinin yükaşırma\nsahəsinə yönləndirilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "style": "solid",
+      "x": 1370,
+      "y": 820,
+      "laneId": "lane-1784966024104",
+      "w": 270,
+      "h": 100,
+      "text": "\nÖdənişin qəbul edilməsi və ödənişə dair məlumatların proqramda emal olunması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "type": "pill",
+      "style": "solid",
+      "x": 1720,
+      "y": 835,
+      "laneId": "lane-1784966024104",
+      "w": 320,
+      "h": 70,
+      "text": "\nProqramda buraxılışın verilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 80,
+      "y": 60,
+      "laneId": "lane-1784965930773",
+      "w": 320,
+      "h": 70,
+      "text": "Qatarların Mərkəzin qəbul-göndərmə\nparkına qəbul edilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "s": "bottom",
+      "e": "bottom"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": "5.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "5.1",
+      "to": "5.2",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": 13,
+      "to": "13.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    }
+  ],
+  "status": "done"
+}
