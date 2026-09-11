@@ -1,4 +1,11 @@
 {
+  "groups": [
+    {
+      "id": 1,
+      "name": "Anbar logistikası şöbəsi",
+      "parentId": null
+    }
+  ],
   "pdfs": [
     {
       "id": 1,
@@ -8,13 +15,6 @@
       "size": 3278401,
       "groupId": 1,
       "uploadedAt": "2026-09-09T08:38:42.855Z"
-    }
-  ],
-  "groups": [
-    {
-      "id": 1,
-      "name": "Anbar logistikası şöbəsi",
-      "parentId": null
     }
   ]
 }
