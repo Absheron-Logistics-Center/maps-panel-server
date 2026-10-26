@@ -1,0 +1,1104 @@
+{
+  "id": 42,
+  "title": "Beynəlxalq daşıma çərçivəsində müştəri sorğularının emalı və tranzit əməliyyatlarının həyata keçirilməsi üzrə iş axın",
+  "subtitle": "",
+  "width": 2200,
+  "height": 2054,
+  "lanes": [
+    {
+      "id": "lane-1789454236593",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 200
+    },
+    {
+      "id": "lane-1789454243088",
+      "label": "MKD",
+      "y": 220,
+      "h": 176
+    },
+    {
+      "id": "lane-1789454249161",
+      "label": "BD",
+      "y": 396,
+      "h": 160
+    },
+    {
+      "id": "lane-1789454255801",
+      "label": "BDD\nTranzit əməliyyatları şöbəsi",
+      "y": 556,
+      "h": 516
+    },
+    {
+      "id": "lane-1789456937279",
+      "label": "Subpodratçı",
+      "y": 1072,
+      "h": 190
+    },
+    {
+      "id": "lane-1789457110279",
+      "label": "HD",
+      "y": 1262,
+      "h": 190
+    },
+    {
+      "id": "lane-1789457123622",
+      "label": "MD",
+      "y": 1452,
+      "h": 220
+    },
+    {
+      "id": "lane-1789457190830",
+      "label": "'MB Broker' MMC",
+      "y": 1672,
+      "h": 160
+    },
+    {
+      "id": "lane-1789457216391",
+      "label": "BDD\nTəhlil və \nhesabatlıq şöbəsi",
+      "y": 1832,
+      "h": 220
+    },
+    {
+      "id": "lane-1789457232542",
+      "label": "VPD",
+      "y": 2052,
+      "h": 180
+    },
+    {
+      "id": "lane-1789457427032",
+      "label": "SƏO",
+      "y": 2232,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": "1.1",
+      "type": "pill",
+      "style": "solid",
+      "x": 120,
+      "y": 70,
+      "laneId": "lane-1789454236593",
+      "w": 200,
+      "h": 100,
+      "text": "Sorğunun Cəmiyyətin veb \nsəhifəsi üzərindən yaradılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.2",
+      "type": "pill",
+      "style": "solid",
+      "x": 460,
+      "y": 70,
+      "laneId": "lane-1789454236593",
+      "w": 200,
+      "h": 90,
+      "text": "Sorğunun BD-yə müraciət \nedərək yaradılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.3",
+      "type": "pill",
+      "style": "solid",
+      "x": 770,
+      "y": 70,
+      "laneId": "lane-1789454236593",
+      "w": 200,
+      "h": 90,
+      "text": "Sorğunun BDD-yə müraciət \nedilərək yaradılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 1090,
+      "y": 60,
+      "laneId": "lane-1789454236593",
+      "w": 200,
+      "h": 80,
+      "text": "Zəruri məlumatların təqdim \nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "2.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 115,
+      "y": 276,
+      "laneId": "lane-1789454243088",
+      "w": 200,
+      "h": 100,
+      "text": "Sorğunun emalı və uyğunluq \ntəşkil etdikdə ötürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "type": "diamond",
+      "style": "solid",
+      "x": 1390,
+      "y": 24,
+      "laneId": "lane-1789454236593",
+      "w": 150,
+      "h": 150,
+      "text": "Təklif üzrə \nqərar verir",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "type": "rect",
+      "style": "solid",
+      "x": 1640,
+      "y": 70,
+      "laneId": "lane-1789454236593",
+      "w": 200,
+      "h": 80,
+      "text": "Zəruri məlumatların təqdim \nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "type": "rect",
+      "style": "solid",
+      "x": 2170,
+      "y": 60,
+      "laneId": "lane-1789454236593",
+      "w": 200,
+      "h": 140,
+      "text": "Hesab-faktura əsasında \nödənişin həyata keçirilməsi və \nödəniş tapşırığın BDD-yə \ntəqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 28,
+      "type": "diamond",
+      "style": "solid",
+      "x": 2460,
+      "y": 24,
+      "laneId": "lane-1789454236593",
+      "w": 150,
+      "h": 170,
+      "text": "Daşınma zamanı \nyük zərər görüb?",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "2.2",
+      "type": "rect",
+      "style": "solid",
+      "x": 115,
+      "y": 422,
+      "laneId": "lane-1789454249161",
+      "w": 200,
+      "h": 100,
+      "text": "Sorğunun emalı və uyğunluq \ntəşkil etdikdə ötürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 560,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 70,
+      "text": "Sorğunun qəbulu və emalı ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "3.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 115,
+      "y": 682,
+      "laneId": "lane-1789454255801",
+      "w": 210,
+      "h": 120,
+      "text": "Proqramda sorğunun qeydiyyatı \nvə sorğunun unikal kodun \nformalaşdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "3.2",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 460,
+      "y": 672,
+      "laneId": "lane-1789454255801",
+      "w": 210,
+      "h": 140,
+      "text": "Unikal kodun müştəriyə təqdim \nedilməsi və yük haqqında zəruri \nməlumatların tələb edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 760,
+      "y": 572,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 100,
+      "text": "\nTəqdim olunan məlumatların \nproqrama daxil edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 1080,
+      "y": 572,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 120,
+      "text": "Müvafiq meyarlar əsasında \nsubpodratçının mövcud bazadan \nseçilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "",
+      "type": "parallelogram",
+      "style": "solid",
+      "x": 1075,
+      "y": 732,
+      "laneId": "lane-1789454255801",
+      "w": 210,
+      "h": 120,
+      "text": "Ölkə və istiqamət\n• Yükün xüsusiyyəti\n• Nəqliyyat növü\n• və s.\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 115,
+      "y": 1122,
+      "laneId": "lane-1789456937279",
+      "w": 200,
+      "h": 70,
+      "text": "Təklifin hazırlanması və \nBDD-yə göndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "A.2",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 110,
+      "y": 1312,
+      "laneId": "lane-1789457110279",
+      "w": 210,
+      "h": 120,
+      "text": "Müştəri ilə yeni müqavilənin bağlanması və \nməlumatların MD-yə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "A.3",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 115,
+      "y": 1512,
+      "laneId": "lane-1789457123622",
+      "w": 210,
+      "h": 100,
+      "text": "Müştərini müqavilə əsasında proqramda qeydiyyata \nalınması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "B.1.1.1",
+      "type": "rect",
+      "style": "stroke",
+      "x": 110,
+      "y": 1692,
+      "laneId": "lane-1789457190830",
+      "w": 200,
+      "h": 80,
+      "text": "Tranzit bəyannaməsinin hazırlanması ( dəmir və dəniz yolu ilə gəldikdə)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "B.1.1.2",
+      "type": "rect",
+      "style": "stroke",
+      "x": 430,
+      "y": 1722,
+      "laneId": "lane-1789457190830",
+      "w": 200,
+      "h": 70,
+      "text": "Gömrük rəsmiləşdirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "type": "rect",
+      "style": "solid",
+      "x": 110,
+      "y": 1882,
+      "laneId": "lane-1789457216391",
+      "w": 200,
+      "h": 120,
+      "text": "Müştəriyə hesab-fakturanın tərtib edilməsi üçün zəruri \nməlumatların proqrama əlavə edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "type": "rect",
+      "style": "solid",
+      "x": 430,
+      "y": 1882,
+      "laneId": "lane-1789457216391",
+      "w": 200,
+      "h": 120,
+      "text": "Tərtib edilmiş hesab-fakturanın və təhvil-təslim \naktının müştəriyə təqdim edilməsİ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "28.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 7420,
+      "y": 622,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 100,
+      "text": "İnsidentin aradan \nqaldırılmasına dair \nzəruri işlərin həyata \nkeçirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "type": "rect",
+      "style": "solid",
+      "x": 790,
+      "y": 1882,
+      "laneId": "lane-1789457216391",
+      "w": 200,
+      "h": 150,
+      "text": "Subpodratçıya müqavilə şərtlərinə \nuyğun olaraq ödənişin həyata \nkeçirilməsinə dair “1C” proqramında \nsorğunun yaradılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "D2",
+      "type": "rect",
+      "style": "stroke",
+      "x": 115,
+      "y": 2092,
+      "laneId": "lane-1789457232542",
+      "w": 200,
+      "h": 120,
+      "text": "Cəmiyyət tərəfindən göstəriləcək xidmətlərə dair \nsifariş sənədinin hazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "D3",
+      "type": "rect",
+      "style": "stroke",
+      "x": 115,
+      "y": 2282,
+      "laneId": "lane-1789457427032",
+      "w": 200,
+      "h": 80,
+      "text": "Zəruri yükaşırma əməliyyatlarının icra edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "B.1.2.1",
+      "type": "rect",
+      "style": "stroke",
+      "x": 1890,
+      "y": 60,
+      "laneId": "lane-1789454236593",
+      "w": 200,
+      "h": 100,
+      "text": "Tranzit bəyannaməsinin tərtib edilməsi \n(dəmir və dəniz yolu ilə gəldikdə)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "      ",
+      "type": "parallelogram",
+      "style": "solid",
+      "x": 300,
+      "y": 852,
+      "laneId": "lane-1789454255801",
+      "w": 530,
+      "h": 200,
+      "text": "• Çəki\n• Ölçüləri\n• Qablaşdırma növü\n• Yükün təsnifat kodu\n• Yükün götürələcəyi ünvan\n• Təyinat ünvanı\n• INCOTERMS\n• Yükün hazırolma tarixi\n• Yükün təhlükəli olub olmadığı \nhaqqında məlumat",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "type": "rect",
+      "style": "solid",
+      "x": 460,
+      "y": 1122,
+      "laneId": "lane-1789456937279",
+      "w": 200,
+      "h": 80,
+      "text": "Yükün götürüləcəyi \nhaqqında BDD-nin \nməlumatlandırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "type": "rect",
+      "style": "solid",
+      "x": 760,
+      "y": 1122,
+      "laneId": "lane-1789456937279",
+      "w": 200,
+      "h": 80,
+      "text": "Yükün təhvil alınmağı \nhaqqında BDD-nin \nməlumatlandırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "type": "rect",
+      "style": "solid",
+      "x": 1090,
+      "y": 1122,
+      "laneId": "lane-1789456937279",
+      "w": 200,
+      "h": 80,
+      "text": "Yükün yola düşməsi \nhaqqında BDD-nin \nməlumatlandırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "type": "rect",
+      "style": "solid",
+      "x": 1380,
+      "y": 1122,
+      "laneId": "lane-1789456937279",
+      "w": 200,
+      "h": 100,
+      "text": "Yükün Mərkəzə çatması \nhaqqında BDD-nin \nməlumatlandırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "C.1.4",
+      "type": "rect",
+      "style": "stroke",
+      "x": 2030,
+      "y": 1122,
+      "laneId": "lane-1789456937279",
+      "w": 200,
+      "h": 80,
+      "text": "Yükün təhvil alınması \nhaqqında BDD-nin \nməlumatlandırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "C.1.2",
+      "type": "rect",
+      "style": "stroke",
+      "x": 1730,
+      "y": 1122,
+      "laneId": "lane-1789456937279",
+      "w": 200,
+      "h": 80,
+      "text": "Təklifin hazırlanması \nvə BDD-yə \ngöndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "type": "rect",
+      "style": "solid",
+      "x": 430,
+      "y": 1512,
+      "laneId": "lane-1789457123622",
+      "w": 200,
+      "h": 140,
+      "text": "Hesab-fakturanın və təhvil-təslim aktının proqrama tərtib \nedilməsi, eləcə də elektron qaimə-fakturanın yaradılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.5",
+      "type": "rect",
+      "style": "stroke",
+      "x": 2320,
+      "y": 1122,
+      "laneId": "lane-1789456937279",
+      "w": 200,
+      "h": 80,
+      "text": "Yükün yola düşməsi \nhaqqında BDD-nin \nməlumatlandırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.6",
+      "type": "rect",
+      "style": "stroke",
+      "x": 2620,
+      "y": 1122,
+      "laneId": "lane-1789456937279",
+      "w": 200,
+      "h": 100,
+      "text": "Yükün son təyinat \nməntəqəsinə çatması \nhaqqında BDD-nin \nməlumatlandırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.6.1",
+      "type": "rect",
+      "style": "stroke",
+      "x": 2900,
+      "y": 1122,
+      "laneId": "lane-1789456937279",
+      "w": 200,
+      "h": 120,
+      "text": "Yol qaiməsinin \nimzalanması üçün \nyükalana təqdim \nedilməsi / sonda BDD\nyə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "diamond",
+      "style": "solid",
+      "x": 1440,
+      "y": 560,
+      "laneId": "lane-1789454255801",
+      "w": 150,
+      "h": 150,
+      "text": "Təklifin \nhazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1780,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 100,
+      "text": "Subpodratçının seçilməsi \nvə sorğunun göndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "diamond",
+      "style": "solid",
+      "x": 2110,
+      "y": 572,
+      "laneId": "lane-1789454255801",
+      "w": 150,
+      "h": 150,
+      "text": "Təklifin \nhazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 2810,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 100,
+      "text": "Təkliflərin müqayisəli \ncədvəlinin hazırlanması və \nuyğun təklifin seçilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "solid",
+      "x": 3080,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 70,
+      "text": "Müştəri üçün təklifin \nhazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "10.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 2340,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 70,
+      "text": "Müştəri sorğusu \nqüvvədə deyil",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "10.2",
+      "type": "rect",
+      "style": "solid",
+      "x": 2580,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 70,
+      "text": "Təklif təqdim edilə bilmir",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "style": "solid",
+      "x": 3370,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 70,
+      "text": "Təklifin müştəriyə \ngöndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "14.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 3630,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 210,
+      "h": 80,
+      "text": "Müştəridən \nimtina səbəbinin \nöyrənilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "A.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 3912,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 210,
+      "h": 100,
+      "text": "Müqavilənin \nbağlanması \nüçün müraciət \nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "type": "rect",
+      "style": "solid",
+      "x": 4170,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 100,
+      "text": "Prosesin icrasına \ndair müştəriyə təsdiq \nməlumatlarının \ngöndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "type": "rect",
+      "style": "solid",
+      "x": 4700,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 150,
+      "text": "Subpodratçıya zəruri \nməlumatların ötürülməsi, \nsubpodratçı ilə yükgöndərən \narasında müvafiq \nkoordinasiyanın təşkili",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "type": "rect",
+      "style": "solid",
+      "x": 4430,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 100,
+      "text": "Prosesin icrası üçün\nmüştəridən zəruri \nməlumatların əldə \nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "parallelogram",
+      "style": "solid",
+      "x": 4425,
+      "y": 762,
+      "laneId": "lane-1789454255801",
+      "w": 210,
+      "h": 150,
+      "text": "Yükgöndərən \nhaqqında \nməlumatlar\nYük \nməlumatları\nTəhlükəli yük \nbəyannaməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "B.1",
+      "type": "diamond",
+      "style": "stroke",
+      "x": 4990,
+      "y": 572,
+      "laneId": "lane-1789454255801",
+      "w": 150,
+      "h": 200,
+      "text": "Gömrük rəsmiləşdirilməsi \nCəmiyyət \ntərəfindən edilir?",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "B.1.2",
+      "type": "rect",
+      "style": "stroke",
+      "x": 5500,
+      "y": 607,
+      "laneId": "lane-1789454255801",
+      "w": 160,
+      "h": 100,
+      "text": "Tranzit bəyannaməsinin \nmüştəridən tələb \nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "B.1.1",
+      "type": "rect",
+      "style": "stroke",
+      "x": 5210,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 80,
+      "text": "Tranzit bəyannaməsinin \nhazırlanmasına \nnəzarət",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "type": "rect",
+      "style": "solid",
+      "x": 5770,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 100,
+      "text": "Yükün Mərkəzə çatması \nhaqqında müştərinin \nməlumatlandırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "D.1",
+      "type": "rect",
+      "style": "stroke",
+      "x": 6060,
+      "y": 612,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 80,
+      "text": "Cəmiyyət tərəfindən \ngörüləcək işlərə dair \nbildirişin göndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "C.1.1",
+      "type": "rect",
+      "style": "stroke",
+      "x": 6610,
+      "y": 622,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 100,
+      "text": "Subpodratçının mövcud \nbazadan seçilməsi və sorğunun \ngöndərilməs",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "C.1",
+      "type": "diamond",
+      "style": "stroke",
+      "x": 6360,
+      "y": 582,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 150,
+      "text": "Yük son təyinat \nməntəqəsinə Cəmiyyət \ntərəfindən çatdırılır?",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "C.1.3",
+      "type": "rect",
+      "style": "stroke",
+      "x": 6920,
+      "y": 622,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 100,
+      "text": "Təkliflərin müqayisəli \ncədvəlinin hazırlanması və \nuyğun təklifin seçilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "C.1.7",
+      "type": "rect",
+      "style": "stroke",
+      "x": 7170,
+      "y": 622,
+      "laneId": "lane-1789454255801",
+      "w": 200,
+      "h": 80,
+      "text": "Yükün çatması \nhaqqında müştərinin \nməlumatlandırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 3,
+      "to": "3.1",
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": "3.1",
+      "to": "3.2",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": 6,
+      "to": "",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "3.2",
+      "to": "      ",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 16,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    }
+  ],
+  "status": "done"
+}

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo, useCallback, useDeferredValue, startTransition } from 'react';
 import { LogoFull } from './Logo.jsx';
 import {
-  LogOut, Loader2, Trash2, ChevronLeft, Download, Upload
+  LogOut, Loader2, Trash2, ChevronLeft, Download, Upload, ExternalLink
 } from './icons.jsx';
 import { LayoutGrid } from 'lucide-react';
 import { api } from '../api/client.js';
@@ -12,6 +12,8 @@ import {
 } from './Status.jsx';
 import { useLabels } from '../labels/LabelsContext.jsx';
 import { exportSheetToExcel, importSheetRowsFromExcel } from './sheetsExcel.js';
+import { buildImportPlan, defaultDecisions, resolvePlan } from './sheetsImportMerge.js';
+import ImportConflictModal from './ImportConflictModal.jsx';
 import SheetColumnFilter, {
   BLANK_FILTER_VALUE,
   uniqueColumnValues
@@ -232,6 +234,7 @@ export default function SheetsPage({
   kind = 'diagrams',
   onBack,
   onLogout,
+  onOpenItem,
   withStatus = true
 }) {
   const { t, tByText } = useLabels();
@@ -267,6 +270,9 @@ export default function SheetsPage({
   const [colFilters, setColFilters] = useState({});
   const [openColFilter, setOpenColFilter] = useState(null); // column key or null
   const [importBusy, setImportBusy] = useState(false);
+  // Excel import: plan awaiting the admin's combine/separate decisions (null = no popup)
+  const [importPlan, setImportPlan] = useState(null);
+  const [importDecisions, setImportDecisions] = useState({});
   // Folder/group names from the matching section (İş Axışları / Normativ
   // Sənədlər / Şablonlar) — so Struktur adı can be picked from the real
   // folder list even before any document exists in it. Sync matches by
@@ -724,42 +730,35 @@ export default function SheetsPage({
 
   const linked = (row) => row.itemId != null || row.processId != null;
 
-  // Deletes the actual main-list item (process/diagram, pdf or template)
-  // that a linked row points to. No-op for hand-typed rows (nothing to
-  // delete there). Errors are swallowed with a console warning so a
-  // 404 (item already gone) doesn't block the sheet row from being
-  // removed too.
-  async function deleteLinkedItem(row) {
-    const iid = row?.itemId ?? row?.processId;
-    if (iid == null) return;
-    try {
-      if (kind === 'pdfs') await pdfsApi.remove(iid);
-      else if (kind === 'templates') await templatesApi.remove(iid);
-      else await api.deleteProcess(iid);
-    } catch (e) {
-      console.warn('Əsas siyahıdan silinmədi:', e.message || e);
-    }
-  }
-
+  // Deleting a hesabat row is ONE backend call. For a linked row the server
+  // also takes the diagram / pdf / template out of the main list — it is
+  // ARCHIVED (restorable from the section's Archive), not destroyed. (The old
+  // code hard-deleted the item first, which already removed the row, and then
+  // asked the server to delete the row again → "Sheet row not found" error and
+  // a row that stayed on screen.)
   async function removeRow(id) {
     if (!isAdmin) return;
     const row = items.find(x => Number(x.id) === Number(id));
     const isLinked = row ? linked(row) : false;
     const msg = isLinked
-      ? 'Bu sətir silinsin? Əsas siyahıdakı uyğun element də silinəcək. Bu geri qaytarılmır.'
+      ? 'Bu sətir silinsin? Əsas siyahıdakı uyğun element də oradan çıxarılacaq və ARXİVƏ köçürüləcək (arxivdən bərpa edə bilərsiniz).'
       : 'Bu sətir Sheets-dən silinsin? (Əsas siyahıya toxunmur)';
     if (!confirm(msg)) return;
     try {
-      if (isLinked) await deleteLinkedItem(row);
       await api.deleteSheet(kind, id);
-      setItems(prev => {
-        const next = prev.filter(x => Number(x.id) !== Number(id));
-        cacheSheets(kind, next);
-        return next;
-      });
     } catch (e) {
-      alert('Xəta: ' + (e.message || 'Silinmədi'));
+      // already gone on the server → treat as deleted; anything else is real
+      if (!/not found|tapılmadı/i.test(String(e?.message || ''))) {
+        alert('Xəta: ' + (e.message || 'Silinmədi'));
+        await load({ silent: true });
+        return;
+      }
     }
+    setItems(prev => {
+      const next = prev.filter(x => Number(x.id) !== Number(id));
+      cacheSheets(kind, next);
+      return next;
+    });
   }
 
   const stats = useMemo(() => {
@@ -884,28 +883,82 @@ export default function SheetsPage({
         alert('Excel faylında sətir tapılmadı.');
         return;
       }
-      // Always ADD: never update/replace an existing row that has the same
-      // title/struktur text. Excel order is kept via sequential `order`.
-      const baseOrder = items.reduce((m, x) => Math.max(m, Number(x.order) || 0), 0);
-      const created = [];
-      for (let i = 0; i < rows.length; i++) {
-        const r = rows[i];
-        const body = { order: baseOrder + i + 1, status: withStatus ? (r.status || null) : null };
-        for (const f of ALL_FIELDS) body[f] = r[f] || '';
-        const row = await api.createSheet(kind, body);
-        created.push(row);
-      }
-      setItems(prev => {
-        const next = [...prev, ...created];
-        cacheSheets(kind, next);
-        return next;
+      // Match by NAME. Identical rows combine silently (no duplicates); a row
+      // with the same name but different status / struktur adı / number opens
+      // the popup so the admin chooses: combine (which value wins) or separate.
+      const plan = buildImportPlan({
+        rows,
+        items,
+        fields: columns.map(c => c.field),
+        withStatus,
+        getStruktur: effectiveStrukturAdi
       });
-      alert(`${created.length} sətir əlavə edildi. Mövcud sətirlər saxlanıldı.`);
+      if (plan.conflicts.length) {
+        setImportDecisions(defaultDecisions(plan));
+        setImportPlan(plan);   // wait for the admin — nothing is written yet
+        return;
+      }
+      await applyImport(plan, {});
     } catch (err) {
       alert('Xəta: ' + (err.message || 'İdxal edilmədi'));
     } finally {
       setImportBusy(false);
     }
+  }
+
+  // Writes the plan. Sequential on purpose: the backend does read-modify-write
+  // on one file, so parallel calls would overwrite each other.
+  async function applyImport(plan, decisions) {
+    const { creates, updates, combined, separate } = resolvePlan(plan, decisions);
+    setImportBusy(true);
+    try {
+      const baseOrder = items.reduce((m, x) => Math.max(m, Number(x.order) || 0), 0);
+      const created = [];
+      const updatedById = new Map();
+      for (const u of updates) {
+        const row = await api.updateSheet(kind, u.id, u.patch);
+        updatedById.set(Number(u.id), row);
+      }
+      for (let i = 0; i < creates.length; i++) {
+        const r = creates[i];
+        const body = { order: baseOrder + i + 1, status: withStatus ? (r.status || null) : null };
+        for (const f of ALL_FIELDS) body[f] = r[f] || '';
+        created.push(await api.createSheet(kind, body));
+      }
+      setItems(prev => {
+        const next = [...prev.map(x => updatedById.get(Number(x.id)) || x), ...created];
+        cacheSheets(kind, next);
+        return next;
+      });
+      alert(
+        `${created.length} yeni sətir əlavə edildi, ${updatedById.size} sətir yeniləndi` +
+        (combined ? ` (${combined} fərq birləşdirildi)` : '') +
+        (separate ? `, ${separate} sətir ayrı əlavə olundu` : '') +
+        (plan.mergedInFile ? `, faylda təkrarlanan ${plan.mergedInFile} sətir birləşdirildi` : '') + '.'
+      );
+    } catch (err) {
+      alert('Xəta: ' + (err.message || 'İdxal edilmədi'));
+      await load({ silent: true });
+    } finally {
+      setImportBusy(false);
+    }
+  }
+
+  function confirmImportPlan() {
+    const plan = importPlan;
+    const decisions = importDecisions;
+    setImportPlan(null);
+    if (plan) applyImport(plan, decisions);
+  }
+
+  function importValueLabel(field, value) {
+    if (field === 'status') return value ? statusLabel(value) : '—';
+    return value || '—';
+  }
+  function importFieldLabel(field) {
+    if (field === 'status') return tByText('Status');
+    const c = columns.find(x => x.field === field);
+    return c ? tByText(c.label) : field;
   }
 
   const isBlankRow = (row) => {
@@ -942,15 +995,16 @@ export default function SheetsPage({
     if (!isAdmin || items.length === 0) return;
     const linkedCount = items.filter(linked).length;
     const msg = linkedCount > 0
-      ? `Bu Sheets-in HAMISI (${items.length} sətir) silinsin? Əsas siyahıdakı uyğun ${linkedCount} element də silinəcək. Bu geri qaytarılmır.`
+      ? `Bu Sheets-in HAMISI (${items.length} sətir) silinsin? Əsas siyahıdakı uyğun ${linkedCount} element də oradan çıxarılıb ARXİVƏ köçürüləcək.`
       : `Bu Sheets-in HAMISI (${items.length} sətir) silinsin? Bu geri qaytarılmır.`;
     if (!confirm(msg)) return;
     setBusy(true);
     try {
-      // Delete the linked main-list items first (best-effort, one by one),
-      // then wipe the sheet itself.
+      // Deleting a linked row archives its main-list item (restorable) —
+      // do that one by one (best-effort), then wipe whatever rows remain.
       for (const row of items.filter(linked)) {
-        await deleteLinkedItem(row);
+        try { await api.deleteSheet(kind, row.id); }
+        catch (e) { console.warn('Arxivə köçürülmədi:', e.message || e); }
       }
       await api.clearAllSheets(kind);
       setHiddenBlankOrders(new Set());
@@ -1211,6 +1265,16 @@ export default function SheetsPage({
                           {showDate && <td className="col-date">{fmtDate(row.date)}</td>}
                           {isAdmin && (
                             <td className="col-act">
+                              {linked(row) && onOpenItem && (
+                                <button
+                                  type="button"
+                                  className="icon-btn sheets-open"
+                                  title="Aç"
+                                  onClick={() => onOpenItem(kind, row)}
+                                >
+                                  <ExternalLink size={15} />
+                                </button>
+                              )}
                               <button
                                 type="button"
                                 className="icon-btn sheets-del"
@@ -1245,6 +1309,17 @@ export default function SheetsPage({
           )}
         </div>
       </div>
+      {importPlan && (
+        <ImportConflictModal
+          plan={importPlan}
+          decisions={importDecisions}
+          setDecisions={setImportDecisions}
+          labelOf={importFieldLabel}
+          valueLabel={importValueLabel}
+          onApply={confirmImportPlan}
+          onCancel={() => setImportPlan(null)}
+        />
+      )}
     </div>
   );
 }

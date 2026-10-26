@@ -1,0 +1,297 @@
+{
+  "id": 37,
+  "title": "Dəmiryolu ilə yük daşımada ekspeditor xidməti ixrac prosedurunda",
+  "subtitle": "AE-İMS-PRD-003",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1785846755561",
+      "label": "Yük göndərən",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1785846785116",
+      "label": "Əməliyyatçı",
+      "y": 180,
+      "h": 200
+    },
+    {
+      "id": "lane-1785846794697",
+      "label": "Nəqliyyatçı",
+      "y": 380,
+      "h": 160
+    },
+    {
+      "id": "lane-1785846799769",
+      "label": "Mühasib",
+      "y": 540,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "rect",
+      "style": "solid",
+      "x": 100,
+      "y": 70,
+      "laneId": "lane-1785846755561",
+      "w": 290,
+      "h": 70,
+      "text": "İxrac üçün sifariş formasının doldurulması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 100,
+      "y": 260,
+      "laneId": "lane-1785846785116",
+      "w": 290,
+      "h": 80,
+      "text": "Vaqon ayrılması, naryad yazılışı,  ödəniş üçün Dəmiryoluna müraciət hazırlanması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 480,
+      "y": 70,
+      "laneId": "lane-1785846755561",
+      "w": 290,
+      "h": 70,
+      "text": "Müraciətin təsdiqlənməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 445,
+      "y": 240,
+      "laneId": "lane-1785846785116",
+      "w": 360,
+      "h": 120,
+      "text": "1.\tNTS alınması üçün Nəqliyyatçıya müraciət edilməsi. (Nəqliyyatçının proqramı üzərində)\n2.\tİnstruksiyanın hazırlanması,\n3.\tvaqonun yükləmə stansiyasına gəlməinə nəzarət və SMQS sifarişi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 480,
+      "y": 420,
+      "laneId": "lane-1785846794697",
+      "w": 290,
+      "h": 70,
+      "text": "Sifarişin emalı və hesabın kəsilməsi-hesab faktura",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 890,
+      "y": 420,
+      "laneId": "lane-1785846794697",
+      "w": 290,
+      "h": 70,
+      "text": "Sifarişin icrata ötürülməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 890,
+      "y": 250,
+      "laneId": "lane-1785846785116",
+      "w": 290,
+      "h": 80,
+      "text": "Ödənişin təsdiqlənməsi və yükdaşımanın təsdiqinin izlənməsi.\nMS projectdə sifariş tam qeydiyyatı \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      },
+      "color": "#ea580c"
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1320,
+      "y": 255,
+      "laneId": "lane-1785846785116",
+      "w": 290,
+      "h": 70,
+      "text": "Vaqonun təyinat stansiyasına çatmasının izlənməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1320,
+      "y": 590,
+      "laneId": "lane-1785846799769",
+      "w": 290,
+      "h": 70,
+      "text": "Müştəriyə hesab kəsilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1690,
+      "y": 440,
+      "laneId": "lane-1785846794697",
+      "w": 290,
+      "h": 70,
+      "text": "Daşımalar üzrə üzləşmə sənədinin hazırlanması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1690,
+      "y": 260,
+      "laneId": "lane-1785846785116",
+      "w": 290,
+      "h": 70,
+      "text": "Üzləşmə sənədinin monitorinqi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "solid",
+      "x": 1700,
+      "y": 590,
+      "laneId": "lane-1785846799769",
+      "w": 290,
+      "h": 70,
+      "text": "Üzləşmə sənədinin monitorinqi , Nəqliyyatçıya ödəniş ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "right"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "left"
+    }
+  ],
+  "status": null
+}

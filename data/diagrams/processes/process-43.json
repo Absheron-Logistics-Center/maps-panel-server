@@ -1,0 +1,386 @@
+{
+  "id": 43,
+  "title": "Normativ sənədlərin hazırlanması, qəbul olunması, onlara əlavə və dəyişikliklərin edilməsinə dair iş axını",
+  "subtitle": "",
+  "width": 2200,
+  "height": 960,
+  "lanes": [
+    {
+      "id": "lane-1789631177781",
+      "label": "Sifarişçi struktur  vahid",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1789631191797",
+      "label": "Məsul struktur vahid",
+      "y": 180,
+      "h": 370
+    },
+    {
+      "id": "lane-1789631206301",
+      "label": "Hüquq  departamenti",
+      "y": 550,
+      "h": 205
+    },
+    {
+      "id": "lane-1789631218869",
+      "label": "İnsan resursları və  inzibati departament",
+      "y": 755,
+      "h": 200
+    },
+    {
+      "id": "lane-1789631315133",
+      "label": "Analitik təhlil və  operativ nəzarət  şöbəsi",
+      "y": 955,
+      "h": 190
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 70,
+      "y": 35,
+      "laneId": "lane-1789631177781",
+      "w": 260,
+      "h": 100,
+      "text": "Normativ sənəd layihəsinin \nhazırlanması və ya mövcud sənədə \nəlavə və dəyişikliklərin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 410,
+      "y": 25,
+      "laneId": "lane-1789631177781",
+      "w": 200,
+      "h": 120,
+      "text": "Hazırlanmış sənəd layihəsinin \nməsul struktur vahidə təqdim \nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 80,
+      "y": 200,
+      "laneId": "lane-1789631191797",
+      "w": 200,
+      "h": 80,
+      "text": "10 (on) iş günü ərzində \nmetodoloji təhlilin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 80,
+      "y": 330,
+      "laneId": "lane-1789631191797",
+      "w": 200,
+      "h": 140,
+      "text": "Sənəd layihəsini baxılması və \nmünasibət bildirilməsi üçün rəyçi \nstrukturlara təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 80,
+      "y": 600,
+      "laneId": "lane-1789631206301",
+      "w": 200,
+      "h": 100,
+      "text": "10 (on) iş günü ərzində sənəd \nlayihəsinə rəyin verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.2",
+      "type": "rect",
+      "style": "solid",
+      "x": 80,
+      "y": 815,
+      "laneId": "lane-1789631218869",
+      "w": 200,
+      "h": 100,
+      "text": "7 (yeddi) iş günü ərzində sənəd \nlayihəsinə rəyin verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.3",
+      "type": "rect",
+      "style": "solid",
+      "x": 80,
+      "y": 1005,
+      "laneId": "lane-1789631315133",
+      "w": 200,
+      "h": 100,
+      "text": "7 (yeddi) iş günü ərzində sənəd \nlayihəsinə rəyin verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 680,
+      "y": 200,
+      "laneId": "lane-1789631191797",
+      "w": 210,
+      "h": 140,
+      "text": "Zəruri hallarda rəylərin icmallaşdırılması, \neləcə də açıq qalan məsələlərin sifarişçi \nstruktur vahid ilə dəqiqləşdirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 685,
+      "y": 390,
+      "laneId": "lane-1789631191797",
+      "w": 200,
+      "h": 140,
+      "text": "Sənədin təhlil və rəy prosesi bitdikdən \nsonra sənəd layihəsinə İdarə Heyətində \nbaxılması üçün HD-yə müraciət edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "pill",
+      "style": "solid",
+      "x": 1200,
+      "y": 210,
+      "laneId": "lane-1789631191797",
+      "w": 200,
+      "h": 90,
+      "text": "Normativ sənədin reyestrə \nyerləşdirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 685,
+      "y": 615,
+      "laneId": "lane-1789631206301",
+      "w": 200,
+      "h": 120,
+      "text": "Qərar layihəsinin hazırlanması \nvə sənəd layihəsinin aidiyyəti \nüzrə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 990,
+      "y": 615,
+      "laneId": "lane-1789631206301",
+      "w": 200,
+      "h": 120,
+      "text": "Qəbul edilmiş sənədə dair \nQərarın məsul struktur vahidə \ntəqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.1.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 350,
+      "y": 580,
+      "laneId": "lane-1789631206301",
+      "w": 210,
+      "h": 140,
+      "text": "Metodoloji baxımından əlavə işlərin \ngörülməsi üçün sənəd layihəsinin məsul \nstruktur vahidə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.2.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 350,
+      "y": 795,
+      "laneId": "lane-1789631218869",
+      "w": 210,
+      "h": 140,
+      "text": "Metodoloji baxımından əlavə işlərin \ngörülməsi üçün sənəd layihəsinin məsul \nstruktur vahidə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.3.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 355,
+      "y": 985,
+      "laneId": "lane-1789631315133",
+      "w": 200,
+      "h": 140,
+      "text": "Metodoloji baxımından əlavə işlərin \ngörülməsi üçün sənəd layihəsinin məsul \nstruktur vahidə təqdim edilməs",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": "5.1",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "5.1",
+      "to": "5.2",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "5.2",
+      "to": "5.3",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": "5.3",
+      "to": "5.3.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "5.1",
+      "to": "5.1.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "5.2",
+      "to": "5.2.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "5.3.1",
+      "to": 5,
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "5.2.1",
+      "to": 5,
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "5.1.1",
+      "to": 5,
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    }
+  ],
+  "status": null
+}

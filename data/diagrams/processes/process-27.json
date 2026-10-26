@@ -1,0 +1,296 @@
+{
+  "id": 27,
+  "title": "BƏYANETMƏ FƏALİYYƏTİ (Tranzit əməliyyatları)",
+  "subtitle": "MB-İMS-PRD-007",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1785488973488",
+      "label": "Sorğu verən şəxs (BDD / Müştəri)",
+      "y": 20,
+      "h": 200
+    },
+    {
+      "id": "lane-1785488990868",
+      "label": "Koordinator",
+      "y": 220,
+      "h": 160
+    },
+    {
+      "id": "lane-1785488995953",
+      "label": "Bəyannaməçi",
+      "y": 380,
+      "h": 280
+    },
+    {
+      "id": "lane-1785489002660",
+      "label": "Gömrük orqanı",
+      "y": 660,
+      "h": 270
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "rect",
+      "style": "solid",
+      "x": 235,
+      "y": 90,
+      "laneId": "lane-1785488973488",
+      "w": 290,
+      "h": 100,
+      "text": "Əməliyyata dair sorğunun verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 230,
+      "y": 250,
+      "laneId": "lane-1785488990868",
+      "w": 300,
+      "h": 110,
+      "text": "Yük müşayiət sənədlərinin VPD-dən təhvil alınması və sorğu verən şəxsə yükə dair müqavilənin təqdim edilməsi\nüçün müraciət edilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 695,
+      "y": 100,
+      "laneId": "lane-1785488973488",
+      "w": 280,
+      "h": 100,
+      "text": "Yükə dair müqavilənin, maşın sənədlərinin (texpasort\nvə sürücülərin pasportları) koordinatora təqdim edilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 695,
+      "y": 255,
+      "laneId": "lane-1785488990868",
+      "w": 280,
+      "h": 100,
+      "text": "Daxil olan sənədlərin tamlığının və düzgünlüyünün\nyoxlanması\n \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 1080,
+      "y": 255,
+      "laneId": "lane-1785488990868",
+      "w": 260,
+      "h": 100,
+      "text": "Sənəd toplusunun bəyannaməçiyə təqdim\nedilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 695,
+      "y": 430,
+      "laneId": "lane-1785488995953",
+      "w": 280,
+      "h": 90,
+      "text": "CMR və GB-nin qaralama tərtibatı",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 1350,
+      "y": 100,
+      "laneId": "lane-1785488973488",
+      "w": 270,
+      "h": 90,
+      "text": "CMR məlumatlarının təsdiqi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1175,
+      "y": 500,
+      "laneId": "lane-1785488995953",
+      "w": 300,
+      "h": 120,
+      "text": "Tərəzi çekinə əsasən GB-nin\ntərtibatının tamamlanması və təsdiqi; CMR və GB-nin gömrüyə təqdimi üçün brokerə verilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 730,
+      "y": 790,
+      "laneId": "lane-1785489002660",
+      "w": 280,
+      "h": 120,
+      "text": "Gömrük sistemi üzərindən maliyyə inspektorunun GB- ni ödənişə göndərilməsi və ya sənədlərlə çatızmazlıq, uyğunsuzluq olduqda geri qaytarması (düzəliş üçün)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 2080,
+      "y": 530,
+      "laneId": "lane-1785488995953",
+      "w": 280,
+      "h": 110,
+      "text": "Gömrük ödənişlərinin həyata keçirilməsi (MB\nBroker müştəri adından edir)\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1660,
+      "y": 770,
+      "laneId": "lane-1785489002660",
+      "w": 310,
+      "h": 110,
+      "text": "Yükün maliyyə inspektoru tərəfindən\nburaxılması\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 2110,
+      "y": 775,
+      "laneId": "lane-1785489002660",
+      "w": 280,
+      "h": 100,
+      "text": "Keçid: Broker fəaliyyəti (Tranzit) biznes prosesi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "right"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 11,
+      "to": "",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "bottom",
+      "e": "top"
+    }
+  ],
+  "status": null
+}

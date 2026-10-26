@@ -1,4 +1,464 @@
 {
-  "processes": null,
-  "groups": null
+  "groups": [
+    {
+      "id": 1,
+      "name": "Anbar logistikası şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 2,
+      "name": "Biznes departamenti",
+      "parentId": null
+    },
+    {
+      "id": 3,
+      "name": "Beynəlxalq daşımalar departamenti",
+      "parentId": null
+    },
+    {
+      "id": 5,
+      "name": "Daxili daşımalar departamenti",
+      "parentId": null
+    },
+    {
+      "id": 7,
+      "name": "Hüquq departamenti",
+      "parentId": null
+    },
+    {
+      "id": 8,
+      "name": "İnformasiya texnologiyaları şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 9,
+      "name": "İnsan resursları və inzibati departament",
+      "parentId": null
+    },
+    {
+      "id": 10,
+      "name": "Keyfiyyətə nəzarət və SƏTƏM şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 11,
+      "name": "Layihələrin idarə olunması departamenti",
+      "parentId": null
+    },
+    {
+      "id": 13,
+      "name": "Maliyyə departamenti",
+      "parentId": null
+    },
+    {
+      "id": 14,
+      "name": "Manevra və planlama ofisi",
+      "parentId": null
+    },
+    {
+      "id": 15,
+      "name": "Risklərə nəzarət və monitorinq şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 16,
+      "name": "Sahə əməliyyatları ofisi",
+      "parentId": null
+    },
+    {
+      "id": 17,
+      "name": "Təchizat şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 18,
+      "name": "Təhlükəsizlik şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 19,
+      "name": "Tırpark və Minik avtomobillərinin dayanacağı şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 20,
+      "name": "Təmir və texnikaya nəzarət şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 22,
+      "name": "Vahid pəncərə departamenti",
+      "parentId": null
+    },
+    {
+      "id": 23,
+      "name": "MB BROKER MMC",
+      "parentId": null
+    },
+    {
+      "id": 24,
+      "name": "Abşeron Express MMC",
+      "parentId": null
+    },
+    {
+      "id": 26,
+      "name": "Abşeron Biznes Park",
+      "parentId": null
+    },
+    {
+      "id": 27,
+      "name": "XİAN Absheron",
+      "parentId": null
+    },
+    {
+      "id": 28,
+      "name": "Təsərrüfat şöbəsi",
+      "parentId": null
+    }
+  ],
+  "processes": [
+    {
+      "id": 10,
+      "title": "Mal qəbulu əməliyyatlarının həyata keçirilməsi üzrə iş axını",
+      "subtitle": "ALM-İMS-PRD-001",
+      "groupId": 1,
+      "status": "prep"
+    },
+    {
+      "id": 2,
+      "title": "Mal çıxışı əməliyyatlarının həyata keçirilməsi üzrə iş axını",
+      "subtitle": "ALM-İMS-PRD-002",
+      "groupId": 1,
+      "status": "prep"
+    },
+    {
+      "id": 3,
+      "title": "Yüklərin saxlanc anbarına qəbulu üzrə iş axını",
+      "subtitle": "ALM-İMS-PRD-003",
+      "groupId": 1,
+      "status": "prep"
+    },
+    {
+      "id": 4,
+      "title": "Saxlanc anbarından yüklərin çıxarılması və müştəriyə təhvil verilməsi üzrə iş axını",
+      "subtitle": "ALM-İMS-PRD-004",
+      "groupId": 1,
+      "status": "prep"
+    },
+    {
+      "id": 6,
+      "title": "Terminal prosesləri ilə əlaqədar boş yük avtomobillərinin Tırparka girişi və Mərkəzdən çıxışı",
+      "subtitle": "ALM-IMS-PRD-TP-01",
+      "groupId": 19,
+      "status": "prep"
+    },
+    {
+      "id": 7,
+      "title": "Terminal prosesləri ilə əlaqədar dolu yük avtomobillərinin Mərkəzə girişi və çıxışı",
+      "subtitle": "ALM-IMS-PRD-TP-01",
+      "groupId": 19,
+      "status": "prep"
+    },
+    {
+      "id": 8,
+      "title": "Terminal prosesləri ilə əlaqədar dolu yük avtomobillərinin Mərkəzə girişi və çıxışı iş axışı",
+      "subtitle": "ALM-İMS-PRD-TP-001",
+      "groupId": 19,
+      "status": "prep"
+    },
+    {
+      "id": 5,
+      "title": "Mal çıxışı (dağıtım) əməliyyatlarının həyata keçirilməsi üzrə iş axını",
+      "subtitle": "ALM-İMS-PRD-005",
+      "groupId": 1,
+      "status": "prep"
+    },
+    {
+      "id": 11,
+      "title": "Satınalmaların idarə edilməsinə dair iş axını",
+      "subtitle": "ALM-İMS-PRD-PROC-001",
+      "groupId": 17,
+      "status": "prep"
+    },
+    {
+      "id": 12,
+      "title": "Vaqonların Mərkəzə qəbuluna dair iş axını",
+      "subtitle": "ALM-İMS-MPO-001",
+      "groupId": 14,
+      "status": "progress"
+    },
+    {
+      "id": 13,
+      "title": "Dəmir yolu ilə Mərkəzə daxil olan yüklərin sənədləşməsi zamanı həyata keçirilən proseslərin iş axını",
+      "subtitle": "ALM-İMS-PRD-VPD-001",
+      "groupId": 22,
+      "status": "prep"
+    },
+    {
+      "id": 14,
+      "title": "Yüklərin vaqonla Mərkəzdən ixrac edilməsi zamanı sənədləşdirmə prosesinin icrasına dair iş axını",
+      "subtitle": "ALM-İMS-PRD-VPD-002",
+      "groupId": 22,
+      "status": "progress"
+    },
+    {
+      "id": 15,
+      "title": "Yüklərin konteynerlə Mərkəzdən ixrac edilməsi zamanı sənədləşləşdirmə prosesinin icrasına dair iş axınI",
+      "subtitle": "ALM-İMS-PRD-VPD-003",
+      "groupId": 22,
+      "status": "progress"
+    },
+    {
+      "id": 16,
+      "title": "Yüklü vaqonların Mərkəzdən göndərilməsi prosesinin iş axını",
+      "subtitle": "ALM-İMS-MPO-002",
+      "groupId": 14,
+      "status": "progress"
+    },
+    {
+      "id": 17,
+      "title": "Boş vaqonların Mərkəzdən göndərilməsi prosesinin iş axını",
+      "subtitle": "ALM-İMS-MPO-003",
+      "groupId": 14,
+      "status": "progress"
+    },
+    {
+      "id": 18,
+      "title": "Abşeron Özəl Sənaye Məhəlləsində rezidentlik prosesinin idarəedilməsinə dair iş axını",
+      "subtitle": "ALM-İMS-PR-ASM-001",
+      "groupId": 26,
+      "status": "progress"
+    },
+    {
+      "id": 19,
+      "title": "MÜŞTƏRİ SORĞUSUNUN QƏBULU (Qeyri-tranzit əməliyyatlar)",
+      "subtitle": "MB-İMS-PRD-001",
+      "groupId": 23,
+      "status": "prep"
+    },
+    {
+      "id": 20,
+      "title": "BƏYANETMƏ FƏALİYYƏTİ (Qeyri-tranzit əməliyyatları)",
+      "subtitle": "MB-İMS-PRD-002",
+      "groupId": 23,
+      "status": "prep"
+    },
+    {
+      "id": 21,
+      "title": "DAXİLİ DAŞIMA PROSESİ",
+      "subtitle": "ALM-İMS-DDD-PRD-001",
+      "groupId": 5,
+      "status": "progress"
+    },
+    {
+      "id": 22,
+      "title": "BROKER FƏALİYYƏTİ (Qeyri-tranzit/İdxal_Abşeron terminalı)",
+      "subtitle": "MB-İMS-PRD-003",
+      "groupId": 23,
+      "status": "prep"
+    },
+    {
+      "id": 23,
+      "title": "BROKER FƏALİYYƏTİ (Qeyri-tranzit/Tır idxalı_İpək Yolu Terminalı, BBGİ)",
+      "subtitle": "MB-İMS-PRD-004",
+      "groupId": 23,
+      "status": "prep"
+    },
+    {
+      "id": 24,
+      "title": "BROKER FƏALİYYƏTİ (Qeyri-tranzit/İdxal_Hava yolu)",
+      "subtitle": "MB-İMS-PRD-005",
+      "groupId": 23,
+      "status": "prep"
+    },
+    {
+      "id": 25,
+      "title": "BROKER FƏALİYYƏTİ (İxrac əməliyyatları)",
+      "subtitle": "MB-İMS-PRD-006",
+      "groupId": 23,
+      "status": "prep"
+    },
+    {
+      "id": 26,
+      "title": "Vaqondan tıra tranzit prosesi",
+      "subtitle": "ALM-İMS-PRD-BDD/TRZ-001",
+      "groupId": 3,
+      "status": "prep"
+    },
+    {
+      "id": 27,
+      "title": "BƏYANETMƏ FƏALİYYƏTİ (Tranzit əməliyyatları)",
+      "subtitle": "MB-İMS-PRD-007",
+      "groupId": 23,
+      "status": "prep"
+    },
+    {
+      "id": 28,
+      "title": "BROKER FƏALİYYƏTİ (Tranzit əməliyyatları)",
+      "subtitle": "MB-İMS-PRD-008",
+      "groupId": 23,
+      "status": "prep"
+    },
+    {
+      "id": 29,
+      "title": "GƏLİRLƏRİN TANINMASI",
+      "subtitle": "MB-İMS-PRD-009",
+      "groupId": 23,
+      "status": "prep"
+    },
+    {
+      "id": 30,
+      "title": "Tırdan vaqona tranzit prosesi",
+      "subtitle": "ALM-İMS-PRD-BDD/TRZ-002",
+      "groupId": 3,
+      "status": "prep"
+    },
+    {
+      "id": 31,
+      "title": "XƏRCLƏRİN TANINMASI",
+      "subtitle": "MB-İMS-PRD-010",
+      "groupId": 23,
+      "status": "prep"
+    },
+    {
+      "id": 32,
+      "title": "Daxili anbar idarəetməsi prosesi",
+      "subtitle": "ALM-İMZ-PRD-PROC-002",
+      "groupId": 17,
+      "status": "prep"
+    },
+    {
+      "id": 33,
+      "title": "Vaqondan vaqona tranzit prosesi",
+      "subtitle": "ALM-İMS-PRD-BDD/TRZ-003",
+      "groupId": 3,
+      "status": "prep"
+    },
+    {
+      "id": 34,
+      "title": "Tırdan tıra tranzit prosesi",
+      "subtitle": "ALM-İMS-PRD-BDD/TRZ-004",
+      "groupId": 3,
+      "status": "prep"
+    },
+    {
+      "id": 35,
+      "title": "Dəmiryolu ilə yük daşımada ekspeditor xidməti/Azərbaycan və digər ölkə ərazilərindən idxal proseduru",
+      "subtitle": "AE-İMS-PRD-001",
+      "groupId": 24,
+      "status": "prep"
+    },
+    {
+      "id": 36,
+      "title": "Dəmiryolu ilə yük daşımada ekspeditor xidməti/İdxal prosedurunda",
+      "subtitle": "AE-İMS-PRD-002",
+      "groupId": 24,
+      "status": "prep"
+    },
+    {
+      "id": 37,
+      "title": "Dəmiryolu ilə yük daşımada ekspeditor xidməti ixrac prosedurunda",
+      "subtitle": "AE-İMS-PRD-003",
+      "groupId": 24,
+      "status": "prep"
+    },
+    {
+      "id": 38,
+      "title": "Büdcə planlama və icrasına nəzarət proses axışı",
+      "subtitle": "ALM-İMS-Pİ-FİNC-001",
+      "groupId": 13,
+      "status": "prep"
+    },
+    {
+      "id": 39,
+      "title": "Ekspedisiya xidmətlərin göstərilməsi çərçivəsində idxal və tranzit əməliyyatlarına dair daxil olmuş müştəri sorğularının emalı və icrasına dair iş axını",
+      "subtitle": "",
+      "groupId": 24,
+      "status": "prep"
+    },
+    {
+      "id": 40,
+      "title": "Beynəlxalq daşıma çərçivəsində idxal əməliyyatlarına dair  daxil olmuş müştəri sorğularının emalı və icrasına dair iş axını",
+      "subtitle": "",
+      "groupId": 3,
+      "status": "progress"
+    },
+    {
+      "id": 41,
+      "title": "Beynəlxalq yükdaşıma çərçivəsində ixrac əməliyyatlarına dair daxil olmuş müştəri sorğularının emalı və icrasına dair iş axını",
+      "subtitle": "",
+      "groupId": 3,
+      "status": "progress"
+    },
+    {
+      "id": 42,
+      "title": "Beynəlxalq daşıma çərçivəsində müştəri sorğularının emalı və tranzit əməliyyatlarının həyata keçirilməsi üzrə iş axın",
+      "subtitle": "",
+      "groupId": 3,
+      "status": "prep"
+    },
+    {
+      "id": 43,
+      "title": "Normativ sənədlərin hazırlanması, qəbul olunması, onlara əlavə və dəyişikliklərin edilməsinə dair iş axını",
+      "subtitle": "",
+      "groupId": 11,
+      "status": "progress"
+    },
+    {
+      "id": 44,
+      "title": "Normativ sənədlərin qüvvədən düşməsinə dair iş axını",
+      "subtitle": "",
+      "groupId": 11,
+      "status": "progress"
+    },
+    {
+      "id": 45,
+      "title": "Çindən gələn Ələt yüklərinin emalı və Tranzit əməliyyatlarının həyata keçirilməsi üzrə iş axını",
+      "subtitle": "",
+      "groupId": 3,
+      "status": "progress"
+    },
+    {
+      "id": 46,
+      "title": "ALM  sifarişi üzərindən yüklərin XİAN Abşeron şirkəti tərəfindən daşıması (Qısa təsvir)",
+      "subtitle": "XİAN-İMS-PRD-001",
+      "groupId": 27,
+      "status": "prep"
+    },
+    {
+      "id": 47,
+      "title": "ALM sifarişi üzərindən yüklərin XİAN Abşeron şirkəti tərəfindən daşıması (Geniş təsvir)",
+      "subtitle": "XİAN-İMS-PRD-002",
+      "groupId": 27,
+      "status": "prep"
+    },
+    {
+      "id": 48,
+      "title": "XİAN Absheron Gəlirin taninması prosesi",
+      "subtitle": "XİAN-İMS-PRD-003",
+      "groupId": 27,
+      "status": "prep"
+    },
+    {
+      "id": 49,
+      "title": "XİAN Absheron Xərclərin tanınması prosesi",
+      "subtitle": "XİAN-İMS-PRD-004",
+      "groupId": 27,
+      "status": "prep"
+    },
+    {
+      "id": 50,
+      "title": "Subkontaktorlarla işin təşkili",
+      "subtitle": "XİAN-İMS-PRD-005",
+      "groupId": 27,
+      "status": "prep"
+    },
+    {
+      "id": 51,
+      "title": "XİAN Absheron şirkətinin daxili Proqram təminatından istifadə ilə bağlı iş axışı",
+      "subtitle": "XİAN-İMS-PRD-006",
+      "groupId": 27,
+      "status": "prep"
+    }
+  ]
 }

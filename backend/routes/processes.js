@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getFile, putFile, deleteFile, attribution } from '../services/store.js';
-import { syncFromProcess } from '../services/sheetsStore.js';
+import { syncFromProcess, removeSheetRowsForDeletedItems } from '../services/sheetsStore.js';
 
 const router = Router();
 const dataPath = () => (process.env.DATA_PATH || 'data').replace(/^\/|\/$/g, '');
@@ -13,7 +13,9 @@ const processPath = id => `${dataPath()}/diagrams/processes/process-${id}.json`;
 async function readArchive() {
   const file = await getFile(archivePath());
   const c = file ? file.content : null;
-  return (c && Array.isArray(c.items)) ? c : { items: [] };
+  // Filter out any null/malformed entries — old data had a stray `null` in
+  // here (from a prior bug), which crashed the frontend's archive list.
+  return (c && Array.isArray(c.items)) ? { ...c, items: c.items.filter(Boolean) } : { items: [] };
 }
 // `user` is the logged-in panel admin (req.user) — gets stamped onto the commit
 // so GitHub shows who made the change instead of just the token owner.
@@ -156,12 +158,21 @@ router.delete('/group/:gid', requireAdmin, async (req, res, next) => {
     const allGroupIds = collectIds(gid);
 
     const inGroup = idx.processes.filter(p => allGroupIds.includes(Number(p.groupId)));
+    const deletedGroupNames = idx.groups
+      .filter(g => allGroupIds.includes(Number(g.id)))
+      .map(g => String(g.name || '').trim())
+      .filter(Boolean);
+    const groupNameById = new Map(idx.groups.map(g => [Number(g.id), String(g.name || '').trim()]));
+    const deletedItemIds = inGroup.map(p => Number(p.id));
     for (const p of inGroup) {
       await deleteFile(processPath(p.id), attribution(req.user, `Delete process ${p.id} (group ${gid})`)).catch(() => {});
     }
     idx.processes = idx.processes.filter(p => !allGroupIds.includes(Number(p.groupId)));
     idx.groups = idx.groups.filter(g => !allGroupIds.includes(Number(g.id)));
     await writeIndex(idx, `Delete group ${gid} (+ subgroups)`, req.user);
+    await removeSheetRowsForDeletedItems('diagrams', deletedItemIds, deletedGroupNames, req.user, inGroup.map(p => ({ ...p, strukturAdi: groupNameById.get(Number(p.groupId)) || '' }))).catch((e) =>
+      console.error('[process group delete -> sheets]', e.message)
+    );
     res.json({ ok: true, deletedDiagrams: inGroup.length, deletedGroups: allGroupIds.length });
   } catch (e) { next(e); }
 });
@@ -412,8 +423,13 @@ router.delete('/:id', async (req, res, next) => {
     const id = req.params.id;
     await deleteFile(processPath(id), attribution(req.user, `Delete process ${id}`));
     const idx = await readIndex();
+    const existing = idx.processes.find(p => Number(p.id) === Number(id));
+    const existingGroupName = idx.groups.find(g => Number(g.id) === Number(existing?.groupId))?.name || '';
     idx.processes = idx.processes.filter(p => Number(p.id) !== Number(id));
     await writeIndex(idx, `Remove process ${id} from index`, req.user);
+    await removeSheetRowsForDeletedItems('diagrams', [id], [], req.user, existing ? [{ ...existing, strukturAdi: existingGroupName }] : []).catch((e) =>
+      console.error('[process delete -> sheets]', e.message)
+    );
     // also drop it from the archive, in case it was archived
     const archive = await readArchive();
     if (archive.items.some(a => Number(a.id) === Number(id))) {

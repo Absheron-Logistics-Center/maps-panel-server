@@ -1,0 +1,290 @@
+{
+  "id": 12,
+  "title": "Vaqonların Mərkəzə qəbuluna dair iş axını",
+  "subtitle": "ALM-İMS-MPO-001",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1784891810930",
+      "label": "ADY",
+      "y": 20,
+      "h": 180
+    },
+    {
+      "id": "lane-1784891837329",
+      "label": "MPO Hərəkətin idarə olunması şöbəsi",
+      "y": 200,
+      "h": 400
+    },
+    {
+      "id": "lane-1784891870762",
+      "label": "MPO Lokomotiv şöbəsi",
+      "y": 600,
+      "h": 190
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 80,
+      "y": 40,
+      "laneId": "lane-1784891810930",
+      "w": 280,
+      "h": 100,
+      "text": "Qatarın Abşeron dəmir yolu stansiyasından Mərkəzin qəbul-göndərmə parkına göndərilməsi üçün məlumatın verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 110,
+      "y": 230,
+      "laneId": "lane-1784891837329",
+      "w": 220,
+      "h": 130,
+      "text": "Qatarın Mərkəzin qəbul-göndərmə parkına qəbul edilməsininin razılaşdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 440,
+      "laneId": "lane-1784891837329",
+      "w": 200,
+      "h": 140,
+      "text": "Marşrutun müəyyən edilməsi və Mərkəzin qəbul-göndərmə parkının müvafiq yolunun müəyyən edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 530,
+      "y": 220,
+      "laneId": "lane-1784891837329",
+      "w": 200,
+      "h": 80,
+      "text": "«ADY»-yə qatarın göndərilməsinə dair razılığın bildirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 530,
+      "y": 40,
+      "laneId": "lane-1784891810930",
+      "w": 200,
+      "h": 140,
+      "text": "Vaqonların Abşeron dəmir yolu stansiyasından Mərkəzin qəbul-göndərmə parkına gətirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 860,
+      "y": 230,
+      "laneId": "lane-1784891837329",
+      "w": 200,
+      "h": 120,
+      "text": "Yükə dair sənədlərin qəbulu və hərəkət tərkibinin tormoz başmaqları ilə bərkidilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 860,
+      "y": 370,
+      "laneId": "lane-1784891837329",
+      "w": 200,
+      "h": 80,
+      "text": "Natura vərəqəsinin tərtib\nedilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 815,
+      "y": 480,
+      "laneId": "lane-1784891837329",
+      "w": 290,
+      "h": 100,
+      "text": "Kommersiya baxışının təşkil edilməsi və zəruri hallarda uyğunsuzluqların qeydiyyatının aparılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1200,
+      "y": 230,
+      "laneId": "lane-1784891837329",
+      "w": 200,
+      "h": 100,
+      "text": "“UDPAS” proqramında vaqonlara dair müvafiq məlumatların daxil edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1200,
+      "y": 360,
+      "laneId": "lane-1784891837329",
+      "w": 200,
+      "h": 80,
+      "text": "Sənədlərin VPD-yə təhvil\nverilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1195,
+      "y": 500,
+      "laneId": "lane-1784891837329",
+      "w": 210,
+      "h": 80,
+      "text": "Vaqonların çeşidləmə planının hazırlanması və razılaşdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "pill",
+      "style": "solid",
+      "x": 1175,
+      "y": 660,
+      "laneId": "lane-1784891870762",
+      "w": 250,
+      "h": 110,
+      "text": "Vaqonların Mərkəzin terminal yollarına yerləşdirilməsi və hərəkət tərkiblərinin tormoz başmaqları ilə bərkidilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "bottom",
+      "e": "top"
+    }
+  ],
+  "status": "done"
+}

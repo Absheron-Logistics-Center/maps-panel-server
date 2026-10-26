@@ -1,0 +1,246 @@
+{
+  "id": 51,
+  "title": "XİAN Absheron şirkətinin daxili Proqram təminatından istifadə ilə bağlı iş axışı",
+  "subtitle": "XİAN-İMS-PRD-006",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1790936783680",
+      "label": "ALM-BDD",
+      "y": 20,
+      "h": 170
+    },
+    {
+      "id": "lane-1790936836616",
+      "label": "XİAM ALM Operation & RFQ team",
+      "y": 190,
+      "h": 280
+    },
+    {
+      "id": "lane-1790936855568",
+      "label": "XIAN ALM Finance team",
+      "y": 470,
+      "h": 170
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "stroke",
+      "x": 90,
+      "y": 60,
+      "laneId": "lane-1790936783680",
+      "w": 200,
+      "h": 90,
+      "text": "Müştəridən sifarişin email üzərindən qəbul edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "stroke",
+      "x": 90,
+      "y": 220,
+      "laneId": "lane-1790936836616",
+      "w": 200,
+      "h": 70,
+      "text": "Sifarişin Emaillə ALM BDD-yə qəbulu",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "stroke",
+      "x": 90,
+      "y": 350,
+      "laneId": "lane-1790936836616",
+      "w": 200,
+      "h": 80,
+      "text": "Sifarişlə bağlı Proqramda Refernce kodun yaradılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "stroke",
+      "x": 410,
+      "y": 350,
+      "laneId": "lane-1790936836616",
+      "w": 200,
+      "h": 80,
+      "text": "Sifariş əsasında Qiymət təkliflərinin toplanması və RfQ hazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "stroke",
+      "x": 410,
+      "y": 220,
+      "laneId": "lane-1790936836616",
+      "w": 200,
+      "h": 80,
+      "text": "Hazırlanmış RFQ-nin yoxlanib BDD-yə emaillə ötürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "stroke",
+      "x": 410,
+      "y": 70,
+      "laneId": "lane-1790936783680",
+      "w": 200,
+      "h": 100,
+      "text": "Sifarişin təsdiq və ya ləğvi ilə bağlı emaillə müştəri qərarının alınması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "stroke",
+      "x": 710,
+      "y": 220,
+      "laneId": "lane-1790936836616",
+      "w": 200,
+      "h": 80,
+      "text": "BDD-dən alınan qərar əsasında RFQ statusunun ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "stroke",
+      "x": 710,
+      "y": 350,
+      "laneId": "lane-1790936836616",
+      "w": 200,
+      "h": 100,
+      "text": "Sifarişlə uyğun Vendorlarla iş prosesinin icrası və proqramda qeydiyyatı",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1020,
+      "y": 350,
+      "laneId": "lane-1790936836616",
+      "w": 200,
+      "h": 100,
+      "text": "RFQ da nəzərdə tutulmayan xərclər olarsa onların proqrama daxil edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "pill",
+      "style": "stroke",
+      "x": 1020,
+      "y": 530,
+      "laneId": "lane-1790936855568",
+      "w": 200,
+      "h": 90,
+      "text": "Xidmətlər əsasında İnvoice və ödəniş proseslərinin icrası",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+    }
+  ],
+  "status": null
+}

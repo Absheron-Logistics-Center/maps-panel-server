@@ -2,5 +2,11 @@ node_modules
 dist
 .env
 .env.local
+.env.production.local
 .DS_Store
 *.log
+
+data/.mongo-outbox.json
+data/.write-probe.json
+backend/.env
+*.tmp

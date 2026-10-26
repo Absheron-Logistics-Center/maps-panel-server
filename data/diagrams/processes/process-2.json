@@ -1,0 +1,320 @@
+{
+  "id": 2,
+  "title": "Mal çıxışı əməliyyatlarının həyata keçirilməsi üzrə iş axını",
+  "subtitle": "ALM-İMS-PRD-002",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1784619455276",
+      "label": "UDPAS",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1784619518685",
+      "label": "Billing",
+      "y": 180,
+      "h": 160
+    },
+    {
+      "id": "lane-1784622482213",
+      "label": "WMS",
+      "y": 340,
+      "h": 265
+    },
+    {
+      "id": "lane-1784622495093",
+      "label": "ANBAR",
+      "y": 605,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 80,
+      "y": 60,
+      "laneId": "lane-1784619455276",
+      "w": 240,
+      "h": 90,
+      "text": "Müştəridən gözlənilən mal çıxışı sifarişinin qəbulu",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 450,
+      "y": 70,
+      "laneId": "lane-1784619455276",
+      "w": 260,
+      "h": 70,
+      "text": "Sifarişin sistemə operator tərəfindən daxil edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 78.01041603088379,
+      "y": 200,
+      "laneId": "lane-1784619518685",
+      "w": 240,
+      "h": 90,
+      "text": "Mal çıxışı sifarişi ilə birgə ümumi xidmətin hesablanib sistemə yazılması - Billing",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 830,
+      "y": 70,
+      "laneId": "lane-1784619455276",
+      "w": 320,
+      "h": 70,
+      "text": "Yükü götürən nəqliyyat vasitəsinin əraziyə girişinin təmin edilməsi (NBM)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 90,
+      "y": 500,
+      "laneId": "lane-1784622482213",
+      "w": 240,
+      "h": 80,
+      "text": "Mal çıxışı ilə bağlı sifarişin UDPAS\ndan inteqrasiyası\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "3.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 420,
+      "y": 200,
+      "laneId": "lane-1784619518685",
+      "w": 360,
+      "h": 90,
+      "text": "Stok sıfırlandığı halda öncədən invoicelanma aparılır və mühasibatlıq səviyyəsində qaimə kəsilir (Digər hallarda ayda 1 dəfə qaimə kəsilir)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 435,
+      "y": 495,
+      "laneId": "lane-1784622482213",
+      "w": 270,
+      "h": 90,
+      "text": "Mal çıxışının stoka uyğunlaşdırılıb Əl\nterminalına ( TSD) ötürülməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 70,
+      "y": 650,
+      "laneId": "lane-1784622495093",
+      "w": 260,
+      "h": 80,
+      "text": "TSD də olan sifarişin yığılması\n \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 430,
+      "y": 645,
+      "laneId": "lane-1784622495093",
+      "w": 280,
+      "h": 90,
+      "text": "Yük operatorları tərəfindən yığılmış sifarişin paletləşdirilib toplama məntəqəsinə yerləşdirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 790,
+      "y": 645,
+      "laneId": "lane-1784622495093",
+      "w": 280,
+      "h": 90,
+      "text": "Anbardar tərəfindən yığılmış sifarişlərin qaimə vasitəsiylə yoxlanılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1150,
+      "y": 640,
+      "laneId": "lane-1784622495093",
+      "w": 270,
+      "h": 100,
+      "text": "Sifarişin Təhvil-Təslim aktı ilə maşına yüklənməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1165,
+      "y": 390,
+      "laneId": "lane-1784622482213",
+      "w": 240,
+      "h": 80,
+      "text": "Scan edilmiş sifariş sənədlərinin\nmüştəriyə göndərilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "pill",
+      "style": "solid",
+      "x": 1165,
+      "y": 210,
+      "laneId": "lane-1784619518685",
+      "w": 240,
+      "h": 90,
+      "text": "Aylıq üzləşmələrin müştərilərlə aparılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": "3.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "3.1",
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top",
+      "color": ""
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "top",
+      "e": "bottom"
+    }
+  ],
+  "status": "done"
+}

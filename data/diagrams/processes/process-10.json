@@ -1,0 +1,321 @@
+{
+  "id": 10,
+  "title": "Mal qəbulu əməliyyatlarının həyata keçirilməsi üzrə iş axını",
+  "subtitle": "ALM-İMS-PRD-001",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1784531661326",
+      "label": "UDPAS",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1784531682758",
+      "label": "WMS",
+      "y": 180,
+      "h": 170
+    },
+    {
+      "id": "lane-1784531690390",
+      "label": "ANBAR",
+      "y": 350,
+      "h": 160
+    },
+    {
+      "id": "lane-1784531720646",
+      "label": "Billing",
+      "y": 510,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 105,
+      "y": 40,
+      "laneId": "lane-1784531661326",
+      "w": 220,
+      "h": 90,
+      "text": "Müştəridən gözlənilən mal qəbulu sifarişi ( packing list )",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 410,
+      "y": 50,
+      "laneId": "lane-1784531661326",
+      "w": 250,
+      "h": 70,
+      "text": "Yeni mal olduqda sistemdə yeni mal növünün yaradılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 770,
+      "y": 45,
+      "laneId": "lane-1784531661326",
+      "w": 350,
+      "h": 80,
+      "text": "Sifarişin sistemə operator tərəfindən daxil edilməsi və sifarişin gözləmə rejimində saxlanılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 1240,
+      "y": 45,
+      "laneId": "lane-1784531661326",
+      "w": 250,
+      "h": 80,
+      "text": "Yükü gətirən nəqliyyat vasitəsinin əraziyə girişinin təmin edilməsi ( NBM )",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 200,
+      "laneId": "lane-1784531682758",
+      "w": 270,
+      "h": 70,
+      "text": "Mal qəbulu ilə bağlı sifarişin UDPAS-dən inteqrasiya olunması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 450,
+      "y": 195,
+      "laneId": "lane-1784531682758",
+      "w": 280,
+      "h": 80,
+      "text": "Gözlənilən mal qəbulunun əl terminalına ( TSD ) ötürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 130,
+      "y": 395,
+      "laneId": "lane-1784531690390",
+      "w": 250,
+      "h": 70,
+      "text": "Məhsulların anbara fiziki  qəbulu",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 450,
+      "y": 390,
+      "laneId": "lane-1784531690390",
+      "w": 280,
+      "h": 80,
+      "text": "Qəbul olunmuş məhsulların çeşidlənməsi və patentləşdirilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 810,
+      "y": 390,
+      "laneId": "lane-1784531690390",
+      "w": 270,
+      "h": 80,
+      "text": "Məhsullar terminalla sistem üzrə qəbulu və xanalara yerləşdirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "pill",
+      "style": "solid",
+      "x": 1060,
+      "y": 240,
+      "laneId": "lane-1784531682758",
+      "w": 310,
+      "h": 90,
+      "text": "Müştəriyə qəbul prosesi yekunlaşdıqdan sonra sənədlərin və stokun göndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.2",
+      "type": "rect",
+      "style": "stroke",
+      "x": 480,
+      "y": 560,
+      "laneId": "lane-1784531720646",
+      "w": 230,
+      "h": 80,
+      "text": "Günlük saxlancın formalaşması\n \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.3",
+      "type": "rect",
+      "style": "stroke",
+      "x": 860,
+      "y": 565,
+      "laneId": "lane-1784531720646",
+      "w": 200,
+      "h": 70,
+      "text": "Aylıq  üzləşmələrin müştərilərlə aparılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 120,
+      "y": 555,
+      "laneId": "lane-1784531720646",
+      "w": 280,
+      "h": 90,
+      "text": "Məhsullar anbara boşaldıqdan sonra ümumi xidmətin hesablanıb sistemə yazılması - Billing",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": "1.2",
+      "to": "1.3",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 1,
+      "to": "1.1",
+      "s": "left",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "1.1",
+      "to": "1.2",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    }
+  ],
+  "status": "done"
+}

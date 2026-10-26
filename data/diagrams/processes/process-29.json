@@ -1,0 +1,247 @@
+{
+  "id": 29,
+  "title": "GƏLİRLƏRİN TANINMASI",
+  "subtitle": "MB-İMS-PRD-009",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1785492974848",
+      "label": "Bəyannaməçi",
+      "y": 20,
+      "h": 170
+    },
+    {
+      "id": "lane-1785492978451",
+      "label": "Mühasib",
+      "y": 190,
+      "h": 210
+    },
+    {
+      "id": "lane-1785492984558",
+      "label": "Baş mühasib",
+      "y": 400,
+      "h": 200
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "rect",
+      "style": "solid",
+      "x": 310,
+      "y": 20,
+      "laneId": "lane-1785492974848",
+      "w": 310,
+      "h": 150,
+      "text": "ALM HD tərəfindən müştəri ilə razılaşdırılmış xidmət haqqı məbləğlərinin\ndaxili proqram təminatına əlavə edildikdən sonra, gömrük sistemindən (e-gov.az) yazılmış bəyannamələrə dair\nməlumatların daxili proqram təminatına inteqrasiya edilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 90,
+      "y": 260,
+      "laneId": "lane-1785492978451",
+      "w": 200,
+      "h": 120,
+      "text": "Digər xərclərin (terminal və ərazi) daxili proqram təminatına əlavə edilməsi\n(manual)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 370,
+      "y": 260,
+      "laneId": "lane-1785492978451",
+      "w": 200,
+      "h": 120,
+      "text": "Yekun məbləğə əsasən proqram təminatı üzərindən hesab\nfakturanın yaradılması\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 660,
+      "y": 260,
+      "laneId": "lane-1785492978451",
+      "w": 200,
+      "h": 120,
+      "text": "Hesab fakturaların rəhbər tərəfindən imza/ möhürlənməsinin təmini",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 970,
+      "y": 260,
+      "laneId": "lane-1785492978451",
+      "w": 200,
+      "h": 120,
+      "text": "Hesab fakturalara əsasən, eletkron qaimə fakturaların tərtibatı",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 90,
+      "y": 460,
+      "laneId": "lane-1785492984558",
+      "w": 230,
+      "h": 120,
+      "text": "Tərtib edilmiş elektron qaimə fakturaların daxili proqram təminatındakı\nməlumatlarla uyğunluğunun yoxlanılması\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 410,
+      "y": 460,
+      "laneId": "lane-1785492984558",
+      "w": 200,
+      "h": 120,
+      "text": "Müştərilərə göndərilən elektron qaimə fakturaların\ntəsdiqi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1300,
+      "y": 260,
+      "laneId": "lane-1785492978451",
+      "w": 200,
+      "h": 120,
+      "text": "Hesab fakturaların və digər xərcləri təsdiq edən sənədlərin e-mail üzərindən Müştərilərə\ntəqdimi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "",
+      "type": "pill",
+      "style": "stroke",
+      "x": 1610,
+      "y": 285,
+      "laneId": "lane-1785492978451",
+      "w": 70,
+      "h": 70,
+      "text": "",
+      "info": {
+        "general": [
+          ""
+        ]
+      },
+      "color": "#16a34a"
+    },
+    {
+      "id": ".",
+      "type": "pill",
+      "style": "stroke",
+      "x": 100,
+      "y": 60,
+      "laneId": "lane-1785492974848",
+      "w": 70,
+      "h": 70,
+      "text": "",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": ".",
+      "to": 1,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 8,
+      "to": "",
+      "s": "right",
+      "e": "left"
+    }
+  ],
+  "status": null
+}

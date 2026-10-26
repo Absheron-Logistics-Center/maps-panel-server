@@ -1,0 +1,501 @@
+{
+  "id": 20,
+  "title": "BƏYANETMƏ FƏALİYYƏTİ (Qeyri-tranzit əməliyyatları)",
+  "subtitle": "MB-İMS-PRD-002",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1785481495851",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 170
+    },
+    {
+      "id": "lane-1785481503248",
+      "label": "Koordinator",
+      "y": 190,
+      "h": 390
+    },
+    {
+      "id": "lane-1785481510346",
+      "label": "Bəyannaməçi",
+      "y": 580,
+      "h": 285
+    },
+    {
+      "id": "lane-1785481517317",
+      "label": "Gömrük orqanı",
+      "y": 865,
+      "h": 205
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 290,
+      "laneId": "lane-1785481503248",
+      "w": 230,
+      "h": 140,
+      "text": "Gömrük bəyannaməsinin tərtibi\nüçün zəruri olan sənədlərin və\nməlumatların siyahısının Müştəriyə təqdimi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 400,
+      "y": 60,
+      "laneId": "lane-1785481495851",
+      "w": 200,
+      "h": 80,
+      "text": "Müştəri tərəfindən sənəd toplusunun\ntəqdimi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 400,
+      "y": 230,
+      "laneId": "lane-1785481503248",
+      "w": 200,
+      "h": 100,
+      "text": "Sənəd toplusuna ilkin baxış\nkeçirilməsi və bəyannaməçiyə təqdimi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 710,
+      "laneId": "lane-1785481510346",
+      "w": 230,
+      "h": 120,
+      "text": "Sənəd və ya məlumatlarda\nçatışmazlıq olduğu halda koordinatora məlumat verilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 1100,
+      "y": 50,
+      "laneId": "lane-1785481495851",
+      "w": 350,
+      "h": 120,
+      "text": "Yük sərhədi keçdikdən sonra əsas GB üçün zəruri sənədlərin təqdimi (hava yolu yüklərində yük ASG Business Aviationun anbarına boşaldıldıqdan sonra\nmala verilmiş barkod)\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 1360,
+      "y": 720,
+      "laneId": "lane-1785481510346",
+      "w": 180,
+      "h": 100,
+      "text": "Əsas GB-nin\ntərtibi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 1335,
+      "y": 910,
+      "laneId": "lane-1785481517317",
+      "w": 230,
+      "h": 140,
+      "text": "Gömrük sistemi üzərindən maliyyə inspektorunun GB-ni ödənişə təqdim etməsi və ya\nsənədlərdə çatışmazlıq, uyğunsuzluq olduqda geri qaytarılması (düzəliş üçün)\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1550,
+      "y": 420,
+      "laneId": "lane-1785481503248",
+      "w": 200,
+      "h": 100,
+      "text": "GB-nin, gömrük ödənişlərinin edilməsi üçün müştəriyə təqdim\nedilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1550,
+      "y": 50,
+      "laneId": "lane-1785481495851",
+      "w": 200,
+      "h": 100,
+      "text": "Gömrük ödənişlərinin həyata\nkeçirilməsi\n \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1880,
+      "y": 910,
+      "laneId": "lane-1785481517317",
+      "w": 200,
+      "h": 120,
+      "text": "Maliyyə inspektoru\ntərəfindən işin buraxılışa göndərilməsi (yük inspektoruna yönləndirilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1880,
+      "y": 410,
+      "laneId": "lane-1785481503248",
+      "w": 200,
+      "h": 100,
+      "text": "Müştəriyə yükün buraxılışa\ngöndərilməsi barədə məlumat verilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 125,
+      "y": 194,
+      "laneId": "lane-1785481503248",
+      "w": 220,
+      "h": 70,
+      "text": "Keçid: Sorğu qəbulu (QT) biznes prosesi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "4.2",
+      "type": "rect",
+      "style": "solid",
+      "x": 810,
+      "y": 60,
+      "laneId": "lane-1785481495851",
+      "w": 210,
+      "h": 100,
+      "text": "Tərtib edilmiş QİB əsasında xidmət haqqının ödənməsi\n \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "11.2",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1875,
+      "y": 50,
+      "laneId": "lane-1785481495851",
+      "w": 210,
+      "h": 80,
+      "text": "Keçid: Broker fəaliyyəti biznes\nprosesləri",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": ".",
+      "type": "diamond",
+      "style": "solid",
+      "x": 440,
+      "y": 695,
+      "laneId": "lane-1785481510346",
+      "w": 120,
+      "h": 150,
+      "text": "Hava yolu",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "4.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 658,
+      "y": 710,
+      "laneId": "lane-1785481510346",
+      "w": 230,
+      "h": 120,
+      "text": "Sənəd və ya məlumatlar tam formada təqdim edildikdən sonra QİB-in tərtib ediliməsi\n(CMR və İnvoys əsasında) ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "4.3",
+      "type": "rect",
+      "style": "solid",
+      "x": 980,
+      "y": 720,
+      "laneId": "lane-1785481510346",
+      "w": 180,
+      "h": 100,
+      "text": "QİB-in aktivləşdirilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "",
+      "type": "diamond",
+      "style": "solid",
+      "x": 1205,
+      "y": 205,
+      "laneId": "lane-1785481503248",
+      "w": 140,
+      "h": 150,
+      "text": "İcazə/sertifikat xidməti",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 1155,
+      "y": 420,
+      "laneId": "lane-1785481503248",
+      "w": 240,
+      "h": 140,
+      "text": "İcazə/sertifikatlar üçün zəruri sənədlərin\nmüştəri və təqdim edilmiş sənədlərə əsasən\nzəruri icazə/\nsertifikatların alınması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "..",
+      "type": "diamond",
+      "style": "solid",
+      "x": 1910,
+      "y": 205,
+      "laneId": "lane-1785481503248",
+      "w": 140,
+      "h": 150,
+      "text": "Broker xidməti",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "pill",
+      "style": "stroke",
+      "x": 2150,
+      "y": 245,
+      "laneId": "lane-1785481503248",
+      "w": 70,
+      "h": 70,
+      "text": "",
+      "info": {
+        "general": [
+          ""
+        ]
+      },
+      "color": "#dc2626"
+    }
+  ],
+  "edges": [
+    {
+      "from": "1.1",
+      "to": 1,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": ".",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": ".",
+      "to": "4.1",
+      "s": "right",
+      "e": "left",
+      "label": "Xeyr"
+    },
+    {
+      "from": "4.1",
+      "to": "4.2",
+      "s": "top",
+      "e": "left"
+    },
+    {
+      "from": "4.2",
+      "to": "4.3",
+      "s": "bottom",
+      "e": "left"
+    },
+    {
+      "from": "4.3",
+      "to": 5,
+      "s": "top",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": "",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "",
+      "to": "5.1",
+      "s": "bottom",
+      "e": "top",
+      "label": "Bəli"
+    },
+    {
+      "from": "",
+      "to": 6,
+      "s": "right",
+      "e": "top",
+      "label": "Xeyr"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 10,
+      "to": 9,
+      "s": "left",
+      "e": "right",
+      "arrow": "start"
+    },
+    {
+      "from": "..",
+      "to": "11.2",
+      "s": "top",
+      "e": "bottom",
+      "label": "Bəli"
+    },
+    {
+      "from": 11,
+      "to": "..",
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": "..",
+      "to": 12,
+      "s": "right",
+      "e": "left",
+      "label": "Xeyr"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "top",
+      "e": "bottom"
+    }
+  ],
+  "status": null
+}

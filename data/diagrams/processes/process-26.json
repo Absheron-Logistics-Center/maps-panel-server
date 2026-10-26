@@ -1,0 +1,496 @@
+{
+  "id": 26,
+  "title": "Vaqondan tıra tranzit prosesi",
+  "subtitle": "ALM-İMS-PRD-BDD/TRZ-001",
+  "width": 2200,
+  "height": 1320,
+  "lanes": [
+    {
+      "id": "lane-1785488171435",
+      "label": "Manevra və planlama",
+      "y": 20,
+      "h": 220
+    },
+    {
+      "id": "lane-1785488230347",
+      "label": "Vahid pəncərə UDPAS , WMS , operator",
+      "y": 240,
+      "h": 170
+    },
+    {
+      "id": "lane-1785488267691",
+      "label": "Yük sahibi/nümayəndə",
+      "y": 410,
+      "h": 160
+    },
+    {
+      "id": "lane-1785488279387",
+      "label": "Yük əməliyyatçı",
+      "y": 570,
+      "h": 160
+    },
+    {
+      "id": "lane-1785488298868",
+      "label": "Anbar əməliyyatçı",
+      "y": 730,
+      "h": 160
+    },
+    {
+      "id": "lane-1785488336436",
+      "label": "TIR park / NBM nəzarətçi",
+      "y": 890,
+      "h": 160
+    },
+    {
+      "id": "lane-1785488370092",
+      "label": "Gömrük nəzarətçisi",
+      "y": 1050,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 150,
+      "y": 50,
+      "laneId": "lane-1785488171435",
+      "w": 250,
+      "h": 110,
+      "text": "Qatarın qəbulu-stansiya, sistemdə təsdiqi, vaqona aid sənəd paketinin vahid pəncərəyə verilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 460,
+      "y": 65,
+      "laneId": "lane-1785488171435",
+      "w": 200,
+      "h": 80,
+      "text": "Vaqona tex. baxış, təsdiqi və VP-yə sənəd təqdimi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 160,
+      "y": 270,
+      "laneId": "lane-1785488230347",
+      "w": 200,
+      "h": 120,
+      "text": "Vaqon və konteyner sənədlərinin çeşidlənməsi, emalı və müştəri məlumat verilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 720,
+      "y": 140,
+      "laneId": "lane-1785488171435",
+      "w": 200,
+      "h": 80,
+      "text": "Vaqonun terminala qəbulu, yerləşmə planı üzrə təsdiq edilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 160,
+      "y": 590,
+      "laneId": "lane-1785488279387",
+      "w": 200,
+      "h": 100,
+      "text": "Yük nümayəndəsinin qəbulu, əməliyyata istiqamətlənmə, (koordinasiya) ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 550,
+      "y": 270,
+      "laneId": "lane-1785488230347",
+      "w": 200,
+      "h": 70,
+      "text": "Sifarişin  işlənməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "6.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 830,
+      "y": 270,
+      "laneId": "lane-1785488230347",
+      "w": 200,
+      "h": 70,
+      "text": "Sifariş ərazi/anbarda saxlanc ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 560,
+      "y": 750,
+      "laneId": "lane-1785488298868",
+      "w": 200,
+      "h": 70,
+      "text": "Yükün açıq ərazi və ya anbara yerləşdirmə ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "8.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 710,
+      "y": 590,
+      "laneId": "lane-1785488279387",
+      "w": 200,
+      "h": 70,
+      "text": "Yükə gələcək maşının çağırılması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "8.2",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 720,
+      "y": 920,
+      "laneId": "lane-1785488336436",
+      "w": 200,
+      "h": 70,
+      "text": "Yükə gələcək maşının girişinin təmin edilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "9.4",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 770,
+      "y": 450,
+      "laneId": "lane-1785488267691",
+      "w": 240,
+      "h": 100,
+      "text": "Tranzit yükün rəsmiləşdirilməsi/sənədləşmə (CMR in Vahid pəncərəyə təqdim edilməsi) ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "9.5",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1090,
+      "y": 270,
+      "laneId": "lane-1785488230347",
+      "w": 200,
+      "h": 70,
+      "text": "İxrac təyinat sənədlərin tanınması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "9.6",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1370,
+      "y": 270,
+      "laneId": "lane-1785488230347",
+      "w": 200,
+      "h": 70,
+      "text": "Boş vaqona geridönüş sənədi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "9.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1090,
+      "y": 574,
+      "laneId": "lane-1785488279387",
+      "w": 200,
+      "h": 70,
+      "text": "Yükləmə/boşaltma TIR-a ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "9.2",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1090,
+      "y": 750,
+      "laneId": "lane-1785488298868",
+      "w": 200,
+      "h": 80,
+      "text": "Yükün açıq ərazi və ya anbardan nəqliyyata yüklənməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "9.3",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1090,
+      "y": 1080,
+      "laneId": "lane-1785488370092",
+      "w": 200,
+      "h": 70,
+      "text": "Gömrük kontrolu ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1410,
+      "y": 1080,
+      "laneId": "lane-1785488370092",
+      "w": 200,
+      "h": 70,
+      "text": "Yük maşının çıxışının təsdiqi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1410,
+      "y": 590,
+      "laneId": "lane-1785488279387",
+      "w": 200,
+      "h": 70,
+      "text": "Yüklü maşının çıxışa verilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "solid",
+      "x": 1660,
+      "y": 920,
+      "laneId": "lane-1785488336436",
+      "w": 200,
+      "h": 70,
+      "text": "CMR sənədin  sistemdə kontrolu və çıxış  ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "9.7",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1740,
+      "y": 70,
+      "laneId": "lane-1785488171435",
+      "w": 200,
+      "h": 80,
+      "text": "Vaqonların terminaldan çıxarılması, çıxış plan təsdiqi, texniki baxış ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": "8.1",
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": "8.1",
+      "to": "8.2",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": "6.1",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": "9.1",
+      "to": "9.6",
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": "9.1",
+      "to": "9.4",
+      "s": "top",
+      "e": "right"
+    },
+    {
+      "from": "9.4",
+      "to": "9.5",
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "top",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "right"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "8.2",
+      "to": "9.1",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "8.2",
+      "to": "9.2",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "9.2",
+      "to": "9.1",
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": "9.3",
+      "to": "9.2",
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": "9.3",
+      "to": 11,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "9.7",
+      "to": "9.1",
+      "s": "bottom",
+      "e": "right"
+    }
+  ],
+  "status": "done"
+}

@@ -1,0 +1,264 @@
+{
+  "id": 50,
+  "title": "Subkontaktorlarla işin təşkili",
+  "subtitle": "XİAN-İMS-PRD-005",
+  "width": 2200,
+  "height": 1140,
+  "lanes": [
+    {
+      "id": "lane-1790926451704",
+      "label": "Werui Duan Ticha",
+      "y": 20,
+      "h": 170
+    },
+    {
+      "id": "lane-1790926471328",
+      "label": "Subkontraktor",
+      "y": 190,
+      "h": 160
+    },
+    {
+      "id": "lane-1790926518848",
+      "label": "Fuad Əhmədov - Direktor",
+      "y": 350,
+      "h": 170
+    },
+    {
+      "id": "lane-1790926574329",
+      "label": "Xian Absheron Maliyyə komandası",
+      "y": 520,
+      "h": 160
+    },
+    {
+      "id": "lane-1790926590840",
+      "label": "ALM Hüquq departament",
+      "y": 680,
+      "h": 160
+    },
+    {
+      "id": "lane-1790926614049",
+      "label": "RFQ və Əməliyyat Komandası",
+      "y": 840,
+      "h": 200
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "stroke",
+      "x": 100,
+      "y": 60,
+      "laneId": "lane-1790926451704",
+      "w": 280,
+      "h": 100,
+      "text": "Şablon müqavilə forması üzərindən Vendor rekvizitlərininin daxil edilməsi və müqavilənin hazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "stroke",
+      "x": 140,
+      "y": 550,
+      "laneId": "lane-1790926574329",
+      "w": 200,
+      "h": 80,
+      "text": "Müqaviləyə maliyyə yönümlü baxış və ümumi rəyim verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "stroke",
+      "x": 460,
+      "y": 240,
+      "laneId": "lane-1790926471328",
+      "w": 200,
+      "h": 70,
+      "text": "Müqavilənin Vendor tərəfindən imzalanması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "stroke",
+      "x": 460,
+      "y": 420,
+      "laneId": "lane-1790926518848",
+      "w": 200,
+      "h": 70,
+      "text": "Müqavilənin direktor tərəfindən imzalanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "stroke",
+      "x": 810,
+      "y": 70,
+      "laneId": "lane-1790926451704",
+      "w": 200,
+      "h": 100,
+      "text": "İmzalanmış  müqaviləsinin ALM Hüquq Departamentinə  ötürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "stroke",
+      "x": 810,
+      "y": 730,
+      "laneId": "lane-1790926590840",
+      "w": 200,
+      "h": 80,
+      "text": "İmzalanmış müqavilənin Opera  proqramına əlavə edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "stroke",
+      "x": 810,
+      "y": 900,
+      "laneId": "lane-1790926614049",
+      "w": 200,
+      "h": 120,
+      "text": "Proqram üzərindən  Vendorlarla alış proseslərinin qeydiyyatının aparılması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1260,
+      "y": 420,
+      "laneId": "lane-1790926518848",
+      "w": 200,
+      "h": 80,
+      "text": "Vendorlardan alınmış İnvoice  əsasında ödənişlərin təsdiqi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1620,
+      "y": 550,
+      "laneId": "lane-1790926574329",
+      "w": 200,
+      "h": 80,
+      "text": "Vendorlardan alınmış İnvoice əsasında ödənişlərin icrasının ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "pill",
+      "style": "stroke",
+      "x": 1615,
+      "y": 910,
+      "laneId": "lane-1790926614049",
+      "w": 210,
+      "h": 100,
+      "text": "Dövri olaraq Vendorların qiymətləndirilməsi prosesinin icrası",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 4,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 4,
+      "to": 3,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 3,
+      "to": 5,
+      "s": "top",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+    }
+  ],
+  "status": null
+}

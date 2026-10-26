@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { X, Loader2, ChevronDown } from '../icons.jsx';
-import { uploadsEnabled, uploadsEnabledReady } from '../../api/client.js';
+import { uploadsEnabled, uploadsEnabledReady, maxUploadBytes } from '../../api/client.js';
 
 // Flattens a flat groups array (with optional parentId) into depth-first
 // order, so a plain <select> can show nested groups with indentation.
@@ -52,7 +52,8 @@ export default function PdfFormModal({ mode, pdf, groups = [], defaultGroupId, s
   useEffect(() => { uploadsEnabledReady.then(setCanUpload); }, []);
   const sheetMenuRef = useRef(null);
 
-  const MAX_FILE_BYTES = 20 * 1024 * 1024; // 20MB
+  // 20MB on the server, 3MB on Vercel (reported by /api/health)
+  const getMaxBytes = () => maxUploadBytes;
 
   const groupName = (groups.find(g => Number(g.id) === Number(groupId))?.name || '').trim();
 
@@ -110,8 +111,8 @@ export default function PdfFormModal({ mode, pdf, groups = [], defaultGroupId, s
       return;
     }
 
-    if (f.size > MAX_FILE_BYTES) {
-      setError(`Fayl çox böyükdür (maks. ${MAX_FILE_BYTES / (1024 * 1024)}MB)`);
+    if (f.size > getMaxBytes()) {
+      setError(`Fayl çox böyükdür (maks. ${Math.round(getMaxBytes() / (1024 * 1024))}MB)`);
       e.target.value = '';
       return;
     }

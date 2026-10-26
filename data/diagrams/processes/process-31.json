@@ -1,0 +1,132 @@
+{
+  "id": 31,
+  "title": "XƏRCLƏRİN TANINMASI",
+  "subtitle": "MB-İMS-PRD-010",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1785493737005",
+      "label": "Broker",
+      "y": 20,
+      "h": 196
+    },
+    {
+      "id": "lane-1785493739098",
+      "label": "Mühasib",
+      "y": 216,
+      "h": 169
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "rect",
+      "style": "solid",
+      "x": 330,
+      "y": 76,
+      "laneId": "lane-1785493737005",
+      "w": 200,
+      "h": 120,
+      "text": "Terminallarda müştəri adından\nxərclərin ödənməsi (depozit şəklində)\n \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 630,
+      "y": 76,
+      "laneId": "lane-1785493737005",
+      "w": 270,
+      "h": 120,
+      "text": "Terminallarda çəkilən xərclərə dair brokerlər\ntərəfindən xərc reyestrinə əlavə\nedilməsi və xərci təsdiq edən çek/qəbzlərin təqdimi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 630,
+      "y": 265,
+      "laneId": "lane-1785493739098",
+      "w": 270,
+      "h": 100,
+      "text": "Terminalların təqdim etdiyi elektron qaimə fakturalara əsasən xərclərin bağlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "",
+      "type": "pill",
+      "style": "stroke",
+      "x": 1050,
+      "y": 280,
+      "laneId": "lane-1785493739098",
+      "w": 70,
+      "h": 70,
+      "text": "",
+      "info": {
+        "general": [
+          ""
+        ]
+      },
+      "color": "#16a34a"
+    },
+    {
+      "id": ".",
+      "type": "pill",
+      "style": "stroke",
+      "x": 90,
+      "y": 101,
+      "laneId": "lane-1785493737005",
+      "w": 70,
+      "h": 70,
+      "text": "",
+      "info": {
+        "general": [
+          ""
+        ]
+      },
+      "color": "#16a34a"
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": "",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": ".",
+      "to": 1,
+      "s": "right",
+      "e": "left"
+    }
+  ],
+  "status": null
+}

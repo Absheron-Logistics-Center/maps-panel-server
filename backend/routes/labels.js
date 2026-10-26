@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getFile, putFile } from '../services/github.js';
+import { getFile, putFile } from '../services/store.js';
 
 const router = Router();
 const dataPath = () => (process.env.DATA_PATH || 'data').replace(/^\/|\/$/g, '');

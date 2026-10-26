@@ -10,6 +10,7 @@ import {
   clearAllRows,
   syncFromItem,
   backfillMissingFromIndex,
+  deleteHomeGroupByName,
   ALLOWED_STATUS,
   ALLOWED_STATUS_BY_KIND,
   EXTRA_FIELDS
@@ -103,6 +104,16 @@ router.put('/:kind/:id', requireAdmin, async (req, res, next) => {
   try {
     const row = await updateSheetRow(req.params.kind, req.params.id, req.body || {}, req.user);
     res.json(row);
+  } catch (e) { next(e); }
+});
+
+// Delete the Home group represented by a folder-only Sheets row.
+router.delete('/:kind/group', requireAdmin, async (req, res, next) => {
+  if (!SHEET_KINDS[req.params.kind]) return next();
+  try {
+    const name = String(req.body?.name || req.query?.name || '').trim();
+    if (!name) return res.status(400).json({ error: 'Qrup adı tələb olunur' });
+    res.json(await deleteHomeGroupByName(req.params.kind, name, req.user));
   } catch (e) { next(e); }
 });
 

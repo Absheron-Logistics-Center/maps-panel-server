@@ -1,0 +1,302 @@
+{
+  "id": 32,
+  "title": "Daxili anbar idarəetməsi prosesi",
+  "subtitle": "ALM-İMZ-PRD-PROC-002",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1785494445058",
+      "label": "Təchizat şöbəsi",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1785494448554",
+      "label": "Anbardar",
+      "y": 180,
+      "h": 260
+    },
+    {
+      "id": "lane-1785494453973",
+      "label": "Mühasibatlıq",
+      "y": 440,
+      "h": 160
+    },
+    {
+      "id": "lane-1785494514384",
+      "label": "Struktur vahidləri",
+      "y": 600,
+      "h": 350
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 70,
+      "laneId": "lane-1785494445058",
+      "w": 280,
+      "h": 80,
+      "text": "Satınalınan mal-materialın\nanbara tәhvili",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 105,
+      "y": 270,
+      "laneId": "lane-1785494448554",
+      "w": 310,
+      "h": 100,
+      "text": "Mal-materialın tәlәblәrә\nuyğunluğunun kontrolu vә\nanbara 1әbulu, 1C proqramına\nqeydiyyatı (anbara\nmәdaxil)+tәhvil-tәslim sәnәdi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 520,
+      "y": 270,
+      "laneId": "lane-1785494448554",
+      "w": 200,
+      "h": 80,
+      "text": "Uyğun olmayan\nmalların ayrı\nqruplaşdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 786,
+      "type": "rect",
+      "style": "solid",
+      "x": 450,
+      "y": 480,
+      "laneId": "lane-1785494453973",
+      "w": 240,
+      "h": 70,
+      "text": "Sәnәdlәrin\nqәbul edilmәsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 810,
+      "y": 212,
+      "laneId": "lane-1785494448554",
+      "w": 200,
+      "h": 100,
+      "text": "Mal-materialın anbardan mәxaric edilmәsi 1 C-dә qeydiyyat",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 470,
+      "y": 660,
+      "laneId": "lane-1785494514384",
+      "w": 200,
+      "h": 70,
+      "text": "Mal-materiala dair tәlәb",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.2",
+      "type": "rect",
+      "style": "solid",
+      "x": 790,
+      "y": 320,
+      "laneId": "lane-1785494448554",
+      "w": 200,
+      "h": 100,
+      "text": "Әsas vәsaitә İnventar\nnömrәsinin verilmәsi 1 Cdә\nqeydiyyat",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.3",
+      "type": "rect",
+      "style": "solid",
+      "x": 900,
+      "y": 510,
+      "laneId": "lane-1785494453973",
+      "w": 200,
+      "h": 70,
+      "text": "Mәlumatların 1 C-dә emalı",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "6.2",
+      "type": "rect",
+      "style": "solid",
+      "x": 780,
+      "y": 860,
+      "laneId": "lane-1785494514384",
+      "w": 200,
+      "h": 70,
+      "text": "Әsas vәsaitin istifadәyә qәbulu",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "6.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 1030,
+      "y": 640,
+      "laneId": "lane-1785494514384",
+      "w": 200,
+      "h": 70,
+      "text": "Mal-materialın istifadәyә qәbulu",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 1350,
+      "y": 280,
+      "laneId": "lane-1785494448554",
+      "w": 210,
+      "h": 80,
+      "text": "Әsas vәsaitin yerdәyişmәsi, silinmәsi/aktlaşdırma",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1670,
+      "y": 480,
+      "laneId": "lane-1785494453973",
+      "w": 200,
+      "h": 70,
+      "text": "Mәlumatların 1 C-dә emalı",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 2,
+      "to": 786,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 786,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": "5.1",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": "5.2",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "5.2",
+      "to": "5.3",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "5.2",
+      "to": "6.2",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "5.1",
+      "to": "6.1",
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": "5.1",
+      "to": "5.3",
+      "s": "right",
+      "e": "right"
+    },
+    {
+      "from": "6.2",
+      "to": 7,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "top"
+    }
+  ],
+  "status": null
+}

@@ -64,5 +64,6 @@ export {
   Hammer,
   RefreshCw,
   MessageCircleQuestion,
-  Ban
+  Ban,
+  ExternalLink
 } from 'lucide-react';

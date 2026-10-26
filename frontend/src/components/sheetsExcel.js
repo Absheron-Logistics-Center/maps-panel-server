@@ -8,9 +8,10 @@
 // Normativ Sənədlər / Şablonlar each have their own order + labels), so
 // this file has no hardcoded assumptions about which fields exist.
 //
-// Import is always ADDITIVE: parsed rows are handed back to the caller as
-// plain objects, which the page then creates one-by-one as new blank sheet
-// rows. Existing rows are never touched or removed.
+// Import only PARSES: rows are handed back to the caller as plain objects.
+// The page (SheetsPage.handleImportFile) then merges them by title +
+// struktur adı — matching rows are updated (incl. status), new ones added.
+// Rows are never removed.
 //
 // Export is styled to look like a normal Excel sheet (bold dark-blue
 // header with a blue underline, thin gridlines on every cell, white
@@ -166,8 +167,7 @@ export async function exportSheetToExcel({ fileTitle, sheetName, items, columns 
 // columns: [{ field, label, aliases: [...] }] in the same order as the
 // on-screen table for this kind.
 // Returns an array of plain row objects: { [field]: value, status? }.
-// ALWAYS one object per Excel data row (duplicates kept). Never merges/
-// replaces by matching text — caller creates new sheet rows for each.
+// One object per Excel data row (duplicates kept here — the caller merges).
 export async function importSheetRowsFromExcel(file, { columns, withStatus, statusKeyFromLabel }) {
   const buf = await file.arrayBuffer();
   const wb = XLSX.read(buf, { type: 'array', cellDates: true });

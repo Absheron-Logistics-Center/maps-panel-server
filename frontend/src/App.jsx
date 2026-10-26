@@ -11,6 +11,66 @@ import SheetsPage from './components/SheetsPage.jsx';
 import EditorBar from './components/EditorBar.jsx';
 import { LabelsProvider } from './labels/LabelsContext.jsx';
 
+// ---------------------------------------------------------------------
+// URL <-> view sync. The app has no router (views are just React state),
+// so the address bar used to never change while navigating. These two
+// helpers translate between a `view`/id and a real path, so every screen
+// gets its own URL, refresh keeps you on the same screen, and the
+// browser Back/Forward buttons work via the popstate listener below.
+// ---------------------------------------------------------------------
+// Path this app is actually served under. Empty for the normal
+// root-domain deploy (Vercel); e.g. "/maps-panel" when self-hosted
+// alongside other apps (see vite.config.js's VITE_BASE / server.js's
+// BASE_PATH). Vite bakes this in from VITE_BASE at build time. Every
+// pushed/parsed URL below is relative to this — it must stay in front
+// of the app's own routes rather than get replaced by them.
+const BASE = (import.meta.env.BASE_URL || '/').replace(/\/+$/, ''); // '' or e.g. '/maps-panel'
+
+function withBase(subPath) {
+  return BASE + subPath;
+}
+
+function stripBase(pathname) {
+  if (BASE && pathname.startsWith(BASE)) {
+    const rest = pathname.slice(BASE.length);
+    return rest === '' ? '/' : rest;
+  }
+  return pathname;
+}
+
+function pathForView(view, { processId, sheetsKind } = {}) {
+  if (view === 'diagram' && processId != null) return `/is-axislari/${processId}`;
+  if (view === 'sheets') {
+    if (sheetsKind === 'pdfs') return '/normativ-senedler/hesabat';
+    if (sheetsKind === 'templates') return '/sablonlar/hesabat';
+    return '/is-axislari/hesabat';
+  }
+  if (view === 'diagrams') return '/is-axislari';
+  if (view === 'pdfs') return '/normativ-senedler';
+  if (view === 'templates') return '/sablonlar';
+  if (view === 'hub') return '/hub';
+  return '/';
+}
+
+function viewFromPath(pathname) {
+  const parts = pathname.split('/').filter(Boolean);
+  if (parts.length === 0 || parts[0] === 'hub') return { view: 'hub' };
+  if (parts[0] === 'is-axislari') {
+    if (parts[1] === 'hesabat') return { view: 'sheets', sheetsKind: 'diagrams' };
+    if (parts[1]) return { view: 'diagram', processId: /^\d+$/.test(parts[1]) ? Number(parts[1]) : parts[1] };
+    return { view: 'diagrams' };
+  }
+  if (parts[0] === 'normativ-senedler') {
+    if (parts[1] === 'hesabat') return { view: 'sheets', sheetsKind: 'pdfs' };
+    return { view: 'pdfs' };
+  }
+  if (parts[0] === 'sablonlar') {
+    if (parts[1] === 'hesabat') return { view: 'sheets', sheetsKind: 'templates' };
+    return { view: 'templates' };
+  }
+  return null;
+}
+
 export default function App() {
   // views: 'login' | 'hub' | 'diagrams' | 'pdfs' | 'templates' | 'files' | 'diagram' | 'sheets'
   const [view, setView] = useState('login');
@@ -22,10 +82,18 @@ export default function App() {
   // on backToDiagrams — only replaced the next time a diagram is opened.
   const [lastOpenedProcessId, setLastOpenedProcessId] = useState(null);
   const [sheetsKind, setSheetsKind] = useState('diagrams'); // diagrams | pdfs | templates
+  // itemId to scroll to / highlight when landing back on the pdfs or
+  // templates list after opening it from a Sheets row (see openSheetItem).
+  const [pdfsFocusId, setPdfsFocusId] = useState(null);
+  const [templatesFocusId, setTemplatesFocusId] = useState(null);
   const [bootChecking, setBootChecking] = useState(true);
   // A diagram id parsed from a share link (?d=<id>&n=<nodeId>), pending until
   // the user is authenticated. Kept in a ref so it survives re-renders.
   const pendingShare = useRef(null);
+  // Set right before a popstate-driven state update so the URL-sync effect
+  // below doesn't push a brand new history entry for a navigation the
+  // browser Back/Forward button already produced.
+  const suppressPushRef = useRef(false);
 
   // Read the share-link params once, and strip them from the URL so a refresh
   // doesn't keep forcing the same diagram open.
@@ -48,6 +116,23 @@ export default function App() {
     return true;
   }
 
+  // Restore whatever screen the address bar points to (deep link / page
+  // refresh) instead of always dropping the user back on the hub.
+  function restoreFromUrl() {
+    const parsed = viewFromPath(stripBase(window.location.pathname));
+    if (!parsed) { setView('hub'); return; }
+    if (parsed.view === 'diagram') {
+      setProcessId(parsed.processId);
+      setLastOpenedProcessId(parsed.processId);
+      setView('diagram');
+    } else if (parsed.view === 'sheets') {
+      setSheetsKind(parsed.sheetsKind || 'diagrams');
+      setView('sheets');
+    } else {
+      setView(parsed.view);
+    }
+  }
+
   useEffect(() => {
     (async () => {
       const token = getToken();
@@ -60,7 +145,7 @@ export default function App() {
         setUser(me);
         localStorage.setItem('role', me.role);
         localStorage.setItem('username', me.username);
-        if (!consumeShare()) setView('hub');
+        if (!consumeShare()) restoreFromUrl();
       } catch (e) {
         console.error(e);
         setToken(null);
@@ -73,11 +158,35 @@ export default function App() {
     // eslint-disable-next-line
   }, []);
 
+  // Keep the address bar in sync with the current screen. Runs after every
+  // navigation; skipped once right after a popstate-driven update, since
+  // the browser already changed the URL for us in that case.
+  useEffect(() => {
+    if (bootChecking || view === 'login') return;
+    if (suppressPushRef.current) { suppressPushRef.current = false; return; }
+    const path = withBase(pathForView(view, { processId, sheetsKind }));
+    if (window.location.pathname !== path) {
+      try { window.history.pushState({}, '', path + window.location.search); } catch (e) { }
+    }
+  }, [view, processId, sheetsKind, bootChecking]);
+
+  // Browser Back/Forward support.
+  useEffect(() => {
+    function onPopState() {
+      if (!user) return;
+      suppressPushRef.current = true;
+      restoreFromUrl();
+    }
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
   function onLogin(data) {
     setUser(data);
     localStorage.setItem('role', data.role);
     localStorage.setItem('username', data.username);
-    if (!consumeShare()) setView('hub');
+    if (!consumeShare()) restoreFromUrl();
   }
 
   function onLogout() {
@@ -87,6 +196,7 @@ export default function App() {
     setUser(null);
     setProcessId(null);
     setView('login');
+    try { window.history.pushState({}, '', withBase('/')); } catch (e) { }
   }
 
   function pickSection(key) {
@@ -117,6 +227,22 @@ export default function App() {
     if (sheetsKind === 'pdfs') setView('pdfs');
     else if (sheetsKind === 'templates') setView('templates');
     else setView('diagrams');
+  }
+
+  // Open the real item (diagram / pdf / template) a Sheets row is linked
+  // to — the "open" button next to the trash can on the sheets table.
+  function openSheetItem(kind, row) {
+    const itemId = row?.itemId ?? row?.processId;
+    if (itemId == null) return;
+    if (kind === 'diagrams') {
+      openProcess(itemId);
+    } else if (kind === 'pdfs') {
+      setPdfsFocusId(itemId);
+      setView('pdfs');
+    } else if (kind === 'templates') {
+      setTemplatesFocusId(itemId);
+      setView('templates');
+    }
   }
 
   function backToHub() {
@@ -157,6 +283,7 @@ export default function App() {
           withStatus={sheetsKind !== 'templates'}
           onBack={backFromSheets}
           onLogout={onLogout}
+          onOpenItem={openSheetItem}
         />
       );
     }
@@ -167,6 +294,7 @@ export default function App() {
           onBack={backToHub}
           onLogout={onLogout}
           onOpenSheets={() => openSheets('pdfs')}
+          focusItemId={pdfsFocusId}
         />
       );
     }
@@ -177,6 +305,7 @@ export default function App() {
           onBack={backToHub}
           onLogout={onLogout}
           onOpenSheets={() => openSheets('templates')}
+          focusItemId={templatesFocusId}
         />
       );
     }

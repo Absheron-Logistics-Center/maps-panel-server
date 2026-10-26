@@ -137,6 +137,8 @@ export const api = {
 // mode we're in; components that render an upload button should check this
 // (via the useUploadsEnabled hook below) and hide/disable it when false.
 export let uploadsEnabled = true;
+// Max upload size reported by the backend (3MB on Vercel, 20MB on the server).
+export let maxUploadBytes = 20 * 1024 * 1024;
 export const uploadsEnabledReady = api.getHealth()
-  .then((h) => { uploadsEnabled = h?.uploadsEnabled !== false; return uploadsEnabled; })
+  .then((h) => { uploadsEnabled = h?.uploadsEnabled !== false; if (h?.maxUploadBytes) maxUploadBytes = h.maxUploadBytes; return uploadsEnabled; })
   .catch(() => true); // if health check fails for some other reason, don't block uploads on that

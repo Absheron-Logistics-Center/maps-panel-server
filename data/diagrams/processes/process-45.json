@@ -1,0 +1,437 @@
+{
+  "id": 45,
+  "title": "Çindən gələn Ələt yüklərinin emalı və Tranzit əməliyyatlarının həyata keçirilməsi üzrə iş axını",
+  "subtitle": "",
+  "width": 2200,
+  "height": 960,
+  "lanes": [
+    {
+      "id": "lane-1789725681533",
+      "label": "VPD",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1789725700764",
+      "label": "MB Broker",
+      "y": 180,
+      "h": 240
+    },
+    {
+      "id": "lane-1789725720003",
+      "label": "BDD",
+      "y": 420,
+      "h": 370
+    },
+    {
+      "id": "lane-1789725743387",
+      "label": "Müştəri",
+      "y": 790,
+      "h": 190
+    },
+    {
+      "id": "lane-1789725759964",
+      "label": "SƏO",
+      "y": 980,
+      "h": 220
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 100,
+      "y": 25,
+      "laneId": "lane-1789725681533",
+      "w": 200,
+      "h": 120,
+      "text": " Konteynerin terminala daxil \nolması və VPD-də qeydiyyata \ndüşməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 420,
+      "y": 35,
+      "laneId": "lane-1789725681533",
+      "w": 200,
+      "h": 100,
+      "text": " VPD tərəfindən \ngündəlik hesabatın \ntərtibi və rəhbərliyə \ngöndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "6.1",
+      "type": "rect",
+      "style": "stroke",
+      "x": 820,
+      "y": 50,
+      "laneId": "lane-1789725681533",
+      "w": 200,
+      "h": 80,
+      "text": " VPD tərəfindən \nİnvoyslamanın həyata \nkeçirilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "stroke",
+      "x": 100,
+      "y": 230,
+      "laneId": "lane-1789725700764",
+      "w": 200,
+      "h": 100,
+      "text": "Koordinator (Günay M.) tərəfindən \nsənədlərinn qəbulu və  emalı.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "stroke",
+      "x": 100,
+      "y": 450,
+      "laneId": "lane-1789725720003",
+      "w": 200,
+      "h": 80,
+      "text": "Sənədlərə baxış \n(ALŞ-R.Rza +BDD-Ə.Tural)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "",
+      "type": "document",
+      "style": "stroke",
+      "x": 420,
+      "y": 205,
+      "laneId": "lane-1789725700764",
+      "w": 200,
+      "h": 150,
+      "text": "BDD, MB Broker və ALŞ (Rza) ilə \nemal prosesinin sürətli təşkili ilə \nbağlı Whatsapp qrupunun \nyaradılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": " ",
+      "type": "document",
+      "style": "stroke",
+      "x": 100,
+      "y": 590,
+      "laneId": "lane-1789725720003",
+      "w": 200,
+      "h": 140,
+      "text": "SƏO, Tırpark, MB Broker-lə işlərin \nkoordinasiyalı aparılması üçün \nWhatsapp qrupunun yaradılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "stroke",
+      "x": 420,
+      "y": 440,
+      "laneId": "lane-1789725720003",
+      "w": 200,
+      "h": 100,
+      "text": "Müştəri ilə ilkin əlaqənin \nyaradılması üçün işin \nkoordinatora ötürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "stroke",
+      "x": 420,
+      "y": 850,
+      "laneId": "lane-1789725743387",
+      "w": 200,
+      "h": 80,
+      "text": "Koordinator tərəfindən \nyükün emalı prosesinin \nrazılaşdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "stroke",
+      "x": 420,
+      "y": 1045,
+      "laneId": "lane-1789725759964",
+      "w": 200,
+      "h": 120,
+      "text": " Yükaşırma əməliyyatı üçün \nnəqliyyat vasitəsinin Tırparkdan \nçağrışa verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "stroke",
+      "x": 820,
+      "y": 450,
+      "laneId": "lane-1789725720003",
+      "w": 200,
+      "h": 100,
+      "text": "Tarif setkasının təqdim edilməsi \nvə müqavilənin bağlanılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "stroke",
+      "x": 820,
+      "y": 850,
+      "laneId": "lane-1789725743387",
+      "w": 200,
+      "h": 80,
+      "text": "Müştəri tərəfindən \nödənişin həyata keçirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "stroke",
+      "x": 810,
+      "y": 1065,
+      "laneId": "lane-1789725759964",
+      "w": 200,
+      "h": 80,
+      "text": "Yükaşırma əməliyyatının icrası\n(D2D  və ya Reloading)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1190,
+      "y": 820,
+      "laneId": "lane-1789725743387",
+      "w": 200,
+      "h": 140,
+      "text": " Nəqliyyat vasitəsi barəsində \nməlumatların təqdim edilməsi \n(Whatsapp və ya e-mail üzərindən) ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1200,
+      "y": 1030,
+      "laneId": "lane-1789725759964",
+      "w": 200,
+      "h": 150,
+      "text": "Tələb əsasında yükaşırma \nprosesi ilə bağlı foto və ya \nvideoların BDD-yə təqdim edilməsi \n(Whatsapp vasitəsi ilə)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "12.1",
+      "type": "rect",
+      "style": "stroke",
+      "x": 1530,
+      "y": 630,
+      "laneId": "lane-1789725720003",
+      "w": 200,
+      "h": 140,
+      "text": " Koordinator tərəfindən \nyükaşırmanın yekunlaşması \nbarəsində müştəriyə məlumatın \nverilməsi. ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "12.2",
+      "type": "rect",
+      "style": "stroke",
+      "x": 1530,
+      "y": 480,
+      "laneId": "lane-1789725720003",
+      "w": 200,
+      "h": 100,
+      "text": "Tələb edilərsə video və ya \nfotoların müştəriyə göndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": "pill",
+      "style": "solid",
+      "x": 1530,
+      "y": 240,
+      "laneId": "lane-1789725700764",
+      "w": 200,
+      "h": 160,
+      "text": "Yükün gömrük buraxılışının həyata \nkeçirilməsi üçün MB Broker və ya ALŞ \n(R.Rza) tərəfindən köməklik göstərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 3,
+      "to": " ",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 2,
+      "to": "",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": 1,
+      "to": "1.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": "6.1",
+      "s": "top",
+      "e": "bottom",
+      "dashed": true
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 11,
+      "to": "12.1",
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": "12.1",
+      "to": "12.2",
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": "12.2",
+      "to": 13,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+    }
+  ],
+  "status": null
+}

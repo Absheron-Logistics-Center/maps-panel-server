@@ -1,0 +1,729 @@
+{
+  "id": 39,
+  "title": "Ekspedisiya xidmətlərin göstərilməsi çərçivəsində idxal və tranzit əməliyyatlarına dair daxil olmuş müştəri sorğularının emalı və icrasına dair iş axını",
+  "subtitle": "",
+  "width": 2200,
+  "height": 1900,
+  "lanes": [
+    {
+      "id": "lane-1788856073670",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 200
+    },
+    {
+      "id": "lane-1788856622366",
+      "label": "Marketinq və kommunikasiya departamenti",
+      "y": 220,
+      "h": 162
+    },
+    {
+      "id": "lane-1788857211735",
+      "label": "Digər struktur vahidi",
+      "y": 382,
+      "h": 172
+    },
+    {
+      "id": "lane-1788857839455",
+      "label": "Əməliyyat şöbəsi",
+      "y": 554,
+      "h": 185
+    },
+    {
+      "id": "lane-1788862116666",
+      "label": "Logistika şöbəsi",
+      "y": 739,
+      "h": 241
+    },
+    {
+      "id": "lane-1788865235918",
+      "label": "Direktor",
+      "y": 980,
+      "h": 160
+    },
+    {
+      "id": "lane-1788865651231",
+      "label": "Subpodratçı",
+      "y": 1140,
+      "h": 170
+    },
+    {
+      "id": "lane-1788866516530",
+      "label": " Hüquq departamenti",
+      "y": 1310,
+      "h": 160
+    },
+    {
+      "id": "lane-1788866563793",
+      "label": "Mühasibatlıq şöbəsi",
+      "y": 1470,
+      "h": 180
+    },
+    {
+      "id": "lane-1788867025593",
+      "label": "Baş mühasib",
+      "y": 1650,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": "1.1",
+      "type": "pill",
+      "style": "solid",
+      "x": 80,
+      "y": 50,
+      "laneId": "lane-1788856073670",
+      "w": 260,
+      "h": 100,
+      "text": "\nSorğunun Cəmiyyətin rəsmi \nkommunikasiya vasitələr \nüzərindən yaradılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.2",
+      "type": "pill",
+      "style": "solid",
+      "x": 430,
+      "y": 50,
+      "laneId": "lane-1788856073670",
+      "w": 270,
+      "h": 90,
+      "text": "Sorğunun Səhmdar Cəmiyyətinin \nstruktur vahidlərinə müraciət \nedilməklə formalaşdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.3",
+      "type": "pill",
+      "style": "solid",
+      "x": 850,
+      "y": 50,
+      "laneId": "lane-1788856073670",
+      "w": 220,
+      "h": 100,
+      "text": "Sorğunu Cəmiyyətə müraciət \nedilməklə formalaşdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 1210,
+      "y": 65,
+      "laneId": "lane-1788856073670",
+      "w": 200,
+      "h": 80,
+      "text": "Zəruri məlumatların təqdim \nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "2.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 105,
+      "y": 252,
+      "laneId": "lane-1788856622366",
+      "w": 220,
+      "h": 110,
+      "text": "Sorğunun emal edilməsi və \nəməliyyat zərurəti yarandıqda \naidiyyəti üzrə ötürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "2.2",
+      "type": "rect",
+      "style": "solid",
+      "x": 105,
+      "y": 414,
+      "laneId": "lane-1788857211735",
+      "w": 210,
+      "h": 120,
+      "text": "Sorğunun emal edilməsi və \nəməliyyat zərurəti yarandıqda \naidiyyəti üzrə ötürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "type": "diamond",
+      "style": "solid",
+      "x": 1500,
+      "y": 50,
+      "laneId": "lane-1788856073670",
+      "w": 110,
+      "h": 150,
+      "text": "Təklif üzrə \nqərar verir",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "type": "rect",
+      "style": "solid",
+      "x": 1770,
+      "y": 80,
+      "laneId": "lane-1788856073670",
+      "w": 200,
+      "h": 70,
+      "text": "Hesab-faktura əsasında \nödənişin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "type": "rect",
+      "style": "solid",
+      "x": 2090,
+      "y": 65,
+      "laneId": "lane-1788856073670",
+      "w": 240,
+      "h": 100,
+      "text": "SMGS yük qaiməsinin tərtib \nedilməsi üçün instruksiya sənədinin \nyük göndərənə göndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 30,
+      "type": "pill",
+      "style": "solid",
+      "x": 2450,
+      "y": 65,
+      "laneId": "lane-1788856073670",
+      "w": 200,
+      "h": 100,
+      "text": "Möhürlənmiş SMGS yük qaiməsinin \nƏməliyyat şöbəsinə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 584,
+      "laneId": "lane-1788857839455",
+      "w": 200,
+      "h": 80,
+      "text": "Sorğunun qəbul edilməsi və \nemalı",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 440,
+      "y": 584,
+      "laneId": "lane-1788857839455",
+      "w": 200,
+      "h": 80,
+      "text": "Yükə dair zəruri məlumatların \ntələb edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "type": "rect",
+      "style": "solid",
+      "x": 810,
+      "y": 564,
+      "laneId": "lane-1788857839455",
+      "w": 350,
+      "h": 120,
+      "text": "Müştəri sorğusuna əsasən \nproqramda sifarişin yaradılması və \nmüştəriyə təqdim ediləcək ödəniş \nsənədlərinin hazırlanması üçün \nsifarişin təsdiqə göndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "type": "rect",
+      "style": "solid",
+      "x": 1240,
+      "y": 564,
+      "laneId": "lane-1788857839455",
+      "w": 200,
+      "h": 140,
+      "text": "Ödəniş sənədlərinin hazırlanması \nüçün e-poçt vasitəsilə \nMühasibatlıq şöbəsinə müraciətin \nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "type": "rect",
+      "style": "solid",
+      "x": 1580,
+      "y": 584,
+      "laneId": "lane-1788857839455",
+      "w": 200,
+      "h": 80,
+      "text": "Hesab-fakturanın \nmüştəriyə təqdim edilməs",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "type": "rect",
+      "style": "solid",
+      "x": 1980,
+      "y": 564,
+      "laneId": "lane-1788857839455",
+      "w": 200,
+      "h": 120,
+      "text": "Podkodların əldə edilməsi məqsədilə \n“ADY Express”in əməliyyat proqramında \nsifarişin yaradılmas",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "type": "rect",
+      "style": "solid",
+      "x": 2370,
+      "y": 599,
+      "laneId": "lane-1788857839455",
+      "w": 200,
+      "h": 70,
+      "text": "Podkodların əldə edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "C.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 2730,
+      "y": 564,
+      "laneId": "lane-1788857839455",
+      "w": 200,
+      "h": 140,
+      "text": "Müştəriyə vaqon ayrılması \nnəzərdə tutulduqda, vaqon \nsahib(lər)inə sorğunun \ngöndərilməs",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "30 ",
+      "type": "pill",
+      "style": "solid",
+      "x": 3290,
+      "y": 559,
+      "laneId": "lane-1788857839455",
+      "w": 200,
+      "h": 160,
+      "text": "Yükün təyinat ünvanına qədər daşınma prosesinin izlənilməsi və \naidiyyəti tərəflərlə koordinasiyanın \ntəşkili\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "diamond",
+      "style": "solid",
+      "x": 125,
+      "y": 743,
+      "laneId": "lane-1788862116666",
+      "w": 150,
+      "h": 150,
+      "text": "Təklifin \nhazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 460,
+      "y": 768,
+      "laneId": "lane-1788862116666",
+      "w": 200,
+      "h": 100,
+      "text": "Subpodratçının seçilməsi \nvə sorğunun göndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 830,
+      "y": 768,
+      "laneId": "lane-1788862116666",
+      "w": 200,
+      "h": 100,
+      "text": "Təkliflərin müqayisəli cədvəlinin \ntərtibi və uyğun təklifin seçilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1240,
+      "y": 758,
+      "laneId": "lane-1788862116666",
+      "w": 200,
+      "h": 120,
+      "text": "Sorğunun icrasına dair xərclərin \nhesablanması və maya dəyərinin \nformalaşdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1590,
+      "y": 748,
+      "laneId": "lane-1788862116666",
+      "w": 260,
+      "h": 120,
+      "text": "İmtinanın səbəblərini müştəridən \ndəqiqləşdirilməsi, mümkün olduqda \nalternativ təklifin hazırlanmas",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "style": "solid",
+      "x": 1990,
+      "y": 748,
+      "laneId": "lane-1788862116666",
+      "w": 200,
+      "h": 140,
+      "text": "Müştəri tələbləri əsasında qiymət \ntəklifinin formalaşdırılması və rəsmi \nşəkildə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "14.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 2350,
+      "y": 768,
+      "laneId": "lane-1788862116666",
+      "w": 260,
+      "h": 100,
+      "text": "İmtinanın səbəblərini müştəridən \ndəqiqləşdirilməsi, mümkün olduqda \nalternativ təklifin hazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "A.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 2780,
+      "y": 768,
+      "laneId": "lane-1788862116666",
+      "w": 210,
+      "h": 100,
+      "text": "Münasibətlərin \nrəsmiləşdirilməsi \nməqsədilə \nmüraciətin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "type": "rect",
+      "style": "solid",
+      "x": 3120,
+      "y": 778,
+      "laneId": "lane-1788862116666",
+      "w": 200,
+      "h": 80,
+      "text": "Sorğunun icra üçün \nƏməliyyat şöbəsinə \nyönəldirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "solid",
+      "x": 110,
+      "y": 1020,
+      "laneId": "lane-1788865235918",
+      "w": 200,
+      "h": 80,
+      "text": "Mənfəət dərəcəsinin müəyyən \nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "type": "rect",
+      "style": "solid",
+      "x": 465,
+      "y": 1020,
+      "laneId": "lane-1788865235918",
+      "w": 200,
+      "h": 80,
+      "text": "Hesab-fakturanın \nyoxlanılması və təsdiq \nediməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 1210,
+      "laneId": "lane-1788865651231",
+      "w": 200,
+      "h": 80,
+      "text": "Təklifin hazırlanması və təqdim \nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "A.2",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 110,
+      "y": 1370,
+      "laneId": "lane-1788866516530",
+      "w": 380,
+      "h": 80,
+      "text": "Müştəri ilə münasibətlərin rəsmiləşdirdilməsi və \nbağlanmış müqavilə əsasında “UDPAS” \nproqramında müştəri profilinin formalaşdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 1510,
+      "laneId": "lane-1788866563793",
+      "w": 200,
+      "h": 120,
+      "text": "Daxil olan müraciətin \nproqramdakı sifarişlə uyğunluğun \nyoxlanılması və təsdiq edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "type": "rect",
+      "style": "solid",
+      "x": 470,
+      "y": 1530,
+      "laneId": "lane-1788866563793",
+      "w": 200,
+      "h": 80,
+      "text": "Hesab-fakturanın tərtib \nedilməsi və təsdiqə \ngöndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "type": "rect",
+      "style": "solid",
+      "x": 850,
+      "y": 1530,
+      "laneId": "lane-1788866563793",
+      "w": 200,
+      "h": 100,
+      "text": "Hesab-fakturanın \nCəmiyyətin direktoruna \ntəsdiq üçün təqdim \nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "23.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1240,
+      "y": 1530,
+      "laneId": "lane-1788866563793",
+      "w": 200,
+      "h": 100,
+      "text": "Müştəri rezident olduqda, elektron \nqaimə-fakturanın \ntərtib ediməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "type": "rect",
+      "style": "solid",
+      "x": 465,
+      "y": 1700,
+      "laneId": "lane-1788867025593",
+      "w": 200,
+      "h": 80,
+      "text": "Hesab-fakturanın \nyoxlanılması və təsdiq \nediməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 28,
+      "type": "rect",
+      "style": "solid",
+      "x": 3010,
+      "y": 574,
+      "laneId": "lane-1788857839455",
+      "w": 200,
+      "h": 100,
+      "text": "İnstruksiya sənədin \nformalaşdırılması və \nmüştəriyə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "type": "rect",
+      "style": "solid",
+      "x": 3440,
+      "y": 783,
+      "laneId": "lane-1788862116666",
+      "w": 200,
+      "h": 80,
+      "text": "Sifarişin yoxlanılması və təsdiq \nedilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "B.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 3770,
+      "y": 790,
+      "laneId": "lane-1788862116666",
+      "w": 330,
+      "h": 100,
+      "text": "Yüklərin digər ölkələrin üzərindən daşınması \nnəzərdə tutulduqda, həmin ölkələrdə \nfəaliyyət göstərən subpodratçıya müraciətin \nedilməsi və podkodun əldə edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 31,
+      "type": "rect",
+      "style": "solid",
+      "x": 4170,
+      "y": 790,
+      "laneId": "lane-1788862116666",
+      "w": 290,
+      "h": 170,
+      "text": "SMGS yük qaiməsinin proqramda qeydiyyata \nalınması. Həmçinin B.1 və (və ya) C.1 \nbəndlərində nəzərdə tutulan proseslər baş \nverdikdə, SMGS yük qaiməsinin aidiyyəti \nüzrə yönləndirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [],
+  "status": "done"
+}

@@ -51,6 +51,19 @@ function normPid(g) {
     : Number(g.parentId);
 }
 
+// A group and every ancestor above it, so a nested folder can be opened
+// along with all the folders containing it.
+function ancestorGroupIds(groupId, gs) {
+  const ids = [];
+  let cur = gs.find(g => Number(g.id) === Number(groupId));
+  while (cur) {
+    ids.push(cur.id);
+    const pid = normPid(cur);
+    cur = pid != null ? gs.find(g => Number(g.id) === pid) : null;
+  }
+  return ids;
+}
+
 export default function PdfList({
   onBack,
   onLogout,
@@ -60,6 +73,7 @@ export default function PdfList({
   pageTitleDefault = 'Normativ Sənədlər',
   withStatus = true,
   sheetsKind = 'pdfs',
+  focusItemId = null,
 }) {
   const { t, tByText, rawByText, LabelPen } = useLabels();
   const [now, setNow] = useState(new Date());
@@ -79,6 +93,10 @@ export default function PdfList({
   const [pendingArchive, setPendingArchive] = useState(null); // pdf id awaiting confirm
   const [sheetOptions, setSheetOptions] = useState([]);
   const searchInputRef = useRef(null);
+  // ---- restoring position when opened from a Sheets row ----
+  const itemRefs = useRef({});          // pdfId -> row DOM node
+  const [highlightId, setHighlightId] = useState(null);
+  const restoredForRef = useRef(null);  // last focusItemId we already handled
 
   // ---- staged (unsaved) folder edits ----
   // Folder create/rename/move/delete/reorder are applied to local state only.
@@ -139,6 +157,32 @@ export default function PdfList({
   useEffect(() => { load(); }, []);
   useEffect(() => { api.getSettings().then(setSettings).catch(() => setSettings({})); }, []);
   useEffect(() => { if (searchOpen) searchInputRef.current?.focus(); }, [searchOpen]);
+
+  // Restore position for the item opened from a Sheets row: open its
+  // folder chain, scroll it into view, and highlight it for a couple
+  // seconds so it's easy to spot again.
+  useEffect(() => {
+    if (loading || focusItemId == null) return;
+    if (restoredForRef.current === focusItemId) return;
+    const item = pdfs.find(p => String(p.id) === String(focusItemId));
+    if (!item) return;
+    restoredForRef.current = focusItemId;
+
+    const chain = ancestorGroupIds(item.groupId, groups);
+    if (chain.length) {
+      setExpanded(prev => {
+        const o = { ...prev };
+        chain.forEach(id => { o[id] = true; });
+        return o;
+      });
+    }
+    setHighlightId(item.id);
+    const raf = requestAnimationFrame(() => {
+      itemRefs.current[item.id]?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    });
+    const timer = setTimeout(() => setHighlightId(null), 2000);
+    return () => { cancelAnimationFrame(raf); clearTimeout(timer); };
+  }, [loading, focusItemId, pdfs, groups]);
 
   async function saveSettings(patch) {
     const next = await api.updateSettings(patch);
@@ -665,7 +709,8 @@ export default function PdfList({
               return (
                 <div
                   key={p.id}
-                  className={`process-item pdf-item ${isItemOver ? 'drag-over' : ''}`}
+                  ref={(el) => { itemRefs.current[p.id] = el; }}
+                  className={`process-item pdf-item ${isItemOver ? 'drag-over' : ''} ${highlightId === p.id ? 'just-opened' : ''}`}
                   draggable={dndOn}
                   onDragStart={e => onItemDragStart(e, g.id, p.id)}
                   onDragOver={e => onItemDragOver(e, g.id, p.id)}
