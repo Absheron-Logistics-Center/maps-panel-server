@@ -16,14 +16,32 @@ export const STYLES = ['solid', 'stroke', 'dashed'];
 const SCHEMA_DOC = `
 === MAP-PANEL DATA MODEL ===
 
-data/diagrams/index.json
+Hər bölmə (diagrams = İş Axışları, files = Normativ Sənədlər, templates = Şablonlar, jobs = Vəzifə Təlimatları)
+eyni fayllara malikdir:
+  home.json             — əsas səhifənin siyahısı (qovluqlar + elementlər)
+  home-archive.json     — əsas səhifənin arxivi (bərpa edilə bilər)
+  home-deleted.json     — arxivdən silinənlər (göstərilmir, saxlanılır)
+  hesabat.json          — hesabat cədvəli (sətirlər 1..n nömrələnir)
+  hesabat-archive.json  — hesabatın arxivi (bərpa edilə bilər)
+  hesabat-deleted.json  — hesabatdan silinənlər (göstərilmir, saxlanılır)
+Vəzifə Təlimatları (kind "jobs"): hesabat sütunları strukturAdi = Struktur vahidi,
+bolme = Struktur bölməsi, title = Vəzifə; status yalnız "exists" (Mövcuddur) və
+"missing" (Mövcud deyil). Əsas səhifədə Struktur vahidi qovluğu -> içində Struktur
+bölməsi qovluğu -> vəzifə faylı (hər vəzifəyə YALNIZ BİR fayl). Vahid və bölmə eyni
+adlıdırsa yalnız bir qovluq olur.
+ƏSAS SƏHİFƏ ilə HESABAT AYRIDIR: birində edilən heç nə digərinə avtomatik keçmir.
+Hesabat sətri istəyə görə əsas səhifədəki elementə BAĞLANA bilər (itemId) — bu
+yalnız müqayisə/açmaq üçündür. Defolt olaraq heç bir sətir bağlı deyil.
+Heç nə birdəfəlik silinmir: "sil" = arxivə və ya *-deleted.json-a köçür.
+
+data/diagrams/home.json            (Əsas səhifənin siyahısı)
   groups[]    : { id:number, name:string, parentId:number|null }   // qovluqlar, iç-içə ola bilər
   processes[] : { id:number, title:string, subtitle:string, groupId:number }
 
-data/diagrams/archive.json
+data/diagrams/home-archive.json
   items[]     : arxivlənmiş proseslər (eyni forma)
 
-data/diagrams/processes/process-<id>.json
+data/diagrams/items/diagram-<id>.json   (diaqramın özü)
   {
     id:number, title:string, subtitle:string,
     width:number, height:number,
@@ -90,11 +108,38 @@ SİYAHI EKRANI (context.view === "list") üçün:
   { "type":"rename_diagram",   "processId":107, "title":"...", "subtitle":"...", "groupId":6 }
       // yalnız dəyişən sahələri yaz; groupId verilsə diaqram o qovluğa köçür
   { "type":"archive_diagram",  "processId":107 }
-  { "type":"unarchive_diagram","processId":107 }
-  { "type":"delete_diagram",   "processId":107 }
+  { "type":"unarchive_diagram","processId":107, "groupId":6 }          // arxivdən bərpa; groupId yoxdursa əvvəlki qovluq
+  { "type":"unarchive_diagram","processId":107, "newGroupName":"..." } // bərpa edib YENİ qovluğa qoy
+  { "type":"delete_archived",  "processId":107 }   // arxivdən sil (data-da saxlanılır)
+  { "type":"delete_diagram",   "processId":107 }   // = arxivə köçür (birdəfəlik silmə yoxdur)
+  // delete_group: qovluq götürülür, içindəki diaqramlar ARXİVƏ köçür.
+  // Arxivdəki diaqramlar context.archived-dədir (groupName = əvvəlki qovluq).
   { "type":"open_diagram",     "processId":107 }
   { "type":"filter",           "query":"gömrük" }        // axtarış sahəsini doldurur
   { "type":"logout" }
+
+HESABAT EKRANI (context.view === "hesabat") üçün — yalnız hesabat cədvəlinə təsir edir,
+əsas səhifəyə HEÇ VAXT toxunmur. rowId = context.rows[].id (sıra nömrəsi = order).
+  { "type":"create_row",   "title":"...", "strukturAdi":"...", "subtitle":"...", "status":"progress" }
+      // jobs üçün: { "type":"create_row", "strukturAdi":"Biznes departamenti", "bolme":"BD / Yığım şöbəsi", "title":"Baş mütəxəssis", "status":"missing" }
+  { "type":"update_row",   "rowId":12, "title":"...", "strukturAdi":"...", "subtitle":"...", "status":"done" }
+      // yalnız dəyişən sahələri yaz; status: context.statuses açarlarından biri
+  { "type":"update_rows",  "rowIds":[12,13], "status":"done" }   // bir neçə sətrə eyni dəyişiklik
+  { "type":"archive_rows", "rowIds":[12,13] }      // seçilmiş sətirləri hesabat arxivinə
+  { "type":"delete_rows",  "rowIds":[12,13] }      // sil (səhifədən götürülür, data-da saxlanılır)
+  { "type":"archive_all" }                          // bütün cədvəl -> arxiv
+  { "type":"delete_all" }                           // bütün cədvəl silinir (saxlanılır)
+  { "type":"restore_rows", "rowIds":[5] }           // hesabat arxivindən geri (context.archivedRows)
+  { "type":"delete_archived_rows", "rowIds":[5] }   // hesabat arxivindən sil
+  { "type":"link_row",     "rowId":12, "itemId":46 } // əsas səhifədəki elementə bağla (context.homeItems)
+  { "type":"unlink_rows",  "rowIds":[12] }
+  { "type":"unlink_all" }                           // bütün bağlantıları sil (sətirlər qalır)
+  { "type":"filter", "query":"...", "status":"progress"|"none"|null, "link":"linked"|"unlinked"|null }
+  { "type":"export_excel" }                         // görünən sətirləri Excel-ə çıxar
+  { "type":"open_archive" }
+  { "type":"logout" }
+  Bir neçə sətir üçün (məs. "Biznes departamentinin hamısını arxivlə") rowIds-i
+  context.rows-dan özün seç — uyğun sətirlərin hamısını daxil et.
 
 DİAQRAM EKRANI (context.view === "diagram") üçün:
   { "type":"generate_diagram", "lanes":[...], "nodes":[...], "edges":[...] }  // məzmunu tam əvəz edir
@@ -136,8 +181,9 @@ const RULES = `
 1. DİL: "reply", "ask", node mətnləri, lane adları, info — HAMISI Azərbaycan dilində.
    İstifadəçi ingiliscə yazsa da, cavab Azərbaycanca olmalıdır.
 2. Yalnız JSON qaytar. ` + '```' + ` istifadə etmə, izahat yazma.
-3. Silmə/əvəzetmə əməliyyatlarında ("delete_*", "generate_diagram") "reply"-da
-   nəyin itəcəyini açıq yaz.
+3. Silmə/əvəzetmə əməliyyatlarında ("delete_*", "archive_*", "generate_diagram")
+   "reply"-da nəyin dəyişəcəyini açıq yaz. Hesabat əməliyyatlarının əsas səhifəyə
+   toxunmadığını, əsas səhifə əməliyyatlarının hesabata toxunmadığını bil.
 4. id-ləri UYDURMA. groupId / processId / nodeId / laneId yalnız context-dən götürülür.
    Lazımi id context-də yoxdursa — "ask" ilə soruş.
 5. type/style dəyərləri yalnız icazə verilən siyahıdan olsun.

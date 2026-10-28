@@ -7,6 +7,7 @@ import Home from './components/Home.jsx';
 import Diagram from './components/Diagram.jsx';
 import PdfList from './components/pdfs/PdfList.jsx';
 import TemplateList from './components/pdfs/TemplateList.jsx';
+import JobList from './components/pdfs/JobList.jsx';
 import SheetsPage from './components/SheetsPage.jsx';
 import EditorBar from './components/EditorBar.jsx';
 import { LabelsProvider } from './labels/LabelsContext.jsx';
@@ -43,11 +44,13 @@ function pathForView(view, { processId, sheetsKind } = {}) {
   if (view === 'sheets') {
     if (sheetsKind === 'pdfs') return '/normativ-senedler/hesabat';
     if (sheetsKind === 'templates') return '/sablonlar/hesabat';
+    if (sheetsKind === 'jobs') return '/vezife-telimatlari/hesabat';
     return '/is-axislari/hesabat';
   }
   if (view === 'diagrams') return '/is-axislari';
   if (view === 'pdfs') return '/normativ-senedler';
   if (view === 'templates') return '/sablonlar';
+  if (view === 'jobs') return '/vezife-telimatlari';
   if (view === 'hub') return '/hub';
   return '/';
 }
@@ -63,6 +66,10 @@ function viewFromPath(pathname) {
   if (parts[0] === 'normativ-senedler') {
     if (parts[1] === 'hesabat') return { view: 'sheets', sheetsKind: 'pdfs' };
     return { view: 'pdfs' };
+  }
+  if (parts[0] === 'vezife-telimatlari') {
+    if (parts[1] === 'hesabat') return { view: 'sheets', sheetsKind: 'jobs' };
+    return { view: 'jobs' };
   }
   if (parts[0] === 'sablonlar') {
     if (parts[1] === 'hesabat') return { view: 'sheets', sheetsKind: 'templates' };
@@ -86,6 +93,7 @@ export default function App() {
   // templates list after opening it from a Sheets row (see openSheetItem).
   const [pdfsFocusId, setPdfsFocusId] = useState(null);
   const [templatesFocusId, setTemplatesFocusId] = useState(null);
+  const [jobsFocusId, setJobsFocusId] = useState(null);
   const [bootChecking, setBootChecking] = useState(true);
   // A diagram id parsed from a share link (?d=<id>&n=<nodeId>), pending until
   // the user is authenticated. Kept in a ref so it survives re-renders.
@@ -203,6 +211,7 @@ export default function App() {
     if (key === 'diagrams') setView('diagrams');
     else if (key === 'pdfs') setView('pdfs');
     else if (key === 'templates') setView('templates');
+    else if (key === 'jobs') setView('jobs');
   }
 
   function openProcess(id, nodeId = null) {
@@ -226,6 +235,7 @@ export default function App() {
   function backFromSheets() {
     if (sheetsKind === 'pdfs') setView('pdfs');
     else if (sheetsKind === 'templates') setView('templates');
+    else if (sheetsKind === 'jobs') setView('jobs');
     else setView('diagrams');
   }
 
@@ -242,6 +252,9 @@ export default function App() {
     } else if (kind === 'templates') {
       setTemplatesFocusId(itemId);
       setView('templates');
+    } else if (kind === 'jobs') {
+      setJobsFocusId(itemId);
+      setView('jobs');
     }
   }
 
@@ -306,6 +319,17 @@ export default function App() {
           onLogout={onLogout}
           onOpenSheets={() => openSheets('templates')}
           focusItemId={templatesFocusId}
+        />
+      );
+    }
+
+    if (view === 'jobs') {
+      return (
+        <JobList
+          onBack={backToHub}
+          onLogout={onLogout}
+          onOpenSheets={() => openSheets('jobs')}
+          focusItemId={jobsFocusId}
         />
       );
     }

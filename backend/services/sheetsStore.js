@@ -1,802 +1,508 @@
 /*
-  Per-section Sheets catalogs (Mongo via store.js — never GitHub).
+  Hesabat (report table) for each section — data/<section>/hesabat.json.
 
-  Kinds:
-    diagrams  → data/diagrams/sheets.json   (İş Axışları)
-    pdfs      → data/files/sheets.json      (Normativ Sənədlər)
-    templates → data/templates/sheets.json  (Şablonlar)
+  Hesabat and Home are SEPARATE lists. Nothing is copied between them
+  automatically: creating, renaming, changing status, archiving or deleting on
+  one side never touches the other.
 
-  Sync with the section's own catalog is one-way for creation:
-  Home → Sheets is automatic; Sheets → Home only happens through an explicit
-  manual link. Deletion of an explicitly linked row still removes its linked
-  Home item:
-    - item → sheet: syncFromItem() upserts the sheet row whenever an item's
-      title/subtitle/status/struktur changes (called from processes.js /
-      pdfs.js / templates.js). Creating a diagram/pdf/template in Home
-      always keeps its hesabat row in step.
-    - sheet → item: syncRowToTarget() only matches an existing item by the
-      triple (title + strukturAdi + subtitle/nömrə) or an explicit link and
-      can push status changes across. It NEVER creates a Home folder or
-      diagram/document/template from a Sheets row. Excel imports therefore
-      cannot populate Home; the admin must explicitly create/link the real
-      Home item.
-    - deleting a hesabat row (deleteSheetRow) also removes its linked item
-      from the section's own list via deleteLinkedItem() — both directions
-      stay in sync for deletes too.
+  A row can optionally be LINKED to a Home item (`itemId`). The link only lets
+  the admin open the item and compare the two: GET …/link shows where the
+  name / number / struktur / status differ, and POST …/link/apply copies the
+  value the admin picks (Hesabat -> Home, or Home -> Hesabat), field by field.
+
+  Rows are never lost: "archive" moves a row to hesabat-archive.json (can be
+  restored on the page), the trash icon moves it to hesabat-deleted.json (kept
+  in Mongo + data/, not shown). Remaining rows are renumbered 1..n — no gaps.
 */
-
+import { getFile, putFile } from './store.js';
+import { autoLinkOn } from './flags.js';
 import {
-  getFile as mongoGet, putFile as mongoPut, deleteFile as mongoDelete, attribution,
-  // Every index/archive now lives in Mongo too (same store as diagrams) —
-  // these old "github" names are just aliases of the same Mongo functions.
-  getFile as githubGet, putFile as githubPut,
-  putFileQueued as githubPutQueued,
-  deleteBinaryQueued as githubDeleteBinary
-} from './store.js';
+  SECTIONS, homePath, homeArchivePath, hesabatPath, hesabatArchivePath, hesabatDeletedPath, diagramPath
+} from './paths.js';
 
-const dataPath = () => (process.env.DATA_PATH || 'data').replace(/^\/|\/$/g, '');
-
-// Status sets differ per kind — İş Axışları dropped "sign" and gained an
-// explicit terminal "cancelled"; Normativ Sənədlər / Şablonlar additionally
-// have "prep" and "renew". Keep in sync with frontend Status.jsx.
 export const ALLOWED_STATUS_BY_KIND = {
   diagrams: ['progress', 'prep', 'notdone', 'done', 'cancelled'],
   pdfs: ['progress', 'prep', 'notdone', 'sign', 'done', 'cancelled', 'renew'],
-  templates: ['progress', 'prep', 'notdone', 'sign', 'done', 'cancelled', 'renew']
+  templates: ['progress', 'prep', 'notdone', 'sign', 'done', 'cancelled', 'renew'],
+  jobs: ['exists', 'missing']
 };
-// Back-compat flat list (used by a couple of older call sites / legacy routes).
-export const ALLOWED_STATUS = ['progress', 'prep', 'notdone', 'sign', 'done', 'cancelled', 'renew'];
-
-// Extra hand-typed fields shown only for the pdfs / templates sheets
-// (Normativ Sənədlər / Şablonlar): sənədin növü, nəşr, təsdiq tarixi,
-// qərar/protokol, səhifə sayı.
+export const ALLOWED_STATUS = ['progress', 'prep', 'notdone', 'sign', 'done', 'cancelled', 'renew', 'exists', 'missing'];
 export const EXTRA_FIELDS = ['docType', 'edition', 'approvalDate', 'protocol', 'pageCount'];
-// (kept as a single flat list — SheetsPage.jsx decides per-kind order/labels)
+// bolme = Struktur bölməsi (Vəzifə Təlimatları)
+const TEXT_FIELDS = ['title', 'subtitle', 'strukturAdi', 'bolme', ...EXTRA_FIELDS];
+export const SHEET_KINDS = SECTIONS;
 
-export const SHEET_KINDS = {
-  diagrams: {
-    sheetsRel: 'diagrams/sheets.json',
-    indexRel: 'diagrams/index.json',
-    indexKey: 'processes',
-    indexVia: 'mongo',
-    label: 'diagrams'
-  },
-  pdfs: {
-    sheetsRel: 'files/sheets.json',
-    indexRel: 'files/index.json',
-    indexKey: 'pdfs',
-    indexVia: 'github',
-    label: 'pdfs'
-  },
-  templates: {
-    sheetsRel: 'templates/sheets.json',
-    indexRel: 'templates/index.json',
-    // templates index reuses the same shape as pdfs ({ groups, pdfs })
-    indexKey: 'pdfs',
-    indexVia: 'github',
-    label: 'templates'
-  }
-};
+// Fields a linked row can be compared on.
+const LINK_FIELDS = ['title', 'subtitle', 'strukturAdi', 'status'];
 
-// Sheets ↔ section sync is ON in both directions — see file header.
-const AUTO_SYNC_ENABLED = true;
-
+function httpErr(status, message) {
+  const e = new Error(message);
+  e.status = status;
+  return e;
+}
 export function assertKind(kind) {
-  if (!SHEET_KINDS[kind]) {
-    const err = new Error('Yanlış sheets kind');
-    err.status = 400;
-    throw err;
-  }
-  return SHEET_KINDS[kind];
+  if (!SECTIONS[kind]) throw httpErr(400, 'Yanlış hesabat növü');
+  return SECTIONS[kind];
 }
-
-function sheetsPath(kind) {
-  return `${dataPath()}/${assertKind(kind).sheetsRel}`;
-}
-function indexPath(kind) {
-  return `${dataPath()}/${assertKind(kind).indexRel}`;
-}
-function processBodyPath(id) {
-  return `${dataPath()}/diagrams/processes/process-${id}.json`;
-}
-// Section (Home / Sənədlər / Şablonlar) archive.json lives next to that
-// section's own index.json — same folder either way.
-function archivePath(kind) {
-  const rel = kind === 'templates' ? 'templates' : (kind === 'diagrams' ? 'diagrams' : 'files');
-  return `${dataPath()}/${rel}/archive.json`;
-}
-// pdfs/templates binary files can live under a couple of legacy paths —
-// mirrors pdfFilePathFiles/Legacy/Legacy2 in routes/pdfs.js & templates.js.
-function pdfBinaryPaths(kind, id, ext) {
-  const rel = kind === 'templates' ? 'templates' : 'files';
-  return [
-    `${dataPath()}/${rel}/pdf/pdf-${id}.${ext || 'pdf'}`,
-    `${dataPath()}/pdfs/files/pdf-${id}.pdf`,
-    `${dataPath()}/files/files/pdf-${id}.pdf`
-  ];
-}
-function extOf(filename) {
-  const m = /\.([a-z0-9]+)$/i.exec(filename || '');
-  return m ? m[1].toLowerCase() : '';
-}
-
-function nextId(list) {
-  const ids = (list || []).map(x => Number(x.id)).filter(Number.isFinite);
-  return ids.length ? Math.max(...ids) + 1 : 1;
-}
-
 export function normalizeStatus(kind, raw) {
   if (raw == null || raw === '') return null;
   const s = String(raw);
-  const allowed = ALLOWED_STATUS_BY_KIND[kind] || ALLOWED_STATUS;
-  return allowed.includes(s) ? s : null;
+  return (ALLOWED_STATUS_BY_KIND[kind] || ALLOWED_STATUS).includes(s) ? s : null;
+}
+const nextId = (list) => list.reduce((m, x) => Math.max(m, Number(x.id) || 0), 0) + 1;
+const str = (v) => (v == null ? '' : String(v));
+const same = (a, b) => str(a).trim() === str(b).trim();
+
+function cleanRow(r) {
+  const { processId, ...rest } = r || {};
+  const itemId = rest.itemId ?? processId ?? null;
+  const out = { ...rest, itemId: itemId == null || itemId === '' ? null : Number(itemId) };
+  for (const f of TEXT_FIELDS) out[f] = str(out[f]);
+  if (!out.status) delete out.status;
+  return out;
 }
 
-/** Normalize legacy processId → itemId */
-function normalizeRow(row) {
-  if (!row || typeof row !== 'object') return row;
-  const itemId = row.itemId != null
-    ? row.itemId
-    : (row.processId != null ? row.processId : null);
-  const extras = {};
-  for (const f of EXTRA_FIELDS) extras[f] = typeof row[f] === 'string' ? row[f] : (row[f] || '');
-  const order = Number.isFinite(Number(row.order)) ? Number(row.order) : null;
-  return { ...row, ...extras, itemId, processId: itemId, order };
-}
-
+/* ---------------- read / write ---------------- */
 export async function readSheets(kind) {
   assertKind(kind);
-  const file = await mongoGet(sheetsPath(kind));
-  const c = file ? file.content : null;
-  let items = (c && Array.isArray(c.items)) ? c.items.map(normalizeRow) : [];
-  // itemIds an admin explicitly deleted the (auto-synced) sheet row for —
-  // backfillMissingFromIndex() must never recreate these, or "delete" would
-  // just silently undo itself on the next page load.
-  const deletedItemIds = (c && Array.isArray(c.deletedItemIds))
-    ? c.deletedItemIds.map(Number).filter(Number.isFinite)
-    : [];
-
-  // Migration: rows created before the `order` field existed don't have a
-  // stable position — backfill using their stored (creation) order once,
-  // so old rows keep their spot instead of colliding with new order numbers.
-  if (items.some(x => x.order == null)) {
-    items = items.map((x, i) => (x.order == null ? { ...x, order: i + 1 } : x));
-    await writeSheets(kind, { items, deletedItemIds }, `Backfill order for ${kind} sheets`, null);
-  }
-
+  const c = (await getFile(hesabatPath(kind)))?.content;
+  const items = (Array.isArray(c?.items) ? c.items : []).filter(Boolean).map(cleanRow);
   items.sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0));
-  return { items, deletedItemIds };
-}
-
-export async function writeSheets(kind, content, message, user) {
-  assertKind(kind);
-  return mongoPut(sheetsPath(kind), content, attribution(user, message));
-}
-
-async function readIndexFile(kind) {
-  const meta = assertKind(kind);
-  const p = indexPath(kind);
-  if (meta.indexVia === 'github') return githubGet(p);
-  return mongoGet(p);
-}
-
-async function writeIndexFile(kind, content, message, user) {
-  const meta = assertKind(kind);
-  const p = indexPath(kind);
-  if (meta.indexVia === 'github') return githubPut(p, content, attribution(user, message));
-  return mongoPut(p, content, attribution(user, message));
-}
-
-/** One-time seed from the section index when sheets is empty. */
-export async function backfillFromIndex(kind, user) {
-  const meta = assertKind(kind);
-  let sheets = await readSheets(kind);
-
-  const idxFile = await readIndexFile(kind);
-  const content = idxFile?.content || {};
-  const list = Array.isArray(content[meta.indexKey]) ? content[meta.indexKey] : [];
-  const groups = Array.isArray(content.groups) ? content.groups : [];
-
-  function strukturFor(entry) {
-    const g = groups.find(x => Number(x.id) === Number(entry?.groupId));
-    return g?.name ? String(g.name) : '';
+  // Positions are always 1..n — repair once if an older build left gaps.
+  const gap = items.some((r, i) => Number(r.order) !== i + 1);
+  if (gap) {
+    items.forEach((r, i) => { r.order = i + 1; });
+    await putFile(hesabatPath(kind), { items });
   }
-
-  if (!sheets.items.length && list.length) {
-    const now = new Date().toISOString();
-    sheets.items = list.map((p, i) => {
-      const id = Number(p.id);
-      return {
-        id: i + 1,
-        order: i + 1,
-        title: String(p.title || ''),
-        subtitle: String(p.subtitle || ''),
-        strukturAdi: strukturFor(p),
-        status: normalizeStatus(kind, p.status),
-        date: now,
-        itemId: id,
-        processId: id
-      };
-    });
-    await writeSheets(kind, sheets, `Backfill ${kind} sheets from index`, user);
-    return sheets;
-  }
-
-  // Repair: fill missing strukturAdi from group name for linked rows
-  let changed = false;
-  for (const row of sheets.items) {
-    if ((row.strukturAdi || '').trim()) continue;
-    const iid = row.itemId ?? row.processId;
-    if (iid == null) continue;
-    const entry = list.find(p => Number(p.id) === Number(iid));
-    const name = strukturFor(entry || {});
-    if (name) {
-      row.strukturAdi = name;
-      changed = true;
-    }
-  }
-  if (changed) {
-    await writeSheets(kind, sheets, `Fill strukturAdi on ${kind} sheets`, user);
-  }
-  return sheets;
+  return { items };
+}
+async function writeSheets(kind, items) {
+  items.sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0));
+  items.forEach((r, i) => { r.order = i + 1; });
+  await putFile(hesabatPath(kind), { items });
+}
+async function readArchive(kind) {
+  const c = (await getFile(hesabatArchivePath(kind)))?.content;
+  return (Array.isArray(c?.items) ? c.items : []).filter(Boolean).map(cleanRow);
+}
+async function writeArchive(kind, items) {
+  await putFile(hesabatArchivePath(kind), { items });
 }
 
-/**
- * Fill in any item from the section index (diagrams/pdfs/templates) that
- * doesn't have a linked sheet row yet — e.g. the 5 real workflows inside a
- * folder that only had a couple of hand-typed sheet rows. Unlike
- * backfillFromIndex() above (one-time seed of a *completely empty* sheet),
- * this tops up an existing sheet incrementally and is safe to call on every
- * GET: it's a no-op (no write) once every item already has a row.
- */
-export async function backfillMissingFromIndex(kind, user) {
-  const meta = assertKind(kind);
-  const sheets = await readSheets(kind);
-
-  const idxFile = await readIndexFile(kind);
-  const content = idxFile?.content || {};
-  const list = Array.isArray(content[meta.indexKey]) ? content[meta.indexKey] : [];
-  const groups = Array.isArray(content.groups) ? content.groups : [];
-  if (!list.length) return sheets;
-
-  const linkedIds = new Set(
-    sheets.items
-      .map(x => (x.itemId != null ? x.itemId : x.processId))
-      .filter(v => v != null)
-      .map(Number)
-  );
-  const deletedIds = new Set(sheets.deletedItemIds || []);
-  const missing = list.filter(p => !linkedIds.has(Number(p.id)) && !deletedIds.has(Number(p.id)));
-  if (!missing.length) return sheets;
-
-  function strukturFor(entry) {
-    const g = groups.find(x => Number(x.id) === Number(entry?.groupId));
-    return g?.name ? String(g.name) : '';
-  }
-
-  let order = sheets.items.reduce((m, x) => Math.max(m, Number(x.order) || 0), 0);
-  let id = nextId(sheets.items);
-  const now = new Date().toISOString();
-  const added = missing.map((p) => {
-    order += 1;
-    const row = {
-      id: id++,
-      order,
-      title: String(p.title || ''),
-      subtitle: String(p.subtitle || ''),
-      strukturAdi: strukturFor(p),
-      status: normalizeStatus(kind, p.status),
-      date: now,
-      itemId: Number(p.id),
-      processId: Number(p.id)
-    };
-    if (row.status == null) delete row.status;
-    return row;
-  });
-
-  sheets.items = [...sheets.items, ...added];
-  await writeSheets(kind, sheets, `Backfill ${added.length} missing ${kind} sheet row(s) from index`, user);
-  return sheets;
-}
-
-/**
- * Upsert a sheet row from a section item (diagram / pdf / template).
- * Item → Sheet direction.
- */
-export async function syncFromItem(kind, { itemId, title, subtitle, status, sheetId, strukturAdi }, user) {
-  assertKind(kind);
-  if (!AUTO_SYNC_ENABLED) return null;
-  const iid = Number(itemId);
-  if (!Number.isFinite(iid)) return null;
-
-  const sheets = await readSheets(kind);
-  const now = new Date().toISOString();
-  const st = status === undefined ? undefined : normalizeStatus(kind, status);
-  const struktur = strukturAdi != null ? String(strukturAdi) : undefined;
-
-  let row = null;
-  if (sheetId != null && Number.isFinite(Number(sheetId))) {
-    row = sheets.items.find(x => Number(x.id) === Number(sheetId)) || null;
-  }
-  if (!row) {
-    row = sheets.items.find(x => Number(x.itemId ?? x.processId) === iid) || null;
-  }
-
-  if (row) {
-    if (typeof title === 'string') row.title = title;
-    if (typeof subtitle === 'string') row.subtitle = subtitle;
-    if (st !== undefined) {
-      if (st === null) delete row.status;
-      else row.status = st;
-    }
-    // Keep existing custom struktur; only fill when blank
-    if (struktur !== undefined && !(row.strukturAdi || '').trim()) {
-      row.strukturAdi = struktur;
-    }
-    row.itemId = iid;
-    row.processId = iid;
-    await writeSheets(kind, sheets, `Sync ${kind} sheet ${row.id} from item ${iid}`, user);
-    return normalizeRow(row);
-  }
-
-  const item = {
-    id: nextId(sheets.items),
-    title: typeof title === 'string' ? title : '',
-    subtitle: typeof subtitle === 'string' ? subtitle : '',
-    strukturAdi: struktur || '',
-    status: st === undefined ? null : st,
-    date: now,
-    itemId: iid,
-    processId: iid
-  };
-  if (item.status == null) delete item.status;
-  sheets.items = [...sheets.items, item];
-  await writeSheets(kind, sheets, `Add ${kind} sheet for item ${iid}`, user);
-  return normalizeRow(item);
-}
-
-/** @deprecated use syncFromItem('diagrams', …) */
-export async function syncFromProcess(opts, user) {
-  return syncFromItem('diagrams', {
-    itemId: opts.processId,
-    title: opts.title,
-    subtitle: opts.subtitle,
-    status: opts.status,
-    sheetId: opts.sheetId,
-    strukturAdi: opts.strukturAdi
-  }, user);
-}
-
-/** @deprecated use backfillFromIndex('diagrams', …) */
-export async function backfillFromProcesses(user) {
-  return backfillFromIndex('diagrams', user);
-}
-
-/* ============================================================
-   Sheet → Item sync (the reverse direction)
-   ============================================================ */
-
-function norm(s) {
-  return String(s || '').trim().toLowerCase();
-}
-
-/**
- * Called whenever a Sheets row (diagrams / pdfs / templates) is created or
- * edited. It only acts on an EXPLICIT itemId/processId link and can push a
- * status change across when that linked Home item exists.
- *
- * IMPORTANT: this direction is intentionally NON-CREATING. A Sheets row
- * imported from Excel remains a Sheets/report row only. Its Struktur adı
- * NEVER creates a Home folder, and its title NEVER creates a Home
- * diagram/document/template. The admin creates the real Home item manually
- * and can explicitly link it using "Sheets-dən seç".
- */
-export async function syncRowToTarget(kind, row, user) {
-  assertKind(kind);
-  if (!AUTO_SYNC_ENABLED) return null;
-  const title = (row.title || '').trim();
-  if (!title) return null;
-
-  const meta = SHEET_KINDS[kind];
-  const idxFile = await readIndexFile(kind);
-  const idx = (idxFile && idxFile.content && typeof idxFile.content === 'object') ? idxFile.content : {};
-  const list = Array.isArray(idx[meta.indexKey]) ? idx[meta.indexKey] : [];
-  const targetStatus = normalizeStatus(kind, row.status);
-
-  // Only an explicit itemId/processId link is allowed to cross from Sheets
-  // back into Home. Do NOT match by title/structure/subtitle: an Excel import
-  // can contain the same text as an existing Home item, but it must remain an
-  // independent Sheets row until the admin manually links it from Home.
-  const linkedId = row.itemId ?? row.processId;
-  if (linkedId == null || linkedId === '') return null;
-
-  const entry = list.find(p => Number(p.id) === Number(linkedId)) || null;
-  if (!entry) return null;
-
-  let changed = false;
-  if (targetStatus !== (entry.status ?? null)) {
-    if (targetStatus === null) delete entry.status;
-    else entry.status = targetStatus;
-    changed = true;
-  }
-  if (changed) {
-    await writeIndexFile(kind, idx, `Sync ${kind} item ${entry.id} status from sheet`, user);
-  }
-  return { itemId: Number(entry.id), created: false, status: entry.status ?? null };
-}
-
-export async function createSheetRow(kind, { title, subtitle, status, strukturAdi, order, ...rest }, user) {
-  assertKind(kind);
-  // Empty title allowed — plus button must work even when fields are blank.
-  const name = title != null ? String(title).trim() : '';
-  const sheets = await readSheets(kind);
-  // `order` is the row's fixed visual position (the blank slot it was typed
-  // into). Rows keep this position forever — filling row 5 while rows 2/3
-  // stay empty must never bump row 5 up to fill the gap. Falls back to
-  // appending after the highest known position when not provided.
-  const maxOrder = sheets.items.reduce((m, x) => Math.max(m, Number(x.order) || 0), 0);
-  const ord = Number.isFinite(Number(order)) && Number(order) > 0 ? Number(order) : maxOrder + 1;
-  const item = {
-    id: nextId(sheets.items),
-    order: ord,
-    title: name,
-    subtitle: subtitle != null ? String(subtitle) : '',
-    strukturAdi: strukturAdi != null ? String(strukturAdi).trim() : '',
-    status: normalizeStatus(kind, status),
+/* ---------------- rows ---------------- */
+export async function createSheetRow(kind, body) {
+  const { items } = await readSheets(kind);
+  const row = {
+    id: nextId([...items, ...(await readArchive(kind)), ...(((await getFile(hesabatDeletedPath(kind)))?.content?.items) || [])]),
+    order: items.length + 1,
     date: new Date().toISOString(),
-    itemId: null,
-    processId: null
+    itemId: null
   };
-  for (const f of EXTRA_FIELDS) {
-    if (typeof rest[f] === 'string') item[f] = rest[f];
+  for (const f of TEXT_FIELDS) row[f] = str(body?.[f]).trim();
+  const st = normalizeStatus(kind, body?.status);
+  if (st) row.status = st;
+  if (body?.itemId != null && body.itemId !== '') row.itemId = await validItemId(kind, body.itemId);
+  // Optional: insert at a position (1-based) instead of the end.
+  const at = Number(body?.order);
+  if (Number.isFinite(at) && at >= 1 && at <= items.length) {
+    items.forEach((r) => { if (r.order >= at) r.order += 1; });
+    row.order = at;
   }
-  if (item.status == null) delete item.status;
-
-  // Sheet → item sync: match an existing Home item only; never create Home content.
-  try {
-    const sync = await syncRowToTarget(kind, item, user);
-    if (sync?.itemId != null) {
-      item.itemId = sync.itemId;
-      item.processId = sync.itemId;
-      if (sync.created && sync.status && item.status == null) item.status = sync.status;
-    }
-  } catch (e) { console.error(`[sheets->${kind} sync create]`, e.message); }
-
-  sheets.items = [...sheets.items, item];
-  await writeSheets(kind, sheets, `Create ${kind} sheet row ${item.id}`, user);
-  return normalizeRow(item);
+  items.push(row);
+  await autoLinkRows(kind, [row]);
+  await writeSheets(kind, items);
+  return row;
 }
 
-export async function updateSheetRow(kind, id, patch, user) {
-  assertKind(kind);
-  const sheets = await readSheets(kind);
-  const row = sheets.items.find(x => Number(x.id) === Number(id));
-  if (!row) {
-    const err = new Error('Sheet row not found');
-    err.status = 404;
-    throw err;
-  }
-  if (typeof patch.title === 'string') row.title = patch.title; // allow empty
-  if (typeof patch.subtitle === 'string') row.subtitle = patch.subtitle;
-  if (typeof patch.strukturAdi === 'string') row.strukturAdi = patch.strukturAdi;
-  if (patch.order !== undefined && Number.isFinite(Number(patch.order))) row.order = Number(patch.order);
-  for (const f of EXTRA_FIELDS) {
-    if (typeof patch[f] === 'string') row[f] = patch[f];
-  }
-  if (patch.status !== undefined) {
-    const st = normalizeStatus(kind, patch.status);
-    if (st === null) delete row.status;
-    else row.status = st;
-  }
-  if (patch.itemId !== undefined || patch.processId !== undefined) {
-    const raw = patch.itemId !== undefined ? patch.itemId : patch.processId;
-    const v = raw == null || raw === '' ? null : Number(raw);
-    row.itemId = v;
-    row.processId = v;
-  }
-
-  // Sheet → item sync: edits may match an existing Home item and push status
-  // across, but never create Home content.
-  try {
-    const sync = await syncRowToTarget(kind, row, user);
-    if (sync?.itemId != null) {
-      row.itemId = sync.itemId;
-      row.processId = sync.itemId;
-    }
-  } catch (e) { console.error(`[sheets->${kind} sync update]`, e.message); }
-
-  await writeSheets(kind, sheets, `Update ${kind} sheet row ${id}`, user);
-  return normalizeRow(row);
-}
-
-/* ---------- archive helpers (sheet delete => archive, never purge) ---------- */
-async function readArchiveFile(kind) {
-  const p = archivePath(kind);
-  const f = kind === 'diagrams' ? await mongoGet(p) : await githubGet(p);
-  const c = f && f.content;
-  return (c && Array.isArray(c.items)) ? { ...c, items: c.items.filter(Boolean) } : { items: [] };
-}
-async function writeArchiveFile(kind, content, message, user) {
-  const p = archivePath(kind);
-  if (kind === 'diagrams') return mongoPut(p, content, attribution(user, message));
-  return githubPutQueued(p, content, attribution(user, message));
-}
-
-/**
- * Move index entries into the section's archive.json (same shape the
- * Home "archive" button writes: entry + groupName + archivedAt). The diagram
- * body / PDF binary is NOT touched, so the item can be restored later from the
- * section's Archive view. Idempotent: entries already archived are replaced,
- * entries missing from the index are skipped.
- */
-async function archiveIndexEntries(kind, idx, entries, user, why) {
-  const meta = assertKind(kind);
-  if (!entries.length) return 0;
-  const groups = Array.isArray(idx.groups) ? idx.groups : [];
-  const ids = new Set(entries.map(e => Number(e.id)));
-  const archive = await readArchiveFile(kind);
+// Many new rows in ONE write (Excel import) — appended at the end.
+export async function createSheetRows(kind, bodies) {
+  const { items } = await readSheets(kind);
+  const archived = await readArchive(kind);
+  const deleted = ((await getFile(hesabatDeletedPath(kind)))?.content?.items) || [];
+  let id = nextId([...items, ...archived, ...deleted]);
   const now = new Date().toISOString();
-  archive.items = [
-    ...archive.items.filter(a => !ids.has(Number(a.id))),
-    ...entries.map(e => ({
-      ...e,
-      groupName: groups.find(g => Number(g.id) === Number(e.groupId))?.name || '',
-      archivedAt: now
-    }))
-  ];
-  // archive first, then drop from the index — a crash in between leaves the
-  // item visible (safe) rather than lost.
-  await writeArchiveFile(kind, archive, `Archive ${kind} item(s) ${[...ids].join(',')} (${why})`, user);
-  idx[meta.indexKey] = (Array.isArray(idx[meta.indexKey]) ? idx[meta.indexKey] : [])
-    .filter(p => !ids.has(Number(p.id)));
-  return entries.length;
-}
-
-/**
- * Called when a hesabat row linked to a real diagram / pdf / template is
- * deleted. The item leaves the section's main list but is ARCHIVED, not
- * destroyed — its data file stays on disk and it can be restored from the
- * section's archive. Safe to call twice (second call is a no-op).
- */
-export async function deleteLinkedItem(kind, itemId, user) {
-  const meta = assertKind(kind);
-  const id = Number(itemId);
-  if (!Number.isFinite(id)) return { removed: false };
-
-  const idxFile = await readIndexFile(kind);
-  const idx = (idxFile && idxFile.content && typeof idxFile.content === 'object') ? idxFile.content : null;
-  if (!idx) return { removed: false };
-  const list = Array.isArray(idx[meta.indexKey]) ? idx[meta.indexKey] : [];
-  const entry = list.find(p => Number(p.id) === id);
-  if (!entry) return { removed: false };
-
-  await archiveIndexEntries(kind, idx, [entry], user, 'deleted from sheets');
-  await writeIndexFile(kind, idx, `Archive ${kind} item ${id} (deleted from sheets)`, user);
-  return { removed: true, archived: true };
-}
-
-/**
- * Remove Sheets rows when a real Home item or its group is deleted.
- * This ONLY removes rows from the Sheets catalog; it never deletes the
- * Home item itself. It also removes old empty-folder placeholder rows that
- * were saved with only `strukturAdi` and no explicit itemId/processId.
- */
-export async function removeSheetRowsForDeletedItems(kind, itemIds = [], groupNames = [], user, deletedEntries = []) {
-  assertKind(kind);
-  const ids = new Set((Array.isArray(itemIds) ? itemIds : [])
-    .map(Number).filter(Number.isFinite));
-  const names = new Set((Array.isArray(groupNames) ? groupNames : [])
-    .map(norm).filter(Boolean));
-  const entries = Array.isArray(deletedEntries) ? deletedEntries : [];
-  if (!ids.size && !names.size && !entries.length) return { removed: 0 };
-
-  const sheets = await readSheets(kind);
-  const before = sheets.items.length;
-  const removedIds = [];
-
-  function sameDeletedEntry(row) {
-    if (row.itemId != null || row.processId != null) return false;
-    const title = norm(row.title);
-    const subtitle = norm(row.subtitle);
-    const structure = norm(row.strukturAdi);
-    if (!title || !structure) return false;
-    return entries.some(entry => {
-      const entryTitle = norm(entry?.title);
-      const entrySubtitle = norm(entry?.subtitle);
-      const entryStructure = norm(entry?.strukturAdi);
-      return entryTitle === title
-        && entrySubtitle === subtitle
-        && entryStructure === structure;
-    });
+  const created = [];
+  for (const body of (Array.isArray(bodies) ? bodies : [])) {
+    const row = { id: id++, order: items.length + 1, date: now, itemId: null };
+    for (const f of TEXT_FIELDS) row[f] = str(body?.[f]).trim();
+    const st = normalizeStatus(kind, body?.status);
+    if (st) row.status = st;
+    if (body?.itemId != null && body.itemId !== '') row.itemId = await validItemId(kind, body.itemId);
+    items.push(row);
+    created.push(row);
   }
-
-  sheets.items = sheets.items.filter(row => {
-    const linkedId = row.itemId != null ? row.itemId : row.processId;
-    if (linkedId != null && ids.has(Number(linkedId))) {
-      removedIds.push(Number(linkedId));
-      return false;
-    }
-
-    // Old/auto-created empty-folder rows have no item link and contain only
-    // the folder name. Remove them when the real Home folder disappears.
-    // Status is deliberately ignored: older builds could leave these rows
-    // marked "cancelled", and they must still disappear with the folder.
-    const isUnlinked = linkedId == null;
-    const structure = norm(row.strukturAdi);
-    const isFolderPlaceholder = isUnlinked && structure && names.has(structure)
-      && !(row.title || '').trim()
-      && !(row.subtitle || '').trim()
-      && !(row.docType || '').trim()
-      && !(row.edition || '').trim()
-      && !(row.approvalDate || '').trim()
-      && !(row.protocol || '').trim()
-      && !(row.pageCount || '').trim();
-    if (isFolderPlaceholder || sameDeletedEntry(row)) return false;
-    return true;
-  });
-
-  const removed = before - sheets.items.length;
-  if (!removed) return { removed: 0 };
-
-  const deletedItemIds = new Set(sheets.deletedItemIds || []);
-  for (const id of removedIds) deletedItemIds.add(id);
-  sheets.deletedItemIds = [...deletedItemIds];
-  await writeSheets(kind, sheets, `Remove ${removed} ${kind} sheet row(s) after Home deletion`, user);
-  return { removed };
-}
-
-/**
- * Delete a Home group when an admin deletes its folder-only Sheets row.
- * This is intentionally name-based because those rows represent groups,
- * not real documents/items, and therefore have no itemId.
- */
-export async function deleteHomeGroupByName(kind, groupName, user) {
-  const meta = assertKind(kind);
-  const wanted = norm(groupName);
-  if (!wanted) return { removed: false };
-
-  const idxFile = await readIndexFile(kind);
-  const idx = (idxFile && idxFile.content && typeof idxFile.content === 'object') ? idxFile.content : null;
-  if (!idx) return { removed: false };
-  const groups = Array.isArray(idx.groups) ? idx.groups : [];
-  const root = groups.find(g => norm(g?.name) === wanted);
-  if (!root) return { removed: false };
-
-  const allGroupIds = [Number(root.id)];
-  let frontier = [Number(root.id)];
-  while (frontier.length) {
-    const children = groups.filter(g => frontier.includes(Number(g.parentId)));
-    const childIds = children.map(g => Number(g.id));
-    allGroupIds.push(...childIds);
-    frontier = childIds;
+  if (created.length) {
+    await autoLinkRows(kind, created);
+    await writeSheets(kind, items);
   }
-  const groupSet = new Set(allGroupIds);
-  const list = Array.isArray(idx[meta.indexKey]) ? idx[meta.indexKey] : [];
-  const inGroup = list.filter(item => groupSet.has(Number(item.groupId)));
-
-  // Items inside the group go to the ARCHIVE (files stay on disk, restorable
-  // from the section's Archive view) instead of being destroyed with it.
-  await archiveIndexEntries(kind, idx, inGroup, user, `group ${root.id} deleted from sheets`);
-
-  idx[meta.indexKey] = list.filter(item => !groupSet.has(Number(item.groupId)));
-  idx.groups = groups.filter(g => !groupSet.has(Number(g.id)));
-  await writeIndexFile(kind, idx, `Delete ${kind} group ${root.id} from sheets`, user);
-
-  // Remove the corresponding report rows as part of the same operation.
-  await removeSheetRowsForDeletedItems(
-    kind,
-    inGroup.map(item => Number(item.id)),
-    allGroupIds.map(id => groups.find(g => Number(g.id) === id)?.name).filter(Boolean),
-    user,
-    inGroup.map(item => ({
-      ...item,
-      strukturAdi: groups.find(g => Number(g.id) === Number(item.groupId))?.name || ''
-    }))
-  );
-
-  // The items were archived (restorable), so let their sheet rows come back
-  // automatically if they're restored — don't leave them on the "never
-  // recreate" list.
-  try {
-    const after = await readSheets(kind);
-    const archivedIds = new Set(inGroup.map(item => Number(item.id)));
-    const kept = (after.deletedItemIds || []).filter(x => !archivedIds.has(Number(x)));
-    if (kept.length !== (after.deletedItemIds || []).length) {
-      after.deletedItemIds = kept;
-      await writeSheets(kind, after, `Allow ${kind} rows of archived group items to return on restore`, user);
-    }
-  } catch (e) { console.error(`[sheets group delete -> ${kind} deletedItemIds]`, e.message); }
-
-  return { removed: true, deletedItems: inGroup.length, deletedGroups: allGroupIds.length };
+  return { ok: true, created };
 }
 
-export async function deleteSheetRow(kind, id, user) {
-  assertKind(kind);
-  const sheets = await readSheets(kind);
-  const row = sheets.items.find(x => Number(x.id) === Number(id));
-  // Idempotent: a row that is already gone (double click, a second tab, or a
-  // linked-item delete that already removed it) is a success, not a 404 —
-  // the old "Sheet row not found" error is what made deletes look broken.
+export async function updateSheetRow(kind, id, patch) {
+  const { items } = await readSheets(kind);
+  const row = items.find((x) => Number(x.id) === Number(id));
+  if (!row) throw httpErr(404, 'Sətir tapılmadı');
+  const before = { title: row.title, strukturAdi: row.strukturAdi, bolme: row.bolme };
+  for (const f of TEXT_FIELDS) if (typeof patch?.[f] === 'string') row[f] = patch[f];
+  if (patch?.status !== undefined) {
+    const st = normalizeStatus(kind, patch.status);
+    if (st) row.status = st; else delete row.status;
+  }
+  if (patch?.itemId !== undefined) row.itemId = patch.itemId == null || patch.itemId === '' ? null : await validItemId(kind, patch.itemId);
+  if (patch?.date !== undefined && !Number.isNaN(new Date(patch.date).getTime())) row.date = new Date(patch.date).toISOString();
+  await writeSheets(kind, items);
+  // Vəzifə Təlimatları: a row and its Home item are ONE position sharing one
+  // file — renaming the Vəzifə here renames the LINKED item and its file on Home.
+  // An unlinked row never changes Home.
+  if (kind === 'jobs' && typeof patch?.title === 'string' && row.title.trim() && !patch.__fromHome) {
+    const { home, key } = await readHome(kind);
+    let entry = row.itemId != null ? home[key].find((e) => Number(e.id) === Number(row.itemId)) : null;
+    // Not linked -> Home is not touched (unless "Avtomatik bağla" is on, which links it first)
+    if (!entry && row.itemId == null && await autoLinkOn(kind)) {
+      const g = jobFolder(home, before.strukturAdi, before.bolme);
+      if (g) entry = home[key].find((e) => Number(e.groupId) === Number(g.id) && same(e.title, before.title)) || null;
+    }
+    if (entry && entry.title !== row.title.trim()) {
+      entry.title = row.title.trim();
+      if (entry.filename) {
+        const ext = (/\.([a-z0-9]+)$/i.exec(entry.filename) || [])[1] || 'pdf';
+        entry.filename = `${entry.title.replace(/[\\/:*?"<>|]+/g, '_')}.${ext}`;
+      }
+      await putFile(homePath(kind), home);
+    }
+    if (entry && row.itemId == null) { row.itemId = Number(entry.id); await writeSheets(kind, items); }
+  }
+  return row;
+}
+
+// Move a row to the Hesabat archive. Home is not touched.
+export async function archiveSheetRow(kind, id) {
+  const { items } = await readSheets(kind);
+  const row = items.find((x) => Number(x.id) === Number(id));
   if (!row) return { ok: true, alreadyGone: true };
+  const archive = await readArchive(kind);
+  archive.push({ ...row, archivedFromOrder: row.order, archivedAt: new Date().toISOString() });
+  await writeArchive(kind, archive);
+  await writeSheets(kind, items.filter((x) => x !== row));
+  return { ok: true };
+}
 
-  const linkedItemId = row.itemId != null ? row.itemId : row.processId;
+// Whole table -> Hesabat archive (one call). Home is not touched.
+export async function archiveAllRows(kind) {
+  const { items } = await readSheets(kind);
+  if (!items.length) return { ok: true, archived: 0 };
+  const archive = await readArchive(kind);
+  const now = new Date().toISOString();
+  archive.push(...items.map((r) => ({ ...r, archivedFromOrder: r.order, archivedAt: now })));
+  await writeArchive(kind, archive);
+  await putFile(hesabatPath(kind), { items: [] });
+  return { ok: true, archived: items.length };
+}
+/* ---------- trash: removed from the page, KEPT in hesabat-deleted.json ---------- */
+async function keepDeleted(kind, rows) {
+  const c = (await getFile(hesabatDeletedPath(kind)))?.content;
+  const kept = (Array.isArray(c?.items) ? c.items : []).filter(Boolean);
+  const now = new Date().toISOString();
+  kept.push(...rows.map((r) => ({ ...r, deletedFromOrder: r.order, deletedAt: now })));
+  await putFile(hesabatDeletedPath(kind), { items: kept });
+}
+export async function deleteSheetRow(kind, id) {
+  const { items } = await readSheets(kind);
+  const row = items.find((x) => Number(x.id) === Number(id));
+  if (!row) return { ok: true, alreadyGone: true };
+  await keepDeleted(kind, [row]); // copy first, then remove: never lost
+  await writeSheets(kind, items.filter((x) => x !== row));
+  return { ok: true };
+}
+// Delete a row from the Hesabat ARCHIVE (copy kept in hesabat-deleted.json).
+export async function deleteArchivedRow(kind, id) {
+  const archive = await readArchive(kind);
+  const row = archive.find((x) => Number(x.id) === Number(id));
+  if (!row) return { ok: true, alreadyGone: true };
+  const { archivedAt, archivedFromOrder, ...rest } = row;
+  await keepDeleted(kind, [{ ...rest, order: archivedFromOrder ?? rest.order, archivedAt }]);
+  await writeArchive(kind, archive.filter((x) => x !== row));
+  return { ok: true };
+}
+// Remove every link (rows stay, Home stays).
+export async function unlinkAllRows(kind) {
+  const { items } = await readSheets(kind);
+  const n = items.filter((r) => r.itemId != null).length;
+  if (n) await writeSheets(kind, items.map((r) => ({ ...r, itemId: null })));
+  return { ok: true, unlinked: n };
+}
 
-  // A row linked to a real diagram/pdf/template takes that item out of the
-  // main list with it — but the item is ARCHIVED (restorable), not purged.
-  // Done BEFORE removing the row so a failure can't leave an orphan.
+// Whole table deleted (copies kept in hesabat-deleted.json). Home is not touched.
+export async function deleteAllRows(kind) {
+  const { items } = await readSheets(kind);
+  if (items.length) await keepDeleted(kind, items);
+  await putFile(hesabatPath(kind), { items: [] });
+  return { ok: true, deleted: items.length };
+}
+
+export async function listSheetArchive(kind) {
+  assertKind(kind);
+  const list = await readArchive(kind);
+  return list.sort((a, b) => str(b.archivedAt).localeCompare(str(a.archivedAt)));
+}
+
+// Back from the archive — appended at the end of the table.
+export async function restoreSheetRow(kind, id) {
+  const archive = await readArchive(kind);
+  const row = archive.find((x) => Number(x.id) === Number(id));
+  if (!row) throw httpErr(404, 'Arxivdə tapılmadı');
+  const { items } = await readSheets(kind);
+  const { archivedAt, archivedFromOrder, ...back } = row;
+  items.push({ ...back, order: items.length + 1 });
+  await writeSheets(kind, items);
+  await writeArchive(kind, archive.filter((x) => x !== row));
+  return back;
+}
+
+/* ---------------- optional link to a Home item ---------------- */
+// Only ids that exist in the Home list can be linked; anything else -> null.
+async function validItemId(kind, raw) {
+  const id = Number(raw);
+  if (!Number.isFinite(id)) return null;
+  const c = (await getFile(homePath(kind)))?.content || {};
+  const list = c[SECTIONS[kind].listKey] || [];
+  return list.some((e) => Number(e.id) === id) ? id : null;
+}
+async function readHome(kind) {
+  const c = (await getFile(homePath(kind)))?.content || {};
+  const key = SECTIONS[kind].listKey;
+  return { home: { ...c, groups: Array.isArray(c.groups) ? c.groups : [], [key]: Array.isArray(c[key]) ? c[key] : [] }, key };
+}
+const groupNameOf = (home, gid) => str(home.groups.find((g) => Number(g.id) === Number(gid))?.name);
+
+function homeView(kind, home, key, entry) {
+  const view = {
+    id: Number(entry.id),
+    title: str(entry.title),
+    subtitle: str(entry.subtitle),
+    strukturAdi: groupNameOf(home, entry.groupId),
+    status: kind === 'templates' ? null : (entry.status || null)
+  };
+  if (kind === 'jobs') {
+    // Vəzifə Təlimatları: folder = Struktur bölməsi, its parent = Struktur vahidi
+    // (a top-level folder is both, when vahid and bölmə have the same name)
+    const g = home.groups.find((x) => Number(x.id) === Number(entry.groupId));
+    const parent = g && g.parentId != null ? home.groups.find((x) => Number(x.id) === Number(g.parentId)) : null;
+    view.bolme = str(g?.name);
+    view.strukturAdi = str(parent ? parent.name : g?.name);
+  }
+  return view;
+}
+// Folder for a (vahid, bölmə) pair in the jobs tree.
+function jobFolder(home, vahid, bolme) {
+  const top = home.groups.find((x) => x.parentId == null && same(x.name, vahid));
+  if (!top) return null;
+  if (!bolme || same(bolme, vahid)) return top;
+  return home.groups.find((x) => Number(x.parentId) === Number(top.id) && same(x.name, bolme)) || null;
+}
+
+export async function linkInfo(kind, id) {
+  const { items } = await readSheets(kind);
+  const row = items.find((x) => Number(x.id) === Number(id));
+  if (!row) throw httpErr(404, 'Sətir tapılmadı');
+  const { home, key } = await readHome(kind);
+  // every Home item + what helps choose: its file, and which row already links to it
+  const linkedBy = new Map(items.filter((r) => r.itemId != null && Number(r.id) !== Number(id)).map((r) => [Number(r.itemId), r.order ?? null]));
+  const options = home[key].map((e) => ({
+    ...homeView(kind, home, key, e),
+    filename: e.noFile ? '' : str(e.filename),
+    linkedRow: linkedBy.has(Number(e.id)) ? (linkedBy.get(Number(e.id)) ?? true) : null
+  }));
+
+  let item = null;
   let archived = false;
-  let archiveFailed = false;
-  if (linkedItemId != null) {
-    try {
-      const r = await deleteLinkedItem(kind, linkedItemId, user);
-      archived = !!r?.removed;
-    } catch (e) {
-      archiveFailed = true;
-      console.error(`[sheets delete -> ${kind} item]`, e.message);
+  if (row.itemId != null) {
+    const entry = home[key].find((e) => Number(e.id) === Number(row.itemId));
+    if (entry) item = homeView(kind, home, key, entry);
+    else {
+      const arch = (await getFile(homeArchivePath(kind)))?.content?.items || [];
+      const a = arch.find((e) => Number(e.id) === Number(row.itemId));
+      if (a) { archived = true; item = { ...homeView(kind, home, key, a), strukturAdi: str(a.groupName) }; }
     }
   }
+  const fields = kind === 'jobs' ? ['title', 'strukturAdi', 'bolme', 'status']
+    : kind === 'templates' ? LINK_FIELDS.filter((f) => f !== 'status') : LINK_FIELDS;
+  const diffs = item
+    ? fields.map((f) => ({ field: f, hesabat: f === 'status' ? (row.status || null) : str(row[f]), home: item[f] ?? null }))
+        .map((d) => ({ ...d, same: same(d.hesabat ?? '', d.home ?? '') }))
+    : [];
+  return {
+    row,
+    item,
+    archived,
+    diffs,
+    groups: home.groups.map((g) => str(g.name)).filter(Boolean),
+    options
+  };
+}
 
-  sheets.items = sheets.items.filter(x => Number(x.id) !== Number(id));
-  // Only remember the id when the item is STILL in the main list (archive
-  // failed) so the next auto-backfill doesn't resurrect a row the admin
-  // deleted. When the item was archived it's out of the index, and keeping
-  // the id out of deletedItemIds lets "restore from archive" bring the row
-  // back automatically.
-  if (linkedItemId != null && archiveFailed && !sheets.deletedItemIds.includes(Number(linkedItemId))) {
-    sheets.deletedItemIds = [...sheets.deletedItemIds, Number(linkedItemId)];
+export async function setLink(kind, id, itemId) {
+  const { items } = await readSheets(kind);
+  const row = items.find((x) => Number(x.id) === Number(id));
+  if (!row) throw httpErr(404, 'Sətir tapılmadı');
+  if (itemId == null || itemId === '') {
+    row.itemId = null;
+  } else {
+    const { home, key } = await readHome(kind);
+    if (!home[key].some((e) => Number(e.id) === Number(itemId))) throw httpErr(404, 'Əsas səhifədə belə element yoxdur');
+    row.itemId = Number(itemId);
   }
-  if (linkedItemId != null && archived) {
-    sheets.deletedItemIds = sheets.deletedItemIds.filter(x => Number(x) !== Number(linkedItemId));
-  }
-  await writeSheets(kind, sheets, `Delete ${kind} sheet row ${id}`, user);
+  await writeSheets(kind, items);
+  return linkInfo(kind, id);
+}
 
-  // Folder-only Sheets rows represent a Home group. Deleting that row must
-  // therefore delete the corresponding group from the main page as well
-  // (its items are archived).
-  const rowTitle = (row.title || '').trim();
-  const rowSubtitle = (row.subtitle || '').trim();
-  const isFolderRow = linkedItemId == null
-    && !!norm(row.strukturAdi)
-    && !rowTitle
-    && !rowSubtitle
-    && !row.docType
-    && !row.edition
-    && !row.approvalDate
-    && !row.protocol
-    && !row.pageCount;
-  if (isFolderRow) {
-    await deleteHomeGroupByName(kind, row.strukturAdi, user).catch((e) => {
-      console.error(`[sheets delete -> ${kind} group]`, e.message);
+// choices: { title: 'home'|'hesabat', subtitle: …, strukturAdi: …, status: … }
+//   'home'    -> copy the Home value into the Hesabat row
+//   'hesabat' -> copy the Hesabat value onto the Home item
+export async function applyLink(kind, id, choices) {
+  const { items } = await readSheets(kind);
+  const row = items.find((x) => Number(x.id) === Number(id));
+  if (!row) throw httpErr(404, 'Sətir tapılmadı');
+  if (row.itemId == null) throw httpErr(400, 'Sətir heç bir elementə bağlı deyil');
+  const { home, key } = await readHome(kind);
+  const entry = home[key].find((e) => Number(e.id) === Number(row.itemId));
+  if (!entry) throw httpErr(404, 'Bağlı element əsas siyahıda yoxdur (arxivdə ola bilər)');
+
+  let rowChanged = false;
+  let homeChanged = false;
+  for (const [field, use] of Object.entries(choices || {})) {
+    if (!LINK_FIELDS.includes(field) && !(kind === 'jobs' && field === 'bolme')) continue;
+    if (field === 'status' && kind === 'templates') continue;
+    const current = homeView(kind, home, key, entry);
+    if (use === 'home') {
+      if (field === 'status') {
+        const st = normalizeStatus(kind, current.status);
+        if (st) row.status = st; else delete row.status;
+      } else row[field] = current[field];
+      rowChanged = true;
+    } else if (use === 'hesabat') {
+      if (kind === 'jobs' && (field === 'strukturAdi' || field === 'bolme')) {
+        const vahid = field === 'strukturAdi' ? row.strukturAdi : current.strukturAdi;
+        const bolme = field === 'bolme' ? row.bolme : current.bolme;
+        const g = jobFolder(home, vahid, bolme);
+        if (!g) throw httpErr(400, `"${vahid}${bolme && !same(bolme, vahid) ? ' / ' + bolme : ''}" qovluğu əsas səhifədə yoxdur`);
+        entry.groupId = g.id;
+      } else if (field === 'strukturAdi') {
+        const g = home.groups.find((x) => same(x.name, row.strukturAdi));
+        if (!g) throw httpErr(400, `"${row.strukturAdi}" adlı qovluq əsas səhifədə yoxdur`);
+        entry.groupId = g.id;
+      } else if (field === 'status') {
+        const st = normalizeStatus(kind, row.status);
+        if (st) entry.status = st; else delete entry.status;
+      } else entry[field] = row[field];
+      homeChanged = true;
+    }
+  }
+  if (homeChanged) {
+    await putFile(homePath(kind), home);
+    if (kind === 'diagrams') {
+      const body = (await getFile(diagramPath(entry.id)))?.content;
+      if (body && (body.title !== entry.title || body.subtitle !== entry.subtitle)) {
+        await putFile(diagramPath(entry.id), { ...body, title: entry.title, subtitle: entry.subtitle || '' });
+      }
+    }
+  }
+  if (rowChanged) await writeSheets(kind, items);
+  return linkInfo(kind, id);
+}
+
+// Vəzifə Təlimatları, Home -> Hesabat: an item was renamed on Home; rename the
+// matching row(s) — by link, or by (vahid, bölmə, old Vəzifə).
+export async function renameJobRows(itemId, oldTitle, newTitle, vahid, bolme) {
+  const { items } = await readSheets('jobs');
+  const link = await autoLinkOn('jobs');
+  let changed = false;
+  for (const r of items) {
+    const byLink = r.itemId != null && Number(r.itemId) === Number(itemId);
+    // Not linked -> the row is left alone. Only "Avtomatik bağla" links a same-name row (and then it follows).
+    const byName = link && r.itemId == null && same(r.title, oldTitle) && same(r.strukturAdi, vahid) && same(r.bolme || vahid, bolme || vahid);
+    if (byLink || byName) {
+      if (byName) { r.itemId = Number(itemId); changed = true; }
+      if (r.title !== newTitle) { r.title = newTitle; changed = true; }
+    }
+  }
+  if (changed) await writeSheets('jobs', items);
+  return changed;
+}
+
+/* ---------- "Avtomatik bağla" (per section, off by default) ---------- */
+// A new Home item -> link the first UNLINKED row with the same name (and the
+// same struktur, when the row has one).
+export async function autoLinkNewItem(kind, itemId, title, struktur, bolme) {
+  if (!(await autoLinkOn(kind))) return null;
+  const { items } = await readSheets(kind);
+  const row = items.find((r) => r.itemId == null && same(r.title, title)
+    && (!str(r.strukturAdi).trim() || same(r.strukturAdi, struktur))
+    && (kind !== 'jobs' || same(r.bolme || r.strukturAdi, bolme || struktur)));
+  if (!row) return null;
+  row.itemId = Number(itemId);
+  await writeSheets(kind, items);
+  return row;
+}
+// Pair UNLINKED rows with a Home item of the same name (+ folder); each Home
+// item is used once and never one that another row already links to.
+function matchRows(kind, home, key, rows, allRows) {
+  const used = new Set(allRows.filter((r) => r.itemId != null).map((r) => Number(r.itemId)));
+  const pairs = [];
+  for (const r of rows) {
+    if (r.itemId != null || !str(r.title).trim()) continue;
+    const hit = home[key].find((e) => {
+      if (used.has(Number(e.id))) return false;
+      const v = homeView(kind, home, key, e);
+      if (!same(v.title, r.title)) return false;
+      if (kind === 'jobs') return same(v.strukturAdi, r.strukturAdi) && same(v.bolme, r.bolme || r.strukturAdi);
+      return !str(r.strukturAdi).trim() || same(v.strukturAdi, r.strukturAdi);
     });
+    if (hit) { used.add(Number(hit.id)); pairs.push({ row: r, entry: hit, view: homeView(kind, home, key, hit) }); }
   }
-
-  return { ok: true, archived };
+  return pairs;
+}
+// New Hesabat rows -> link (only with "Avtomatik bağla").
+async function autoLinkRows(kind, rows) {
+  if (!rows.length || !(await autoLinkOn(kind))) return false;
+  const { home, key } = await readHome(kind);
+  const { items } = await readSheets(kind);
+  const pairs = matchRows(kind, home, key, rows, items);
+  for (const p of pairs) p.row.itemId = Number(p.entry.id);
+  return pairs.length > 0;
+}
+// ⋯ menu: what "Hamısını bağla" would link (for "Seçərək bağla").
+export async function linkCandidates(kind) {
+  const { home, key } = await readHome(kind);
+  const { items } = await readSheets(kind);
+  return {
+    items: matchRows(kind, home, key, items, items).map(({ row, entry, view }) => ({
+      rowId: row.id, title: str(row.title), strukturAdi: str(row.strukturAdi), bolme: str(row.bolme),
+      itemId: Number(entry.id), itemTitle: str(view.title),
+      folder: [view.strukturAdi, kind === 'jobs' && !same(view.bolme, view.strukturAdi) ? view.bolme : ''].filter(Boolean).join(' / ')
+    }))
+  };
+}
+// ⋯ menu: "Hamısını bağla" (no ids) or "Seçərək bağla" (ids).
+export async function linkAllRows(kind, ids) {
+  const { home, key } = await readHome(kind);
+  const { items } = await readSheets(kind);
+  const pick = Array.isArray(ids) ? new Set(ids.map(String)) : null;
+  const rows = pick ? items.filter((r) => pick.has(String(r.id))) : items;
+  const pairs = matchRows(kind, home, key, rows, items);
+  for (const p of pairs) p.row.itemId = Number(p.entry.id);
+  if (pairs.length) await writeSheets(kind, items);
+  return { ok: true, linked: pairs.length, items };
 }
 
-/**
- * Bulk-remove every row that was auto-populated from an item (itemId set) —
- * i.e. rows created by the old GET-time backfill or by the per-item auto-sync.
- * Hand-typed blank rows (itemId=null) are never touched.
- */
-export async function clearLinkedRows(kind, user) {
-  assertKind(kind);
-  const sheets = await readSheets(kind);
-  const before = sheets.items.length;
-  sheets.items = sheets.items.filter(x => x.itemId == null && x.processId == null);
-  const removed = before - sheets.items.length;
-  if (removed > 0) {
-    await writeSheets(kind, sheets, `Clear ${removed} auto-synced ${kind} sheet rows`, user);
-  }
-  return { removed, items: sheets.items };
-}
-
-/** Remove every sheet row for this kind (Sheets checklist wipe). */
-export async function clearAllRows(kind, user) {
-  assertKind(kind);
-  const sheets = await readSheets(kind);
-  const removed = sheets.items.length;
-  if (removed === 0) return { removed: 0, items: [] };
-  sheets.items = [];
-  await writeSheets(kind, sheets, `Clear all ${removed} ${kind} sheet rows`, user);
-  return { removed, items: [] };
+// Used by "Yeni diaqram"/upload when the admin picked a Hesabat row: links
+// the row to the new item. Only the link is stored — no values are copied.
+export async function linkRowToItem(kind, sheetId, itemId) {
+  if (sheetId == null || !Number.isFinite(Number(sheetId))) return null;
+  const { items } = await readSheets(kind);
+  const row = items.find((x) => Number(x.id) === Number(sheetId));
+  if (!row) return null;
+  row.itemId = Number(itemId);
+  await writeSheets(kind, items);
+  return row;
 }

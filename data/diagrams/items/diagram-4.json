@@ -1,0 +1,346 @@
+{
+  "id": 4,
+  "title": "Saxlanc anbarından yüklərin çıxarılması və müştəriyə təhvil verilməsi üzrə iş axını",
+  "subtitle": "ALM-İMS-PRD-004",
+  "width": 2200,
+  "height": 960,
+  "lanes": [
+    {
+      "id": "lane-1784710479377",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1784710488048",
+      "label": "ƏKTD",
+      "y": 180,
+      "h": 305
+    },
+    {
+      "id": "lane-1784710494737",
+      "label": "ALŞ",
+      "y": 485,
+      "h": 162
+    },
+    {
+      "id": "lane-1784710501025",
+      "label": "SƏO",
+      "y": 647,
+      "h": 160
+    },
+    {
+      "id": "lane-1784710532281",
+      "label": "TIR Park və MAD şöbəsi",
+      "y": 807,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 110,
+      "y": 60,
+      "laneId": "lane-1784710479377",
+      "w": 240,
+      "h": 60,
+      "text": "Xidmətin sifariş edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 85,
+      "y": 220,
+      "laneId": "lane-1784710488048",
+      "w": 290,
+      "h": 110,
+      "text": "Sorğunun qəbulu, emalı, “udpas”a zəruri məlumatların əlavə edilməsi, yükü götürəcək yük avtomobilinə dair məlumatların NBM-ə ötürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 440,
+      "y": 225,
+      "laneId": "lane-1784710488048",
+      "w": 270,
+      "h": 100,
+      "text": "Sifarişə əsasən yüklərin çeşidlənməsi və məlumatların ALŞ-yə ötürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "2.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 125,
+      "y": 390,
+      "laneId": "lane-1784710488048",
+      "w": 210,
+      "h": 70,
+      "text": "“WMS” ilə avtomatik inteqrasiya",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "3.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 470,
+      "y": 385,
+      "laneId": "lane-1784710488048",
+      "w": 210,
+      "h": 80,
+      "text": "Zərurət olduqda SƏO-dan əlavə resursun sifariş edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 475,
+      "y": 525,
+      "laneId": "lane-1784710494737",
+      "w": 200,
+      "h": 70,
+      "text": "Yüklərin xüsusi ayrılmış əraziyə yığılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 770,
+      "y": 525,
+      "laneId": "lane-1784710494737",
+      "w": 200,
+      "h": 80,
+      "text": "Yığılmış yüklərin müştəri sifarişi ilə uzlaşdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 770,
+      "y": 60,
+      "laneId": "lane-1784710479377",
+      "w": 200,
+      "h": 80,
+      "text": "Yüklərin daşınması üçün yük avtomobilinin təmin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 1020,
+      "y": 830,
+      "laneId": "lane-1784710532281",
+      "w": 200,
+      "h": 100,
+      "text": "Yük avtomobilinin Mərkəzə daxil olmasının təmin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1180,
+      "y": 537,
+      "laneId": "lane-1784710494737",
+      "w": 200,
+      "h": 80,
+      "text": "Yüklərin yük avtomobilinə yüklənməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1470,
+      "y": 527,
+      "laneId": "lane-1784710494737",
+      "w": 270,
+      "h": 100,
+      "text": "İşlərin görülməsinə dair yük avtomobili sürücü ilə təhvil-təslim aktın imzalanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1800,
+      "y": 250,
+      "laneId": "lane-1784710488048",
+      "w": 200,
+      "h": 100,
+      "text": "İşlərin görülməsinə dair təhvil-təslim aktının müştəriyə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "pill",
+      "style": "solid",
+      "x": 1800,
+      "y": 835,
+      "laneId": "lane-1784710532281",
+      "w": 200,
+      "h": 90,
+      "text": "Yük avtomobilinin Mərkəzdən çıxışının təmin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "3.2",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 475,
+      "y": 679,
+      "laneId": "lane-1784710501025",
+      "w": 210,
+      "h": 70,
+      "text": "Yüklərin xüsusi ayrılmış əraziyə yığılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 3,
+      "to": "3.1",
+      "s": "bottom",
+      "e": "top",
+      "arrow": "end"
+    },
+    {
+      "from": 2,
+      "to": "2.1",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "3.1",
+      "to": "3.2",
+      "s": "left",
+      "e": "left"
+    },
+    {
+      "from": "3.1",
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "3.2",
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "bottom",
+      "e": "top"
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "id": 66,
+  "title": "İşə qəbul prosesi",
+  "subtitle": "ALM-HR-PRD-001",
+  "width": 2275,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1793096842641-0",
+      "label": "Namizəd",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1793096842641-1",
+      "label": "İnsan Resursları Şöbəsi",
+      "y": 180,
+      "h": 210
+    },
+    {
+      "id": "lane-1793096842641-2",
+      "label": "Struktur Bölmə Rəhbəri",
+      "y": 390,
+      "h": 200
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 85,
+      "y": 50,
+      "laneId": "lane-1793096842641-0",
+      "w": 200,
+      "h": 70,
+      "text": "Vakansiyaya müraciət etmək",
+      "info": {
+        "general": [
+          "Namizəd CV-ni təqdim edir"
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 355,
+      "y": 210,
+      "laneId": "lane-1793096842641-1",
+      "w": 200,
+      "h": 70,
+      "text": "CV-lərin ilkin seçimi",
+      "info": {
+        "general": [
+          "İHR tələblərə uyğunluğu yoxlayır"
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "diamond",
+      "style": "stroke",
+      "x": 625,
+      "y": 210,
+      "laneId": "lane-1793096842641-1",
+      "w": 150,
+      "h": 150,
+      "text": "CV uyğundur?",
+      "info": {
+        "general": [
+          "Uyğunluq qiymətləndirilir"
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "pill",
+      "style": "solid",
+      "x": 1605,
+      "y": 210,
+      "laneId": "lane-1793096842641-1",
+      "w": 200,
+      "h": 70,
+      "text": "İmtina bildirişi göndərmək",
+      "info": {
+        "general": [
+          "Namizədə imtina məktubu göndərilir"
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 845,
+      "y": 210,
+      "laneId": "lane-1793096842641-1",
+      "w": 200,
+      "h": 70,
+      "text": "İlkin müsahibənin keçirilməsi",
+      "info": {
+        "general": [
+          "İHR tərəfindən ilkin görüş təşkil olunur"
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 1115,
+      "y": 420,
+      "laneId": "lane-1793096842641-2",
+      "w": 200,
+      "h": 70,
+      "text": "Xüsusi/Texniki müsahibə",
+      "info": {
+        "general": [
+          "Bölmə rəhbəri peşəkar bilikləri yoxlayır"
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "diamond",
+      "style": "stroke",
+      "x": 1385,
+      "y": 420,
+      "laneId": "lane-1793096842641-2",
+      "w": 150,
+      "h": 150,
+      "text": "Nəticə müsbətdir?",
+      "info": {
+        "general": [
+          "Müsahibə nəticəsi qiymətləndirilir"
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1605,
+      "y": 300,
+      "laneId": "lane-1793096842641-1",
+      "w": 200,
+      "h": 70,
+      "text": "İş təklifi (Job Offer) təqdim etmək",
+      "info": {
+        "general": [
+          "Müsbət namizədə iş təklifi olunur"
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "pill",
+      "style": "solid",
+      "x": 1875,
+      "y": 210,
+      "laneId": "lane-1793096842641-1",
+      "w": 200,
+      "h": 70,
+      "text": "İşə qəbulun rəsmiləşdirilməsi",
+      "info": {
+        "general": [
+          "Sənədlər toplanır və əmək müqaviləsi bağlanır"
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left",
+      "dashed": false
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left",
+      "dashed": false
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left",
+      "dashed": false,
+      "label": "Xeyr"
+    },
+    {
+      "from": 3,
+      "to": 5,
+      "s": "right",
+      "e": "left",
+      "dashed": false,
+      "label": "Bəli"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left",
+      "dashed": false
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left",
+      "dashed": false
+    },
+    {
+      "from": 7,
+      "to": 4,
+      "s": "top",
+      "e": "bottom",
+      "dashed": false,
+      "label": "Xeyr"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left",
+      "dashed": false,
+      "label": "Bəli"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left",
+      "dashed": false
+    }
+  ]
+}

@@ -1,0 +1,450 @@
+{
+  "id": 18,
+  "title": "Abşeron Özəl Sənaye Məhəlləsində rezidentlik prosesinin idarəedilməsinə dair iş axını",
+  "subtitle": "ALM-İMS-PR-ASM-001",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1785232579224",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1785232590817",
+      "label": "Abşeron Logistika Mərkəzi",
+      "y": 180,
+      "h": 850
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 140,
+      "y": 50,
+      "laneId": "lane-1785232579224",
+      "w": 330,
+      "h": 110,
+      "text": "Abşeron Özəl Sənaye Məhəlləsində rezident olmaq məqsədilə layihə konsepsiyasının təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 165,
+      "y": 250,
+      "laneId": "lane-1785232590817",
+      "w": 280,
+      "h": 90,
+      "text": "Rezidentliyə dair müraciətin qəbulu, təqdim olunan konsepsiyanın təhlili və qiymətləndirilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "diamond",
+      "style": "solid",
+      "x": 230,
+      "y": 420,
+      "laneId": "lane-1785232590817",
+      "w": 150,
+      "h": 150,
+      "text": "Təklifin\nhazırlanması\n\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "3.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 70,
+      "y": 700,
+      "laneId": "lane-1785232590817",
+      "w": 210,
+      "h": 150,
+      "text": "Layihə konsepsiyası uyğun hesab edilmədiyi halda, müştəriyə rəsmi imtina məktubunun təqdim edilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "3.2",
+      "type": "rect",
+      "style": "solid",
+      "x": 330,
+      "y": 700,
+      "laneId": "lane-1785232590817",
+      "w": 210,
+      "h": 150,
+      "text": "Layihə konsepsiyası uyğun hesab edildiyi təqdirdə, kommersiya təklifinin hazırlanması və müştəriyə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "4.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 620,
+      "y": 55,
+      "laneId": "lane-1785232579224",
+      "w": 270,
+      "h": 70,
+      "text": "Birgə təşkil edilən proses",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "7.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1460,
+      "y": 50,
+      "laneId": "lane-1785232579224",
+      "w": 290,
+      "h": 80,
+      "text": "Layihələndirmə üçün zəruri olan\nbütün texniki və funksional məlumatların ALM-a təqdim edilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1020,
+      "y": 55,
+      "laneId": "lane-1785232579224",
+      "w": 270,
+      "h": 70,
+      "text": "Birgə təşkil edilən proses",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 605,
+      "y": 250,
+      "laneId": "lane-1785232590817",
+      "w": 300,
+      "h": 90,
+      "text": "Təklif və tələblərin müzakirəsi, inşaat və təhvil-təslim proqramının (iş qrafikinin) birgə hazırlanması və razılaşdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 1015,
+      "y": 250,
+      "laneId": "lane-1785232590817",
+      "w": 280,
+      "h": 90,
+      "text": "Tərəflər arasında mülki-hüquqi müqavilənin rəsmiləşdirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 1015,
+      "y": 420,
+      "laneId": "lane-1785232590817",
+      "w": 280,
+      "h": 90,
+      "text": "İZİA-dan rezidentliyin əldə olunması üçün müştəriyə dəstək göstərilməsi\n \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "6.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 970,
+      "y": 590,
+      "laneId": "lane-1785232590817",
+      "w": 370,
+      "h": 100,
+      "text": "Layihəyə uyğun biznes planın hazırlanması, eləcə də zəruri hüquqi sənədlərin və rəsmi müraciət formalarının hazırlanması, aidiyyəti quruma rəsmi müraciətin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "6.2",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1015,
+      "y": 780,
+      "laneId": "lane-1785232590817",
+      "w": 280,
+      "h": 90,
+      "text": "Təşviq sənədinin əldə edilməsi üçün müştəriyə metodoloji və sənədləşmə dəstəyin göstərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 1445,
+      "y": 250,
+      "laneId": "lane-1785232590817",
+      "w": 320,
+      "h": 140,
+      "text": "İnşaat sahəsinin müştərinin təqdim etdiyi texnoloji plana, tələblərinə, qüvvədə olan qanunvericiliyə və normativ aktlara uyğun şəkildə layihələndirilməsi\n \n                             \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1480,
+      "y": 440,
+      "laneId": "lane-1785232590817",
+      "w": 250,
+      "h": 70,
+      "text": "Təsdiq edilmiş layihəyə uyğun\nolaraq inşaat işlərinin icrası\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1480,
+      "y": 560,
+      "laneId": "lane-1785232590817",
+      "w": 250,
+      "h": 80,
+      "text": "İnşaatın gedişatı barədə müştərinin mütəmadi şəkildə məlumatlandırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1445,
+      "y": 700,
+      "laneId": "lane-1785232590817",
+      "w": 320,
+      "h": 120,
+      "text": "İnşa edilmiş obyektin müştərinin istəyinə uyğun olaraq tam şəkildə və ya qismən (avadanlıqların quraşdırılması və sazlanması üçün) müştəriyə təhvil verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "pill",
+      "style": "solid",
+      "x": 1455,
+      "y": 890,
+      "laneId": "lane-1785232590817",
+      "w": 300,
+      "h": 90,
+      "text": "İnşa edilmiş obyektin müştəriyə təhvil verilməsi ilə bağlı bütün proseslərin təşkil edilməsi və idarə olunması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "",
+      "type": "pill",
+      "style": "stroke",
+      "x": 140,
+      "y": 940,
+      "laneId": "lane-1785232590817",
+      "w": 70,
+      "h": 70,
+      "text": "\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      },
+      "color": "#111827"
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": "3.1",
+      "s": "bottom",
+      "e": "top",
+      "color": "#ea580c",
+      "label": "Mümkün deyil"
+    },
+    {
+      "from": 3,
+      "to": "3.2",
+      "s": "bottom",
+      "e": "top",
+      "color": "#16a34a",
+      "label": "Mümkündür",
+      "arrow": "end",
+      "dashed": false
+    },
+    {
+      "from": 4,
+      "to": "4.1",
+      "s": "top",
+      "e": "bottom",
+      "dashed": true
+    },
+    {
+      "from": "3.2",
+      "to": 4,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 5,
+      "to": "5.1",
+      "s": "top",
+      "e": "bottom",
+      "dashed": true
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": "6.1",
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": "6.1",
+      "to": "6.2",
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": "7.1",
+      "s": "top",
+      "e": "bottom",
+      "dashed": true
+    },
+    {
+      "from": "3.1",
+      "to": "",
+      "s": "bottom",
+      "e": "top",
+      "color": "#ea580c"
+    }
+  ]
+}

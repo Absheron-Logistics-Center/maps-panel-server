@@ -1,0 +1,862 @@
+{
+  "id": 58,
+  "title": "E-commerce Order Fulfillment",
+  "subtitle": "TEST-EN-LONG-33",
+  "width": 6170,
+  "height": 1110,
+  "lanes": [
+    {
+      "id": "lane-1",
+      "label": "Customer",
+      "y": 20,
+      "h": 210
+    },
+    {
+      "id": "lane-2",
+      "label": "Order Management",
+      "y": 230,
+      "h": 210
+    },
+    {
+      "id": "lane-3",
+      "label": "Warehouse",
+      "y": 440,
+      "h": 210
+    },
+    {
+      "id": "lane-4",
+      "label": "Shipping",
+      "y": 650,
+      "h": 210
+    },
+    {
+      "id": "lane-5",
+      "label": "Finance",
+      "y": 860,
+      "h": 210
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "x": 90,
+      "y": 95,
+      "w": 210,
+      "h": 60,
+      "laneId": "lane-1",
+      "text": "Customer places order",
+      "info": {
+        "general": [
+          "Step 1: Customer places order."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "parallelogram",
+      "x": 340,
+      "y": 300,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Order data captured",
+      "info": {
+        "general": [
+          "Step 2: Order data captured."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      },
+      "dash": true
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "x": 590,
+      "y": 930,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-5",
+      "text": "Validate payment",
+      "info": {
+        "general": [
+          "Step 3: Validate payment."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "diamond",
+      "x": 840,
+      "y": 890,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-5",
+      "text": "Payment approved?",
+      "info": {
+        "general": [
+          "Step 4: Payment approved?."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "x": 1090,
+      "y": 90,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-1",
+      "text": "Notify payment failed",
+      "info": {
+        "general": [
+          "Step 5: Notify payment failed."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "pill",
+      "x": 1340,
+      "y": 95,
+      "w": 210,
+      "h": 60,
+      "laneId": "lane-1",
+      "text": "Order cancelled",
+      "info": {
+        "general": [
+          "Step 6: Order cancelled."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "x": 1090,
+      "y": 300,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Create order record",
+      "info": {
+        "general": [
+          "Step 7: Create order record."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "parallelogram",
+      "x": 1340,
+      "y": 300,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Generate pick list",
+      "info": {
+        "general": [
+          "Step 8: Generate pick list."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      },
+      "dash": true
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "x": 1590,
+      "y": 510,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-3",
+      "text": "Locate items",
+      "info": {
+        "general": [
+          "Step 9: Locate items."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "diamond",
+      "x": 1840,
+      "y": 470,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-3",
+      "text": "All items in stock?",
+      "info": {
+        "general": [
+          "Step 10: All items in stock?."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "x": 2090,
+      "y": 300,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Backorder item",
+      "info": {
+        "general": [
+          "Step 11: Backorder item."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "parallelogram",
+      "x": 2340,
+      "y": 300,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Notify customer of delay",
+      "info": {
+        "general": [
+          "Step 12: Notify customer of delay."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      },
+      "dash": true
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "x": 2090,
+      "y": 510,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-3",
+      "text": "Pick items",
+      "info": {
+        "general": [
+          "Step 13: Pick items."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "type": "rect",
+      "x": 2340,
+      "y": 510,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-3",
+      "text": "Quality check",
+      "info": {
+        "general": [
+          "Step 14: Quality check."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "type": "diamond",
+      "x": 2590,
+      "y": 470,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-3",
+      "text": "QC passed?",
+      "info": {
+        "general": [
+          "Step 15: QC passed?."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "type": "stroke",
+      "x": 2840,
+      "y": 515,
+      "w": 200,
+      "h": 60,
+      "laneId": "lane-3",
+      "text": "Return to stock / re-pick",
+      "info": {
+        "general": [
+          "Step 16: Return to stock / re-pick."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "type": "rect",
+      "x": 3090,
+      "y": 510,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-3",
+      "text": "Pack items",
+      "info": {
+        "general": [
+          "Step 17: Pack items."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "type": "parallelogram",
+      "x": 3340,
+      "y": 720,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-4",
+      "text": "Print shipping label",
+      "info": {
+        "general": [
+          "Step 18: Print shipping label."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      },
+      "dash": true
+    },
+    {
+      "id": 19,
+      "type": "rect",
+      "x": 3590,
+      "y": 720,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-4",
+      "text": "Assign carrier",
+      "info": {
+        "general": [
+          "Step 19: Assign carrier."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "type": "diamond",
+      "x": 3840,
+      "y": 680,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-4",
+      "text": "Express shipping?",
+      "info": {
+        "general": [
+          "Step 20: Express shipping?."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "type": "rect",
+      "x": 4090,
+      "y": 720,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-4",
+      "text": "Schedule express pickup",
+      "info": {
+        "general": [
+          "Step 21: Schedule express pickup."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "type": "rect",
+      "x": 4090,
+      "y": 800,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-4",
+      "text": "Standard dispatch",
+      "info": {
+        "general": [
+          "Step 22: Standard dispatch."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "type": "rect",
+      "x": 4340,
+      "y": 720,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-4",
+      "text": "Hand over to carrier",
+      "info": {
+        "general": [
+          "Step 23: Hand over to carrier."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "type": "parallelogram",
+      "x": 4590,
+      "y": 300,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Send tracking number",
+      "info": {
+        "general": [
+          "Step 24: Send tracking number."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      },
+      "dash": true
+    },
+    {
+      "id": 25,
+      "type": "rect",
+      "x": 4340,
+      "y": 930,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-5",
+      "text": "Capture final charge",
+      "info": {
+        "general": [
+          "Step 25: Capture final charge."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "type": "rect",
+      "x": 4590,
+      "y": 930,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-5",
+      "text": "Generate invoice",
+      "info": {
+        "general": [
+          "Step 26: Generate invoice."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "type": "stroke",
+      "x": 4840,
+      "y": 935,
+      "w": 200,
+      "h": 60,
+      "laneId": "lane-5",
+      "text": "Archive transaction",
+      "info": {
+        "general": [
+          "Step 27: Archive transaction."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 28,
+      "type": "rect",
+      "x": 4840,
+      "y": 90,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-1",
+      "text": "Customer receives package",
+      "info": {
+        "general": [
+          "Step 28: Customer receives package."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "type": "diamond",
+      "x": 5090,
+      "y": 50,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-1",
+      "text": "Issue with order?",
+      "info": {
+        "general": [
+          "Step 29: Issue with order?."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 30,
+      "type": "rect",
+      "x": 5340,
+      "y": 300,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Initiate return / refund",
+      "info": {
+        "general": [
+          "Step 30: Initiate return / refund."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 31,
+      "type": "parallelogram",
+      "x": 5590,
+      "y": 930,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-5",
+      "text": "Process refund",
+      "info": {
+        "general": [
+          "Step 31: Process refund."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      },
+      "dash": true
+    },
+    {
+      "id": 32,
+      "type": "stroke",
+      "x": 5590,
+      "y": 305,
+      "w": 200,
+      "h": 60,
+      "laneId": "lane-2",
+      "text": "Request feedback",
+      "info": {
+        "general": [
+          "Step 32: Request feedback."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 33,
+      "type": "pill",
+      "x": 5840,
+      "y": 95,
+      "w": 210,
+      "h": 60,
+      "laneId": "lane-1",
+      "text": "Order complete",
+      "info": {
+        "general": [
+          "Step 33: Order complete."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": 7,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 13,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 14,
+      "to": 15,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 15,
+      "to": 17,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 15,
+      "to": 16,
+      "s": "bottom",
+      "e": "bottom"
+    },
+    {
+      "from": 16,
+      "to": 13,
+      "s": "top",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": 17,
+      "to": 18,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 18,
+      "to": 19,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 19,
+      "to": 20,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 20,
+      "to": 21,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 20,
+      "to": 22,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 21,
+      "to": 23,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 22,
+      "to": 23,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 23,
+      "to": 24,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 23,
+      "to": 25,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 24,
+      "to": 28,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 25,
+      "to": 26,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 26,
+      "to": 27,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 28,
+      "to": 29,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 29,
+      "to": 30,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 29,
+      "to": 32,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 30,
+      "to": 31,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 31,
+      "to": 33,
+      "s": "top",
+      "e": "bottom",
+      "dashed": true
+    },
+    {
+      "from": 32,
+      "to": 33,
+      "s": "right",
+      "e": "left"
+    }
+  ]
+}

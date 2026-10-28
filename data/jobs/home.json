@@ -1,0 +1,450 @@
+{
+  "pdfs": [],
+  "groups": [
+    {
+      "id": 1,
+      "name": "İdarə Heyəti",
+      "parentId": null
+    },
+    {
+      "id": 2,
+      "name": "Administrativ Heyət",
+      "parentId": null
+    },
+    {
+      "id": 3,
+      "name": "Anbar logistikası şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 4,
+      "name": "ALŞ / Dağıtım bölməsi",
+      "parentId": 3
+    },
+    {
+      "id": 5,
+      "name": "Biznes departamenti",
+      "parentId": null
+    },
+    {
+      "id": 6,
+      "name": "BD / Biznes departamenti",
+      "parentId": 5
+    },
+    {
+      "id": 7,
+      "name": "BD / Beynəlxalq logistika şöbəsi",
+      "parentId": 5
+    },
+    {
+      "id": 8,
+      "name": "BD / Biznesin inkişafı şöbəsi",
+      "parentId": 5
+    },
+    {
+      "id": 9,
+      "name": "BD / Ölkədaxili logistika şöbəsi",
+      "parentId": 5
+    },
+    {
+      "id": 10,
+      "name": "BD / Yığım şöbəsi",
+      "parentId": 5
+    },
+    {
+      "id": 11,
+      "name": "Beynəlxalq daşımalar departamenti",
+      "parentId": null
+    },
+    {
+      "id": 12,
+      "name": "BDD / Beynəlxalq daşımalar departamenti",
+      "parentId": 11
+    },
+    {
+      "id": 13,
+      "name": "BDD / Əməliyyatlar bölməsi",
+      "parentId": 11
+    },
+    {
+      "id": 14,
+      "name": "BDD / İdxal-ixrac əməliyyatları şöbəsi",
+      "parentId": 11
+    },
+    {
+      "id": 15,
+      "name": "BDD / Tarif-qiymətləndirmə bölməsi",
+      "parentId": 11
+    },
+    {
+      "id": 16,
+      "name": "BDD / Təhlil və hesabatlıq şöbəsi",
+      "parentId": 11
+    },
+    {
+      "id": 17,
+      "name": "BDD / Tranzit əməliyyatları şöbəsi",
+      "parentId": 11
+    },
+    {
+      "id": 18,
+      "name": "Daxili audit departamenti",
+      "parentId": null
+    },
+    {
+      "id": 19,
+      "name": "Daxili daşımalar departamenti",
+      "parentId": null
+    },
+    {
+      "id": 20,
+      "name": "Əməliyyatların konfiqurasiyası və transformasiya departamenti",
+      "parentId": null
+    },
+    {
+      "id": 21,
+      "name": "ƏKTD / Əməliyyatların konfiqurasiyası və transformasiya departamenti",
+      "parentId": 20
+    },
+    {
+      "id": 22,
+      "name": "ƏKTD / Anbar əməliyyatları şöbəsi (WMS)",
+      "parentId": 20
+    },
+    {
+      "id": 23,
+      "name": "ƏKTD / Anbar əməliyyatlarına nəzarət şöbəsi",
+      "parentId": 20
+    },
+    {
+      "id": 24,
+      "name": "ƏKTD / Sistem əməliyyatları şöbəsi (UDPAS)",
+      "parentId": 20
+    },
+    {
+      "id": 25,
+      "name": "ƏKTD / Sistem əməliyyatlarına nəzarət şöbəsi",
+      "parentId": 20
+    },
+    {
+      "id": 26,
+      "name": "Hüquq departamenti",
+      "parentId": null
+    },
+    {
+      "id": 27,
+      "name": "HD / Hüquq departamenti",
+      "parentId": 26
+    },
+    {
+      "id": 28,
+      "name": "HD / Hüquqi təminat şöbəsi",
+      "parentId": 26
+    },
+    {
+      "id": 29,
+      "name": "HD / Müqavilələr və korporativ işlər şöbəsi",
+      "parentId": 26
+    },
+    {
+      "id": 30,
+      "name": "İctimaiyyətlə əlaqələr və marketinq şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 31,
+      "name": "İnformasiya texnologiyaları şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 32,
+      "name": "İnfrastruktur şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 33,
+      "name": "Təsərrüfat bölməsi / Təmizlik qrupu (ərazi üzrə)",
+      "parentId": 32
+    },
+    {
+      "id": 34,
+      "name": "Təsərrüfat bölməsi / Təmizlik qrupu (ofislər üzrə)",
+      "parentId": 32
+    },
+    {
+      "id": 35,
+      "name": "Təsərrüfat şöbəsi",
+      "parentId": 32
+    },
+    {
+      "id": 36,
+      "name": "İnventarların idarə edilməsi şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 37,
+      "name": "İnsan resursları və inzibati departament",
+      "parentId": null
+    },
+    {
+      "id": 38,
+      "name": "İRİD / İnsan resursları və inzibati departament",
+      "parentId": 37
+    },
+    {
+      "id": 39,
+      "name": "İRİD / Arxiv və kargüzarlıq şöbəsi",
+      "parentId": 37
+    },
+    {
+      "id": 40,
+      "name": "İRİD / Əmək münasibətlərinin rəsmiləşdirməsi şöbəsi",
+      "parentId": 37
+    },
+    {
+      "id": 41,
+      "name": "İRİD / İstedadların cəlbi və idarə olunması şöbəsi",
+      "parentId": 37
+    },
+    {
+      "id": 42,
+      "name": "Keyfiyyətə nəzarət və SƏTƏM şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 43,
+      "name": "Layihələrin idarə olunması departamenti",
+      "parentId": null
+    },
+    {
+      "id": 44,
+      "name": "LİOD / Layihələrin idarə olunması departamenti",
+      "parentId": 43
+    },
+    {
+      "id": 45,
+      "name": "LİOD / Araşdırma və Strategiya şöbəsi",
+      "parentId": 43
+    },
+    {
+      "id": 46,
+      "name": "LİOD / Layihələrin təşkili və monitorinqi şöbəsi",
+      "parentId": 43
+    },
+    {
+      "id": 47,
+      "name": "Maliyyə departamenti",
+      "parentId": null
+    },
+    {
+      "id": 48,
+      "name": "MD / Maliyyə departamenti",
+      "parentId": 47
+    },
+    {
+      "id": 49,
+      "name": "MD / Büdcə və hesabatlılıq şöbəsi",
+      "parentId": 47
+    },
+    {
+      "id": 50,
+      "name": "MD / Mühasibatlıq şöbəsi",
+      "parentId": 47
+    },
+    {
+      "id": 51,
+      "name": "Manevra və planlama ofisi",
+      "parentId": null
+    },
+    {
+      "id": 52,
+      "name": "MP / Manevra və planlama ofisi",
+      "parentId": 51
+    },
+    {
+      "id": 53,
+      "name": "MP / DY infrastrukturu şöbəsi",
+      "parentId": 51
+    },
+    {
+      "id": 54,
+      "name": "MP / Hərəkətin idarə olunması şöbəsi",
+      "parentId": 51
+    },
+    {
+      "id": 55,
+      "name": "MP / Lokomativ şöbəsi",
+      "parentId": 51
+    },
+    {
+      "id": 56,
+      "name": "Risklərə nəzarət və monitorinq şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 57,
+      "name": "Sahə əməliyyatları ofisi",
+      "parentId": null
+    },
+    {
+      "id": 58,
+      "name": "SƏ / Sahə əməliyyatları ofisi",
+      "parentId": 57
+    },
+    {
+      "id": 59,
+      "name": "SƏ / Yük əməliyyatları şöbəsi",
+      "parentId": 57
+    },
+    {
+      "id": 60,
+      "name": "SƏ / Anbar əməliyyatları şöbəsi",
+      "parentId": 57
+    },
+    {
+      "id": 61,
+      "name": "SƏ / Avtokar əməliyyatları şöbəsi",
+      "parentId": 57
+    },
+    {
+      "id": 62,
+      "name": "SƏ / Konteyner əməliyyatları şöbəsi",
+      "parentId": 57
+    },
+    {
+      "id": 63,
+      "name": "SƏ / Kran və əl yükü əməliyyatları şöbəsi",
+      "parentId": 57
+    },
+    {
+      "id": 64,
+      "name": "Təchizat şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 65,
+      "name": "Təchizat şöbəsi / Daxili anbar bölməsi",
+      "parentId": 64
+    },
+    {
+      "id": 66,
+      "name": "Təhlükəsizlik şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 67,
+      "name": "Təhlükəsizlik şöbəsi / Elektrik təminatı və Təmir bölməsi",
+      "parentId": 66
+    },
+    {
+      "id": 68,
+      "name": "Təmir və texnikaya nəzarət şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 69,
+      "name": "TIR Park və minik avtomobillərinin dayanacağı şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 70,
+      "name": "TPMADŞ / Mərkəzi buraxılış məntəqəsi",
+      "parentId": 69
+    },
+    {
+      "id": 71,
+      "name": "TPMADŞ / Minik avtomobillərinin buraxılış məntəqəsi",
+      "parentId": 69
+    },
+    {
+      "id": 72,
+      "name": "TPMADŞ / Tır Parka buraxılış məntəqəsi",
+      "parentId": 69
+    },
+    {
+      "id": 73,
+      "name": "Vahid pəncərə departamenti",
+      "parentId": null
+    },
+    {
+      "id": 74,
+      "name": "VPD / Vahid pəncərə departamenti",
+      "parentId": 73
+    },
+    {
+      "id": 75,
+      "name": "VPD / Əməliyyatlar və koordinasiya şöbəsi",
+      "parentId": 73
+    },
+    {
+      "id": 76,
+      "name": "VPD / Müştəri xidməti şöbəsi",
+      "parentId": 73
+    },
+    {
+      "id": 77,
+      "name": "MB Broker",
+      "parentId": null
+    },
+    {
+      "id": 78,
+      "name": "BBGİ ofisi",
+      "parentId": 77
+    },
+    {
+      "id": 79,
+      "name": "Bəyannamə bölməsi",
+      "parentId": 77
+    },
+    {
+      "id": 80,
+      "name": "Gömrük təmsilçiliyi bölməsi",
+      "parentId": 77
+    },
+    {
+      "id": 81,
+      "name": "HNBGİ ofisi",
+      "parentId": 77
+    },
+    {
+      "id": 82,
+      "name": "Koordinasiya şöbəsi",
+      "parentId": 77
+    },
+    {
+      "id": 83,
+      "name": "Koordinasiya şöbəsi / Sertifikatlaşdırma bölməsi",
+      "parentId": 77
+    },
+    {
+      "id": 84,
+      "name": "Mühasibatlıq şöbəsi",
+      "parentId": 77
+    },
+    {
+      "id": 85,
+      "name": "Mühasibatlıq şöbəsi / Kassa - hesablaşmalar bölməsi",
+      "parentId": 77
+    },
+    {
+      "id": 86,
+      "name": "Abşeron Express",
+      "parentId": null
+    },
+    {
+      "id": 87,
+      "name": "Əməliyyat şöbəsi",
+      "parentId": 86
+    },
+    {
+      "id": 88,
+      "name": "Əməliyyat şöbəsi / İnzibati dəstək bölməsi",
+      "parentId": 86
+    },
+    {
+      "id": 89,
+      "name": "Logistika şöbəsi",
+      "parentId": 86
+    }
+  ]
+}

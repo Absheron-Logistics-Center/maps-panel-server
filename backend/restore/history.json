@@ -1,0 +1,5916 @@
+{
+ "version": 1,
+ "diagrams": [
+  {
+   "key": "git-diagram-1-4b65beba",
+   "oldId": 1,
+   "title": "Vaqonların Mərkəzə qəbulu prosesi",
+   "subtitle": "ALM-X1-C1",
+   "groupName": "Ümumi",
+   "status": null,
+   "deletedAround": "2026-07-22",
+   "note": "Tarixçədən bərpa edildi",
+   "body": {
+    "id": 1,
+    "title": "Vaqonların Mərkəzə qəbulu prosesi",
+    "width": 1820,
+    "height": 720,
+    "lanes": [
+     {
+      "id": "lane-1",
+      "label": "ADY",
+      "y": 20,
+      "h": 200
+     },
+     {
+      "id": "lane-2",
+      "label": "MPO\nHərəkətin idarə\nolunması şöbəsi",
+      "y": 220,
+      "h": 320
+     },
+     {
+      "id": "lane-3",
+      "label": "MPO\nLokomotiv şöbəsi",
+      "y": 540,
+      "h": 160
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "x": 100,
+      "y": 70,
+      "w": 230,
+      "h": 110,
+      "text": "Qatarın Abşeron dəmir yolu stansiyasından Mərkəzin qəbul-göndərmə parkına göndərilməsi üçün məlumatın verilməsi",
+      "info": {
+       "general": [
+        "Bu mərhələdə ADY-nin müvafiq əməkdaşı Mərkəz təyinatlı qatarın qəbul-göndərmə parkına göndərilməsi barədə Şöbəyə telefon zəngi vasitəsilə ilkin məlumat verir.",
+        "Verilən məlumat sonrakı razılaşdırma, marşrut planlaşdırılması və parkda yolun hazırlanması üçün başlanğıc siqnal rolunu oynayır.",
+        "Bu addımda məlumatın vaxtında və düzgün ötürülməsi bütün qəbul prosesinin təhlükəsiz və ardıcıl icrası üçün əsas şərtdir."
+       ],
+       "risks": [
+        "Məlumatın gec verilməsi nəticəsində qəbul-göndərmə parkında hazırlıq işlərinin ləngiməsi.",
+        "Qatar nömrəsi, tərkib və ya təyinat barədə məlumatın səhv ötürülməsi.",
+        "Telefon əlaqəsində anlaşılmazlıq səbəbindən proses iştirakçıları arasında koordinasiya pozuntusu."
+       ]
+      }
+     },
+     {
+      "id": 5,
+      "type": "rect",
+      "x": 600,
+      "y": 80,
+      "w": 220,
+      "h": 90,
+      "text": "Vağonların Abşeron dəmir yolu stansiyasından Mərkəzin qəbul-göndərmə parkına gətirilməsi"
+     },
+     {
+      "id": 2,
+      "type": "rect",
+      "x": 100,
+      "y": 270,
+      "w": 220,
+      "h": 100,
+      "text": "Qatarın Mərkəzin qəbul-göndərmə parkına qəbul edilməsinin razılaşdırılması"
+     },
+     {
+      "id": 3,
+      "type": "rect",
+      "x": 100,
+      "y": 410,
+      "w": 220,
+      "h": 110,
+      "text": "Marşrutun müəyyən edilməsi və Mərkəzin qəbul-göndərmə parkının müvafiq yolunun müəyyən edilməsi"
+     },
+     {
+      "id": 4,
+      "type": "rect",
+      "x": 380,
+      "y": 350,
+      "w": 220,
+      "h": 80,
+      "text": "\"ADY\"-yə qatarın göndərilməsinə dair razılığın bildirilməsi"
+     },
+     {
+      "id": 6,
+      "type": "rect",
+      "x": 860,
+      "y": 270,
+      "w": 220,
+      "h": 100,
+      "text": "Yükə dair sənədlərin qəbulu və hərəkət tərkibinin tormoz başmaqları ilə bərkidilməsi"
+     },
+     {
+      "id": 7,
+      "type": "rect",
+      "x": 860,
+      "y": 400,
+      "w": 220,
+      "h": 70,
+      "text": "Natura vərəqəsinin tərtib edilməsi"
+     },
+     {
+      "id": 8,
+      "type": "rect",
+      "x": 860,
+      "y": 490,
+      "w": 220,
+      "h": 100,
+      "text": "Kommersiya baxışının təşkil edilməsi və zəruri hallarda uyğunsuzluqların qeydiyyatının aparılması"
+     },
+     {
+      "id": 9,
+      "type": "rect",
+      "x": 1200,
+      "y": 270,
+      "w": 220,
+      "h": 90,
+      "text": "\"UDPAS\" proqramında vaqonlara dair müvafiq məlumatların daxil edilməsi"
+     },
+     {
+      "id": 10,
+      "type": "rect",
+      "x": 1200,
+      "y": 380,
+      "w": 220,
+      "h": 70,
+      "text": "Sənədlərin VPD-yə təhvil verilməsi"
+     },
+     {
+      "id": 11,
+      "type": "rect",
+      "x": 1200,
+      "y": 470,
+      "w": 220,
+      "h": 90,
+      "text": "Vaqonların çeşidləmə planının hazırlanması və razılaşdırılması"
+     },
+     {
+      "id": 12,
+      "type": "pill",
+      "x": 1480,
+      "y": 580,
+      "w": 240,
+      "h": 110,
+      "text": "Vaqonların Mərkəzin terminal yollarına yerləşdirilməsi və hərəkət tərkiblərinin tormoz başmaqları ilə bərkidilməsi"
+     }
+    ],
+    "edges": [
+     {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 4,
+      "to": 5,
+      "s": "top",
+      "e": "bottom"
+     },
+     {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "top",
+      "via": [
+       {
+        "x": 1080,
+        "y": 125
+       }
+      ]
+     },
+     {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 7,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 6,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 9,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 8,
+      "to": 11,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 10,
+      "to": 11,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "top"
+     }
+    ],
+    "subtitle": "ALM-X1-C1"
+   }
+  },
+  {
+   "key": "git-diagram-2-4b65beba",
+   "oldId": 2,
+   "title": "Dəmir yolu ilə daxil olan yüklərə dair sənədlərin çeşidlənməsi prosesi",
+   "subtitle": "ALM-X1-C1",
+   "groupName": "Ümumi",
+   "status": null,
+   "deletedAround": "2026-07-22",
+   "note": "Tarixçədən bərpa edildi",
+   "body": {
+    "id": 2,
+    "title": "Dəmir yolu ilə daxil olan yüklərə dair sənədlərin çeşidlənməsi prosesi",
+    "width": 1820,
+    "height": 800,
+    "lanes": [
+     {
+      "id": "lane-1",
+      "label": "MPO",
+      "y": 20,
+      "h": 170
+     },
+     {
+      "id": "lane-2",
+      "label": "VPD-nin Əməliyyatlar\nvə koordinasiya şöbəsi",
+      "y": 190,
+      "h": 220
+     },
+     {
+      "id": "lane-3",
+      "label": "Müştəri",
+      "y": 410,
+      "h": 130
+     },
+     {
+      "id": "lane-4",
+      "label": "VPD-nin Müştəri\nxidmət şöbəsi",
+      "y": 540,
+      "h": 130
+     },
+     {
+      "id": "lane-5",
+      "label": "VPD-nin Müştəri xidmətinin\nşöbəsinin Xəzinəsi",
+      "y": 670,
+      "h": 110
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "x": 100,
+      "y": 60,
+      "w": 240,
+      "h": 100,
+      "text": "Qatarın Abşeron dəmir yolu stansiyasından Mərkəzin qəbul-göndərmə parkına göndərilməsi üçün məlumatın verilməsi"
+     },
+     {
+      "id": 2,
+      "type": "rect",
+      "x": 400,
+      "y": 70,
+      "w": 220,
+      "h": 80,
+      "text": "Yükə dair sənədlərin VDP-yə təhvil verilməsi"
+     },
+     {
+      "id": 3,
+      "type": "rect",
+      "x": 100,
+      "y": 220,
+      "w": 220,
+      "h": 70,
+      "text": "Yükə dair sənədlərin qəbul edilməsi"
+     },
+     {
+      "id": 4,
+      "type": "rect",
+      "x": 100,
+      "y": 320,
+      "w": 220,
+      "h": 70,
+      "text": "Yükə dair sənədlərin çeşidlənməsi"
+     },
+     {
+      "id": 5,
+      "type": "rect",
+      "x": 400,
+      "y": 220,
+      "w": 240,
+      "h": 90,
+      "text": "Yükə dair sənədlərin emal edilməsi və müvafiq məlumatların proqrama daxil edilməsi"
+     },
+     {
+      "id": "5.1",
+      "type": "stroke",
+      "x": 700,
+      "y": 220,
+      "w": 250,
+      "h": 80,
+      "text": "SMGS yük nəqliyyat qaiməsinin 1-ci və 2-ci nüsxələrinin möhürlənməsi"
+     },
+     {
+      "id": "5.2",
+      "type": "stroke",
+      "x": 980,
+      "y": 220,
+      "w": 250,
+      "h": 80,
+      "text": "SMGS yük nəqliyyat qaiməsinin 2-ci və 3-cü nüsxələrinin ADY-yə təhvil verilməsi"
+     },
+     {
+      "id": 6,
+      "type": "rect",
+      "x": 400,
+      "y": 330,
+      "w": 240,
+      "h": 80,
+      "text": "Müştəri ilə əlaqə yaradılması və yükün Mərkəzə çatması barədə məlumat verilməsi"
+     },
+     {
+      "id": 7,
+      "type": "rect",
+      "x": 400,
+      "y": 440,
+      "w": 220,
+      "h": 70,
+      "text": "Markajın gəlməsi"
+     },
+     {
+      "id": 9,
+      "type": "rect",
+      "x": 700,
+      "y": 440,
+      "w": 220,
+      "h": 70,
+      "text": "Gömrük rəsmiləşdirilməsinin həyata keçirilməsi"
+     },
+     {
+      "id": 12,
+      "type": "rect",
+      "x": 1000,
+      "y": 440,
+      "w": 220,
+      "h": 70,
+      "text": "Ödənişin həyata keçirilməsi"
+     },
+     {
+      "id": 8,
+      "type": "rect",
+      "x": 400,
+      "y": 570,
+      "w": 220,
+      "h": 80,
+      "text": "Yükə dair sənədlərin gömrük rəsmiləşdirilməsi məqsədilə müştəriyə təqdim edilməsi"
+     },
+     {
+      "id": 10,
+      "type": "rect",
+      "x": 700,
+      "y": 570,
+      "w": 240,
+      "h": 80,
+      "text": "Cəmiyyət tərəfindən göstərici rekvizitlərə dair sifariş sənədinin hazırlanması"
+     },
+     {
+      "id": 11,
+      "type": "rect",
+      "x": 1000,
+      "y": 570,
+      "w": 220,
+      "h": 80,
+      "text": "Müştərinin ödəniş icrası üçün Mərkəzin xəzinəsinə yönləndirilməsi"
+     },
+     {
+      "id": 13,
+      "type": "rect",
+      "x": 1000,
+      "y": 690,
+      "w": 220,
+      "h": 80,
+      "text": "Ödənişin qəbul edilməsi və ödənişə dair məlumatların proqrama daxil olunması"
+     },
+     {
+      "id": "13.1",
+      "type": "stroke",
+      "x": 1280,
+      "y": 440,
+      "w": 220,
+      "h": 80,
+      "text": "Müştərinin yüklənmə sahəsinə yönləndirilməsi"
+     },
+     {
+      "id": 14,
+      "type": "pill",
+      "x": 1280,
+      "y": 690,
+      "w": 220,
+      "h": 80,
+      "text": "Proqramda buraxılışın verilməsi"
+     }
+    ],
+    "edges": [
+     {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top",
+      "via": [
+       {
+        "x": 210,
+        "y": 175
+       }
+      ]
+     },
+     {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 3,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 5,
+      "to": "5.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+     },
+     {
+      "from": "5.1",
+      "to": "5.2",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+     },
+     {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 7,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 8,
+      "to": 9,
+      "s": "top",
+      "e": "bottom",
+      "via": [
+       {
+        "x": 810,
+        "y": 540
+       }
+      ]
+     },
+     {
+      "from": 8,
+      "to": 10,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 11,
+      "to": 13,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 13,
+      "to": 12,
+      "s": "top",
+      "e": "bottom"
+     },
+     {
+      "from": 13,
+      "to": 14,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 12,
+      "to": "13.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+     }
+    ],
+    "subtitle": "ALM-X1-C1"
+   }
+  },
+  {
+   "key": "git-diagram-3-4b65beba",
+   "oldId": 3,
+   "title": "Dəmir yolu ilə idxal olunan vaqon yüklərinin yük avtomobilinə boşaldılması və müştəriyə təhvil verilməsi iş axını",
+   "subtitle": "ALM-X1-C1",
+   "groupName": "Ümumi",
+   "status": null,
+   "deletedAround": "2026-07-22",
+   "note": "Tarixçədən bərpa edildi",
+   "body": {
+    "id": 3,
+    "title": "Dəmir yolu ilə idxal olunan vaqon yüklərinin yük avtomobilinə boşaldılması və müştəriyə təhvil verilməsi iş axını",
+    "width": 1880,
+    "height": 1340,
+    "lanes": [
+     {
+      "id": "lane-1",
+      "label": "ADY",
+      "y": 20,
+      "h": 160
+     },
+     {
+      "id": "lane-2",
+      "label": "Manevra və\nplanlama ofisi",
+      "y": 180,
+      "h": 240
+     },
+     {
+      "id": "lane-3",
+      "label": "Vahid Pəncərə\ndepartamenti",
+      "y": 420,
+      "h": 240
+     },
+     {
+      "id": "lane-4",
+      "label": "Müştəri",
+      "y": 660,
+      "h": 160
+     },
+     {
+      "id": "lane-5",
+      "label": "Sahə əməliyyatları ofisinin\nYük əməliyyatları şöbəsi /\nDigər aidiyyəti şöbələr",
+      "y": 820,
+      "h": 380
+     },
+     {
+      "id": "lane-6",
+      "label": "DGK",
+      "y": 1200,
+      "h": 160
+     },
+     {
+      "id": "lane-7",
+      "label": "TIR park və\nMAD şöbəsi",
+      "y": 1360,
+      "h": 160
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "x": 190,
+      "y": 40,
+      "w": 280,
+      "h": 80,
+      "text": "Qatarın Abşeron yük dəmiryolu stansiyasından Mərkəzin qəbulgöndərmə parkına gətirilməsi",
+      "laneId": "lane-1"
+     },
+     {
+      "id": 2,
+      "type": "rect",
+      "x": 90,
+      "y": 210,
+      "w": 220,
+      "h": 90,
+      "text": "Yükə dair sənədlərin qəbulu və hərəkət tərkibinin tormoz başmaqları ilə bərkidilməsi",
+      "laneId": "lane-2"
+     },
+     {
+      "id": 3,
+      "type": "rect",
+      "x": 360,
+      "y": 210,
+      "w": 200,
+      "h": 70,
+      "text": "Natura vərəqəsinin tərtib edilməsi",
+      "laneId": "lane-2"
+     },
+     {
+      "id": 4,
+      "type": "rect",
+      "x": 600,
+      "y": 210,
+      "w": 240,
+      "h": 90,
+      "text": "Kommersiya baxışının təşkil edilməsi və zəruri hallarda uyğunsuzluqların qeydiyyatının aparılması",
+      "laneId": "lane-2"
+     },
+     {
+      "id": 5,
+      "type": "rect",
+      "x": 90,
+      "y": 320,
+      "w": 220,
+      "h": 70,
+      "text": "Sənədlərin VPD-yə təhvil verilməsi",
+      "laneId": "lane-2"
+     },
+     {
+      "id": "5.1",
+      "type": "stroke",
+      "x": 360,
+      "y": 320,
+      "w": 260,
+      "h": 80,
+      "text": "\"UDPAS\" proqramında vaqonlara dair müvafiq məlumatların daxil edilməsi",
+      "laneId": "lane-2"
+     },
+     {
+      "id": "5.2",
+      "type": "stroke",
+      "x": 660,
+      "y": 320,
+      "w": 260,
+      "h": 80,
+      "text": "Vaqonların aidiyyəti üzrə Mərkəzin terminal yollarına yerləşdirilməsi",
+      "laneId": "lane-2"
+     },
+     {
+      "id": "5.3",
+      "type": "stroke",
+      "x": 960,
+      "y": 320,
+      "w": 260,
+      "h": 80,
+      "text": "Hərəkət tərkibinin tormoz başmaqların quraşdırılması",
+      "laneId": "lane-2"
+     },
+     {
+      "id": 6,
+      "type": "rect",
+      "x": 90,
+      "y": 450,
+      "w": 220,
+      "h": 80,
+      "text": "Yükə dair sənədlərin qəbulu və çeşidlənməsi",
+      "laneId": "lane-3"
+     },
+     {
+      "id": 7,
+      "type": "rect",
+      "x": 360,
+      "y": 450,
+      "w": 240,
+      "h": 80,
+      "text": "Sənədlərin emalı və müvafiq məlumatların \"UDPAS\" proqramına əlavə edilməsi",
+      "laneId": "lane-3"
+     },
+     {
+      "id": "7.1",
+      "type": "stroke",
+      "x": 660,
+      "y": 450,
+      "w": 260,
+      "h": 80,
+      "text": "SMGS yük nəqliyyat qaiməsinin 1-ci və 2-ci nüsxələrinin möhürlənməsi",
+      "laneId": "lane-3"
+     },
+     {
+      "id": "7.2",
+      "type": "stroke",
+      "x": 960,
+      "y": 450,
+      "w": 260,
+      "h": 80,
+      "text": "SMGS yük nəqliyyat qaiməsinin 2-ci və 3-cü nüsxələrinin ADY-yə təhvil verilməsi",
+      "laneId": "lane-3"
+     },
+     {
+      "id": 8,
+      "type": "rect",
+      "x": 90,
+      "y": 560,
+      "w": 240,
+      "h": 80,
+      "text": "Müştəri ilə əlaqə yaradılması və yükün Mərkəzə çatması barədə məlumat verilməsi",
+      "laneId": "lane-3"
+     },
+     {
+      "id": 9,
+      "type": "rect",
+      "x": 360,
+      "y": 560,
+      "w": 240,
+      "h": 80,
+      "text": "Yükə dair sənədləri gömrük rəsmiləşdirilməsi məqsədilə müştəriyə təqdim edilməsi",
+      "laneId": "lane-3"
+     },
+     {
+      "id": 11,
+      "type": "rect",
+      "x": 680,
+      "y": 560,
+      "w": 240,
+      "h": 80,
+      "text": "Cəmiyyət tərəfindən göstəriləcək xidmətlərə dair sifariş sənədinin hazırlanması",
+      "laneId": "lane-3"
+     },
+     {
+      "id": 13,
+      "type": "rect",
+      "x": 960,
+      "y": 560,
+      "w": 240,
+      "h": 80,
+      "text": "Ödənişin qəbul edilməsi və müştərinin yükaşırma sahəsinə yönləndirilməsi",
+      "laneId": "lane-3"
+     },
+     {
+      "id": 10,
+      "type": "rect",
+      "x": 360,
+      "y": 690,
+      "w": 240,
+      "h": 80,
+      "text": "Yükə dair sənədləri gömrük rəsmiləşdirilməsi məqsədilə müştəriyə təqdim edilməsi",
+      "laneId": "lane-4"
+     },
+     {
+      "id": 12,
+      "type": "rect",
+      "x": 660,
+      "y": 690,
+      "w": 240,
+      "h": 70,
+      "text": "Ödənişin həyata keçirilməsi",
+      "laneId": "lane-4"
+     },
+     {
+      "id": 14,
+      "type": "rect",
+      "x": 960,
+      "y": 690,
+      "w": 240,
+      "h": 70,
+      "text": "Müvafiq yükaşırma sahəsinə yaxınlaşması",
+      "laneId": "lane-4"
+     },
+     {
+      "id": 15,
+      "type": "rect",
+      "x": 90,
+      "y": 850,
+      "w": 240,
+      "h": 130,
+      "text": "Sənədlərin yoxlanılması və Cəmiyyət tərəfindən göstərilən xidmətlərə dair terminal rüsumların tam şəkildə ödənilməsinin nəzərdən keçirilməsi",
+      "laneId": "lane-5"
+     },
+     {
+      "id": 18,
+      "type": "rect",
+      "x": 380,
+      "y": 850,
+      "w": 240,
+      "h": 90,
+      "text": "Yükün aşırılması üçün zəruri işçi qüvvəsi və texniki resursların cəlb edilməsi",
+      "laneId": "lane-5"
+     },
+     {
+      "id": 19,
+      "type": "rect",
+      "x": 660,
+      "y": 850,
+      "w": 240,
+      "h": 90,
+      "text": "Yükaşırma əməliyyatının icra edilməsi (yüklərin vaqondan boşaldılaraq yük avtomobilinə yüklənməsi)",
+      "laneId": "lane-5"
+     },
+     {
+      "id": "5.3.1",
+      "type": "stroke",
+      "x": 1280,
+      "y": 850,
+      "w": 260,
+      "h": 90,
+      "text": "Vaqona vizual baxışın keçirilməsi",
+      "laneId": "lane-5"
+     },
+     {
+      "id": 16,
+      "type": "rect",
+      "x": 90,
+      "y": 1000,
+      "w": 240,
+      "h": 130,
+      "text": "Mərkəzin TIR parkında olan əvvəlcədən qeydiyyatda olan müştərinin nəqliyyat vasitəsinə \"UDPAS\" proqramı üzərindən çağırış verilməsi",
+      "laneId": "lane-5"
+     },
+     {
+      "id": 17,
+      "type": "rect",
+      "x": 380,
+      "y": 1000,
+      "w": 240,
+      "h": 90,
+      "text": "DGK əməkdaşları ilə birgə vaqona baxışın keçirilməsi və yükün açılması",
+      "laneId": "lane-5"
+     },
+     {
+      "id": 20,
+      "type": "rect",
+      "x": 660,
+      "y": 1000,
+      "w": 240,
+      "h": 110,
+      "text": "Yükaşırma əməliyyatı başa çatdıqdan sonra \"UDPAS\" proqramı üzərindən yük avtomobilinin Mərkəzdən çıxışına dair buraxılışın verilməsi",
+      "laneId": "lane-5"
+     },
+     {
+      "id": "20.1",
+      "type": "stroke",
+      "x": 960,
+      "y": 1000,
+      "w": 260,
+      "h": 80,
+      "text": "Vaqona vizual baxışın keçirilməsi",
+      "laneId": "lane-5"
+     },
+     {
+      "id": "20.2",
+      "type": "stroke",
+      "x": 960,
+      "y": 1090,
+      "w": 260,
+      "h": 90,
+      "text": "Yükaşırma əməliyyatının başa çatmasına dair \"UDPAS\" proqramında qeydiyyatın aparılması",
+      "laneId": "lane-5"
+     },
+     {
+      "id": "16.1",
+      "type": "stroke",
+      "x": 90,
+      "y": 1230,
+      "w": 260,
+      "h": 70,
+      "text": "Yük avtomobilinin Mərkəzə daxil olmasının təmin edilməsi",
+      "laneId": "lane-6"
+     },
+     {
+      "id": "17.1",
+      "type": "stroke",
+      "x": 480,
+      "y": 1230,
+      "w": 260,
+      "h": 70,
+      "text": "Vaqona baxışın keçirilməsi və yükün açılması",
+      "laneId": "lane-6"
+     },
+     {
+      "id": 21,
+      "type": "pill",
+      "x": 880,
+      "y": 1390,
+      "w": 220,
+      "h": 90,
+      "text": "Yük avtomobilinin Mərkəzdən çıxışının təmin edilməsi",
+      "laneId": "lane-7"
+     }
+    ],
+    "edges": [
+     {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 2,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 5,
+      "to": "5.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+     },
+     {
+      "from": "5.1",
+      "to": "5.2",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+     },
+     {
+      "from": "5.2",
+      "to": "5.3",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+     },
+     {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 7,
+      "to": "7.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+     },
+     {
+      "from": "7.1",
+      "to": "7.2",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+     },
+     {
+      "from": 6,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 9,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 9,
+      "to": 11,
+      "s": "right",
+      "e": "left",
+      "via": [
+       {
+        "x": 630,
+        "y": 550
+       }
+      ]
+     },
+     {
+      "from": 11,
+      "to": 13,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 11,
+      "to": 12,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 12,
+      "to": 13,
+      "s": "top",
+      "e": "bottom",
+      "via": [
+       {
+        "x": 1080,
+        "y": 620
+       }
+      ]
+     },
+     {
+      "from": 13,
+      "to": 14,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 14,
+      "to": 15,
+      "s": "left",
+      "e": "top",
+      "via": [
+       {
+        "x": 210,
+        "y": 770
+       }
+      ]
+     },
+     {
+      "from": 15,
+      "to": 16,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 16,
+      "to": 17,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 17,
+      "to": 18,
+      "s": "top",
+      "e": "bottom"
+     },
+     {
+      "from": 18,
+      "to": 19,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 19,
+      "to": 20,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 20,
+      "to": 21,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 16,
+      "to": "16.1",
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+     },
+     {
+      "from": 17,
+      "to": "17.1",
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+     },
+     {
+      "from": 20,
+      "to": "20.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+     },
+     {
+      "from": "20.1",
+      "to": "20.2",
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+     },
+     {
+      "from": "5.3",
+      "to": "5.3.1",
+      "s": "right",
+      "e": "top",
+      "dashed": true
+     },
+     {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+     }
+    ],
+    "subtitle": "ALM-X1-C1"
+   }
+  },
+  {
+   "key": "git-diagram-4-83746140",
+   "oldId": 4,
+   "title": "test",
+   "subtitle": "",
+   "groupName": "Ümumi",
+   "status": null,
+   "deletedAround": "2026-07-21",
+   "note": "Tarixçədən bərpa edildi",
+   "body": {
+    "id": 4,
+    "title": "test",
+    "width": 2200,
+    "height": 900,
+    "lanes": [
+     {
+      "id": "lane-1780390458293",
+      "label": "1",
+      "y": 20,
+      "h": 180
+     },
+     {
+      "id": "lane-1780390460739",
+      "label": "2",
+      "y": 200,
+      "h": 180
+     },
+     {
+      "id": "lane-1780390466656",
+      "label": "3",
+      "y": 380,
+      "h": 180
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "x": 90,
+      "y": 60,
+      "laneId": "lane-1780390458293",
+      "w": 200,
+      "h": 50,
+      "text": "Yeni başlanğıc/sond sdcdsc sd c sdcscd\ndcsdc\ndisco",
+      "info": {
+       "general": [
+        "sdcasdcsdc"
+       ],
+       "risks": [
+        "sdcsdcsadcsadcsadcsdc"
+       ]
+      }
+     },
+     {
+      "id": 2,
+      "type": "rect",
+      "x": 110,
+      "y": 210,
+      "laneId": "lane-1780390460739",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ],
+       "risks": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 3,
+      "type": "stroke",
+      "x": 340,
+      "y": 210,
+      "laneId": "lane-1780390460739",
+      "w": 220,
+      "h": 60,
+      "text": "Yeni alt-addım",
+      "info": {
+       "general": [
+        ""
+       ],
+       "risks": [
+        ""
+       ]
+      }
+     }
+    ],
+    "edges": [
+     {
+      "from": 1,
+      "to": "2",
+      "s": "bottom",
+      "e": "top",
+      "dashed": false
+     }
+    ],
+    "subtitle": ""
+   }
+  },
+  {
+   "key": "git-diagram-101-4b65beba",
+   "oldId": 101,
+   "title": "Customer Support Ticket Resolution",
+   "subtitle": "TEST-EN-SHORT-12",
+   "groupName": "Test Workflows (EN)",
+   "status": null,
+   "deletedAround": "2026-07-22",
+   "note": "Tarixçədən bərpa edildi",
+   "body": {
+    "id": 101,
+    "title": "Customer Support Ticket Resolution",
+    "subtitle": "TEST-EN-SHORT-12",
+    "width": 2420,
+    "height": 690,
+    "lanes": [
+     {
+      "id": "lane-1",
+      "label": "Customer",
+      "y": 20,
+      "h": 210
+     },
+     {
+      "id": "lane-2",
+      "label": "Support Agent",
+      "y": 230,
+      "h": 210
+     },
+     {
+      "id": "lane-3",
+      "label": "Engineering",
+      "y": 440,
+      "h": 210
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "x": 90,
+      "y": 95,
+      "w": 210,
+      "h": 60,
+      "laneId": "lane-1",
+      "text": "Customer submits ticket",
+      "info": {
+       "general": [
+        "Step 1: Customer submits ticket."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 2,
+      "type": "parallelogram",
+      "x": 340,
+      "y": 300,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Ticket details received",
+      "info": {
+       "general": [
+        "Step 2: Ticket details received."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      },
+      "dash": true
+     },
+     {
+      "id": 3,
+      "type": "rect",
+      "x": 590,
+      "y": 300,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Agent reviews ticket",
+      "info": {
+       "general": [
+        "Step 3: Agent reviews ticket."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 4,
+      "type": "diamond",
+      "x": 840,
+      "y": 260,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-2",
+      "text": "Issue reproducible?",
+      "info": {
+       "general": [
+        "Step 4: Issue reproducible?."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 5,
+      "type": "rect",
+      "x": 1090,
+      "y": 300,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Request more information",
+      "info": {
+       "general": [
+        "Step 5: Request more information."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 6,
+      "type": "parallelogram",
+      "x": 1340,
+      "y": 90,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-1",
+      "text": "Customer provides info",
+      "info": {
+       "general": [
+        "Step 6: Customer provides info."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      },
+      "dash": true
+     },
+     {
+      "id": 7,
+      "type": "rect",
+      "x": 1090,
+      "y": 510,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-3",
+      "text": "Engineer investigates",
+      "info": {
+       "general": [
+        "Step 7: Engineer investigates."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 8,
+      "type": "diamond",
+      "x": 1340,
+      "y": 470,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-3",
+      "text": "Code fix needed?",
+      "info": {
+       "general": [
+        "Step 8: Code fix needed?."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 9,
+      "type": "rect",
+      "x": 1590,
+      "y": 510,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-3",
+      "text": "Deploy fix",
+      "info": {
+       "general": [
+        "Step 9: Deploy fix."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 10,
+      "type": "stroke",
+      "x": 1590,
+      "y": 305,
+      "w": 200,
+      "h": 60,
+      "laneId": "lane-2",
+      "text": "Update knowledge base",
+      "info": {
+       "general": [
+        "Step 10: Update knowledge base."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 11,
+      "type": "rect",
+      "x": 1840,
+      "y": 300,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Notify customer",
+      "info": {
+       "general": [
+        "Step 11: Notify customer."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 12,
+      "type": "pill",
+      "x": 2090,
+      "y": 95,
+      "w": 210,
+      "h": 60,
+      "laneId": "lane-1",
+      "text": "Ticket closed",
+      "info": {
+       "general": [
+        "Step 12: Ticket closed."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     }
+    ],
+    "edges": [
+     {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 4,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 6,
+      "to": 3,
+      "s": "top",
+      "e": "top",
+      "dashed": true
+     },
+     {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 8,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 9,
+      "to": 11,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "left"
+     }
+    ]
+   }
+  },
+  {
+   "key": "git-diagram-102-4b65beba",
+   "oldId": 102,
+   "title": "E-commerce Order Fulfillment",
+   "subtitle": "TEST-EN-LONG-33",
+   "groupName": "Test Workflows (EN)",
+   "status": null,
+   "deletedAround": "2026-07-22",
+   "note": "Tarixçədən bərpa edildi",
+   "body": {
+    "id": 102,
+    "title": "E-commerce Order Fulfillment",
+    "subtitle": "TEST-EN-LONG-33",
+    "width": 6170,
+    "height": 1110,
+    "lanes": [
+     {
+      "id": "lane-1",
+      "label": "Customer",
+      "y": 20,
+      "h": 210
+     },
+     {
+      "id": "lane-2",
+      "label": "Order Management",
+      "y": 230,
+      "h": 210
+     },
+     {
+      "id": "lane-3",
+      "label": "Warehouse",
+      "y": 440,
+      "h": 210
+     },
+     {
+      "id": "lane-4",
+      "label": "Shipping",
+      "y": 650,
+      "h": 210
+     },
+     {
+      "id": "lane-5",
+      "label": "Finance",
+      "y": 860,
+      "h": 210
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "x": 90,
+      "y": 95,
+      "w": 210,
+      "h": 60,
+      "laneId": "lane-1",
+      "text": "Customer places order",
+      "info": {
+       "general": [
+        "Step 1: Customer places order."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 2,
+      "type": "parallelogram",
+      "x": 340,
+      "y": 300,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Order data captured",
+      "info": {
+       "general": [
+        "Step 2: Order data captured."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      },
+      "dash": true
+     },
+     {
+      "id": 3,
+      "type": "rect",
+      "x": 590,
+      "y": 930,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-5",
+      "text": "Validate payment",
+      "info": {
+       "general": [
+        "Step 3: Validate payment."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 4,
+      "type": "diamond",
+      "x": 840,
+      "y": 890,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-5",
+      "text": "Payment approved?",
+      "info": {
+       "general": [
+        "Step 4: Payment approved?."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 5,
+      "type": "rect",
+      "x": 1090,
+      "y": 90,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-1",
+      "text": "Notify payment failed",
+      "info": {
+       "general": [
+        "Step 5: Notify payment failed."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 6,
+      "type": "pill",
+      "x": 1340,
+      "y": 95,
+      "w": 210,
+      "h": 60,
+      "laneId": "lane-1",
+      "text": "Order cancelled",
+      "info": {
+       "general": [
+        "Step 6: Order cancelled."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 7,
+      "type": "rect",
+      "x": 1090,
+      "y": 300,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Create order record",
+      "info": {
+       "general": [
+        "Step 7: Create order record."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 8,
+      "type": "parallelogram",
+      "x": 1340,
+      "y": 300,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Generate pick list",
+      "info": {
+       "general": [
+        "Step 8: Generate pick list."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      },
+      "dash": true
+     },
+     {
+      "id": 9,
+      "type": "rect",
+      "x": 1590,
+      "y": 510,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-3",
+      "text": "Locate items",
+      "info": {
+       "general": [
+        "Step 9: Locate items."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 10,
+      "type": "diamond",
+      "x": 1840,
+      "y": 470,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-3",
+      "text": "All items in stock?",
+      "info": {
+       "general": [
+        "Step 10: All items in stock?."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 11,
+      "type": "rect",
+      "x": 2090,
+      "y": 300,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Backorder item",
+      "info": {
+       "general": [
+        "Step 11: Backorder item."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 12,
+      "type": "parallelogram",
+      "x": 2340,
+      "y": 300,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Notify customer of delay",
+      "info": {
+       "general": [
+        "Step 12: Notify customer of delay."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      },
+      "dash": true
+     },
+     {
+      "id": 13,
+      "type": "rect",
+      "x": 2090,
+      "y": 510,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-3",
+      "text": "Pick items",
+      "info": {
+       "general": [
+        "Step 13: Pick items."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 14,
+      "type": "rect",
+      "x": 2340,
+      "y": 510,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-3",
+      "text": "Quality check",
+      "info": {
+       "general": [
+        "Step 14: Quality check."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 15,
+      "type": "diamond",
+      "x": 2590,
+      "y": 470,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-3",
+      "text": "QC passed?",
+      "info": {
+       "general": [
+        "Step 15: QC passed?."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 16,
+      "type": "stroke",
+      "x": 2840,
+      "y": 515,
+      "w": 200,
+      "h": 60,
+      "laneId": "lane-3",
+      "text": "Return to stock / re-pick",
+      "info": {
+       "general": [
+        "Step 16: Return to stock / re-pick."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 17,
+      "type": "rect",
+      "x": 3090,
+      "y": 510,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-3",
+      "text": "Pack items",
+      "info": {
+       "general": [
+        "Step 17: Pack items."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 18,
+      "type": "parallelogram",
+      "x": 3340,
+      "y": 720,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-4",
+      "text": "Print shipping label",
+      "info": {
+       "general": [
+        "Step 18: Print shipping label."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      },
+      "dash": true
+     },
+     {
+      "id": 19,
+      "type": "rect",
+      "x": 3590,
+      "y": 720,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-4",
+      "text": "Assign carrier",
+      "info": {
+       "general": [
+        "Step 19: Assign carrier."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 20,
+      "type": "diamond",
+      "x": 3840,
+      "y": 680,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-4",
+      "text": "Express shipping?",
+      "info": {
+       "general": [
+        "Step 20: Express shipping?."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 21,
+      "type": "rect",
+      "x": 4090,
+      "y": 720,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-4",
+      "text": "Schedule express pickup",
+      "info": {
+       "general": [
+        "Step 21: Schedule express pickup."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 22,
+      "type": "rect",
+      "x": 4090,
+      "y": 800,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-4",
+      "text": "Standard dispatch",
+      "info": {
+       "general": [
+        "Step 22: Standard dispatch."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 23,
+      "type": "rect",
+      "x": 4340,
+      "y": 720,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-4",
+      "text": "Hand over to carrier",
+      "info": {
+       "general": [
+        "Step 23: Hand over to carrier."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 24,
+      "type": "parallelogram",
+      "x": 4590,
+      "y": 300,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Send tracking number",
+      "info": {
+       "general": [
+        "Step 24: Send tracking number."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      },
+      "dash": true
+     },
+     {
+      "id": 25,
+      "type": "rect",
+      "x": 4340,
+      "y": 930,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-5",
+      "text": "Capture final charge",
+      "info": {
+       "general": [
+        "Step 25: Capture final charge."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 26,
+      "type": "rect",
+      "x": 4590,
+      "y": 930,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-5",
+      "text": "Generate invoice",
+      "info": {
+       "general": [
+        "Step 26: Generate invoice."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 27,
+      "type": "stroke",
+      "x": 4840,
+      "y": 935,
+      "w": 200,
+      "h": 60,
+      "laneId": "lane-5",
+      "text": "Archive transaction",
+      "info": {
+       "general": [
+        "Step 27: Archive transaction."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 28,
+      "type": "rect",
+      "x": 4840,
+      "y": 90,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-1",
+      "text": "Customer receives package",
+      "info": {
+       "general": [
+        "Step 28: Customer receives package."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 29,
+      "type": "diamond",
+      "x": 5090,
+      "y": 50,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-1",
+      "text": "Issue with order?",
+      "info": {
+       "general": [
+        "Step 29: Issue with order?."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 30,
+      "type": "rect",
+      "x": 5340,
+      "y": 300,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Initiate return / refund",
+      "info": {
+       "general": [
+        "Step 30: Initiate return / refund."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 31,
+      "type": "parallelogram",
+      "x": 5590,
+      "y": 930,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-5",
+      "text": "Process refund",
+      "info": {
+       "general": [
+        "Step 31: Process refund."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      },
+      "dash": true
+     },
+     {
+      "id": 32,
+      "type": "stroke",
+      "x": 5590,
+      "y": 305,
+      "w": 200,
+      "h": 60,
+      "laneId": "lane-2",
+      "text": "Request feedback",
+      "info": {
+       "general": [
+        "Step 32: Request feedback."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     },
+     {
+      "id": 33,
+      "type": "pill",
+      "x": 5840,
+      "y": 95,
+      "w": 210,
+      "h": 60,
+      "laneId": "lane-1",
+      "text": "Order complete",
+      "info": {
+       "general": [
+        "Step 33: Order complete."
+       ],
+       "risks": [
+        "Delay or miscommunication at this step."
+       ]
+      }
+     }
+    ],
+    "edges": [
+     {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 4,
+      "to": 7,
+      "s": "top",
+      "e": "bottom"
+     },
+     {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 10,
+      "to": 13,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 10,
+      "to": 11,
+      "s": "top",
+      "e": "bottom"
+     },
+     {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 12,
+      "to": 13,
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+     },
+     {
+      "from": 13,
+      "to": 14,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 14,
+      "to": 15,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 15,
+      "to": 17,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 15,
+      "to": 16,
+      "s": "bottom",
+      "e": "bottom"
+     },
+     {
+      "from": 16,
+      "to": 13,
+      "s": "top",
+      "e": "top",
+      "dashed": true
+     },
+     {
+      "from": 17,
+      "to": 18,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 18,
+      "to": 19,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 19,
+      "to": 20,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 20,
+      "to": 21,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 20,
+      "to": 22,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 21,
+      "to": 23,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 22,
+      "to": 23,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 23,
+      "to": 24,
+      "s": "top",
+      "e": "bottom"
+     },
+     {
+      "from": 23,
+      "to": 25,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 24,
+      "to": 28,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 25,
+      "to": 26,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 26,
+      "to": 27,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 28,
+      "to": 29,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 29,
+      "to": 30,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 29,
+      "to": 32,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 30,
+      "to": 31,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 31,
+      "to": 33,
+      "s": "top",
+      "e": "bottom",
+      "dashed": true
+     },
+     {
+      "from": 32,
+      "to": 33,
+      "s": "right",
+      "e": "left"
+     }
+    ]
+   }
+  },
+  {
+   "key": "git-diagram-103-4b65beba",
+   "oldId": 103,
+   "title": "Starting",
+   "subtitle": "STRG-0207-26",
+   "groupName": "Testing how it works",
+   "status": null,
+   "deletedAround": "2026-07-22",
+   "note": "Tarixçədən bərpa edildi",
+   "body": {
+    "id": 103,
+    "title": "Starting",
+    "subtitle": "STRG-0207-26",
+    "width": 2200,
+    "height": 960,
+    "lanes": [
+     {
+      "id": "lane-1782971717064",
+      "label": "Panel 1",
+      "y": 20,
+      "h": 160
+     },
+     {
+      "id": "lane-1782971723668",
+      "label": "Panel 2",
+      "y": 180,
+      "h": 160
+     },
+     {
+      "id": "lane-1782971735284",
+      "label": "Panel 3",
+      "y": 340,
+      "h": 160
+     },
+     {
+      "id": "lane-1782971782190",
+      "label": "Panel 4",
+      "y": 500,
+      "h": 160
+     },
+     {
+      "id": "lane-1782971787484",
+      "label": "Panel 5",
+      "y": 660,
+      "h": 160
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 100,
+      "y": 70,
+      "laneId": "lane-1782971717064",
+      "w": 200,
+      "h": 50,
+      "text": "Yeni başlanğıc/son",
+      "info": {
+       "general": [
+        ""
+       ],
+       "risks": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 100,
+      "y": 220,
+      "laneId": "lane-1782971723668",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ],
+       "risks": [
+        ""
+       ]
+      }
+     }
+    ],
+    "edges": []
+   }
+  },
+  {
+   "key": "git-diagram-105-83746140",
+   "oldId": 105,
+   "title": "HR İşə Qəbul və Adaptasiya Prosesi - Tam İş Axını",
+   "subtitle": "HR-DEPT-V1-030726",
+   "groupName": "HR - Human Resources",
+   "status": null,
+   "deletedAround": "2026-07-21",
+   "note": "Tarixçədən bərpa edildi",
+   "body": {
+    "id": 105,
+    "title": "HR İşə Qəbul və Adaptasiya Prosesi - Tam İş Axını",
+    "subtitle": "HR-DEPT-V1-030726",
+    "width": 2400,
+    "height": 1800,
+    "lanes": [
+     {
+      "id": "lane-hr",
+      "label": "HR Departamenti\nİnsan Resursları",
+      "y": 20,
+      "h": 160
+     },
+     {
+      "id": "lane-manager",
+      "label": "Departament Rəhbəri\nVəzifə Sahibi",
+      "y": 180,
+      "h": 160
+     },
+     {
+      "id": "lane-candidate",
+      "label": "Namizəd\nƏrizəçi",
+      "y": 340,
+      "h": 250
+     },
+     {
+      "id": "lane-interview",
+      "label": "Müsahibə Panelı\nTexniki Komissiya",
+      "y": 590,
+      "h": 210
+     },
+     {
+      "id": "lane-onboarding",
+      "label": "Adaptasiya və\nTəlim Departamenti",
+      "y": 800,
+      "h": 330
+     },
+     {
+      "id": "lane-admin",
+      "label": "İnzibati Xidmət\nKadr Sənədiyyatı",
+      "y": 1130,
+      "h": 160
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "x": 80,
+      "y": 40,
+      "w": 260,
+      "h": 100,
+      "text": "Vəzifə boşluğunun müəyyən edilməsi\nvə ehtiyacın təhlili",
+      "laneId": "lane-hr",
+      "color": "#2c5f7a",
+      "info": {
+       "general": [
+        "Departament rəhbərləri ilə görüş - HR departamenti şirkətin bütün departament rəhbərləri ilə fərdi görüşlər keçirərək mövcud kadr ehtiyaclarını, iş yükünü və gələcək layihələr üçün tələb olunan işçi sayını dəqiqləşdirir. Bu görüşlər zamanı hər bir departamentin qarşısında duran çağırışlar və yeni işçilərdən gözləntilər ətraflı müzakirə olunur.",
+        "Büdcə planlaması - HR və maliyyə departamentləri birgə çalışaraq yeni işçi üçün əmək haqqı, sosial paket, təlim xərcləri və digər əlaqəli büdcə maddələrini hesablayır. Büdcə planlaması zamanı bazar araşdırmaları və rəqib şirkətlərin əmək haqqı səviyyələri də nəzərə alınır.",
+        "Vəzifə təsvirinin hazırlanması - HR departamenti departament rəhbərləri ilə birgə ətraflı vəzifə təsviri hazırlayır. Bu sənəddə vəzifənin əsas funksiyaları, tələb olunan təhsil və iş təcrübəsi, zəruri bacarıqlar, hesabatlılıq strukturu və karyera inkişaf imkanları əks olunur."
+       ],
+       "detailed": "HR departamenti rəhbərliklə birlikdə şirkətin strateji məqsədlərinə uyğun olaraq yeni işçi ehtiyacını müəyyən edir. Bu mərhələdə büdcə, vaxt planlaması və vəzifə tələbləri dəqiqləşdirilir."
+      }
+     },
+     {
+      "id": 2,
+      "type": "rect",
+      "x": 460,
+      "y": 40,
+      "w": 260,
+      "h": 100,
+      "text": "Vəzifə təsvirinin hazırlanması\nvə elanın yerləşdirilməsi",
+      "laneId": "lane-hr",
+      "color": "#3a7894",
+      "info": {
+       "general": [
+        "İş elanı mətni - HR mütəxəssisləri tərəfindən cəlbedici və informativ iş elanı mətni hazırlanır. Elanda şirkətin missiyası, departamentin fəaliyyəti, vəzifənin əsas öhdəlikləri, tələblər və təklif olunan şərtlər ətraflı şəkildə təsvir olunur.",
+        "Tələb olunan bacarıqlar - Vəzifə üçün zəruri olan hard (texniki) və soft (şəxsi) bacarıqlar dəqiq müəyyən edilir. Buraya təhsil səviyyəsi, iş təcrübəsi (minimum il), kompüter bilikləri, dil bacarıqları və liderlik keyfiyyətləri daxildir.",
+        "Əmək haqqı diapazonu - Bazar araşdırmalarına əsasən əmək haqqı diapazonu müəyyən edilir və elanda göstərilir. Bu şəffaflıq namizədlərin daha dəqiq qiymətləndirilməsinə və vaxta qənaətə səbəb olur."
+       ],
+       "detailed": "HR əməkdaşları tərəfindən ətraflı vəzifə təsviri hazırlanır. Elan şirkətin saytında, iş portallarında (LinkedIn, Indeed, JobSearch) və sosial şəbəkələrdə yerləşdirilir."
+      }
+     },
+     {
+      "id": 3,
+      "type": "rect",
+      "x": 800,
+      "y": 40,
+      "w": 260,
+      "h": 100,
+      "text": "CV-lərin ilkin filtrasiyası\nvə qısa siyahının tərtibi",
+      "laneId": "lane-hr",
+      "color": "#4a8ba8",
+      "info": {
+       "general": [
+        "CV bazasının yaradılması - Daxil olan bütün CV-lər HR sistemi vasitəsilə mərkəzləşdirilmiş bazada toplanır. Hər bir CV təhlil edilərək müvafiq kateqoriyalara bölünür və sonrakı mərhələlər üçün əlçatan edilir.",
+        "Uyğunluq meyarları - CV-lər əvvəlcədən müəyyən edilmiş meyarlar əsasında (təhsil, təcrübə, bacarıqlar) avtomatik və manual olaraq filtrlənir. Uyğun olmayan CV-lər müvafiq qeydiyyatla arxivləşdirilir.",
+        "İlkin telefon müsahibəsi - Filtrdən keçən namizədlərlə HR tərəfindən qısa (10-15 dəqiqə) telefon müsahibəsi keçirilir. Bu mərhələdə namizədin ünsiyyət qabiliyyəti, motivasiyası və ümumi uyğunluğu qiymətləndirilir."
+       ],
+       "detailed": "HR departamenti daxil olan CV-ləri tələblərə uyğun olaraq filtrləyir. Uyğun namizədlərlə qısa telefon müsahibəsi keçirilir və ən güclü 5-10 namizəd seçilir."
+      }
+     },
+     {
+      "id": 4,
+      "type": "rect",
+      "x": 1200,
+      "y": 40,
+      "w": 260,
+      "h": 100,
+      "text": "Namizədlərin departament\nrəhbərinə təqdim edilməsi",
+      "laneId": "lane-hr",
+      "color": "#5a9ab8",
+      "info": {
+       "general": [
+        "Namizəd profilləri - Seçilmiş namizədlər üçün ətraflı profillər hazırlanır. Hər bir profilə CV, əlavə sənədlər, telefon müsahibəsi qeydləri və HR-in ilkin qiymətləndirməsi daxildir.",
+        "CV-lərin ötürülməsi - Bütün sənədlər departament rəhbərinə elektron poçt və ya HR sistemi vasitəsilə göndərilir. Rəhbər namizədlərlə tanış olmaq və müsahibə üçün hazırlıq aparmaq imkanı əldə edir.",
+        "Müsahibə cədvəli - HR departamenti tərəfindən hər bir namizəd üçün müsahibə vaxt cədvəli hazırlanır. Cədvəl hazırlanarkən həm departament rəhbərinin, həm də namizədlərin məşğulluğu nəzərə alınır."
+       ],
+       "detailed": "Seçilmiş namizədlərin profilləri və CV-ləri departament rəhbərinə göndərilir. İlk müsahibə üçün vaxt cədvəli tərtib edilir."
+      }
+     },
+     {
+      "id": 5,
+      "type": "rect",
+      "x": 300,
+      "y": 200,
+      "w": 260,
+      "h": 100,
+      "text": "Namizədlərlə ilkin\nmüsahibənin keçirilməsi",
+      "laneId": "lane-manager",
+      "color": "#e67e22",
+      "info": {
+       "general": [
+        "Motivasiya sorğusu - Departament rəhbəri namizədin işə niyə müraciət etməsi, şirkətdən nə gözləməsi və karyera hədəfləri barədə ətraflı sorğu aparır. Namizədin şirkətə gətirə biləcəyi dəyər və uzunmüddətli perspektivlər müzakirə olunur.",
+        "Peşəkar bacarıqlar - Namizədin əvvəlki iş təcrübəsi, nailiyyətləri və peşəkar bilikləri ətraflı araşdırılır. Konkret nümunələr əsasında namizədin problem həll etmə, qərar qəbuletmə və komanda ilə işləmə bacarıqları qiymətləndirilir.",
+        "Şirkət mədəniyyətinə uyğunluq - Namizədin şirkətin dəyərləri, iş mühiti və korporativ mədəniyyəti ilə uyğunluğu müəyyən edilir. Bu, uzunmüddətli əməkdaşlıq üçün əsas amillərdən biridir."
+       ],
+       "detailed": "Departament rəhbəri tərəfindən namizədlərlə şəxsən və ya onlayn müsahibə keçirilir. Namizədin motivasiyası, peşəkar bacarıqları və komandaya uyğunluğu qiymətləndirilir."
+      }
+     },
+     {
+      "id": 6,
+      "type": "rect",
+      "x": 730,
+      "y": 200,
+      "w": 260,
+      "h": 100,
+      "text": "Texniki tapşırığın\nverilməsi və qiymətləndirilməsi",
+      "laneId": "lane-manager",
+      "color": "#f39c12",
+      "info": {
+       "general": [
+        "Test tapşırığı - Namizədə peşəkar bacarıqlarını nümayiş etdirməsi üçün real iş vəziyyətinə əsaslanan test tapşırığı verilir. Tapşırıq müəyyən vaxt çərçivəsində (adətən 3-5 gün) hazırlanmalıdır və namizədin analitik düşüncə qabiliyyətini ölçür.",
+        "Case-studies - Namizədə şirkətin əvvəlki layihələrinə əsaslanan case-studies təqdim edilir. Bu, namizədin real iş situasiyalarında necə qərar verdiyini, problemlərə yanaşmasını və strateji düşüncəsini qiymətləndirməyə imkan verir.",
+        "Texniki bacarıq qiyməti - Namizədin texniki bilikləri və bacarıqları departamentin texniki ekspertləri tərəfindən qiymətləndirilir. Qiymətləndirmə zamanı namizədin bilik dərinliyi, praktiki təcrübəsi və yeni texnologiyalara uyğunlaşma qabiliyyəti nəzərə alınır."
+       ],
+       "detailed": "Namizədə peşəkar biliklərini yoxlamaq üçün texniki tapşırıq (test, case-study) verilir. Tapşırığın nəticələri departament rəhbəri və texniki mütəxəssislər tərəfindən qiymətləndirilir."
+      }
+     },
+     {
+      "id": 7,
+      "type": "rect",
+      "x": 1320,
+      "y": 200,
+      "w": 260,
+      "h": 100,
+      "text": "Final namizədin\nseçilməsi və təsdiqi",
+      "laneId": "lane-manager",
+      "color": "#d35400",
+      "info": {
+       "general": [
+        "Yekun qiymətləndirmə - Bütün mərhələlərdən keçmiş namizədlər üçün yekun qiymət cədvəli tərtib edilir. Burada texniki bacarıqlar, davranış xüsusiyyətləri, motivasiya və şirkətə uyğunluq meyarları üzrə bal toplanır.",
+        "Rəhbərliklə razılaşma - Seçilmiş namizəd barədə yekun qərar üst rəhbərliklə razılaşdırılır. Bu mərhələdə namizədin təklif olunan əmək haqqı və digər şərtləri də təsdiqlənir.",
+        "Vəzifə təklifi hazırlığı - Qərar verildikdən sonra namizədə rəsmi təklif məktubu hazırlanır. Məktubda əmək haqqı, iş qrafiki, sınaq müddəti, sosial paket və digər şərtlər ətraflı göstərilir."
+       ],
+       "detailed": "Bütün mərhələlərdən sonra ən uyğun namizəd seçilir. Qərar rəhbərliklə razılaşdırılır və rəsmi təklif məktubu hazırlanır."
+      }
+     },
+     {
+      "id": 8,
+      "type": "rect",
+      "x": 70,
+      "y": 350,
+      "w": 260,
+      "h": 100,
+      "text": "Ərizə və sənədlərin\ntəqdim edilməsi",
+      "laneId": "lane-candidate",
+      "color": "#27ae60",
+      "info": {
+       "general": [
+        "Ərizə forması - Namizəd şirkətin rəsmi saytında və ya iş portalında yerləşdirilmiş ərizə formasını doldurur. Formada şəxsi məlumatlar, təhsil, iş təcrübəsi və əlavə bacarıqlar barədə məlumatlar tələb olunur.",
+        "CV və portfel - Namizəd öz peşəkar fəaliyyətini əks etdirən CV və mümkün portfelini (layihələr, iş nümunələri) təqdim edir. CV-də iş yerləri, təhsil, sertifikatlar və nailiyyətlər ətraflı şəkildə göstərilir.",
+        "Tövsiyə məktubları - Namizəd əvvəlki iş yerlərindən və ya akademik müəssisələrdən tövsiyə məktubları təqdim edir. Bu məktublar namizədin peşəkar keyfiyyətlərini və iş etikasını təsdiqləyir."
+       ],
+       "detailed": "Namizəd tərəfindən ərizə, CV, portfel və mümkün tövsiyə məktubları təqdim edilir. Bütün sənədlər HR departamentinin sisteminə daxil edilir."
+      }
+     },
+     {
+      "id": 9,
+      "type": "rect",
+      "x": 640,
+      "y": 350,
+      "w": 260,
+      "h": 100,
+      "text": "Müsahibə prosesinə\nqatılım və testlərin icrası",
+      "laneId": "lane-candidate",
+      "color": "#2ecc71",
+      "info": {
+       "general": [
+        "Müsahibə hazırlığı - Namizəd şirkət, departament və vəzifə haqqında ətraflı araşdırma aparır. Şirkətin son layihələri, dəyərləri və mədəniyyəti barədə məlumat toplayaraq müsahibəyə hazırlaşır.",
+        "Test tapşırıqları - Namizəd verilən texniki test və case-study tapşırıqlarını vaxtında və keyfiyyətlə icra edir. Tapşırıqların hazırlanması zamanı namizəd öz bilik və bacarıqlarını maksimum dərəcədə nümayiş etdirməyə çalışır.",
+        "Təqdimat - Namizəd əvvəlki layihələrindən nümunələr və ya verilmiş mövzuda təqdimat hazırlayaraq komissiya qarşısında çıxış edir. Təqdimat zamanı namizədin ünsiyyət bacarıqları və peşəkar bilikləri daha dərindən qiymətləndirilir."
+       ],
+       "detailed": "Namizəd müsahibə və test mərhələlərində aktiv iştirak edir. Öz bacarıqlarını, təcrübəsini və şirkətə gətirə biləcəyi dəyəri nümayiş etdirir."
+      }
+     },
+     {
+      "id": 10,
+      "type": "document",
+      "x": 1020,
+      "y": 350,
+      "w": 260,
+      "h": 100,
+      "text": "Təklifin qəbulu\nvə razılaşmanın imzalanması",
+      "laneId": "lane-candidate",
+      "color": "#1abc9c",
+      "info": {
+       "general": [
+        "Təklif məktubunun təhlili - Namizəd əmək haqqı, iş qrafiki, sınaq müddəti, məzuniyyət, sosial paket və digər şərtləri ətraflı araşdırır. Təklif olunan şərtlər bazar standartları ilə müqayisə edilir.",
+        "Şərtlərin müzakirəsi - Namizəd və HR departamenti arasında təklif olunan şərtlər barədə müzakirələr aparılır. Zəruri hallarda əmək haqqı, iş qrafiki və ya digər şərtlərdə dəyişikliklər edilə bilər.",
+        "Razılaşma imzalanması - Bütün şərtlər razılaşdırıldıqdan sonra namizəd tərəfindən əmək müqaviləsi və digər zəruri sənədlər imzalanır. İmzalanma prosesi elektron və ya fiziki formada həyata keçirilə bilər."
+       ],
+       "detailed": "Namizəd təklif olunan şərtləri (əmək haqqı, iş qrafiki, sosial paket) qiymətləndirir və razılaşdıqda əmək müqaviləsini imzalayır."
+      },
+      "style": "solid"
+     },
+     {
+      "id": 11,
+      "type": "rect",
+      "x": 80,
+      "y": 470,
+      "w": 260,
+      "h": 100,
+      "text": "Texniki müsahibənin\ntəşkili və keçirilməsi",
+      "laneId": "lane-candidate",
+      "color": "#8e44ad",
+      "info": {
+       "general": [
+        "Texniki suallar - Texniki komissiya tərəfindən namizədə peşəkar biliklərini, təcrübəsini və problem həll etmə qabiliyyətini yoxlamaq üçün suallar verilir. Suallar vəzifənin tələblərinə uyğun olaraq hazırlanır.",
+        "Praktiki tapşırıqlar - Namizədə real iş mühitinə yaxın praktiki tapşırıqlar verilir. Tapşırıqların icrası zamanı namizədin texniki bacarıqları, yanaşması və vaxtın idarə edilməsi bacarığı qiymətləndirilir.",
+        "Qiymətləndirmə cədvəli - Hər bir namizəd üçün texniki komissiya tərəfindən bal sisteminə əsaslanan qiymət cədvəli doldurulur. Qiymətləndirmə obyektivliyi üçün bir neçə müstəqil ekspertin rəyi nəzərə alınır."
+       ],
+       "detailed": "Texniki komissiya tərəfindən namizədin peşəkar bilikləri, proqramlaşdırma bacarıqları və problem həll etmə qabiliyyəti yoxlanılır. Qiymət cədvəli doldurulur."
+      },
+      "style": "dashed"
+     },
+     {
+      "id": 12,
+      "type": "rect",
+      "x": 640,
+      "y": 470,
+      "w": 260,
+      "h": 100,
+      "text": "Davranış müsahibəsi\nvə dəyərlərin uyğunluğu",
+      "laneId": "lane-candidate",
+      "color": "#9b59b6",
+      "info": {
+       "general": [
+        "Davranış sualları - Namizədə müxtəlif iş situasiyalarında necə davrandığı, çətinliklərlə necə mübarizə apardığı və komanda ilə necə əməkdaşlıq etdiyi barədə suallar verilir. Suallar əvvəlki təcrübəyə əsaslanaraq hazırlanır.",
+        "Şirkət dəyərləri - Namizədin şəxsi dəyərləri ilə şirkətin korporativ dəyərləri arasındakı uyğunluq müəyyən edilir. Bu, namizədin uzunmüddətli perspektivdə şirkətdə qalma ehtimalını artırır.",
+        "Komanda işi bacarıqları - Namizədin əvvəlki komanda layihələrindəki rolu, töhfəsi və əməkdaşlıq tərzi qiymətləndirilir. Komanda işində çeviklik, empatiya və konstruktiv rəy vermə bacarıqları xüsusi diqqət mərkəzindədir."
+       ],
+       "detailed": "HR və komanda üzvləri tərəfindən namizədin davranış xüsusiyyətləri, şirkət dəyərlərinə uyğunluğu və komanda işinə yanaşması qiymətləndirilir."
+      }
+     },
+     {
+      "id": 13,
+      "type": "rect",
+      "x": 1320,
+      "y": 470,
+      "w": 260,
+      "h": 100,
+      "text": "Yekun qiymət və\nnamizəd haqqında rəy",
+      "laneId": "lane-candidate",
+      "color": "#af7ac5",
+      "info": {
+       "general": [
+        "Qiymət cədvəli - Bütün müsahibə mərhələlərindən toplanan ballar ümumiləşdirilir. Hər bir namizəd üçün texniki biliklər, davranış xüsusiyyətləri, motivasiya və uyğunluq üzrə ayrı-ayrı ballar hesablanır.",
+        "Güclü və zəif tərəflər - Komissiya üzvləri hər bir namizədin güclü cəhətlərini (texniki bacarıqlar, ünsiyyət qabiliyyəti) və inkişaf etdirilməli tərəflərini (təcrübə çatışmazlığı, spesifik biliklər) qeyd edirlər.",
+        "Tövsiyə - Komissiya hər bir namizəd üçün yekun tövsiyə verir. Tövsiyəyə əsasən namizədin işə götürülməsi, gözləmə siyahısında saxlanılması və ya rədd edilməsi qərara alınır."
+       ],
+       "detailed": "Müsahibə komissiyası hər bir namizəd üçün qiymət cədvəlini doldurur, güclü və inkişaf etdirilməli tərəfləri qeyd edir və yekun tövsiyə verir."
+      },
+      "style": "dashed"
+     },
+     {
+      "id": 14,
+      "type": "rect",
+      "x": 80,
+      "y": 810,
+      "w": 260,
+      "h": 110,
+      "text": "İşə başlama tarixinin\ntəyin edilməsi və xoş gəldin",
+      "laneId": "lane-onboarding",
+      "color": "#2980b9",
+      "info": {
+       "general": [
+        "İşə başlama tarixi - Yeni işçi ilə razılaşdırılmış işə başlama tarixi təyin edilir. Tarix müəyyən edilərkən həm işçinin, həm də departamentin hazırlıq müddəti nəzərə alınır.",
+        "İlk gün proqramı - Yeni işçi üçün ilk iş gününün ətraflı proqramı hazırlanır. Proqrama şirkət turu, komanda ilə tanışlıq, HR görüşü və iş yerinin təqdimatı daxildir.",
+        "İş avadanlıqlarının hazırlanması - Yeni işçi üçün kompüter, telefon, iş stolu, giriş kartları və digər zəruri avadanlıqlar əvvəlcədən hazırlanır. Bütün avadanlıqların işlək vəziyyətdə olması təmin edilir."
+       ],
+       "detailed": "Yeni işçi üçün işə başlama tarixi təyin edilir. HR tərəfindən xoş gəldin e-məktubu göndərilir, iş yeri, avadanlıqlar və giriş kartları hazırlanır."
+      },
+      "style": "dashed"
+     },
+     {
+      "id": 15,
+      "type": "rect",
+      "x": 400,
+      "y": 670,
+      "w": 260,
+      "h": 110,
+      "text": "Orientation proqramı\nvə şirkət təlimatlandırması",
+      "laneId": "lane-interview",
+      "color": "#3498db",
+      "info": {
+       "general": [
+        "Şirkət tarixi - Yeni işçiyə şirkətin yaranma tarixi, inkişaf mərhələləri, nailiyyətləri və gələcək vizyonu barədə ətraflı məlumat verilir. Şirkətin uğur hekayələri və əsas hadisələri təqdim olunur.",
+        "Qaydalar və siyasət - Şirkətin daxili qaydaları, etika kodeksi, məzuniyyət siyasəti, iş saatları və digər vacib siyasətlər barədə təlimatlandırma aparılır. İşçi şirkətin gözləntilərini və öz hüquqlarını öyrənir.",
+        "Təhlükəsizlik təlimi - İş yeri təhlükəsizliyi, yanğın təhlükəsizliyi, ilk tibbi yardım və fövqəladə hallarda davranış qaydaları barədə təlim keçirilir. Təhlükəsizlik tədbirləri və şəxsi mühafizə vasitələri barədə məlumat verilir."
+       ],
+       "detailed": "Yeni işçiyə şirkətin tarixi, missiyası, daxili qaydaları, təhlükəsizlik tədbirləri və HR siyasətləri barədə ətraflı məlumat verilir."
+      }
+     },
+     {
+      "id": 16,
+      "type": "rect",
+      "x": 720,
+      "y": 810,
+      "w": 260,
+      "h": 110,
+      "text": "İlk 30 günlük adaptasiya\nplanı və mentor təyini",
+      "laneId": "lane-onboarding",
+      "color": "#5dade2",
+      "info": {
+       "general": [
+        "Fərdi adaptasiya planı - Yeni işçi üçün ilk 30 günlük fərdiləşdirilmiş adaptasiya planı hazırlanır. Plana şirkət sistemləri ilə tanışlıq, departament proseslərinin öyrənilməsi, ilkin tapşırıqlar və təlim sessiyaları daxildir.",
+        "Mentor təyini - Təcrübəli bir işçi yeni işçiyə mentor təyin edilir. Mentor yeni işçini şirkət mühitinə adaptasiya etməkdə, suallarını cavablandırmaqda və peşəkar inkişafında dəstək olur.",
+        "Həftəlik geribildirim - Hər həftə sonu yeni işçi və mentor arasında geribildirim sessiyası keçirilir. Bu sessiyalarda irəliləyiş, çətinliklər və növbəti həftənin planları müzakirə olunur."
+       ],
+       "detailed": "Yeni işçi üçün ilk 30 günlük detallı adaptasiya planı hazırlanır. Təcrübəli bir işçi mentor təyin edilir və həftəlik geribildirim sessiyaları planlaşdırılır."
+      }
+     },
+     {
+      "id": 17,
+      "type": "rect",
+      "x": 1020,
+      "y": 670,
+      "w": 260,
+      "h": 110,
+      "text": "90 günlük sınaq müddəti\nvə performans qiymətləndirməsi",
+      "laneId": "lane-interview",
+      "color": "#85c1e9",
+      "info": {
+       "general": [
+        "Hədəflərin təyini - Sınaq müddətinin əvvəlində yeni işçi üçün aydın və ölçülə bilən hədəflər müəyyən edilir. Bu hədəflər SMART (Specific, Measurable, Achievable, Relevant, Time-bound) prinsiplərinə uyğun olaraq hazırlanır.",
+        "Əməliyyat nəticələri - Sınaq müddəti ərzində yeni işçinin əməliyyat nəticələri mütəmadi olaraq izlənilir və qeydiyyata alınır. Hər bir hədəf üzrə irəliləyiş rüblük olaraq qiymətləndirilir.",
+        "Yekun qiymət - 90 günlük sınaq müddətinin sonunda yeni işçinin ümumi performansı qiymətləndirilir. Qiymətləndirmə nəticəsində işçinin daimi işə qəbulu, sınaq müddətinin uzadılması və ya əməkdaşlığa xitam verilməsi qərara alınır."
+       ],
+       "detailed": "Yeni işçi 90 günlük sınaq müddətində müəyyən edilmiş KPI-lara uyğun olaraq qiymətləndirilir. Rəhbərlik və mentor tərəfindən yekun performans dəyərləndirməsi aparılır."
+      }
+     },
+     {
+      "id": 18,
+      "type": "rect",
+      "x": 80,
+      "y": 1010,
+      "w": 260,
+      "h": 100,
+      "text": "Əmək müqaviləsinin\nhazırlanması və imzalanması",
+      "laneId": "lane-onboarding",
+      "color": "#d35400",
+      "info": {
+       "general": [
+        "Müqavilə mətni - Kadr şöbəsi tərəfindən əmək müqaviləsinin mətni hazırlanır. Müqavilədə işçinin və işəgötürənin hüquq və öhdəlikləri, əmək haqqı, iş qrafiki, məzuniyyət şərtləri və digər vacib maddələr əks olunur.",
+        "Məxfilik sazişi - İşçi ilə məxfilik sazişi imzalanır. Bu sənəd şirkətin kommersiya sirri, müştəri məlumatları və digər məxfi məlumatların qorunmasını təmin edir.",
+        "Əlavə sənədlər - İşçi tərəfindən bank məlumatları, vergi identifikasiya nömrəsi, əmək kitabçası və digər zəruri sənədlər təqdim edilir. Bütün sənədlər kadr şöbəsi tərəfindən qeydiyyata alınır."
+       ],
+       "detailed": "Kadr şöbəsi tərəfindən əmək müqaviləsi, məxfilik sazişi və digər zəruri sənədlər hazırlanır. İşçi və rəhbərlik tərəfindən imzalanır."
+      },
+      "style": "dashed"
+     },
+     {
+      "id": 19,
+      "type": "rect",
+      "x": 490,
+      "y": 1010,
+      "w": 260,
+      "h": 100,
+      "text": "İşçi şəxsi işinin\naçılması və məlumat bazası",
+      "laneId": "lane-onboarding",
+      "color": "#e67e22",
+      "info": {
+       "general": [
+        "Şəxsi iş qovluğu - HR sistemində işçi üçün şəxsi iş qovluğu açılır. Bu qovluqda işçinin bütün sənədləri, müqavilələri, qiymətləndirmə hesabatları və digər rəsmi sənədlər saxlanılır.",
+        "Məlumat sistemi - İşçinin məlumatları şirkətin elektron kadr uçotu sisteminə daxil edilir. Bu sistem vasitəsilə işçinin işə qəbulu, məzuniyyətləri, xəstəlik vərəqələri və digər əməliyyatlar izlənilir.",
+        "Şirkət daxili portallar - İşçi üçün şirkətin daxili portallarına (intranet, e-mail, təqvim, sənəd dövriyyəsi sistemi) giriş yaradılır. İstifadəçi adı və şifrəsi təyin edilir."
+       ],
+       "detailed": "HR sistemində işçinin şəxsi işi açılır, bütün sənədlər rəqəmsallaşdırılır. Şirkətin daxili portallarına giriş və istifadəçi hesabları yaradılır."
+      }
+     },
+     {
+      "id": 20,
+      "type": "pill",
+      "x": 860,
+      "y": 1140,
+      "w": 260,
+      "h": 100,
+      "text": "Prosesin tamamlanması\nvə işçinin aktivləşdirilməsi",
+      "laneId": "lane-admin",
+      "color": "#2c5f7a",
+      "info": {
+       "general": [
+        "Proses yekunu - Bütün HR prosesləri uğurla tamamlanır. Sənədlər imzalanır, sistemlərə daxil edilir və işçi şirkətin tamhüquqlu üzvü olur.",
+        "Aktiv işçi statusu - İşçinin statusu \"aktiv\" olaraq dəyişdirilir. Bu andan etibarən işçi bütün şirkət hüquqlarından istifadə edə bilər və rəsmi olaraq şirkəti təmsil edə bilər.",
+        "Sonrakı addımlar - İşçi üçün növbəti mərhələdə karyera inkişafı planı, davamlı təlimlər və performans qiymətləndirmə prosesi başlayır. HR departamenti işçi ilə mütəmadi əlaqədə olur."
+       ],
+       "detailed": "Bütün formal mərhələlər tamamlandıqdan sonra işçi aktiv statusa keçirilir. İşçinin şirkət daxilində tam hüquqları aktivləşir və daimi əməkdaş kimi fəaliyyətə başlayır."
+      }
+     }
+    ],
+    "edges": [
+     {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Təsdiq"
+     },
+     {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Filtr"
+     },
+     {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "2-3 gün"
+     },
+     {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top",
+      "arrow": "end",
+      "label": "Müsahibə"
+     },
+     {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Test"
+     },
+     {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "2-3 gün"
+     },
+     {
+      "from": 7,
+      "to": 10,
+      "s": "bottom",
+      "e": "top",
+      "arrow": "end",
+      "label": "Təklif"
+     },
+     {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Göndər"
+     },
+     {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Qəbul"
+     },
+     {
+      "from": 5,
+      "to": 11,
+      "s": "bottom",
+      "e": "right",
+      "arrow": "end",
+      "label": "Texniki"
+     },
+     {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Davranış"
+     },
+     {
+      "from": 12,
+      "to": 13,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Qiymət"
+     },
+     {
+      "from": 13,
+      "to": 7,
+      "s": "top",
+      "e": "bottom",
+      "arrow": "end",
+      "label": "Təsdiq"
+     },
+     {
+      "from": 10,
+      "to": 14,
+      "s": "bottom",
+      "e": "top",
+      "arrow": "end",
+      "label": "Başlanğıc"
+     },
+     {
+      "from": 14,
+      "to": 15,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "1-ci həftə"
+     },
+     {
+      "from": 15,
+      "to": 16,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "2-3 həftə"
+     },
+     {
+      "from": 16,
+      "to": 17,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "90 gün"
+     },
+     {
+      "from": 14,
+      "to": 18,
+      "s": "bottom",
+      "e": "top",
+      "arrow": "end",
+      "label": "Sənədlər"
+     },
+     {
+      "from": 18,
+      "to": 19,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Qeydiyyat"
+     },
+     {
+      "from": 19,
+      "to": 20,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Aktiv"
+     }
+    ]
+   }
+  },
+  {
+   "key": "git-diagram-108-53c1245b",
+   "oldId": 108,
+   "title": "Terminal proseslərinə daxil olmayacaq yük və minik avtomobillərinin Mərkəzin dayanacağından istifadəsi iş axışı",
+   "subtitle": "ALM-İMS-PRD-TP-001",
+   "groupName": "Tırpark və Minik avtomobillərinin dayanacağı şöbəsi",
+   "status": null,
+   "deletedAround": "2026-07-17",
+   "note": "Tarixçədən bərpa edildi",
+   "body": {
+    "id": 108,
+    "title": "Terminal proseslərinə daxil olmayacaq yük və minik avtomobillərinin Mərkəzin dayanacağından istifadəsi iş axışı",
+    "subtitle": "ALM-İMS-PRD-TP-001",
+    "width": 2200,
+    "height": 900,
+    "lanes": [
+     {
+      "id": "lane-1784279662076",
+      "label": "Sürücü",
+      "y": 20,
+      "h": 160
+     },
+     {
+      "id": "lane-1784279673995",
+      "label": "Dayanacaq üzrə məsul əməkdaş",
+      "y": 180,
+      "h": 250
+     },
+     {
+      "id": "lane-1784279682676",
+      "label": "Şöbə müdiri",
+      "y": 430,
+      "h": 160
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 90,
+      "y": 70,
+      "laneId": "lane-1784279662076",
+      "w": 310,
+      "h": 70,
+      "text": "Avtomobi ilə dayanacaq girişinə yaxınlaşır.",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 100,
+      "y": 230,
+      "laneId": "lane-1784279673995",
+      "w": 290,
+      "h": 90,
+      "text": "2.\tAvtomobil nömrəsinin güzəşt siyahısında olub olmamasını\nyoxlayır\n",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 90,
+      "y": 340,
+      "laneId": "lane-1784279673995",
+      "w": 300,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     }
+    ],
+    "edges": [
+     {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+     }
+    ]
+   }
+  },
+  {
+   "key": "git-diagram-110-0f4aa87a",
+   "oldId": 110,
+   "title": "ALM",
+   "subtitle": "ALM",
+   "groupName": "Biznes departamenti",
+   "status": null,
+   "deletedAround": "2026-07-21",
+   "note": "Tarixçədən bərpa edildi",
+   "body": {
+    "id": 110,
+    "title": "ALM",
+    "subtitle": "ALM",
+    "width": 2200,
+    "height": 900,
+    "lanes": [
+     {
+      "id": "lane-1784617042616",
+      "label": "ALM",
+      "y": 20,
+      "h": 160
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 80,
+      "y": 40,
+      "laneId": "lane-1784617042616",
+      "w": 200,
+      "h": 50,
+      "text": "ALM",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     }
+    ],
+    "edges": []
+   }
+  },
+  {
+   "key": "git-diagram-110-d9685a6b",
+   "oldId": 110,
+   "title": "Mal qəbulu əməliyyatlarının həyata keçirilməsi üzrə iş axını",
+   "subtitle": "ALM-İMS-PRD-001",
+   "groupName": "Anbar logistikası şöbəsi",
+   "status": "done",
+   "deletedAround": "2026-07-21",
+   "note": "Köhnə versiya (tarixçədən)",
+   "body": {
+    "id": 110,
+    "title": "Mal qəbulu əməliyyatlarının həyata keçirilməsi üzrə iş axını",
+    "subtitle": "ALM-İMS-PRD-001",
+    "width": 2200,
+    "height": 900,
+    "lanes": [
+     {
+      "id": "lane-1784618997981",
+      "label": "UDPAS",
+      "y": 20,
+      "h": 160
+     },
+     {
+      "id": "lane-1784619023621",
+      "label": "WMS",
+      "y": 180,
+      "h": 160
+     },
+     {
+      "id": "lane-1784619040389",
+      "label": "ANBAR",
+      "y": 340,
+      "h": 160
+     },
+     {
+      "id": "lane-1784619072316",
+      "label": "Billing",
+      "y": 500,
+      "h": 160
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 125,
+      "y": 50,
+      "laneId": "lane-1784618997981",
+      "w": 200,
+      "h": 50,
+      "text": "Yeni başlanğıc/son",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 400,
+      "y": 40,
+      "laneId": "lane-1784618997981",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 740,
+      "y": 40,
+      "laneId": "lane-1784618997981",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 1080,
+      "y": 40,
+      "laneId": "lane-1784618997981",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 220,
+      "laneId": "lane-1784619023621",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 410,
+      "y": 220,
+      "laneId": "lane-1784619023621",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 390,
+      "laneId": "lane-1784619040389",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 410,
+      "y": 390,
+      "laneId": "lane-1784619040389",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 740,
+      "y": 390,
+      "laneId": "lane-1784619040389",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 10,
+      "type": "pill",
+      "style": "solid",
+      "x": 1060,
+      "y": 220,
+      "laneId": "lane-1784619023621",
+      "w": 180,
+      "h": 70,
+      "text": "Yeni başlanğıc/son",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 11,
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 125,
+      "y": 560,
+      "laneId": "lane-1784619072316",
+      "w": 210,
+      "h": 70,
+      "text": "Yeni alt-proses",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 12,
+      "type": "rect",
+      "style": "stroke",
+      "x": 410,
+      "y": 560,
+      "laneId": "lane-1784619072316",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 13,
+      "type": "rect",
+      "style": "stroke",
+      "x": 740,
+      "y": 560,
+      "laneId": "lane-1784619072316",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     }
+    ],
+    "edges": [
+     {
+      "from": 1,
+      "to": 11,
+      "s": "left",
+      "e": "left",
+      "dashed": true
+     },
+     {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "bottom"
+     },
+     {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 12,
+      "to": 13,
+      "s": "right",
+      "e": "left"
+     }
+    ]
+   }
+  },
+  {
+   "key": "git-diagram-111-558169ed",
+   "oldId": 111,
+   "title": "Mal çıxışı əməliyyatlarının həyata keçirilməsi üzrə iş axını",
+   "subtitle": "ALM-İMS-PRD-002",
+   "groupName": "Anbar logistikası şöbəsi",
+   "status": "done",
+   "deletedAround": "2026-07-21",
+   "note": "Köhnə versiya (tarixçədən)",
+   "body": {
+    "id": 111,
+    "title": "Mal çıxışı əməliyyatlarının həyata keçirilməsi üzrə iş axını",
+    "subtitle": "ALM-İMS-PRD-002",
+    "width": 2200,
+    "height": 900,
+    "lanes": [
+     {
+      "id": "lane-1784619455276",
+      "label": "UDPAS",
+      "y": 20,
+      "h": 160
+     },
+     {
+      "id": "lane-1784619518685",
+      "label": "Billing",
+      "y": 180,
+      "h": 160
+     },
+     {
+      "id": "lane-1784622482213",
+      "label": "WMS",
+      "y": 340,
+      "h": 220
+     },
+     {
+      "id": "lane-1784622495093",
+      "label": "ANBAR",
+      "y": 560,
+      "h": 160
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 118.01041603088379,
+      "y": 73,
+      "laneId": "lane-1784619455276",
+      "w": 200,
+      "h": 50,
+      "text": "Yeni başlanğıc/son",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 440,
+      "y": 63,
+      "laneId": "lane-1784619455276",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 118.01041603088379,
+      "y": 208,
+      "laneId": "lane-1784619518685",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 840,
+      "y": 63,
+      "laneId": "lane-1784619455276",
+      "w": 210,
+      "h": 70,
+      "text": "Yeni alt-proses",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 118.01041603088379,
+      "y": 470,
+      "laneId": "lane-1784622482213",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni başlanğıc/son",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": "3.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 440,
+      "y": 208,
+      "laneId": "lane-1784619518685",
+      "w": 210,
+      "h": 70,
+      "text": "Yeni alt-proses",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 440,
+      "y": 470,
+      "laneId": "lane-1784622482213",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 118.01041603088379,
+      "y": 610,
+      "laneId": "lane-1784622495093",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 440,
+      "y": 610,
+      "laneId": "lane-1784622495093",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 750,
+      "y": 610,
+      "laneId": "lane-1784622495093",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1060,
+      "y": 610,
+      "laneId": "lane-1784622495093",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1060,
+      "y": 380,
+      "laneId": "lane-1784622482213",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 12,
+      "type": "pill",
+      "style": "solid",
+      "x": 1060,
+      "y": 228,
+      "laneId": "lane-1784619518685",
+      "w": 200,
+      "h": 50,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     }
+    ],
+    "edges": [
+     {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 3,
+      "to": "3.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+     },
+     {
+      "from": "3.1",
+      "to": 4,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "left"
+     }
+    ]
+   }
+  },
+  {
+   "key": "git-diagram-112-bcb5f523",
+   "oldId": 112,
+   "title": "Yüklərin saxlanc anbarına qəbulu üzrə iş axını",
+   "subtitle": "ALM-İMS-PRD-003",
+   "groupName": "Anbar logistikası şöbəsi",
+   "status": "done",
+   "deletedAround": "2026-07-21",
+   "note": "Köhnə versiya (tarixçədən)",
+   "body": {
+    "id": 112,
+    "title": "Yüklərin saxlanc anbarına qəbulu üzrə iş axını",
+    "subtitle": "ALM-İMS-PRD-003",
+    "width": 2200,
+    "height": 1140,
+    "lanes": [
+     {
+      "id": "lane-1784623585168",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 160
+     },
+     {
+      "id": "lane-1784623591488",
+      "label": "BD",
+      "y": 180,
+      "h": 160
+     },
+     {
+      "id": "lane-1784623598576",
+      "label": "BDD",
+      "y": 340,
+      "h": 160
+     },
+     {
+      "id": "lane-1784623605456",
+      "label": "ƏKTD",
+      "y": 500,
+      "h": 260
+     },
+     {
+      "id": "lane-1784623617560",
+      "label": "ALŞ",
+      "y": 760,
+      "h": 160
+     },
+     {
+      "id": "lane-1784623626914",
+      "label": "SƏO",
+      "y": 920,
+      "h": 160
+     }
+    ],
+    "nodes": [
+     {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 80,
+      "y": 50,
+      "laneId": "lane-1784623585168",
+      "w": 290,
+      "h": 70,
+      "text": "3PL xidmətindən istifadə edilməsi üçün BD-yə müraciətin edilməsi",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": "2.1",
+      "type": "pill",
+      "style": "solid",
+      "x": 125,
+      "y": 210,
+      "laneId": "lane-1784623591488",
+      "w": 200,
+      "h": 50,
+      "text": "Yeni başlanğıc/son",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 125,
+      "y": 520,
+      "laneId": "lane-1784623605456",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": "2.2",
+      "type": "rect",
+      "style": "solid",
+      "x": 360,
+      "y": 370,
+      "laneId": "lane-1784623598576",
+      "w": 270,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 420,
+      "y": 620,
+      "laneId": "lane-1784623605456",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 740,
+      "y": 40,
+      "laneId": "lane-1784623585168",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 420,
+      "y": 520,
+      "laneId": "lane-1784623605456",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 730,
+      "y": 520,
+      "laneId": "lane-1784623605456",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1000,
+      "y": 520,
+      "laneId": "lane-1784623605456",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1000,
+      "y": 670,
+      "laneId": "lane-1784623605456",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 12,
+      "type": "pill",
+      "style": "solid",
+      "x": 1270,
+      "y": 530,
+      "laneId": "lane-1784623605456",
+      "w": 200,
+      "h": 50,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1000,
+      "y": 790,
+      "laneId": "lane-1784623617560",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 730,
+      "y": 790,
+      "laneId": "lane-1784623617560",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": "7.2",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 730,
+      "y": 940,
+      "laneId": "lane-1784623626914",
+      "w": 200,
+      "h": 70,
+      "text": "Yükaşırma prosesin icrasi",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": "7.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 730,
+      "y": 620,
+      "laneId": "lane-1784623605456",
+      "w": 200,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     },
+     {
+      "id": 2,
+      "type": "pill",
+      "style": "solid",
+      "x": 450,
+      "y": 50,
+      "laneId": "lane-1784623585168",
+      "w": 200,
+      "h": 50,
+      "text": "Yeni başlanğıc/son",
+      "info": {
+       "general": [
+        ""
+       ]
+      }
+     }
+    ],
+    "edges": [
+     {
+      "from": 1,
+      "to": "2.1",
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": "2.1",
+      "to": 3,
+      "s": "bottom",
+      "e": "top",
+      "arrow": "end"
+     },
+     {
+      "from": 3,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 10,
+      "to": 11,
+      "s": "top",
+      "e": "bottom"
+     },
+     {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+     },
+     {
+      "from": 7,
+      "to": "7.1",
+      "s": "bottom",
+      "e": "bottom"
+     },
+     {
+      "from": "7.1",
+      "to": "7.2",
+      "s": "left",
+      "e": "left",
+      "dashed": true
+     },
+     {
+      "from": 9,
+      "to": 10,
+      "s": "top",
+      "e": "bottom"
+     },
+     {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "left"
+     },
+     {
+      "from": 2,
+      "to": "2.2",
+      "s": "bottom",
+      "e": "top"
+     }
+    ]
+   }
+  }
+ ],
+ "hesabat": {
+  "diagrams": [
+   {
+    "key": "git-hesabat-0dffb0d743",
+    "row": {
+     "title": "Beynəlxalq yükdaşıma çərçivəsində idxal əməliyyatlarına dair daxil olmuş müştəri sorğularının emalı və icrasına dair iş axını",
+     "subtitle": "ALC-IMS-PRC-ITRN-1/1-FC-1/1",
+     "strukturAdi": "Beynəlxalq daşımalar departamenti",
+     "docType": "",
+     "edition": "",
+     "approvalDate": "",
+     "protocol": "",
+     "pageCount": "",
+     "status": "progress",
+     "date": "2026-08-26T00:00:00.000Z"
+    }
+   },
+   {
+    "key": "git-hesabat-0ab12aadec",
+    "row": {
+     "title": "Beynəlxalq yükdaşıma çərçivəsində tranzit əməliyyatlarına dair daxil olmuş müştəri sorğularının emalı və icrasına dair iş axını",
+     "subtitle": "ALC-IMS-PRC-ITRN-3/1-FC-1/1",
+     "strukturAdi": "Beynəlxalq daşımalar departamenti",
+     "docType": "",
+     "edition": "",
+     "approvalDate": "",
+     "protocol": "",
+     "pageCount": "",
+     "status": "progress",
+     "date": "2026-08-26T00:00:00.000Z"
+    }
+   },
+   {
+    "key": "git-hesabat-a65da12841",
+    "row": {
+     "title": "Tırdan - tıra tranzit əməliyyatlarının icrası",
+     "subtitle": "",
+     "strukturAdi": "Beynəlxalq daşımalar departamenti",
+     "docType": "",
+     "edition": "",
+     "approvalDate": "",
+     "protocol": "",
+     "pageCount": "",
+     "status": "progress",
+     "date": "2026-08-26T00:00:00.000Z"
+    }
+   },
+   {
+    "key": "git-hesabat-91cfbbb417",
+    "row": {
+     "title": "Tırdan - vaqona tranzit əməliyyatlarının icrası",
+     "subtitle": "",
+     "strukturAdi": "Beynəlxalq daşımalar departamenti",
+     "docType": "",
+     "edition": "",
+     "approvalDate": "",
+     "protocol": "",
+     "pageCount": "",
+     "status": "progress",
+     "date": "2026-08-26T00:00:00.000Z"
+    }
+   },
+   {
+    "key": "git-hesabat-b49c99e3b4",
+    "row": {
+     "title": "Vaqondan - tıra tranzit əməliyyatlarının icrası",
+     "subtitle": "",
+     "strukturAdi": "Beynəlxalq daşımalar departamenti",
+     "docType": "",
+     "edition": "",
+     "approvalDate": "",
+     "protocol": "",
+     "pageCount": "",
+     "status": "progress",
+     "date": "2026-08-26T00:00:00.000Z"
+    }
+   },
+   {
+    "key": "git-hesabat-b0faa887f8",
+    "row": {
+     "title": "Vaqondan - vaqona tranzit əməliyyatlarının icrası",
+     "subtitle": "",
+     "strukturAdi": "Beynəlxalq daşımalar departamenti",
+     "docType": "",
+     "edition": "",
+     "approvalDate": "",
+     "protocol": "",
+     "pageCount": "",
+     "status": "progress",
+     "date": "2026-08-26T00:00:00.000Z"
+    }
+   }
+  ]
+ },
+ "pdfs": [
+  {
+   "key": "git-files-8-645e70fa",
+   "title": "ALM İSO 45001",
+   "subtitle": "",
+   "groupName": "Ümumi siyasət və sertifikatlar",
+   "status": null,
+   "filename": "Sertifikat İSO 45001_2018.pdf",
+   "size": 3303652,
+   "blob": "files-8-d0875583.pdf",
+   "ext": "pdf",
+   "note": "Tarixçədən bərpa edildi"
+  },
+  {
+   "key": "git-files-6-823247ad",
+   "title": "ALM İSO 9001",
+   "subtitle": "",
+   "groupName": "Ümumi siyasət və sertifikatlar",
+   "status": null,
+   "filename": "Sertifikat - İSO 90001_2015.pdf",
+   "size": 3293700,
+   "blob": "files-6-25c2a10f.pdf",
+   "ext": "pdf",
+   "note": "Tarixçədən bərpa edildi"
+  },
+  {
+   "key": "git-files-2-4346f0f0",
+   "title": "ALM İMS Siyasəti",
+   "subtitle": "",
+   "groupName": "Ümumi siyasət və sertifikatlar",
+   "status": null,
+   "filename": "İMS Siyasəti.pdf",
+   "size": 1043133,
+   "blob": "files-2-c76bf48b.pdf",
+   "ext": "pdf",
+   "note": "Tarixçədən bərpa edildi"
+  },
+  {
+   "key": "git-files-5-969f88b9",
+   "title": "Tütünçəkmə siyasəti",
+   "subtitle": "",
+   "groupName": "Ümumi siyasət və sertifikatlar",
+   "status": null,
+   "filename": "Tütünçəkmə Siyasəti.pdf",
+   "size": 799243,
+   "blob": "files-5-3b2f102e.pdf",
+   "ext": "pdf",
+   "note": "Tarixçədən bərpa edildi"
+  },
+  {
+   "key": "git-files-3-d0c0ea86",
+   "title": "ALM Narkotik və Alkoqol siyasəti",
+   "subtitle": "",
+   "groupName": "Ümumi siyasət və sertifikatlar",
+   "status": null,
+   "filename": "Narkotik və Alkaqol Siyasəti.pdf",
+   "size": 793853,
+   "blob": "files-3-eff63261.pdf",
+   "ext": "pdf",
+   "note": "Tarixçədən bərpa edildi"
+  },
+  {
+   "key": "git-files-4-cd627306",
+   "title": "Nəqliyyat Idarəetmə Siyasəti",
+   "subtitle": "",
+   "groupName": "Ümumi siyasət və sertifikatlar",
+   "status": null,
+   "filename": "Nəqliyyat Idarəetmə Siyasəti.pdf",
+   "size": 770671,
+   "blob": "files-4-b080d330.pdf",
+   "ext": "pdf",
+   "note": "Tarixçədən bərpa edildi"
+  },
+  {
+   "key": "git-files-7-44c645bb",
+   "title": "ALM İSO 14001",
+   "subtitle": "",
+   "groupName": "Ümumi siyasət və sertifikatlar",
+   "status": null,
+   "filename": "Sertifikat İSO 14001-2015.pdf",
+   "size": 700468,
+   "blob": "files-7-83330d13.pdf",
+   "ext": "pdf",
+   "note": "Tarixçədən bərpa edildi"
+  },
+  {
+   "key": "git-files-1-c7cbdb50",
+   "title": "Tırpark ümumi proses",
+   "subtitle": "ALM-PR-TP-001",
+   "groupName": "TIR Park və minik avtomobillərinin dayanacağı şöbəsi",
+   "status": null,
+   "filename": "Tırpark iş axışı.pdf",
+   "size": 131045,
+   "blob": "files-1-5e627161.pdf",
+   "ext": "pdf",
+   "note": "Tarixçədən bərpa edildi"
+  },
+  {
+   "key": "git-files-2-5cf59d2b",
+   "title": "Sənəd 2",
+   "subtitle": "ALM-X1-C1",
+   "groupName": "Ümumi 2",
+   "status": null,
+   "filename": "pdf-2.pdf",
+   "size": 25953,
+   "blob": "files-2-5588f0a0.pdf",
+   "ext": "pdf",
+   "note": "Tarixçədən bərpa edildi"
+  },
+  {
+   "key": "git-files-11-0992f2d3",
+   "title": "Anbar xidməti işçi təlimatlar",
+   "subtitle": "İT/BD/01",
+   "groupName": "Anbar logistikası şöbəsi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-12-5a244e33",
+   "title": "3 PL anbar idarəetmə prosesi",
+   "subtitle": "PS/İMS/3PL/01",
+   "groupName": "Anbar logistikası şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-14-83cbc4c9",
+   "title": "Anbarın idarəedilməsi proseduru",
+   "subtitle": "Pr/İMS/KAB/02",
+   "groupName": "Anbar logistikası şöbəsi / SƏ / Konteyner əməliyyatları şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-15-fa8ef21e",
+   "title": "Beynəlxalq yükdaşımada idxal əməliyyatlarının təşkili prosesi",
+   "subtitle": "ALC-İMS-PRC-ITRN -1/1",
+   "groupName": "Beynəlxalq daşımalar departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-16-5082826b",
+   "title": "Beynəlxalq yükdaşımada ixrac əməliyyatlarının təşkili prosesi",
+   "subtitle": "ALC-İMS-PRC-ITRN -2/1",
+   "groupName": "Beynəlxalq daşımalar departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-17-dc4d0902",
+   "title": "Beynəlxalq yükdaşıma xidmətləri üzrə gəlir və xərclərin tanınması prosesi",
+   "subtitle": "ALC-İMS-PRC-FINC-1/1",
+   "groupName": "Beynəlxalq daşımalar departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-18-f3d3592c",
+   "title": "Beynəlxalq yükdaşımada tranzit əməliyyatlarının təşkili prosesi",
+   "subtitle": "ALC-İMS-PRC-ITRN-3/1",
+   "groupName": "Beynəlxalq daşımalar departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-19-21af32fb",
+   "title": "Beynəlxalq daşımalar departamentinin əsasnaməsi",
+   "subtitle": "ALM-İMS-BDD-001",
+   "groupName": "Beynəlxalq daşımalar departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-20-d2bd3aad",
+   "title": "Beynəlxalq daşıma prosesi",
+   "subtitle": "",
+   "groupName": "Beynəlxalq daşımalar departamenti",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-21-5470e3e8",
+   "title": "Biznes Departamentinin Əsasnaməsi",
+   "subtitle": "Ə/ALM/17",
+   "groupName": "Biznes departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-22-3e5dad1e",
+   "title": "Xidmətlərin satişi proseduru",
+   "subtitle": "PR/İMS/BD/02",
+   "groupName": "Biznes departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-23-64e46865",
+   "title": "İşgüzar görüşlərin idarəedilməsi proseduru",
+   "subtitle": "PR/BD/ 01",
+   "groupName": "Biznes departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-24-38549971",
+   "title": "Xidmət növlərinin idarəedilməsi prosesi",
+   "subtitle": "PS/BD/01",
+   "groupName": "Biznes departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-25-663a2312",
+   "title": "Daxili audit xidməti haqqinda əsasnamə",
+   "subtitle": "",
+   "groupName": "Daxili audit departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-26-0fffd4f1",
+   "title": "Daxili audit proseduru",
+   "subtitle": "PR/İMS/01",
+   "groupName": "Daxili audit departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-27-2e522cee",
+   "title": "Daxili Daşimalar Departamentinin Əsasnaməsi",
+   "subtitle": "ALM-İMS-DDD-001",
+   "groupName": "Daxili daşımalar departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-28-9280a0b5",
+   "title": "Daxili Daşima Xidməti Prosesi",
+   "subtitle": "İMS/PS/DD/01",
+   "groupName": "Daxili daşımalar departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-29-2925cb83",
+   "title": "Əməliyyatlarin Konfiqurasiyasi Və Transformasiya Departamentinin Əsasnaməsi",
+   "subtitle": "ALM-İMS-ƏKTD-001",
+   "groupName": "Əməliyyatların konfiqurasiyası və transformasiya departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-30-09e137c4",
+   "title": "Anbar proseslərinin proqram təminatı və sayım prosesinin təşkili proseduru",
+   "subtitle": "",
+   "groupName": "Əməliyyatların konfiqurasiyası və transformasiya departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-31-44a951ff",
+   "title": "Hüquq departamentinin əsasnaməsi",
+   "subtitle": "ALM-İMS-HD-001",
+   "groupName": "Hüquq departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-32-cd3af437",
+   "title": "Müqavilələrin idarə olunması proseduru",
+   "subtitle": "ALC-IMS-PRD-LEGD-1/1",
+   "groupName": "Hüquq departamenti",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-33-1bf9f5f6",
+   "title": "Marketinq araşdirma proseduru",
+   "subtitle": "Pr/MK/01",
+   "groupName": "İctimaiyyətlə əlaqələr və marketinq şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-34-1aa2832f",
+   "title": "Marketinq kommunikasiya proseduru",
+   "subtitle": "PR/MK/02",
+   "groupName": "İctimaiyyətlə əlaqələr və marketinq şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-35-6a216a6f",
+   "title": "Müştəri məmnunluğunun ölçülməsi və şikayətlərin araşdirilmasi proseduru",
+   "subtitle": "PR/İMS/MK/03",
+   "groupName": "İctimaiyyətlə əlaqələr və marketinq şöbəsi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-36-ae616336",
+   "title": "Xidmət sorğularin cavablandirilmasi proseduru",
+   "subtitle": "PR/İMS/MK/04",
+   "groupName": "İctimaiyyətlə əlaqələr və marketinq şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-37-62a182d5",
+   "title": "İctimaiyyətlə əlaqələr və marketinq şöbəsi əsasnaməsi",
+   "subtitle": "",
+   "groupName": "İctimaiyyətlə əlaqələr və marketinq şöbəsi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-38-9ed57861",
+   "title": "İnformasiya Texnologiyalari Şöbəsinin Əsasnaməsi",
+   "subtitle": "Ə/ALM/13",
+   "groupName": "İnformasiya texnologiyaları şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-39-610b5f30",
+   "title": "Mərkəz daxilində İT xidmətlərinin təmini proseduru",
+   "subtitle": "",
+   "groupName": "İnformasiya texnologiyaları şöbəsi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-40-3df44650",
+   "title": "İnfrastruktur şöbəsinin əsasnaməsi",
+   "subtitle": "",
+   "groupName": "İnfrastruktur şöbəsi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-41-ac5b8e70",
+   "title": "Müştəri Cəlbi Və Satiş Üzrə Mükafatlandirma Qaydasi",
+   "subtitle": "ALM-İMS",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-42-d3e45e5e",
+   "title": "Davamiyyətə Nəzarət Və İcazə Proseduru",
+   "subtitle": "ALM-İMS-İRİD-004",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-43-7821de78",
+   "title": "\"Abşeron Logistika” Mmc-də İş Fəaliyyətinin İdarə Olunmasi Qaydasi",
+   "subtitle": "AM-İMS-İRİD-R1",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-44-06a707a4",
+   "title": "İşə Qəbul Prosesi",
+   "subtitle": "PS/İMS/İR/01",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-45-d139a7ae",
+   "title": "Təlim Proseduru",
+   "subtitle": "PR/İMS/İR/03",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-46-da2f1aed",
+   "title": "Korporativ Davraniş Və Biznes Etika Məcəlləsi",
+   "subtitle": "ALM-IMS-İRİD-003",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-47-690a2466",
+   "title": "Vəzifə Kateqoriyalari Üzrə Səriştə Tələbi",
+   "subtitle": "",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-48-a316d59b",
+   "title": "Satiş Üzrə Mükafatlandirma Qaydasi",
+   "subtitle": "ALM-İMS-İRİD",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-49-dfb1b8c3",
+   "title": "İnsan Resurslari Və İnzibati Departamentin Əsasnaməsi",
+   "subtitle": "ALM-İMS-İRİD-001",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-50-faae3913",
+   "title": "Sənədləşdirilmiş İnformasiyanin İdarəedilməsi Proseduru",
+   "subtitle": "PR/İMS/İİ/01",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-51-1ff54294",
+   "title": "Sənəd dövriyyəsi proseduru",
+   "subtitle": "PR/İMS/İİ/02",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-52-eb93add3",
+   "title": "Adaptasiya proseduru",
+   "subtitle": "PR/İMS/İR/02",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-53-6c06349f",
+   "title": "İclaslarin keçirilməsi proseduru",
+   "subtitle": "PR/İMS/İİ/04",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-54-6ba3e8a9",
+   "title": "İnsan resursları və inzibati departamentin əsasnaməsi",
+   "subtitle": "ALC-IMS-S-HRAD-001",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-55-7bd7857e",
+   "title": "İşə qəbul və adaptasiya proseduru",
+   "subtitle": "ALM-IMS-PRD-IRID-01",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-56-43f8db34",
+   "title": "Təlim və İnkişaf Proseduru",
+   "subtitle": "ALC-IMS-PRC-HRAD-002",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-57-737370c4",
+   "title": "Mərkəz daxilində Arxiv və kargüzarlıq proseslərinin təmini proseduru",
+   "subtitle": "",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-58-efb29d7c",
+   "title": "İR sənədləşmə prosesləri",
+   "subtitle": "",
+   "groupName": "İnsan resursları və inzibati departament",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-59-59ab378c",
+   "title": "Keyfiyyətə Nəzarət və SƏTƏM şöbəsinin ƏSASNAMƏSİ",
+   "subtitle": "ALC-İMS-S-QHSE - 1/2",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-60-745fc9ba",
+   "title": "Kimyəvi və təhlükəli hesab edilən maddələrin saxlanması və istifadəsi Proseduru",
+   "subtitle": "İMS/SƏTƏM/09",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-61-135c71c6",
+   "title": "İzləmə və ölçmə cihazlarinin izlənməsi və kalibrasiyasi proseduru",
+   "subtitle": "PR/IMS/İD/03",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-62-5a769e12",
+   "title": "Tənzimləyici tədbirlər proseduru",
+   "subtitle": "PR/İMS/ 02",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-63-2fe44057",
+   "title": "Fəaliyyətin planlanmasi proseduru",
+   "subtitle": "PR/İMS/ 01",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-64-c848eabf",
+   "title": "Bədbəxt hadisələrin qeydi, ölçülməsi və izlənməsi proseduru",
+   "subtitle": "İMS/SƏTƏМ/01",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-65-a5047600",
+   "title": "Təhlükələrin müəyyən edilməsi və risk qiyməltəndirmə proseduru",
+   "subtitle": "İMS/SƏTƏM/02",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-66-3d377606",
+   "title": "Fərdi və kollektiv mühafizə vasitələrinə nəzarəт proseduru",
+   "subtitle": "İMS/SƏTƏM/03",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-67-d997f16b",
+   "title": "İlk tibbi yardimin təşkili proseduru",
+   "subtitle": "İMS/SƏTƏM/04",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-68-e7f1ce89",
+   "title": "Təhlükəsiz iş üsullarinin üzrə təlim proseduru",
+   "subtitle": "İMS/SƏTƏM/05",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-69-e3495f1b",
+   "title": "Tullantilarin idarəedilməsi proseduru",
+   "subtitle": "İMS/SƏTƏM/06",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-70-5fda1bdf",
+   "title": "Fövqəladə hallara hazirliq proseduru",
+   "subtitle": "İMS/SƏTƏM/07",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-71-e09bab68",
+   "title": "Ekoloji təhlükələrin qiymətləndirilməsi proseduru",
+   "subtitle": "İMS/SƏTƏM/08",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-72-cf0c0248",
+   "title": "Mülki Müdafiə Planı və Fövqəladə Hallara Hazırlıq Proseduru",
+   "subtitle": "ALM-IMS-PL/PRD-QHSE-07",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-73-4ab09b7b",
+   "title": "Qəzaların ləğvi planı",
+   "subtitle": "ALM-IMS-PL-QHSE-10",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-74-7ddcdd66",
+   "title": "İlklin tibbi yardımın təşkili proseduru",
+   "subtitle": "ALM-IMS-PRD-QHSE-04",
+   "groupName": "KN və SƏTƏM şöbəsi",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-75-dec4cffc",
+   "title": "Normayaratma fəaliyyətinin təşkili və aparılması prosesi",
+   "subtitle": "ALC-İMS-PRC-PMOD-1/3",
+   "groupName": "Layihələrin idarə olunması departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-76-f152da68",
+   "title": "Layihələrin idaeə edilməsi prosedur qaydaları",
+   "subtitle": "PR/LİO/01",
+   "groupName": "Layihələrin idarə olunması departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-77-681e575b",
+   "title": "Layihələrin İdarə Olunmasi Ofisinin Əsasnaməsi",
+   "subtitle": "ALM-İMS-LİOO-001",
+   "groupName": "Layihələrin idarə olunması departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-78-d8ba12c0",
+   "title": "Məlumatların açıqlanması proseduru",
+   "subtitle": "ALM-İMS-LİOO-002",
+   "groupName": "Layihələrin idarə olunması departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-79-5a55131b",
+   "title": "Korrupsiyaya qarşı mübarizə siyasəti",
+   "subtitle": "ALC-IMS-POL-AC-1/1",
+   "groupName": "Layihələrin idarə olunması departamenti",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-80-3fe9bdba",
+   "title": "Büdcə Hazirlanmasi Plani",
+   "subtitle": "ALC-İMS-Pİ-FİNC-001",
+   "groupName": "Maliyyə departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-81-766fd91e",
+   "title": "Maliyyə departamentinin əsasnaməsi",
+   "subtitle": "Ə/ALM/16",
+   "groupName": "Maliyyə departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-82-6c1288c2",
+   "title": "Maliyyə hesabatlılığı və təhlil proseslərinin tənzimlənməsi proseduru",
+   "subtitle": "",
+   "groupName": "Maliyyə departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-83-45daf320",
+   "title": "Mühasibatlıqla bağlı proseslərin tənzimlənməsi proseduru",
+   "subtitle": "",
+   "groupName": "Maliyyə departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-84-225df4e4",
+   "title": "Vaqonların Mərkəzə qəbulu proseduru",
+   "subtitle": "ALC-İMS-PRD-YOPU -1/3",
+   "groupName": "Manevra və planlama ofisi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-85-0ddf54f2",
+   "title": "Dəmir Yolu ilə idxal olunan vaqon yüklərinin təhvil verilməsi prosesi",
+   "subtitle": "ALC-İMS_PRC-TRMS-1/3",
+   "groupName": "Manevra və planlama ofisi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-86-198b6483",
+   "title": "Dəmir yolu ilə idxal olunan konteyner yüklərinin təhvil verilmə prosesi",
+   "subtitle": "ALC-İMS_PRC-TRMS-2/3",
+   "groupName": "Manevra və planlama ofisi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-87-efa2bf35",
+   "title": "Mərkəzdən DY ilə ixrac edilən yüklər üzrə sənədləşmə proseduru",
+   "subtitle": "ALC-İMS-PRD-SWIN -2/1",
+   "groupName": "Manevra və planlama ofisi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-88-3a8e6c19",
+   "title": "Yüklü və boş vaqonların Mərkəzdən göndərilməsi proseduru",
+   "subtitle": "ALC-İMS-PRD-YOPU -2/3",
+   "groupName": "Manevra və planlama ofisi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-89-cbdd81f2",
+   "title": "Manevra və Planlama Şöbəsinin Əsasnaməsi",
+   "subtitle": "Ə/ALM/02",
+   "groupName": "Manevra və planlama ofisi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-90-6be1a5ec",
+   "title": "Manevra və Planlama Bölməsi Üzrə Işçi Təlimatlar",
+   "subtitle": "",
+   "groupName": "Manevra və planlama ofisi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-91-512f2b26",
+   "title": "Boş qatarin mərkəzdən göndərilməsi prosesi",
+   "subtitle": "PS/İMS / MP/02",
+   "groupName": "Manevra və planlama ofisi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-92-06a08624",
+   "title": "Müştəri məmnuniyyətinin ölçülməsi və şikayətlərin idarə edilməsi prosesi",
+   "subtitle": "ALC-İMS_PRC-MCD-1/2",
+   "groupName": "Marketin və kommunikasiya departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-93-28b478f9",
+   "title": "Risklərə nəzarət və monitorinq şöbəsinin əsasnaməsi",
+   "subtitle": "",
+   "groupName": "Risklərə nəzarət və monitorinq şöbəsi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-94-b683545e",
+   "title": "Risklərə nəzarət və monitorinq proseslərinin təşkili",
+   "subtitle": "",
+   "groupName": "Risklərə nəzarət və monitorinq şöbəsi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-95-6b3b389e",
+   "title": "Konteyner sahəsinin idarəedilməsi proseduru",
+   "subtitle": "PR/İMS / KAB/ 01",
+   "groupName": "Sahə əməliyyatları ofisi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-96-bb3d95df",
+   "title": "Yük əməliyyatlarinda texnika və işçi qüvvəsindən istifadə proseduru",
+   "subtitle": "PR/İMS/YƏ/01",
+   "groupName": "Sahə əməliyyatları ofisi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-97-86a27530",
+   "title": "Konteyner və Anbar şöbəsinin əsasnaməsi",
+   "subtitle": "Ə/ALM/03",
+   "groupName": "Sahə əməliyyatları ofisi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-98-8ad07a17",
+   "title": "Kran əməliyyatlari şöbəsinin əsasnaməsi",
+   "subtitle": "9/ALM/04",
+   "groupName": "Sahə əməliyyatları ofisi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-99-8a3ba7f5",
+   "title": "Yükləmə boşaltma şöbəsinin əsasnaməsi",
+   "subtitle": "9/ALM/05",
+   "groupName": "Sahə əməliyyatları ofisi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-100-2860d897",
+   "title": "Avtokar əməliyyatlari şöbəsinin əsasnaməsi",
+   "subtitle": "9/ALM/06",
+   "groupName": "Sahə əməliyyatları ofisi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-101-60feb738",
+   "title": "Konteyner yüklərinin yük alana verilməsi prosesi",
+   "subtitle": "PS/İMS/KAB /01",
+   "groupName": "Sahə əməliyyatları ofisi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-102-b3e28e40",
+   "title": "Vaqon yüklərinin yük sahibinə verilməsi prosesi",
+   "subtitle": "PS/YƏ /01",
+   "groupName": "Sahə əməliyyatları ofisi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-103-fec670ff",
+   "title": "Yükləmə boşaltma əməliyyatlarinda təhlükəsizlik tələbləri",
+   "subtitle": "İT/YBƏ /01",
+   "groupName": "Sahə əməliyyatları ofisi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-104-9ec5905b",
+   "title": "Yüklərin vaqona yüklənməsi prosesi",
+   "subtitle": "PS / İMS /YƏ /02",
+   "groupName": "Sahə əməliyyatları ofisi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-105-68bfbd92",
+   "title": "Yüklü qatarin qəbulu prosesi",
+   "subtitle": "PS/İMS/MP/01",
+   "groupName": "Sahə əməliyyatları ofisi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-106-c96d4cb6",
+   "title": "Sahə əməliyyatları ofisinin əsasnaməsi",
+   "subtitle": "",
+   "groupName": "Sahə əməliyyatları ofisi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-107-fa944e1f",
+   "title": "Satınalma Prosesi",
+   "subtitle": "ALC-İMS-PRC-PROC-1/3",
+   "groupName": "Təchizat şöbəsi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-108-9c78bf79",
+   "title": "Satinalma proseduru",
+   "subtitle": "İMS/PR/TŞ/01",
+   "groupName": "Təchizat şöbəsi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-109-ac887c40",
+   "title": "Tender prosesi",
+   "subtitle": "ALC-IMS-PRC-PROC- 002",
+   "groupName": "Təchizat şöbəsi",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-110-a476687a",
+   "title": "Təchizat şöbəsinin əsasnaməsi",
+   "subtitle": "",
+   "groupName": "Təchizat şöbəsi",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-111-4fbeb30f",
+   "title": "ALM Inzibati binasına və yük həyətinə buraxılış rejimi haqqında təlimat",
+   "subtitle": "",
+   "groupName": "Təhlükəsizlik şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-112-0fee334c",
+   "title": "Mühafizə və təhlükəsizlik şöbəsinin əsasnaməsi",
+   "subtitle": "Ə/ALM/15",
+   "groupName": "Təhlükəsizlik şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-113-2193d35f",
+   "title": "Texnikalarin istismarina nəzarət proseduru",
+   "subtitle": "PR/İD/02",
+   "groupName": "Təmir və texnikaya nəzarət şöbəsi",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-114-6250e374",
+   "title": "Təmir və texnikaya nəzarət şöbəsinin əsasnaməsi",
+   "subtitle": "",
+   "groupName": "Təmir və texnikaya nəzarət şöbəsi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-115-f1a40583",
+   "title": "Tir parkin idarəedilməsi proseduru",
+   "subtitle": "PR/ İMS/TP/01",
+   "groupName": "TIR Park və minik avtomobillərinin dayanacağı şöbəsi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-116-e798f566",
+   "title": "Minik avtomobil dayanacağinin idarəedilməsi proseduru",
+   "subtitle": "PR/İMS/TP/02",
+   "groupName": "TIR Park və minik avtomobillərinin dayanacağı şöbəsi",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-117-077766c6",
+   "title": "Tırpark və Minik avtomobilləri dayanacağının idaeə edilməsi proseduru",
+   "subtitle": "ALM-IMS-PRD-TP-01",
+   "groupName": "TIR Park və minik avtomobillərinin dayanacağı şöbəsi",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-118-e3bcc420",
+   "title": "TIR Park və minik avtomobillərinin dayanacağı şöbəsinin əsasnaməsi",
+   "subtitle": "",
+   "groupName": "TIR Park və minik avtomobillərinin dayanacağı şöbəsi",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-119-7147140b",
+   "title": "Korporativ elektron poçtdan istifadə proseduru",
+   "subtitle": "ALC-İMS-PRD-İT -1/1",
+   "groupName": "Ümumi təyinatlı",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-120-6c754e7f",
+   "title": "Süni intellekt platformasından istifadə təlimatı",
+   "subtitle": "ALC-İMS-İ-PMOD -2/1",
+   "groupName": "Ümumi təyinatlı",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-121-1b1c32b6",
+   "title": "Korporativ normativ aktlarin idarəedilməsi prosesi",
+   "subtitle": "PS / İMS/ 01",
+   "groupName": "Ümumi təyinatlı",
+   "status": "cancelled",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-122-6825da37",
+   "title": "İnteqrasiya edilmiş Menecment Sistemi siyasəti",
+   "subtitle": "İMS/01",
+   "groupName": "Ümumi təyinatlı",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-123-c0cf3f38",
+   "title": "Narkotik və Alkoqol siyasəti",
+   "subtitle": "İMS/SƏTƏM/03",
+   "groupName": "Ümumi təyinatlı",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-126-6f367f71",
+   "title": "Texniki təhlükəsizlik bəyannaməsinin hesabat-izahat vərəqi",
+   "subtitle": "",
+   "groupName": "Ümumi təyinatlı",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-127-67dee35f",
+   "title": "Texniki təhlükəsizlik bəyannaməsi",
+   "subtitle": "",
+   "groupName": "Ümumi təyinatlı",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-128-adacfbb8",
+   "title": "Güzəşt Proseduru",
+   "subtitle": "ALM-IMS-PRD-BD-03",
+   "groupName": "Ümumi təyinatlı",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-129-d575fbef",
+   "title": "Mərkəzdə dəmir yolu ilə daxil olan yüklər üzrə sənədləşmə proseduru",
+   "subtitle": "ALC-İMS-PRD-SWIN -1/1",
+   "groupName": "Vahid pəncərə departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-130-85d1fae1",
+   "title": "Vahid Pəncərə Əməliyyat İşçi Təlimatı",
+   "subtitle": "İT/VP/01",
+   "groupName": "Vahid pəncərə departamenti",
+   "status": "renew",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-131-d7ede2a6",
+   "title": "Vahid pəncərə departamentinin əsasnaməsi",
+   "subtitle": "",
+   "groupName": "Vahid pəncərə departamenti",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-132-b37ac7e8",
+   "title": "Debitor borcların idarə edilməsi proseduru",
+   "subtitle": "AE-PRD-1/1",
+   "groupName": "Abşeron Express MMC",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-133-67eb46f0",
+   "title": "Ekspedisiya xidmətlərinin göstərilməsi proseduru",
+   "subtitle": "AE-PRD-2/1",
+   "groupName": "Abşeron Express MMC",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-134-5ced384a",
+   "title": "Abşeron biznes park rezidentləri üçün ilkin təhlükəsizlik və sətəm tələbləri",
+   "subtitle": "ALC-IMS-I-QHSE-1/1",
+   "groupName": "Abşeron Biznes Park",
+   "status": "notdone",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-135-ea6555a3",
+   "title": "Abşeron biznes park-da istehsalat və qeyri-istehsalat yönümlüsahələr üzrə rezidentlik verilməsi qaydaları",
+   "subtitle": "",
+   "groupName": "Abşeron Biznes Park",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-136-8a17da18",
+   "title": "Qeyri tranzit əməliyyatlarının təşkili proseduru",
+   "subtitle": "",
+   "groupName": "MB Broker",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  },
+  {
+   "key": "git-files-137-f3693502",
+   "title": "Tranzit əməliyyatlarının təşkili proseduru",
+   "subtitle": "",
+   "groupName": "MB Broker",
+   "status": "progress",
+   "filename": "",
+   "size": 0,
+   "noFile": true,
+   "note": "Tarixçədən bərpa edildi (faylsız)"
+  }
+ ],
+ "templates": [
+  {
+   "key": "git-templates-1-ae2b1fca",
+   "title": "Testing",
+   "subtitle": "",
+   "groupName": "Testing",
+   "status": null,
+   "filename": "grapefruit.pdf",
+   "size": 43108,
+   "blob": "templates-1-46de3dd8.pdf",
+   "ext": "pdf",
+   "note": "Tarixçədən bərpa edildi"
+  }
+ ]
+}

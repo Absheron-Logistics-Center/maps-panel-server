@@ -1,0 +1,323 @@
+{
+  "id": 7,
+  "title": "Terminal prosesləri ilə əlaqədar dolu yük avtomobillərinin Mərkəzə girişi və çıxışı",
+  "subtitle": "ALM-IMS-PRD-TP-01",
+  "width": 2200,
+  "height": 960,
+  "lanes": [
+    {
+      "id": "lane-1783505297782",
+      "label": "Sürücü",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1783505308430",
+      "label": "NBM giriş-çıxış məntəqəsi",
+      "y": 180,
+      "h": 240
+    },
+    {
+      "id": "lane-1783505388012",
+      "label": "NBM giriş-çıxış məntəqəsi",
+      "y": 420,
+      "h": 160
+    },
+    {
+      "id": "lane-1783505395276",
+      "label": "Gömrük əməkdaşı",
+      "y": 580,
+      "h": 160
+    },
+    {
+      "id": "lane-1783505401485",
+      "label": "Sahə əməliyyatları ofisi",
+      "y": 740,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 85,
+      "y": 80,
+      "laneId": "lane-1783505297782",
+      "w": 280,
+      "h": 70,
+      "text": "Dolu yük avtomobili ilə NBM girişinə yaxınlaşır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 90,
+      "y": 240,
+      "laneId": "lane-1783505308430",
+      "w": 270,
+      "h": 60,
+      "text": "Avtomobil və yük məlumatlarını yoxlayır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 90,
+      "y": 480,
+      "laneId": "lane-1783505388012",
+      "w": 270,
+      "h": 70,
+      "text": "Giriş üçün gömrük razılığını verir.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 410,
+      "y": 330,
+      "laneId": "lane-1783505308430",
+      "w": 280,
+      "h": 70,
+      "text": "Məlumatları UDPAS-da qeydiyyata alır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 410,
+      "y": 220,
+      "laneId": "lane-1783505308430",
+      "w": 280,
+      "h": 70,
+      "text": "Giriş dirəyini açır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 690,
+      "y": 80,
+      "laneId": "lane-1783505297782",
+      "w": 300,
+      "h": 70,
+      "text": "Avtomobili əməliyyat sahəsinə yönləndirir.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 700,
+      "y": 790,
+      "laneId": "lane-1783505401485",
+      "w": 280,
+      "h": 70,
+      "text": "Boşaldılma əməliyyatını icra edir.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1030,
+      "y": 790,
+      "laneId": "lane-1783505401485",
+      "w": 250,
+      "h": 70,
+      "text": "Əməliyyatın tamamlanmasını UDPAS-da təsdiqləyir.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1030,
+      "y": 630,
+      "laneId": "lane-1783505395276",
+      "w": 250,
+      "h": 70,
+      "text": "Əməliyyatın tamamlanmasını UDPAS-da təsdiqləyir.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1060,
+      "y": 80,
+      "laneId": "lane-1783505297782",
+      "w": 280,
+      "h": 70,
+      "text": "Avtomobili NBM çıxışına yaxınlaşdırır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1070,
+      "y": 220,
+      "laneId": "lane-1783505308430",
+      "w": 260,
+      "h": 80,
+      "text": "Avtomobilin Terminal, Gömrük və Vergi sistemində çıxış icazələri yoxlanılır",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "solid",
+      "x": 1070,
+      "y": 330,
+      "laneId": "lane-1783505308430",
+      "w": 260,
+      "h": 70,
+      "text": "Uyğunluq olduqda çıxış dirəyini açır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": "pill",
+      "style": "solid",
+      "x": 1390,
+      "y": 80,
+      "laneId": "lane-1783505297782",
+      "w": 240,
+      "h": 70,
+      "text": "Avtomobil Mərkəz ərazisini tərk edir",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "top",
+      "e": "left"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "left",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "s": "right",
+      "e": "bottom"
+    }
+  ]
+}

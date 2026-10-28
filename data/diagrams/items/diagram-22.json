@@ -1,0 +1,326 @@
+{
+  "id": 22,
+  "title": "BROKER FƏALİYYƏTİ (Qeyri-tranzit/İdxal_Abşeron terminalı)",
+  "subtitle": "MB-İMS-PRD-003",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1785484349905",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1785484354283",
+      "label": "Koordinator",
+      "y": 180,
+      "h": 162
+    },
+    {
+      "id": "lane-1785484359807",
+      "label": "Broker",
+      "y": 342,
+      "h": 210
+    },
+    {
+      "id": "lane-1785484369346",
+      "label": "Gömrük orqanı",
+      "y": 552,
+      "h": 242
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "rect",
+      "style": "solid",
+      "x": 410,
+      "y": 222,
+      "laneId": "lane-1785484354283",
+      "w": 200,
+      "h": 100,
+      "text": "Buraxılmış yük barədə brokerə\nməlumat verilməsi və GB-nin təqdimi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 100,
+      "y": 407,
+      "laneId": "lane-1785484359807",
+      "w": 190,
+      "h": 120,
+      "text": "VPD-dən vaqon statusunun\nöyrənilməsi və dəmiryol qaiməsinin\ntəhvil alınması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 105,
+      "y": 608,
+      "laneId": "lane-1785484369346",
+      "w": 180,
+      "h": 120,
+      "text": "Yükün buraxılışda olub-olmamasının yoxlanması və GB-nin möhürlə təsdiq edilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 700,
+      "y": 407,
+      "laneId": "lane-1785484359807",
+      "w": 200,
+      "h": 120,
+      "text": "Təsdiq edilmiş dəmiryol qaiməsinin VPD-yə\nterminal xidmətlərinə dair sifariş kəsilməsi üçün təqdim edilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 1000,
+      "y": 402,
+      "laneId": "lane-1785484359807",
+      "w": 210,
+      "h": 130,
+      "text": "Açılacaq yükü daşıyacaq nəqliyyat\nvasitəsinin hazırlanması üçün Tır parka məlumat verilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 1000,
+      "y": 634,
+      "laneId": "lane-1785484369346",
+      "w": 210,
+      "h": 140,
+      "text": "Yük inspektoru və brokerin iştirakı ilə nəqliyyat vasitəsinin plombunun açılması (yükün açılması) və yükün buraxılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 1310,
+      "y": 407,
+      "laneId": "lane-1785484359807",
+      "w": 160,
+      "h": 110,
+      "text": "Yükün nəqliyyat vasitəsinə\nyüklənməsinin təşkili\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1570,
+      "y": 412,
+      "laneId": "lane-1785484359807",
+      "w": 170,
+      "h": 100,
+      "text": "Yükün termimal ərazini tərk etməsi\nüçün NBM-ə\nməlumat verilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1555,
+      "y": 70,
+      "laneId": "lane-1785484349905",
+      "w": 200,
+      "h": 80,
+      "text": "Yükün terminal ərazisini tərk etməsi\n\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "",
+      "type": "diamond",
+      "style": "solid",
+      "x": 430,
+      "y": 593,
+      "laneId": "lane-1785484369346",
+      "w": 150,
+      "h": 150,
+      "text": "Qrupaj yük",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 100,
+      "y": 237,
+      "laneId": "lane-1785484354283",
+      "w": 210,
+      "h": 70,
+      "text": "Keçid: Bəyanetmə fəaliyyəti biznes prosesi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "3.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 410,
+      "y": 407,
+      "laneId": "lane-1785484359807",
+      "w": 190,
+      "h": 120,
+      "text": "Yük inspektorunun təyin edilməsi üçün onlayn növbə götürülməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": ".",
+      "type": "pill",
+      "style": "stroke",
+      "x": 1920,
+      "y": 75,
+      "laneId": "lane-1785484349905",
+      "w": 70,
+      "h": 70,
+      "text": "",
+      "info": {
+        "general": [
+          ""
+        ]
+      },
+      "color": "#16a34a"
+    }
+  ],
+  "edges": [
+    {
+      "from": "1.1",
+      "to": 1,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "",
+      "to": "3.1",
+      "s": "top",
+      "e": "bottom",
+      "label": "Bəli"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "3.1",
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 9,
+      "to": ".",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "",
+      "to": 4,
+      "s": "right",
+      "e": "bottom",
+      "label": "Xeyr"
+    },
+    {
+      "from": 3,
+      "to": "",
+      "s": "right",
+      "e": "left"
+    }
+  ]
+}

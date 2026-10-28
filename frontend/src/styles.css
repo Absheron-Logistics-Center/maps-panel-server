@@ -294,7 +294,7 @@ top: 50px;
    HOME / HUB shared layout
    ============================================================ */
 .home-wrap {
-  max-width: 720px; margin: 0 auto;
+  max-width: 750px; margin: 0 auto;
   padding: calc(var(--topbar-h) + 28px) 24px 64px;
   display: flex; flex-direction: column; align-items: center;
   animation: fade-in 0.4s var(--ease);
@@ -307,9 +307,11 @@ top: 50px;
 
 /* Hub tiles */
 .sections-grid {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 230px));
+  display: grid; grid-template-columns: repeat(4, minmax(0, 230px));
   gap: 18px; width: 100%; justify-content: center;
 }
+.home-wrap.hub-wrap { max-width: 1040px; }
+@media (max-width: 1040px) { .sections-grid { grid-template-columns: repeat(2, minmax(0, 230px)); } }
 .section-tile {
   background: var(--surface); border: 1px solid var(--border-soft);
   border-radius: var(--r-xl); padding: 34px 22px;
@@ -2443,10 +2445,10 @@ border-radius: var(--r-lg) var(--r-lg) 25px 25px;
   font-size: 12px; font-weight: 600; line-height: 1;
   border: 1px solid transparent; white-space: nowrap;
 }
-.status-badge.progress  { color: #b45309; background: rgba(217,119,6,0.12); border-color: rgba(217,119,6,0.25); }
+.status-badge.progress  { color: #0e7490; background: rgba(8,145,178,0.12); border-color: rgba(8,145,178,0.25); }
 .status-badge.prep      { color: #6d28d9; background: rgba(124,58,237,0.12); border-color: rgba(124,58,237,0.25); }
 .status-badge.done      { color: #15803d; background: rgba(22,163,74,0.12); border-color: rgba(22,163,74,0.25); }
-.status-badge.notdone   { color: #0e7490; background: rgba(8,145,178,0.12); border-color: rgba(8,145,178,0.25); }
+.status-badge.notdone   { color: #b45309; background: rgba(217,119,6,0.12); border-color: rgba(217,119,6,0.25); }
 .status-badge.sign      { color: #721cb9; background: rgba(162,28,175,0.12); border-color: rgba(162,28,175,0.25); }
 .status-badge.cancelled { color: #b91c1c; background: rgba(220,38,38,0.12); border-color: rgba(220,38,38,0.25); }
 .status-badge.renew     { color: #0f766e; background: rgba(13,148,136,0.12); border-color: rgba(13,148,136,0.25); }
@@ -2461,10 +2463,10 @@ border-radius: var(--r-lg) var(--r-lg) 25px 25px;
   transition: background 0.15s var(--ease), border-color 0.15s var(--ease), color 0.15s var(--ease);
 }
 .status-trigger:hover { background: var(--bg-soft); }
-.status-trigger.progress  { color: #b45309; background: rgba(217,119,6,0.12); border-color: rgba(217,119,6,0.3); }
+.status-trigger.progress  { color: #0e7490; background: rgba(8,145,178,0.12); border-color: rgba(8,145,178,0.3); }
 .status-trigger.prep      { color: #6d28d9; background: rgba(124,58,237,0.12); border-color: rgba(124,58,237,0.3); }
 .status-trigger.done      { color: #15803d; background: rgba(22,163,74,0.12); border-color: rgba(22,163,74,0.3); }
-.status-trigger.notdone   { color: #0e7490; background: rgba(8,145,178,0.12); border-color: rgba(8,145,178,0.3); }
+.status-trigger.notdone   { color: #b45309; background: rgba(217,119,6,0.12); border-color: rgba(217,119,6,0.3); }
 .status-trigger.sign      { color: #721cb9; background: rgba(162,28,175,0.12); border-color: rgba(162,28,175,0.3); }
 .status-trigger.cancelled { color: #b91c1c; background: rgba(220,38,38,0.12); border-color: rgba(220,38,38,0.3); }
 .status-trigger.renew     { color: #0f766e; background: rgba(13,148,136,0.12); border-color: rgba(13,148,136,0.3); }
@@ -2483,10 +2485,10 @@ border-radius: var(--r-lg) var(--r-lg) 25px 25px;
 }
 .status-opt:hover { background: var(--bg-soft); }
 .status-opt.active { background: var(--primary-soft); color: var(--primary-darker); font-weight: 600; }
-.status-opt.progress svg { color: #d97706; }
+.status-opt.progress svg { color: #0891b2; }
 .status-opt.prep svg { color: #7c3aed; }
 .status-opt.done svg { color: #16a34a; }
-.status-opt.notdone svg { color: #0891b2; }
+.status-opt.notdone svg { color: #d97706; }
 .status-opt.sign svg { color: #a21caf; }
 .status-opt.cancelled svg { color: #dc2626; }
 .status-opt.renew svg { color: #0d9488; }
@@ -2711,10 +2713,10 @@ border-radius: var(--r-lg) var(--r-lg) 25px 25px;
 .sheets-stat-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1 1 auto; }
 .sheets-stat-card.total svg { color: var(--primary); }
 .sheets-stat-card.total .sheets-stat-num { color: var(--primary); }
-.sheets-stat-card.progress svg { color: var(--warn, #d97706); }
+.sheets-stat-card.progress svg { color: #0891b2; }
 .sheets-stat-card.prep svg { color: #7c3aed; }
 .sheets-stat-card.done svg { color: var(--success, #16a34a); }
-.sheets-stat-card.notdone svg { color: #0891b2; }
+.sheets-stat-card.notdone svg { color: #d97706; }
 .sheets-stat-card.sign svg { color: #a21caf; }
 .sheets-stat-card.cancelled svg { color: #dc2626; }
 .sheets-stat-card.renew svg { color: #0d9488; }
@@ -3404,9 +3406,9 @@ textarea.sheets-cell-input:disabled { opacity: 0.6; cursor: default; }
 }
 .nm-sheet-option-status.done { color: #16a34a; }
 .nm-sheet-option-status.prep { color: #7c3aed; }
-.nm-sheet-option-status.progress { color: #d97706; }
+.nm-sheet-option-status.progress { color: #0891b2; }
 .nm-sheet-option-status.sign { color: #a21caf; }
-.nm-sheet-option-status.notdone { color: #0891b2; }
+.nm-sheet-option-status.notdone { color: #d97706; }
 .nm-sheet-option-status.cancelled { color: #dc2626; }
 .nm-sheet-option-status.renew { color: #0d9488; }
 
@@ -3492,3 +3494,32 @@ button.pdf-nofile-upload:hover {
   .imp-diff-head { display: none; }
   .imp-item-top { flex-direction: column; }
 }
+
+/* file type pill (PDF / Word / Excel) */
+.ft-pill {
+  display: inline-flex; align-items: center; height: 18px; padding: 0 7px; margin-left: 8px;
+  border-radius: var(--r-pill); font-size: 10.5px; font-weight: 800; letter-spacing: .03em;
+  vertical-align: 2px; border: 1px solid transparent; white-space: nowrap;
+}
+/* one colour for every type (brand teal) */
+.ft-pill { color: var(--primary-dark); background: var(--primary-soft); border-color: var(--primary-lighter); }
+.ft-pill.ft-inline { margin-left: 0; margin-right: 4px; }
+
+/* uploaded file name (click to rename) + type pill — FileNameEdit.jsx */
+.fn-edit { display: inline-flex; align-items: center; gap: 4px; margin-left: 8px; vertical-align: 1px; max-width: 100%; }
+.fn-name {
+  font-size: 12.5px; font-weight: 500; color: var(--text-secondary); padding: 1px 6px; border-radius: 6px;
+  max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border: 1px solid transparent;
+}
+.fn-name.editable { cursor: text; }
+.fn-name.editable:hover { border-color: var(--border); background: var(--surface); color: var(--text-primary); }
+.fn-name.saving { opacity: .5; }
+.fn-input-wrap { display: inline-flex; align-items: center; }
+.fn-input {
+  font-size: 12.5px; padding: 1px 6px !important; height: 24px;
+  border: 1px solid var(--primary) !important; border-radius: 6px !important; box-shadow: var(--ring) !important;
+}
+.fn-ext { font-size: 12px; color: var(--text-muted); margin-left: 2px; }
+.fn-pill { display: inline-flex; padding: 1px; border-radius: 6px; }
+.fn-pill:hover { background: var(--bg-soft); }
+.fn-pill .ft-pill { margin: 0; }

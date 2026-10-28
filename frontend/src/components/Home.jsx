@@ -1,15 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 import { LogoFull } from './Logo.jsx';
 import {
-  Search, LogOut, Plus, Loader2, Trash2, ChevronLeft,
+  Search, LogOut, Plus, Loader2, ChevronLeft,
   ChevronRight, ChevronDown, ChevronsDownUp, ChevronsUpDown,
   Folder, FolderOpen, FolderPlus, Pencil, Edit3, GripVertical, Save, Check, Undo2
 } from './icons.jsx';
-import { Archive, ArchiveRestore, FileSpreadsheet } from 'lucide-react';
+import { Archive, ArchiveRestore, FileSpreadsheet, Trash2, Copy, MoreHorizontal, FileText, FileJson } from 'lucide-react';
+import './homeArchive.css';
+import RestoreDialog from './RestoreDialog.jsx';
+import ArchiveSection from './ArchiveSection.jsx';
+import { useMarquee, MarqueeLayer } from './MarqueeSelect.jsx';
+import GroupExportDialog from './GroupExportDialog.jsx';
 import { api, setToken } from '../api/client.js';
 import NameModal from './NameModal.jsx';
 import TitleEditButton from './TitleEditButton.jsx';
-import { StatusControl } from './Status.jsx';
+import { StatusControl, PROCESS_STATUS_META } from './Status.jsx';
 import { importDiagramFromExcel, downloadTemplate } from './excel.js';
 import { importDiagramFromJson } from './diagramExport.js';
 import AiButton from './ai/AiButton.jsx';
@@ -66,6 +71,17 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
   const [busy, setBusy] = useState(false);
   const [settings, setSettings] = useState(null);
   const [pendingArchive, setPendingArchive] = useState(null); // process id awaiting confirm
+  const [restoreItem, setRestoreItem] = useState(null); // archived item in the restore dialog
+  const [groupMenu, setGroupMenu] = useState(null);     // group id whose ⋯ menu is open
+  const [exportFor, setExportFor] = useState(null);     // { group, format } for the download dialog
+  const [copiedId, setCopiedId] = useState(null);
+  const [armed, setArmed] = useState(null); // 'g:<id>' | 'p:<id>' — dragging only starts from the grip
+  useEffect(() => {
+    const off = () => setArmed(null);
+    window.addEventListener('mouseup', off);
+    return () => window.removeEventListener('mouseup', off);
+  }, []);
+  const selecting = () => !!(window.getSelection && String(window.getSelection()).trim());
   const [aiOpen, setAiOpen] = useState(false);
   const [sheetOptions, setSheetOptions] = useState([]);
   const searchInputRef = useRef(null);
@@ -124,6 +140,62 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
   const role = localStorage.getItem('role');
   const isViewer = role === 'viewer';
   const isAdmin = role === 'admin' || role === 'editor_2';
+  const mq = useMarquee(isAdmin);
+  const [mqBusy, setMqBusy] = useState(false);
+  // What the selection really covers: top folders (a subfolder of a selected
+  // folder is already inside it) and items that are not inside those folders.
+  function selectionScope() {
+    const gSel = new Set(mq.groupIds());
+    const roots = [...gSel].filter(id => {
+      let g = groups.find(x => x.id === id);
+      while (g && g.parentId != null) { if (gSel.has(g.parentId)) return false; g = groups.find(x => x.id === g.parentId); }
+      return !!groups.find(x => x.id === id);
+    });
+    const inFolders = new Set(roots.flatMap(id => collectDescendantGroupIds(id, groups)));
+    const folderItems = processes.filter(p => inFolders.has(Number(p.groupId)));
+    const items = mq.itemIds().map(id => processes.find(p => p.id === id)).filter(p => p && !inFolders.has(Number(p.groupId)));
+    return { roots, inFolders, folderItems, items };
+  }
+  function describe({ roots, folderItems, items }) {
+    return [items.length ? `${items.length} diaqram` : '', roots.length ? `${roots.length} qovluq (içində ${folderItems.length} diaqram)` : ''].filter(Boolean).join(' və ');
+  }
+  function dropFolders(roots, inFolders) {
+    if (!roots.length) return;
+    setGroups(prev => prev.filter(x => !inFolders.has(x.id)));
+    setProcesses(prev => prev.filter(p => !inFolders.has(Number(p.groupId))));
+    setDirty(true); // saved by auto-save; the backend archives what was inside
+  }
+  async function archiveSelected() {
+    const sc = selectionScope();
+    if (!sc.items.length && !sc.roots.length) return;
+    if (!confirm(`${describe(sc)} arxivə köçürülsün?\nOradan bərpa etmək olar.`)) return;
+    setMqBusy(true);
+    try {
+      for (const p of sc.items) await api.archiveProcess(p.id);
+      const gone = new Set(sc.items.map(p => p.id));
+      setProcesses(prev => prev.filter(p => !gone.has(p.id)));
+      dropFolders(sc.roots, sc.inFolders);
+      mq.clear();
+      if (!sc.roots.length) await load();
+    } catch (err) { alert('Arxivə köçürülə bilmədi: ' + err.message); load(); }
+    finally { setMqBusy(false); }
+  }
+  async function deleteSelected() {
+    const sc = selectionScope();
+    const all = [...sc.items, ...sc.folderItems];
+    if (!all.length && !sc.roots.length) return;
+    if (!confirm(`${describe(sc)} silinsin?\n\nSəhifədən götürülür; nüsxəsi silinənlər faylında (data / Mongo) saxlanılır.`)) return;
+    setMqBusy(true);
+    try {
+      for (const p of all) { await api.archiveProcess(p.id); await api.deleteArchivedProcess(p.id); }
+      const gone = new Set(all.map(p => p.id));
+      setProcesses(prev => prev.filter(p => !gone.has(p.id)));
+      dropFolders(sc.roots, sc.inFolders);
+      mq.clear();
+      if (!sc.roots.length) await load();
+    } catch (err) { alert('Silinə bilmədi: ' + err.message); load(); }
+    finally { setMqBusy(false); }
+  }
 
   useEffect(() => {
     const t = setInterval(() => setNow(new Date()), 1000);
@@ -402,12 +474,12 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
   function deleteGroup(g) {
     const count = itemsOfGroup(g.id).length;
     const subCount = childGroupsOf(g.id).length;
-    let msg = `"${g.name}" qrupunu silmək istəyirsiniz?`;
+    let msg = `"${g.name}" qovluğu siyahıdan götürülsün?`;
     if (count || subCount) {
-      msg = `"${g.name}" qrupunu`
-        + (subCount ? ` və ${subCount} alt qrupunu` : '')
-        + (count ? ` və içindəki ${count} diaqramı` : '')
-        + ` silmək istəyirsiniz? "Yadda saxla"ya basana qədər tətbiq olunmayacaq.`;
+      msg = `"${g.name}" qovluğu`
+        + (subCount ? ` və ${subCount} alt qovluğu` : '')
+        + ` siyahıdan götürülsün?`
+        + (count ? ` İçindəki ${count} diaqram ARXİVƏ köçürüləcək (oradan bərpa etmək olar).` : '');
     }
     if (!confirm(msg)) return;
     const allIds = collectDescendantGroupIds(g.id, groups);
@@ -593,15 +665,6 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
     setModal(null);
     await load();
   }
-  async function deleteProcess(e, p) {
-    e.stopPropagation();
-    if (!confirm(`"${p.title}" diaqramını silmək istəyirsiniz? Geri alına bilməz.`)) return;
-    try {
-      await api.deleteProcess(p.id);
-      setProcesses(prev => prev.filter(x => x.id !== p.id));
-    } catch (err) { alert('Silinə bilmədi: ' + err.message); }
-  }
-
   async function changeStatus(p, status) {
     setProcesses(prev => prev.map(x => x.id === p.id ? { ...x, status } : x));
     try { await api.setProcessStatus(p.id, status); }
@@ -626,22 +689,32 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
       setArchiveOpen(true);
     } catch (err) { alert('Arxivə köçürülə bilmədi: ' + err.message); }
   }
-  async function unarchiveProcess(e, p) {
-    e.stopPropagation();
-    try {
-      await api.unarchiveProcess(p.id);
-      await load();
-    } catch (err) { alert('Bərpa edilə bilmədi: ' + err.message); }
-  }
+  // Delete from the archive: off the page; a copy stays in data/ + Mongo.
   async function deleteArchived(e, p) {
     e.stopPropagation();
-    if (!confirm(`"${p.title}" diaqramını tamamilə silmək istəyirsiniz? Geri alına bilməz.`)) return;
+    if (!confirm(`"${p.title || 'Diaqram'}" arxivdən silinsin?`)) return;
     try {
-      await api.deleteProcess(p.id);
+      await api.deleteArchivedProcess(p.id);
       setArchived(prev => prev.filter(x => x.id !== p.id));
     } catch (err) { alert('Silinə bilmədi: ' + err.message); }
   }
-
+  // Opens the "where should it go back?" dialog
+  function unarchiveProcess(e, p) {
+    e.stopPropagation();
+    setRestoreItem(p);
+  }
+  async function confirmRestore(target) {
+    const p = restoreItem;
+    const r = await api.unarchiveProcess(p.id, target);
+    await load();
+    const gid = r?.groupId;
+    if (gid != null) {
+      setExpanded(prev => ({ ...prev, [gid]: true }));
+      setHighlightId(p.id);
+      setTimeout(() => setHighlightId(null), 2500);
+      requestAnimationFrame(() => setTimeout(() => itemRefs.current[p.id]?.scrollIntoView({ block: 'center', behavior: 'smooth' }), 150));
+    }
+  }
   /* ---------- AI köməkçi ---------- */
   // Rebuilt on every turn (not memoised) so the model never reasons about a
   // group/process id that was renamed or deleted a moment ago.
@@ -651,7 +724,8 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
       role,
       groups: groups.map(g => ({ id: g.id, name: g.name, parentId: normPid(g) })),
       processes: processes.map(p => ({ id: p.id, title: p.title, subtitle: p.subtitle, groupId: p.groupId })),
-      archived: archived.map(p => ({ id: p.id, title: p.title, subtitle: p.subtitle })),
+      archived: archived.map(p => ({ id: p.id, title: p.title, subtitle: p.subtitle, groupName: p.groupName || '' })),
+      note: 'Əsas səhifə hesabatdan AYRIDIR. Silmə = arxivə köçürmə; arxivdən silinən data-da saxlanılır.',
       unsavedFolderChanges: dirty,
       currentSearch: query || null,
       hint: 'Bu, diaqramların siyahı ekranıdır. Diaqramın daxili node-larını dəyişmək üçün əvvəlcə open_diagram istifadə et.'
@@ -728,13 +802,18 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
           needsReload = true;
           break;
         case 'unarchive_diagram':
-          await api.unarchiveProcess(a.processId);
+          await api.unarchiveProcess(a.processId, a.newGroupName ? { newGroupName: a.newGroupName } : (a.groupId != null ? { groupId: a.groupId } : {}));
           log.push('Arxivdən çıxarıldı.');
           needsReload = true;
           break;
+        case 'delete_archived':
+          await api.deleteArchivedProcess(a.processId);
+          log.push('Arxivdən silindi (data-da saxlanılır).');
+          needsReload = true;
+          break;
         case 'delete_diagram':
-          await api.deleteProcess(a.processId);
-          log.push('Diaqram silindi.');
+          await api.archiveProcess(a.processId);
+          log.push('Diaqram arxivə köçürüldü (silinmir).');
           needsReload = true;
           break;
         case 'open_diagram':
@@ -769,12 +848,42 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
 
   const noResults = !loading && !error && groups.length === 0 && processes.length === 0;
 
+  /* ---------- copy name / folder downloads ---------- */
+  async function copyName(e, p) {
+    e.stopPropagation();
+    const text = p.title || '';
+    try { await navigator.clipboard.writeText(text); }
+    catch {
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch { /* ignore */ }
+      ta.remove();
+    }
+    setCopiedId(p.id);
+    setTimeout(() => setCopiedId(c => (c === p.id ? null : c)), 1400);
+  }
+  // every diagram in a folder and its subfolders, with the subfolder name
+  function deepItems(g) {
+    const out = itemsOfGroup(g.id).map(p => ({ ...p }));
+    for (const cg of childGroupsOf(g.id)) out.push(...deepItems(cg).map(p => ({ ...p, folder: p.folder || cg.name })));
+    return out;
+  }
+  useEffect(() => {
+    if (groupMenu == null) return;
+    const close = (e) => { if (!e.target.closest?.('.gm-wrap')) setGroupMenu(null); };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
+  }, [groupMenu]);
+
   /* ---------- recursive group render ---------- */
   function renderGroup(g, depth) {
     const fullItems = itemsOfGroup(g.id);
     const items = fullItems.filter(matches);
     const children = childGroupsOf(g.id);
-    const total = fullItems.length;
+    // count includes subfolders, so a folder whose files sit in a subfolder doesn't show 0
+    const deepIds = new Set(collectDescendantGroupIds(g.id, groups).map(Number));
+    const total = processes.filter(p => deepIds.has(Number(p.groupId))).length;
+    const directCount = fullItems.length;
 
     if (q && !groupHasMatchDeep(g)) return null;
     if (isViewer && !groupHasAnyItemsDeep(g)) return null;
@@ -789,21 +898,22 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
     return (
       <div
         key={g.id}
-        className={`group-card ${isOpen ? 'open' : ''} ${isNestTarget ? 'drag-nest' : (isGroupOver ? 'drag-over' : '')} ${depth > 0 ? 'nested' : ''}`}
+        className={`group-card ${mq.isSel(`g:${g.id}`) ? 'is-selected' : ''} ${isOpen ? 'open' : ''} ${isNestTarget ? 'drag-nest' : (isGroupOver ? 'drag-over' : '')} ${depth > 0 ? 'nested' : ''}`}
         style={depth > 0 ? { marginLeft: 0, borderRadius: '12px' } : undefined}
         title={isNestTarget ? `"${draggingG.name}" bura köçürüləcək` : undefined}
       >
         <div
+          data-sel={`g:${g.id}`}
           className="group-head"
-          onClick={() => toggleGroup(g.id)}
-          draggable={dndOn}
+          onClick={() => { if (!selecting()) toggleGroup(g.id); }}
+          draggable={dndOn && armed === `g:${g.id}`}
           onDragStart={e => onGroupDragStart(e, g.id)}
           onDragOver={e => onGroupDragOver(e, g.id)}
           onDrop={e => onGroupDrop(e, g.id)}
           onDragEnd={onGroupDragEnd}
         >
           {dndOn && (
-            <span className="order-grip group-grip" title="Sürüklə" onClick={e => e.stopPropagation()}>
+            <span className="order-grip group-grip" title="Sürüklə" onClick={e => e.stopPropagation()} onMouseDown={() => setArmed(`g:${g.id}`)}>
               <GripVertical size={15} />
             </span>
           )}
@@ -815,7 +925,24 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
             {isOpen ? <FolderOpen size={18} /> : <Folder size={18} />}
           </span>
           <span className="group-name">{g.name}</span>
-          <span className="group-count">{total}</span>
+          <span className="group-count" title={total !== directCount ? `${directCount} bu qovluqda, ${total - directCount} alt qovluqlarda` : undefined}>{total}</span>
+
+          <span className="gm-wrap" onClick={e => e.stopPropagation()}>
+            <button className="group-act-btn" title="Yüklə"
+              onClick={() => setGroupMenu(m => (m === g.id ? null : g.id))}>
+              <MoreHorizontal size={16} />
+            </button>
+            {groupMenu === g.id && (
+              <div className="gm-menu">
+                <button onClick={() => { setGroupMenu(null); setExportFor({ group: g, format: 'pdf' }); }}>
+                  <FileText size={16} /><span>PDF olaraq yüklə<small>Albom və ya kitab · seçərək</small></span>
+                </button>
+                <button onClick={() => { setGroupMenu(null); setExportFor({ group: g, format: 'json' }); }}>
+                  <FileJson size={16} /><span>JSON məlumat olaraq yüklə<small>Diaqramların datası · seçərək</small></span>
+                </button>
+              </div>
+            )}
+          </span>
 
           {!isViewer && (
             <span className="group-actions" onClick={e => e.stopPropagation()}>
@@ -836,9 +963,9 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
                 onClick={() => setModal({ type: 'group-rename', group: g })}>
                 <Pencil size={15} />
               </button>
-              <button className="group-act-btn danger" title="Qrupu sil"
+              <button className="group-act-btn danger" title="Qovluğu götür (diaqramlar arxivə)"
                 onClick={() => deleteGroup(g)}>
-                <Trash2 size={15} />
+                <Archive size={15} />
               </button>
             </span>
           )}
@@ -860,22 +987,38 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
                 <div
                   key={p.id}
                   ref={el => { if (el) itemRefs.current[p.id] = el; }}
-                  className={`process-item diagram-row ${isItemOver ? 'drag-over' : ''} ${highlightId === p.id ? 'just-opened' : ''}`}
-                  onClick={() => onOpen(p.id)}
-                  draggable={dndOn}
+                  data-sel={`p:${p.id}`}
+                  className={`process-item diagram-row ${mq.isSel(`p:${p.id}`) ? 'is-selected' : ''} ${isItemOver ? 'drag-over' : ''} ${highlightId === p.id ? 'just-opened' : ''}`}
+                  onClick={() => { if (!selecting()) onOpen(p.id); }}
+                  draggable={dndOn && armed === `p:${p.id}`}
                   onDragStart={e => onItemDragStart(e, g.id, p.id)}
                   onDragOver={e => onItemDragOver(e, g.id, p.id)}
                   onDrop={e => onItemDrop(e, g.id, p.id)}
                   onDragEnd={onItemDragEnd}
                 >
                   {dndOn && (
-                    <span className="order-grip item-grip" title="Sürüklə" onClick={e => e.stopPropagation()}>
+                    <span className="order-grip item-grip" title="Sürüklə" onClick={e => e.stopPropagation()} onMouseDown={() => setArmed(`p:${p.id}`)}>
                       <GripVertical size={14} />
                     </span>
                   )}
                   <div className="num">{folderNo}.{itemNo}</div>
                   <div className="label">
-                    <span className="row-title">{p.title}</span>
+                    <span className="row-title">
+                      {(() => { const t = String(p.title || ''); const i = t.lastIndexOf(' '); return i > 0 ? t.slice(0, i + 1) : ''; })()}
+                      <span className="title-tail">
+                      {(() => { const t = String(p.title || ''); const i = t.lastIndexOf(' '); return i > 0 ? t.slice(i + 1) : t; })()}
+                      <button
+                        draggable={false}
+                        onMouseDown={(e) => e.stopPropagation()}
+                        type="button"
+                        className={`copy-name ${copiedId === p.id ? 'done' : ''}`}
+                        title={copiedId === p.id ? 'Kopyalandı' : 'Adı kopyala'}
+                        onClick={(e) => copyName(e, p)}
+                      >
+                        {copiedId === p.id ? <Check size={13} /> : <Copy size={13} />}
+                      </button>
+                      </span>
+                    </span>
                     {p.subtitle ? <span className="row-subtitle">{p.subtitle}</span> : null}
                   </div>
                   <div className="row-status" onClick={e => e.stopPropagation()}>
@@ -885,7 +1028,7 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
                     <div className="row-actions" onClick={e => e.stopPropagation()}>
                       {pendingArchive === p.id ? (
                         <div className="archive-confirm">
-                          <span className="archive-confirm-q"> </span>
+                          <span className="archive-confirm-q">Arxivə köçürülsün?</span>
                           <button className="action-btn confirm-yes" title="Təsdiq et"
                             onClick={(e) => confirmArchive(e, p)}>
                             <Archive size={15} /><span>Təsdiq</span>
@@ -904,10 +1047,6 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
                           <button className="action-btn" title="Arxivə köçür"
                             onClick={(e) => requestArchive(e, p)}>
                             <Archive size={16} />
-                          </button>
-                          <button className="action-btn" title="Sil"
-                            onClick={(e) => deleteProcess(e, p)}>
-                            <Trash2 size={16} />
                           </button>
                         </>
                       )}
@@ -1002,6 +1141,7 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
         </div>
       )}
       <br />
+      {isAdmin && <MarqueeLayer m={mq} itemWord={'diaqram'} busy={mqBusy} onArchive={archiveSelected} onDelete={deleteSelected} />}
       <div className="home-wrap">
         <LogoFull size="large" />
         <h2 className="home-title">
@@ -1049,43 +1189,17 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
           {!isViewer && !loading && !error && archived.length > 0 && (() => {
             const items = archived.filter(Boolean).filter(matches);
             if (q && items.length === 0) return null;
-            const isOpen = q ? true : archiveOpen;
             return (
-              <div className={`group-card archive-card ${isOpen ? 'open' : ''}`}>
-                <div className="group-head" onClick={() => setArchiveOpen(v => !v)}>
-                  <span className="group-chevron">
-                    {isOpen ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-                  </span>
-                  <span className="group-folder"><Archive size={17} /></span>
-                  <span className="group-name">Arxiv</span>
-                  <span className="group-count">{archived.length}</span>
-                </div>
-                {isOpen && (
-                  <div className="group-body">
-                    {items.map((p) => (
-                      <div key={p.id} className="process-item diagram-row archived-row" onClick={() => onOpen(p.id)}>
-                        <div className="num"><Archive size={14} /></div>
-                        <div className="label">
-                          <span className="row-title">{p.title}</span>
-                          {p.subtitle ? <span className="row-subtitle">{p.subtitle}</span> : null}
-                        </div>
-                        {!isViewer && (
-                          <div className="row-actions" onClick={e => e.stopPropagation()}>
-                            <button className="action-btn" title="Arxivdən çıxar"
-                              onClick={(e) => unarchiveProcess(e, p)}>
-                              <ArchiveRestore size={16} />
-                            </button>
-                            <button className="action-btn" title="Tamamilə sil"
-                              onClick={(e) => deleteArchived(e, p)}>
-                              <Trash2 size={16} />
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <ArchiveSection
+                items={items}
+                total={archived.length}
+                open={q ? true : archiveOpen}
+                onToggle={() => setArchiveOpen(v => !v)}
+                statusMeta={PROCESS_STATUS_META}
+                onOpen={(p) => onOpen(p.id)}
+                onRestore={unarchiveProcess}
+                onDelete={deleteArchived}
+              />
             );
           })()}
         </div>
@@ -1123,6 +1237,22 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
           sheetOptions={sheetOptions}
           withImport onImport={importDiagramExcel} onImportJson={importDiagramJson} onTemplate={downloadTemplate}
           onClose={() => setModal(null)} onSave={saveDiagramCreate} />
+      )}
+      {exportFor && (
+        <GroupExportDialog
+          group={exportFor.group}
+          items={deepItems(exportFor.group)}
+          initialFormat={exportFor.format}
+          onClose={() => setExportFor(null)}
+        />
+      )}
+      {restoreItem && (
+        <RestoreDialog
+          item={restoreItem}
+          groups={groups}
+          onConfirm={confirmRestore}
+          onClose={() => setRestoreItem(null)}
+        />
       )}
       {modal?.type === 'diagram-edit' && (
         <NameModal heading="Diaqramı redaktə et" nameLabel="İş axışının adı" withSubtitle

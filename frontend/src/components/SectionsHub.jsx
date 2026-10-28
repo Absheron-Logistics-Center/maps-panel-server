@@ -7,6 +7,7 @@ import TitleEditButton from './TitleEditButton.jsx';
 import Welcome1Img from '../assets/welcome/1.png';
 import Welcome2Img from '../assets/welcome/2.png';
 import Welcome3Img from '../assets/welcome/3.png';
+import Welcome4Img from '../assets/welcome/4.png';
 
 function fmtTime(d) {
   const h = d.getHours();
@@ -104,7 +105,7 @@ export default function SectionsHub({ onPick, onLogout }) {
         </button>
       </div>
 <br />
-      <div className="home-wrap">
+      <div className="home-wrap hub-wrap">
         <LogoFull size="large" />
         <h2 className="home-title">
           {t('org_title', 'ABŞERON LOGİSTİKA MƏRKƏZİ')}
@@ -178,6 +179,27 @@ export default function SectionsHub({ onPick, onLogout }) {
                   subtitle0={t('hub_tmpl_sub', 'Sənəd şablonları')}
                   onSave={({ name, subtitle }) =>
                     saveSettings({ hub_tmpl_title: name, hub_tmpl_sub: subtitle })}
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="tile-wrap">
+            <button className="section-tile" onClick={() => onPick('jobs')}>
+              <div className="section-tile-icon"><img src={Welcome4Img} /></div>
+              <div className="section-tile-title">{t('hub_jobs_title', 'Vəzifə Təlimatları')}</div>
+              <div className="section-tile-sub">{t('hub_jobs_sub', 'Struktur bölmələri üzrə vəzifələr')}</div>
+            </button>
+            {isAdmin && settings && (
+              <div className="tile-edit">
+                <TitleEditButton
+                  heading="Bölmə adını dəyiş"
+                  nameLabel="Başlıq"
+                  name0={t('hub_jobs_title', 'Vəzifə Təlimatları')}
+                  withSubtitle subtitleLabel="Alt yazı"
+                  subtitle0={t('hub_jobs_sub', 'Struktur bölmələri üzrə vəzifələr')}
+                  onSave={({ name, subtitle }) =>
+                    saveSettings({ hub_jobs_title: name, hub_jobs_sub: subtitle })}
                 />
               </div>
             )}

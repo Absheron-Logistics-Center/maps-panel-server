@@ -20,6 +20,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { encodeStatuses, decodeStatuses } from './statusNames.js';
+import { homePath } from './paths.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '../..'); // project root (holds data/)
@@ -154,7 +156,7 @@ export function attribution(user, message) {
 }
 
 /* =============================== JSON =============================== */
-export async function getFile(p) {
+async function getFileRaw(p) {
   if (!hasMongo()) {
     if (isVercel) throw notConfigured();
     return localGet(p);
@@ -188,7 +190,7 @@ export async function getFile(p) {
   }
 }
 
-export async function putFile(p, obj /* , { message, author } ignored */) {
+async function putFileRaw(p, obj) {
   if (!hasMongo()) {
     if (isVercel) throw notConfigured();
     await localPut(p, obj);
@@ -237,6 +239,70 @@ export async function deleteFile(p) {
     await markDirty(p, 'json');
     return { ok: true, mongoSynced: false };
   }
+}
+
+// Public JSON API: statuses are stored by name, handed out as keys.
+export async function getFile(p) {
+  const r = await getFileRaw(p);
+  return r ? { ...r, content: decodeStatuses(p, r.content) } : r;
+}
+export async function putFile(p, obj /* , { message, author } ignored */) {
+  return putFileRaw(p, encodeStatuses(p, obj));
+}
+
+/* --------- helpers for the one-time layout migration --------- */
+// Read this machine's own disk copy (server only), ignoring Mongo.
+export async function readLocal(p) {
+  if (isVercel) return null;
+  const r = await localGet(p);
+  return r ? { ...r, content: decodeStatuses(p, r.content) } : null;
+}
+// Drop an emptied legacy folder from this server's disk (no-op elsewhere).
+export async function removeLocalDirIfEmpty(prefix) {
+  if (isVercel) return;
+  try { await fs.rmdir(localFull(prefix.replace(/\/$/, ''))); } catch { /* not empty / missing */ }
+}
+// Every live JSON path under a prefix (Mongo + this server's disk).
+export async function listJson(prefix) {
+  const out = new Set();
+  if (hasMongo()) {
+    try {
+      const esc = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const docs = await (await col()).find(
+        { _id: { $regex: '^' + esc }, deleted: { $ne: true } },
+        { projection: { _id: 1 } }
+      ).toArray();
+      docs.forEach((d) => out.add(String(d._id)));
+    } catch (e) { markDown(e); }
+  }
+  if (!isVercel) {
+    const base = localFull(prefix.replace(/\/$/, ''));
+    try {
+      for (const n of await fs.readdir(base)) if (n.endsWith('.json')) out.add(prefix.replace(/\/?$/, '/') + n);
+    } catch { /* no folder */ }
+  }
+  return [...out];
+}
+// Every stored binary path under a prefix -> size (GridFS + this server's disk).
+export async function listBinary(prefix) {
+  const out = new Map();
+  if (hasMongo()) {
+    try {
+      const esc = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      for (const f of await (await bucket()).find({ filename: { $regex: '^' + esc } }).toArray()) out.set(f.filename, f.length);
+    } catch (e) { markDown(e); }
+  }
+  if (!isVercel) {
+    const base = localFull(prefix.replace(/\/$/, ''));
+    try {
+      for (const n of await fs.readdir(base)) {
+        if (n.startsWith('.')) continue;
+        const st = await fs.stat(path.join(base, n));
+        if (st.isFile()) out.set(prefix.replace(/\/?$/, '/') + n, st.size);
+      }
+    } catch { /* no folder */ }
+  }
+  return out;
 }
 
 /* =============================== BINARY =============================== */
@@ -478,9 +544,9 @@ export async function diagnose() {
     return out;
   }
   try {
-    out.diagramsResolved = (await getFile(`${dataDir()}/diagrams/index.json`))?.content?.processes?.length ?? 'NOT FOUND';
-    out.pdfsResolved = (await getFile(`${dataDir()}/files/index.json`))?.content?.pdfs?.length ?? 'NOT FOUND';
-    out.templatesResolved = (await getFile(`${dataDir()}/templates/index.json`))?.content?.pdfs?.length ?? 'NOT FOUND';
+    out.diagramsResolved = (await getFile(homePath('diagrams')))?.content?.processes?.length ?? 'NOT FOUND';
+    out.pdfsResolved = (await getFile(homePath('pdfs')))?.content?.pdfs?.length ?? 'NOT FOUND';
+    out.templatesResolved = (await getFile(homePath('templates')))?.content?.pdfs?.length ?? 'NOT FOUND';
   } catch (e) { out.resolveError = e.message; }
   try {
     const b = await bucket();

@@ -1,178 +1,60 @@
 import { Router } from 'express';
 import {
-  SHEET_KINDS,
-  assertKind,
-  readSheets,
-  createSheetRow,
-  updateSheetRow,
-  deleteSheetRow,
-  clearLinkedRows,
-  clearAllRows,
-  syncFromItem,
-  backfillMissingFromIndex,
-  deleteHomeGroupByName,
-  ALLOWED_STATUS,
-  ALLOWED_STATUS_BY_KIND,
-  EXTRA_FIELDS
+  SHEET_KINDS, readSheets, createSheetRow, updateSheetRow, archiveSheetRow,
+  listSheetArchive, restoreSheetRow, linkInfo, setLink, applyLink, archiveAllRows, deleteAllRows, deleteSheetRow, deleteArchivedRow, unlinkAllRows, linkAllRows, linkCandidates, createSheetRows
 } from '../services/sheetsStore.js';
 
+/*
+  Hesabat API — /api/sheets/:kind/…   (kind = diagrams | pdfs | templates | jobs)
+
+  GET    /:kind                    rows (always numbered 1..n)
+  POST   /:kind                    new row
+  POST   /:kind/bulk               { rows: [...] } many new rows at once (Excel import)
+  PUT    /:kind/:id                edit a row
+  POST   /:kind/:id/archive        move row to the Hesabat archive
+  DELETE /:kind/:id                trash: off the page, kept in hesabat-deleted.json
+  GET    /:kind/archive            archived rows
+  POST   /:kind/all/archive        whole table -> archive
+  DELETE /:kind/all                whole table -> hesabat-deleted.json
+  POST   /:kind/archive/:id/restore
+  DELETE /:kind/archive/:id        delete from the archive (kept in hesabat-deleted.json)
+  GET    /:kind/all/link           rows that can be linked by name (+ folder)
+  POST   /:kind/all/link           { ids? }  link all / only the chosen rows
+  POST   /:kind/all/unlink         remove every link (rows and Home untouched)
+  GET    /:kind/:id/link           linked Home item + differences
+  PUT    /:kind/:id/link           { itemId | null }  link / unlink
+  POST   /:kind/:id/link/apply     { choices: { field: 'home' | 'hesabat' } }
+*/
 const router = Router();
 
 function requireAdmin(req, res, next) {
   if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
   next();
 }
+const kindOk = (req, _res, next) => (SHEET_KINDS[req.params.kind] ? next() : next('route'));
+const wrap = (fn) => (req, res, next) => Promise.resolve(fn(req, res)).then((r) => res.json(r)).catch(next);
 
-function pickExtras(body) {
-  const out = {};
-  for (const f of EXTRA_FIELDS) {
-    if (typeof body?.[f] === 'string') out[f] = body[f];
-  }
-  return out;
-}
+router.get('/:kind', kindOk, wrap(async (req) => ({ kind: req.params.kind, items: (await readSheets(req.params.kind)).items })));
+router.get('/:kind/archive', kindOk, wrap(async (req) => ({ kind: req.params.kind, items: await listSheetArchive(req.params.kind) })));
 
-// ---- kind-scoped routes: /api/sheets/:kind/... ----
-
-router.get('/:kind', async (req, res, next) => {
-  // Avoid treating legacy paths as kinds — only known kinds
-  if (!SHEET_KINDS[req.params.kind]) return next();
-  try {
-    // Any real item (diagram/pdf/template) that doesn't have a sheet row
-    // yet gets one added automatically here — e.g. a folder with 5 real
-    // workflows shouldn't sit there invisible just because nobody has
-    // manually retyped them into the sheet. Once every item has a row this
-    // is a no-op (no write) on every subsequent load. Hand-typed rows and
-    // ones an admin has already deleted are never touched or recreated.
-    const sheets = await backfillMissingFromIndex(req.params.kind, req.user);
-    res.json({ kind: req.params.kind, items: sheets.items || [] });
-  } catch (e) { next(e); }
+router.post('/:kind', kindOk, requireAdmin, async (req, res, next) => {
+  try { res.status(201).json(await createSheetRow(req.params.kind, req.body || {})); } catch (e) { next(e); }
 });
+router.post('/:kind/bulk', kindOk, requireAdmin, wrap((req) => createSheetRows(req.params.kind, req.body?.rows || [])));
+router.post('/:kind/all/archive', kindOk, requireAdmin, wrap((req) => archiveAllRows(req.params.kind)));
+router.delete('/:kind/all', kindOk, requireAdmin, wrap((req) => deleteAllRows(req.params.kind)));
+router.get('/:kind/all/link', kindOk, wrap((req) => linkCandidates(req.params.kind)));
+router.post('/:kind/all/link', kindOk, requireAdmin, wrap((req) => linkAllRows(req.params.kind, req.body?.ids)));
+router.post('/:kind/all/unlink', kindOk, requireAdmin, wrap((req) => unlinkAllRows(req.params.kind)));
+router.delete('/:kind/archive/:id', kindOk, requireAdmin, wrap((req) => deleteArchivedRow(req.params.kind, req.params.id)));
+router.post('/:kind/archive/:id/restore', kindOk, requireAdmin, wrap((req) => restoreSheetRow(req.params.kind, req.params.id)));
 
-router.post('/:kind', requireAdmin, async (req, res, next) => {
-  if (!SHEET_KINDS[req.params.kind]) return next();
-  try {
-    const item = await createSheetRow(req.params.kind, {
-      title: req.body?.title,
-      subtitle: req.body?.subtitle,
-      status: req.body?.status,
-      strukturAdi: req.body?.strukturAdi,
-      order: req.body?.order,
-      ...pickExtras(req.body)
-    }, req.user);
-    res.status(201).json(item);
-  } catch (e) { next(e); }
-});
+router.get('/:kind/:id/link', kindOk, wrap((req) => linkInfo(req.params.kind, req.params.id)));
+router.put('/:kind/:id/link', kindOk, requireAdmin, wrap((req) => setLink(req.params.kind, req.params.id, req.body?.itemId ?? null)));
+router.post('/:kind/:id/link/apply', kindOk, requireAdmin, wrap((req) => applyLink(req.params.kind, req.params.id, req.body?.choices || {})));
 
-router.post('/:kind/sync', requireAdmin, async (req, res, next) => {
-  if (!SHEET_KINDS[req.params.kind]) return next();
-  try {
-    const { itemId, processId, title, subtitle, status, sheetId, strukturAdi } = req.body || {};
-    const id = itemId != null ? itemId : processId;
-    if (id == null) return res.status(400).json({ error: 'itemId teleb olunur' });
-    const allowed = ALLOWED_STATUS_BY_KIND[req.params.kind] || ALLOWED_STATUS;
-    if (status != null && status !== '' && !allowed.includes(String(status))) {
-      return res.status(400).json({ error: 'Yanlış status' });
-    }
-    const row = await syncFromItem(req.params.kind, {
-      itemId: id, title, subtitle, status, sheetId, strukturAdi
-    }, req.user);
-    res.json(row);
-  } catch (e) { next(e); }
-});
-
-// Bulk-remove rows that were auto-populated from diagrams/pdfs/templates
-// (itemId set) — leaves hand-typed blank rows untouched.
-router.delete('/:kind/linked', requireAdmin, async (req, res, next) => {
-  if (!SHEET_KINDS[req.params.kind]) return next();
-  try {
-    const result = await clearLinkedRows(req.params.kind, req.user);
-    res.json(result);
-  } catch (e) { next(e); }
-});
-
-// Wipe every row in this Sheets catalog.
-router.delete('/:kind/all', requireAdmin, async (req, res, next) => {
-  if (!SHEET_KINDS[req.params.kind]) return next();
-  try {
-    const result = await clearAllRows(req.params.kind, req.user);
-    res.json(result);
-  } catch (e) { next(e); }
-});
-
-router.put('/:kind/:id', requireAdmin, async (req, res, next) => {
-  if (!SHEET_KINDS[req.params.kind]) return next();
-  try {
-    const row = await updateSheetRow(req.params.kind, req.params.id, req.body || {}, req.user);
-    res.json(row);
-  } catch (e) { next(e); }
-});
-
-// Delete the Home group represented by a folder-only Sheets row.
-router.delete('/:kind/group', requireAdmin, async (req, res, next) => {
-  if (!SHEET_KINDS[req.params.kind]) return next();
-  try {
-    const name = String(req.body?.name || req.query?.name || '').trim();
-    if (!name) return res.status(400).json({ error: 'Qrup adı tələb olunur' });
-    res.json(await deleteHomeGroupByName(req.params.kind, name, req.user));
-  } catch (e) { next(e); }
-});
-
-router.delete('/:kind/:id', requireAdmin, async (req, res, next) => {
-  if (!SHEET_KINDS[req.params.kind]) return next();
-  try {
-    res.json(await deleteSheetRow(req.params.kind, req.params.id, req.user));
-  } catch (e) { next(e); }
-});
-
-// ---- backward-compat: /api/sheets → diagrams ----
-
-router.get('/', async (req, res, next) => {
-  try {
-    const sheets = await backfillMissingFromIndex('diagrams', req.user);
-    res.json({ kind: 'diagrams', items: sheets.items || [] });
-  } catch (e) { next(e); }
-});
-
-router.post('/', requireAdmin, async (req, res, next) => {
-  try {
-    const item = await createSheetRow('diagrams', {
-      title: req.body?.title,
-      subtitle: req.body?.subtitle,
-      status: req.body?.status,
-      strukturAdi: req.body?.strukturAdi
-    }, req.user);
-    res.status(201).json(item);
-  } catch (e) { next(e); }
-});
-
-router.post('/sync-from-process', requireAdmin, async (req, res, next) => {
-  try {
-    const { processId, title, subtitle, status, sheetId } = req.body || {};
-    if (processId == null) return res.status(400).json({ error: 'processId teleb olunur' });
-    if (status != null && status !== '' && !ALLOWED_STATUS.includes(String(status))) {
-      return res.status(400).json({ error: 'Yanlış status' });
-    }
-    const row = await syncFromItem('diagrams', {
-      itemId: processId, title, subtitle, status, sheetId
-    }, req.user);
-    res.json(row);
-  } catch (e) { next(e); }
-});
-
-router.put('/:id', requireAdmin, async (req, res, next) => {
-  // numeric id only — skip if this was a kind name somehow
-  if (SHEET_KINDS[req.params.id]) return next();
-  try {
-    const row = await updateSheetRow('diagrams', req.params.id, req.body || {}, req.user);
-    res.json(row);
-  } catch (e) { next(e); }
-});
-
-router.delete('/:id', requireAdmin, async (req, res, next) => {
-  if (SHEET_KINDS[req.params.id]) return next();
-  try {
-    res.json(await deleteSheetRow('diagrams', req.params.id, req.user));
-  } catch (e) { next(e); }
-});
+router.post('/:kind/:id/archive', kindOk, requireAdmin, wrap((req) => archiveSheetRow(req.params.kind, req.params.id)));
+router.put('/:kind/:id', kindOk, requireAdmin, wrap((req) => updateSheetRow(req.params.kind, req.params.id, req.body || {})));
+router.delete('/:kind/:id', kindOk, requireAdmin, wrap((req) => deleteSheetRow(req.params.kind, req.params.id)));
 
 export default router;

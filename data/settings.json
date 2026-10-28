@@ -2,8 +2,18 @@
   "org_title": "ABŞERON LOGİSTİKA MƏRKƏZİ",
   "diagrams_page_title": "İş Axışları",
   "pdf_page_title": "Normativ Sənədlər",
+  "tmpl_page_title": "Şablonlar",
   "hub_diagrams_title": "İş Axışları",
   "hub_diagrams_sub": "Proses xəritələri, İş axışları",
   "hub_pdf_title": "Normativ Sənədlər",
-  "hub_pdf_sub": "Əsasnamələr, Prosedurlar, Prosesler, Siyasətlər"
+  "hub_pdf_sub": "Əsasnamələr, Prosedurlar, Prosesler, Siyasətlər",
+  "hub_tmpl_title": "Şablonlar",
+  "hub_tmpl_sub": "Sənəd şablonları",
+  "jobs_page_title": "Vəzifə Təlimatları",
+  "hub_jobs_title": "Vəzifə Təlimatları",
+  "hub_jobs_sub": "Struktur bölmələri üzrə vəzifələr",
+  "autolink_diagrams": false,
+  "autolink_pdfs": false,
+  "autolink_templates": false,
+  "autolink_jobs": false
 }

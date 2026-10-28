@@ -1,0 +1,229 @@
+{
+  "id": 53,
+  "title": "Vaqonların Mərkəzə qəbulu prosesi",
+  "width": 1820,
+  "height": 720,
+  "lanes": [
+    {
+      "id": "lane-1",
+      "label": "ADY",
+      "y": 20,
+      "h": 200
+    },
+    {
+      "id": "lane-2",
+      "label": "MPO\nHərəkətin idarə\nolunması şöbəsi",
+      "y": 220,
+      "h": 320
+    },
+    {
+      "id": "lane-3",
+      "label": "MPO\nLokomotiv şöbəsi",
+      "y": 540,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "x": 100,
+      "y": 70,
+      "w": 230,
+      "h": 110,
+      "text": "Qatarın Abşeron dəmir yolu stansiyasından Mərkəzin qəbul-göndərmə parkına göndərilməsi üçün məlumatın verilməsi",
+      "info": {
+        "general": [
+          "Bu mərhələdə ADY-nin müvafiq əməkdaşı Mərkəz təyinatlı qatarın qəbul-göndərmə parkına göndərilməsi barədə Şöbəyə telefon zəngi vasitəsilə ilkin məlumat verir.",
+          "Verilən məlumat sonrakı razılaşdırma, marşrut planlaşdırılması və parkda yolun hazırlanması üçün başlanğıc siqnal rolunu oynayır.",
+          "Bu addımda məlumatın vaxtında və düzgün ötürülməsi bütün qəbul prosesinin təhlükəsiz və ardıcıl icrası üçün əsas şərtdir."
+        ],
+        "risks": [
+          "Məlumatın gec verilməsi nəticəsində qəbul-göndərmə parkında hazırlıq işlərinin ləngiməsi.",
+          "Qatar nömrəsi, tərkib və ya təyinat barədə məlumatın səhv ötürülməsi.",
+          "Telefon əlaqəsində anlaşılmazlıq səbəbindən proses iştirakçıları arasında koordinasiya pozuntusu."
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "x": 600,
+      "y": 80,
+      "w": 220,
+      "h": 90,
+      "text": "Vağonların Abşeron dəmir yolu stansiyasından Mərkəzin qəbul-göndərmə parkına gətirilməsi"
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "x": 100,
+      "y": 270,
+      "w": 220,
+      "h": 100,
+      "text": "Qatarın Mərkəzin qəbul-göndərmə parkına qəbul edilməsinin razılaşdırılması"
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "x": 100,
+      "y": 410,
+      "w": 220,
+      "h": 110,
+      "text": "Marşrutun müəyyən edilməsi və Mərkəzin qəbul-göndərmə parkının müvafiq yolunun müəyyən edilməsi"
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "x": 380,
+      "y": 350,
+      "w": 220,
+      "h": 80,
+      "text": "\"ADY\"-yə qatarın göndərilməsinə dair razılığın bildirilməsi"
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "x": 860,
+      "y": 270,
+      "w": 220,
+      "h": 100,
+      "text": "Yükə dair sənədlərin qəbulu və hərəkət tərkibinin tormoz başmaqları ilə bərkidilməsi"
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "x": 860,
+      "y": 400,
+      "w": 220,
+      "h": 70,
+      "text": "Natura vərəqəsinin tərtib edilməsi"
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "x": 860,
+      "y": 490,
+      "w": 220,
+      "h": 100,
+      "text": "Kommersiya baxışının təşkil edilməsi və zəruri hallarda uyğunsuzluqların qeydiyyatının aparılması"
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "x": 1200,
+      "y": 270,
+      "w": 220,
+      "h": 90,
+      "text": "\"UDPAS\" proqramında vaqonlara dair müvafiq məlumatların daxil edilməsi"
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "x": 1200,
+      "y": 380,
+      "w": 220,
+      "h": 70,
+      "text": "Sənədlərin VPD-yə təhvil verilməsi"
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "x": 1200,
+      "y": 470,
+      "w": 220,
+      "h": 90,
+      "text": "Vaqonların çeşidləmə planının hazırlanması və razılaşdırılması"
+    },
+    {
+      "id": 12,
+      "type": "pill",
+      "x": 1480,
+      "y": 580,
+      "w": 240,
+      "h": 110,
+      "text": "Vaqonların Mərkəzin terminal yollarına yerləşdirilməsi və hərəkət tərkiblərinin tormoz başmaqları ilə bərkidilməsi"
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "top",
+      "via": [
+        {
+          "x": 1080,
+          "y": 125
+        }
+      ]
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": 11,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "top"
+    }
+  ],
+  "subtitle": "ALM-X1-C1"
+}

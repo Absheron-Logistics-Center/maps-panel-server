@@ -1,0 +1,116 @@
+{
+  "groups": [
+    {
+      "id": 2,
+      "name": "Anbar logistikası şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 3,
+      "name": "Beynəlxalq daşımalar departamenti",
+      "parentId": null
+    },
+    {
+      "id": 5,
+      "name": "Biznes departamenti",
+      "parentId": null
+    },
+    {
+      "id": 6,
+      "name": "Daxili audit departamenti",
+      "parentId": null
+    },
+    {
+      "id": 7,
+      "name": "Daxili daşımalar departamenti",
+      "parentId": null
+    },
+    {
+      "id": 8,
+      "name": "Əməliyyatların konfiqurasiyası və transformasiya departamenti",
+      "parentId": null
+    },
+    {
+      "id": 9,
+      "name": "Hüquq departamenti",
+      "parentId": null
+    },
+    {
+      "id": 10,
+      "name": "İnformasiya texnologiyaları şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 16,
+      "name": "İnsan resursları və inzibati departament",
+      "parentId": null
+    },
+    {
+      "id": 11,
+      "name": "Keyfiyyətə nəzarət və SƏTƏM şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 12,
+      "name": "Layihələrin idarə olunması departamenti",
+      "parentId": null
+    },
+    {
+      "id": 13,
+      "name": "Marketinq və Kommunikasiya departamenti",
+      "parentId": null
+    },
+    {
+      "id": 14,
+      "name": "Maliyyə departamenti",
+      "parentId": null
+    },
+    {
+      "id": 15,
+      "name": "Manevra və planlama ofisi",
+      "parentId": null
+    },
+    {
+      "id": 17,
+      "name": "Sahə əməliyyatları ofisi",
+      "parentId": null
+    },
+    {
+      "id": 18,
+      "name": "Təhlükəsizlik şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 19,
+      "name": "Təmir və texnikaya nəzarət şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 20,
+      "name": "Təsərrüfat şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 21,
+      "name": "TIR Park və minik avtomobillərinin dayanacağı şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 22,
+      "name": "Vahid pəncərə departamenti",
+      "parentId": null
+    },
+    {
+      "id": 23,
+      "name": "MB BROKER MMC",
+      "parentId": null
+    },
+    {
+      "id": 24,
+      "name": "Ümumi siyasət və sertifikatlar",
+      "parentId": null
+    }
+  ],
+  "templates": [],
+  "pdfs": []
+}

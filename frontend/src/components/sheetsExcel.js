@@ -168,7 +168,7 @@ export async function exportSheetToExcel({ fileTitle, sheetName, items, columns 
 // on-screen table for this kind.
 // Returns an array of plain row objects: { [field]: value, status? }.
 // One object per Excel data row (duplicates kept here — the caller merges).
-export async function importSheetRowsFromExcel(file, { columns, withStatus, statusKeyFromLabel }) {
+export async function importSheetRowsFromExcel(file, { columns, withStatus, statusKeyFromLabel, extraColumns = [] }) {
   const buf = await file.arrayBuffer();
   const wb = XLSX.read(buf, { type: 'array', cellDates: true });
   const sheet = wb.Sheets[wb.SheetNames[0]];
@@ -177,7 +177,21 @@ export async function importSheetRowsFromExcel(file, { columns, withStatus, stat
   const aoa = XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false, defval: '' });
   if (!aoa.length) return [];
 
-  const rawHeaders = (aoa[0] || []).map((h) => String(h ?? ''));
+  // The header row is not always the first one (e.g. a title + summary block
+  // above the table): use the first row in the top 20 that matches at least
+  // two known column names.
+  const known = new Set();
+  for (const c of [...columns, ...extraColumns]) { known.add(norm(c.label)); (c.aliases || []).forEach((a) => known.add(norm(a))); }
+  ['status', 'vəziyyət', 'tarix', 'date'].forEach((x) => known.add(norm(x)));
+  let headIdx = 0;
+  for (let i = 0; i < Math.min(aoa.length, 20); i++) {
+    const hits = (aoa[i] || []).filter((h) => {
+      const n = norm(h);
+      return n && (known.has(n) || [...known].some((k) => k.length > 4 && n.startsWith(k)));
+    }).length;
+    if (hits >= 2) { headIdx = i; break; }
+  }
+  const rawHeaders = (aoa[headIdx] || []).map((h) => String(h ?? ''));
   const headers = rawHeaders.map(norm);
   const findIdx = (names) => {
     for (const n of names) {
@@ -202,12 +216,18 @@ export async function importSheetRowsFromExcel(file, { columns, withStatus, stat
     }
   }
 
-  let iStatus = withStatus ? findIdx(['status', 'vəziyyət', 'veziyyet']) : -1;
+  // Optional columns (e.g. the linked Home item) — matched by header only,
+  // never by position, so an old file without them imports exactly as before.
+  const extraIdx = {};
+  for (const c of extraColumns) extraIdx[c.field] = findIdx([c.label, ...(c.aliases || [])]);
+
+  let iStatus = withStatus ? findIdx(['status', 'vəziyyət', 'veziyyet', 'Status (Mövcuddur, Mövcud deyil)']) : -1;
+  if (withStatus && iStatus < 0) iStatus = headers.findIndex((h) => h.startsWith('status'));
   let iDate = findIdx(['tarix', 'date', 'tarixi']);
 
   // Positional fallback for anything headers didn't match, in the same
   // order as `columns` (which mirrors the on-screen table): № | col1 | col2 | … | status | date
-  const used = new Set([...Object.values(fieldIdx), iStatus, iDate].filter((i) => i >= 0));
+  const used = new Set([...Object.values(fieldIdx), ...Object.values(extraIdx), iStatus, iDate].filter((i) => i >= 0));
   const looksLikeNo = (h) => /^(№|no|n|#)$/i.test(String(h || '').trim()) || norm(h) === 'n';
   let col = 0;
   if (looksLikeNo(rawHeaders[0]) || headers[0] === 'n' || headers[0] === '') col = 1;
@@ -224,7 +244,7 @@ export async function importSheetRowsFromExcel(file, { columns, withStatus, stat
   if (iDate < 0) { while (used.has(col)) col += 1; iDate = col; used.add(col); }
 
   const out = [];
-  for (const r of aoa.slice(1)) {
+  for (const r of aoa.slice(headIdx + 1)) {
     if (!r || r.every(v => v == null || String(v).trim() === '')) continue;
 
     const row = {};
@@ -235,6 +255,7 @@ export async function importSheetRowsFromExcel(file, { columns, withStatus, stat
       row[c.field] = v;
       if (v) anyValue = true;
     }
+    for (const c of extraColumns) row[c.field] = extraIdx[c.field] >= 0 ? cellStr(r[extraIdx[c.field]]) : '';
     const stRaw = iStatus >= 0 ? cellStr(r[iStatus]) : '';
     if (!anyValue && !stRaw) continue; // fully empty row (besides date) — skip
 

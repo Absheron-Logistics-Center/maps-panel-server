@@ -29,6 +29,13 @@ export const DOC_STATUS_META = {
 };
 export const DOC_STATUS_ORDER = ['progress', 'prep', 'notdone', 'sign', 'done', 'cancelled', 'renew'];
 
+// Vəzifə Təlimatları — only two states
+export const JOB_STATUS_META = {
+  exists:  { id: 'jobstatus.exists',  default: 'Mövcuddur',    Icon: CheckCircle2, cls: 'done' },
+  missing: { id: 'jobstatus.missing', default: 'Mövcud deyil', Icon: Ban,          cls: 'cancelled' }
+};
+export const JOB_STATUS_ORDER = ['exists', 'missing'];
+
 // Back-compat default export — code that hasn't been made kind-aware
 // (Diagram.jsx / Home.jsx / NameModal.jsx, all İş Axışları-only) keeps
 // working against the process status set.

@@ -302,3 +302,65 @@ export function exportDiagramToPdf(process, { orientation = 'landscape' } = {}) 
   );
   win.document.close();
 }
+/* ============================ several diagrams ============================ */
+/** One JSON file holding several diagrams (e.g. a whole folder). */
+export function exportDiagramsToJson(processes, { name = 'diaqramlar', group = '' } = {}) {
+  const data = {
+    group: group || undefined,
+    exportedAt: new Date().toISOString(),
+    count: processes.length,
+    diagrams: processes.map((p) => ({
+      id: p.id,
+      title: p.title || '',
+      subtitle: p.subtitle || '',
+      status: p.status || undefined,
+      width: p.width || 1200,
+      height: p.height || 600,
+      theme: p.theme || undefined,
+      lanes: p.lanes || [],
+      nodes: p.nodes || [],
+      edges: p.edges || []
+    }))
+  };
+  download(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), `${safeName(name)}.json`);
+}
+
+/** One print window, one diagram per page -> "Save as PDF". */
+export function exportDiagramsToPdf(processes, { orientation = 'landscape', name = 'Diaqramlar', win: openedWin = null } = {}) {
+  const win = openedWin || window.open('', '_blank');
+  if (!win) {
+    alert('PDF pəncərəsi açıla bilmədi — brauzerin pop-up bloklamasını yoxlayın.');
+    return;
+  }
+  const pages = processes.map((p) => {
+    const { svg } = buildDiagramSvg(p, { padding: 24 });
+    const sub = p.subtitle ? `<span class="sub">${esc(p.subtitle)}</span>` : '';
+    return `<section class="pg"><div class="hd"><h1>${esc(p.title || 'Diaqram')}</h1>${sub}</div><div class="wrap">${svg}</div></section>`;
+  }).join('');
+  win.document.write(
+    `<!doctype html><html lang="az"><head><meta charset="utf-8"><title>${esc(name)}</title>` +
+    `<style>` +
+    `@page { size: A4 ${orientation}; margin: 12mm; }` +
+    `* { box-sizing: border-box; }` +
+    `body { margin: 0; font-family: 'Segoe UI', system-ui, sans-serif; color: #243f4f; }` +
+    `.pg { page-break-after: always; break-after: page; padding: 8px 0; }` +
+    `.pg:last-child { page-break-after: auto; break-after: auto; }` +
+    `.hd { display:flex; align-items:baseline; gap:8px; margin:0 0 10px; }` +
+    `.hd h1 { font-size: 16px; margin:0; }` +
+    `.hd .sub { font-size: 12px; color:#5b7280; }` +
+    `.wrap svg { width:100%; height:auto; max-height: ${orientation === 'portrait' ? '250mm' : '165mm'}; display:block; }` +
+    `@media print { .noprint { display:none !important; } }` +
+    `@media screen { .pg { border-bottom: 2px dashed #cbd5e1; margin: 0 16px 24px; } }` +
+    `.bar { position:sticky; top:0; display:flex; gap:8px; justify-content:flex-end; padding:10px 16px; background:#fff; z-index:2; }` +
+    `.bar span { margin-right:auto; font: 600 13px 'Segoe UI',sans-serif; color:#5b7280; align-self:center; }` +
+    `.bar button { font:600 13px 'Segoe UI',sans-serif; padding:8px 14px; border-radius:8px; border:1px solid #cbd5e1; background:#fff; cursor:pointer; }` +
+    `.bar button.p { background:#3a7894; color:#fff; border-color:#3a7894; }` +
+    `</style></head><body>` +
+    `<div class="bar noprint"><span>${esc(name)} · ${processes.length} diaqram</span><button class="p" onclick="window.print()">PDF kimi yadda saxla / Çap et</button>` +
+    `<button onclick="window.close()">Bağla</button></div>` +
+    pages +
+    `</body></html>`
+  );
+  win.document.close();
+  try { win.focus(); } catch { /* ignore */ }
+}

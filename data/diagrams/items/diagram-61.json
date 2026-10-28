@@ -1,0 +1,85 @@
+{
+  "id": 61,
+  "title": "Terminal proseslərinə daxil olmayacaq yük və minik avtomobillərinin Mərkəzin dayanacağından istifadəsi iş axışı",
+  "subtitle": "ALM-İMS-PRD-TP-001",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1784279662076",
+      "label": "Sürücü",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1784279673995",
+      "label": "Dayanacaq üzrə məsul əməkdaş",
+      "y": 180,
+      "h": 250
+    },
+    {
+      "id": "lane-1784279682676",
+      "label": "Şöbə müdiri",
+      "y": 430,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 90,
+      "y": 70,
+      "laneId": "lane-1784279662076",
+      "w": 310,
+      "h": 70,
+      "text": "Avtomobi ilə dayanacaq girişinə yaxınlaşır.",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 100,
+      "y": 230,
+      "laneId": "lane-1784279673995",
+      "w": 290,
+      "h": 90,
+      "text": "2.\tAvtomobil nömrəsinin güzəşt siyahısında olub olmamasını\nyoxlayır\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 90,
+      "y": 340,
+      "laneId": "lane-1784279673995",
+      "w": 300,
+      "h": 70,
+      "text": "Yeni addım",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    }
+  ]
+}

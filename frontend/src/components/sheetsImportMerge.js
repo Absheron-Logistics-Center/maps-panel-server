@@ -33,7 +33,10 @@ const sameValue = (a, b) => foldText(a) === foldText(b);
  * @param withStatus  whether this kind has a Status column
  * @param getStruktur (row) => effective Struktur adı of an existing row
  */
-export function buildImportPlan({ rows, items, fields, withStatus, getStruktur }) {
+// keyFields (optional): match a row only when ALL these fields are equal —
+// e.g. Vəzifə Təlimatları, where "Şöbə müdiri" exists in dozens of bölmələr.
+export function buildImportPlan({ rows, items, fields, withStatus, getStruktur, keyFields = null }) {
+  const compositeKey = keyFields ? (r) => (foldText(r.title) ? keyFields.map(f => foldText(r[f])).join('|') : '') : null;
   const cmpFields = [...fields, ...(withStatus ? ['status'] : [])];
 
   // 1) merge exact (title + struktur) repeats inside the file
@@ -42,7 +45,7 @@ export function buildImportPlan({ rows, items, fields, withStatus, getStruktur }
   let mergedInFile = 0;
   for (const r of rows) {
     const t = foldText(r.title);
-    const k = t ? `${t}|${foldText(r.strukturAdi)}` : '';
+    const k = compositeKey ? compositeKey(r) : (t ? `${t}|${foldText(r.strukturAdi)}` : '');
     const hit = k ? byKey.get(k) : null;
     if (hit) {
       mergedInFile += 1;
@@ -57,7 +60,7 @@ export function buildImportPlan({ rows, items, fields, withStatus, getStruktur }
   // 2) index existing rows by name
   const byTitle = new Map();
   for (const it of items) {
-    const t = foldText(it.title);
+    const t = compositeKey ? compositeKey(it) : foldText(it.title);
     if (!t) continue;
     if (!byTitle.has(t)) byTitle.set(t, []);
     byTitle.get(t).push(it);
@@ -67,7 +70,7 @@ export function buildImportPlan({ rows, items, fields, withStatus, getStruktur }
   const claimed = new Set(); // existing ids already matched by an earlier file row
 
   for (const r of uniq) {
-    const t = foldText(r.title);
+    const t = compositeKey ? compositeKey(r) : foldText(r.title);
     const cands = t ? (byTitle.get(t) || []).filter(c => !claimed.has(Number(c.id))) : [];
     if (!cands.length) { plan.toCreate.push(r); continue; }
 

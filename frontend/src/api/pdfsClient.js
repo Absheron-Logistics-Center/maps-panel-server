@@ -82,11 +82,12 @@ export const pdfsApi = {
       })
     ),
 
-  update: (id, { title, subtitle, groupId, file }) => {
+  update: (id, { title, subtitle, groupId, file, filename }) => {
     const body = {};
     if (typeof title === 'string') body.title = title;
     if (typeof subtitle === 'string') body.subtitle = subtitle;
     if (groupId !== undefined) body.groupId = groupId;
+    if (typeof filename === 'string' && !file) body.filename = filename; // rename only
     if (file) {
       return fileToBase64(file).then(dataBase64 => {
         body.filename = file.name;
@@ -100,7 +101,7 @@ export const pdfsApi = {
   remove: (id) => jsonRequest('DELETE', `/api/pdfs/${id}`),
 
   archive: (id) => jsonRequest('POST', `/api/pdfs/${id}/archive`),
-  unarchive: (id) => jsonRequest('POST', `/api/pdfs/${id}/unarchive`),
+  unarchive: (id, target = {}) => jsonRequest('POST', `/api/pdfs/${id}/unarchive`, target),
 
   setStatus: (id, status) => jsonRequest('PUT', `/api/pdfs/${id}/status`, { status }),
 

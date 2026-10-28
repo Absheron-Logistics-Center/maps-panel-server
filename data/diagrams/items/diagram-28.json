@@ -1,0 +1,362 @@
+{
+  "id": 28,
+  "title": "BROKER FƏALİYYƏTİ (Tranzit əməliyyatları)",
+  "subtitle": "MB-İMS-PRD-008",
+  "width": 2200,
+  "height": 960,
+  "lanes": [
+    {
+      "id": "lane-1785491472515",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1785491477400",
+      "label": "Koordinator",
+      "y": 180,
+      "h": 160
+    },
+    {
+      "id": "lane-1785491484422",
+      "label": "Bəyannaməçi",
+      "y": 340,
+      "h": 160
+    },
+    {
+      "id": "lane-1785491486722",
+      "label": "Broker",
+      "y": 500,
+      "h": 170
+    },
+    {
+      "id": "lane-1785491493933",
+      "label": "Gömrük orqanı",
+      "y": 670,
+      "h": 170
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "rect",
+      "style": "solid",
+      "x": 400,
+      "y": 380,
+      "laneId": "lane-1785491484422",
+      "w": 290,
+      "h": 80,
+      "text": "CMR və GB-nin\nbrokerə təhvil verilməsi (tərəzi çeki ilə birlikdə)\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 80,
+      "y": 550,
+      "laneId": "lane-1785491486722",
+      "w": 260,
+      "h": 70,
+      "text": "CMR və GB-nin gömrüyə təqdimi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 80,
+      "y": 730,
+      "laneId": "lane-1785491493933",
+      "w": 260,
+      "h": 80,
+      "text": "CMR-ə ştamp vurularaq təsdiq edilməsi və yükə dair bildirişin təqdimi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 395,
+      "y": 720,
+      "laneId": "lane-1785491493933",
+      "w": 280,
+      "h": 100,
+      "text": "Yük inspektorunun təyin edilməsi və seçilmiş nömrəli plombların yük\ninspektoruna təhvil\nverilməsi \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 395,
+      "y": 550,
+      "laneId": "lane-1785491486722",
+      "w": 280,
+      "h": 80,
+      "text": "CMR və GB-nin skan\nedilərək müştəriyə təqdim\nedilməsi \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 760,
+      "y": 550,
+      "laneId": "lane-1785491486722",
+      "w": 320,
+      "h": 80,
+      "text": "CMR və GB-nin koordinatora təqdimi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 765,
+      "y": 220,
+      "laneId": "lane-1785491477400",
+      "w": 310,
+      "h": 80,
+      "text": "CMR və GB-nin surətlərinin çıxarılaraq, arxivlənməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1150,
+      "y": 550,
+      "laneId": "lane-1785491486722",
+      "w": 280,
+      "h": 80,
+      "text": "CMR və GB-nin\nsurətlərinin sürücülərə\nverilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 760,
+      "y": 730,
+      "laneId": "lane-1785491493933",
+      "w": 320,
+      "h": 80,
+      "text": "Yük nəqliyyat vasitəsinə yükləndikdən\nsonra nəqliyyat vasitəsinin plomblanması və yükün buraxılışı \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1160,
+      "y": 730,
+      "laneId": "lane-1785491493933",
+      "w": 280,
+      "h": 80,
+      "text": "Nəqliyyat vasitəsinə GPS quraşdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1610,
+      "y": 550,
+      "laneId": "lane-1785491486722",
+      "w": 290,
+      "h": 100,
+      "text": "Nəqliyyat vasitəsinin buraxılması üçün CMR-in NBM-ə təqdim edilməsi\n \n\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "solid",
+      "x": 1325,
+      "y": 80,
+      "laneId": "lane-1785491472515",
+      "w": 270,
+      "h": 80,
+      "text": "Nəqliyyat vasitəsinin terminalı tərk etməsi\n\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "style": "solid",
+      "x": 1320,
+      "y": 220,
+      "laneId": "lane-1785491477400",
+      "w": 280,
+      "h": 100,
+      "text": "Əməliyyat reyestrində işin tamamlanması qeydi\n \n\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "1.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 80,
+      "y": 385,
+      "laneId": "lane-1785491484422",
+      "w": 260,
+      "h": 70,
+      "text": "Keçid: Bəyanetmə fəaliyyəti (Tranzit)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "",
+      "type": "pill",
+      "style": "stroke",
+      "x": 1660,
+      "y": 235,
+      "laneId": "lane-1785491477400",
+      "w": 70,
+      "h": 70,
+      "text": "",
+      "info": {
+        "general": [
+          ""
+        ]
+      },
+      "color": "#16a34a"
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "top",
+      "e": "right"
+    },
+    {
+      "from": 13,
+      "to": "",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "s": "bottom",
+      "e": "top"
+    }
+  ]
+}

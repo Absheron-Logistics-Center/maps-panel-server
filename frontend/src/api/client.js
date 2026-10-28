@@ -65,8 +65,6 @@ async function request(method, path, body) {
   return data;
 }
 
-const SHEET_KINDS = new Set(['diagrams', 'pdfs', 'templates']);
-
 export const api = {
   login: (username, password) => request('POST', '/api/login', { username, password }),
   me:    () => request('GET',  '/api/me'),
@@ -79,7 +77,8 @@ export const api = {
   updateProcessMeta: (id, data) => request('PUT', `/api/processes/${id}/meta`, data),
   deleteProcess: (id) => request('DELETE', `/api/processes/${id}`),
   archiveProcess: (id) => request('POST', `/api/processes/${id}/archive`),
-  unarchiveProcess: (id) => request('POST', `/api/processes/${id}/unarchive`),
+  unarchiveProcess: (id, target = {}) => request('POST', `/api/processes/${id}/unarchive`, target),
+  deleteArchivedProcess: (id) => request('DELETE', `/api/processes/archived/${id}`),
   setProcessStatus: (id, status) => request('PUT', `/api/processes/${id}/status`, { status }),
 
   // Diagram groups
@@ -96,35 +95,26 @@ export const api = {
   getSettings: () => request('GET', '/api/settings'),
   updateSettings: (patch) => request('PUT', '/api/settings', patch),
 
-  // Diagram / PDF / Template Sheets catalogs (Mongo; sheet-only rows do not create items)
+  // Hesabat (report table) per section — separate from Home, nothing syncs.
   // kind: 'diagrams' | 'pdfs' | 'templates'
   listSheets: (kind = 'diagrams') => request('GET', `/api/sheets/${kind}`),
-  createSheet: (kind, data) => {
-    if (typeof kind === 'object') {
-      // backward compat: createSheet(data) → diagrams
-      return request('POST', '/api/sheets/diagrams', kind);
-    }
-    return request('POST', `/api/sheets/${kind || 'diagrams'}`, data);
-  },
-  updateSheet: (kindOrId, idOrData, maybeData) => {
-    if (typeof kindOrId === 'string' && SHEET_KINDS.has(kindOrId)) {
-      return request('PUT', `/api/sheets/${kindOrId}/${idOrData}`, maybeData);
-    }
-    // backward compat: updateSheet(id, data)
-    return request('PUT', `/api/sheets/diagrams/${kindOrId}`, idOrData);
-  },
-  deleteSheet: (kindOrId, maybeId) => {
-    if (typeof kindOrId === 'string' && SHEET_KINDS.has(kindOrId)) {
-      return request('DELETE', `/api/sheets/${kindOrId}/${maybeId}`);
-    }
-    return request('DELETE', `/api/sheets/diagrams/${kindOrId}`);
-  },
-  deleteSheetGroup: (kind = 'diagrams', name) => request('DELETE', `/api/sheets/${kind}/group`, { name }),
-  // Bulk-remove rows that were auto-populated from diagrams/pdfs/templates
-  // (old backfill / auto-sync). Hand-typed blank rows are untouched.
-  clearLinkedSheets: (kind = 'diagrams') => request('DELETE', `/api/sheets/${kind}/linked`),
-  // Wipe every row in this Sheets catalog
-  clearAllSheets: (kind = 'diagrams') => request('DELETE', `/api/sheets/${kind}/all`),
+  createSheet: (kind, data) => request('POST', `/api/sheets/${kind}`, data),
+  createSheets: (kind, rows) => request('POST', `/api/sheets/${kind}/bulk`, { rows }),
+  updateSheet: (kind, id, data) => request('PUT', `/api/sheets/${kind}/${id}`, data),
+  deleteSheet: (kind, id) => request('DELETE', `/api/sheets/${kind}/${id}`),
+  archiveSheet: (kind, id) => request('POST', `/api/sheets/${kind}/${id}/archive`),
+  listSheetArchive: (kind) => request('GET', `/api/sheets/${kind}/archive`),
+  archiveAllSheets: (kind) => request('POST', `/api/sheets/${kind}/all/archive`),
+  deleteAllSheets: (kind) => request('DELETE', `/api/sheets/${kind}/all`),
+  deleteArchivedSheet: (kind, id) => request('DELETE', `/api/sheets/${kind}/archive/${id}`),
+  unlinkAllSheets: (kind) => request('POST', `/api/sheets/${kind}/all/unlink`),
+  linkAllSheets: (kind, ids) => request('POST', `/api/sheets/${kind}/all/link`, ids ? { ids } : {}),
+  linkCandidates: (kind) => request('GET', `/api/sheets/${kind}/all/link`),
+  restoreSheet: (kind, id) => request('POST', `/api/sheets/${kind}/archive/${id}/restore`),
+  // Optional link from a Hesabat row to a Home item
+  getSheetLink: (kind, id) => request('GET', `/api/sheets/${kind}/${id}/link`),
+  setSheetLink: (kind, id, itemId) => request('PUT', `/api/sheets/${kind}/${id}/link`, { itemId }),
+  applySheetLink: (kind, id, choices) => request('POST', `/api/sheets/${kind}/${id}/link/apply`, { choices }),
 
   // Interface-text labels (editor_2 role only writes; everyone reads)
   getLabels: () => request('GET', '/api/labels'),

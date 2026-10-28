@@ -6,14 +6,19 @@ import {
   Eye, Edit3, Search, Folder, FolderOpen, FolderPlus, Pencil, GripVertical,
   Save, Check, Undo2, Upload
 } from '../icons.jsx';
-import { Archive, ArchiveRestore, FileSpreadsheet } from 'lucide-react';
+import { Archive, ArchiveRestore, FileSpreadsheet, FileUp } from 'lucide-react';
 import { api, setToken } from '../../api/client.js';
 import { pdfsApi } from '../../api/pdfsClient.js';
-import { StatusControl, DOC_STATUS_META, DOC_STATUS_ORDER } from '../Status.jsx';
+import { StatusControl, DOC_STATUS_META as DOC_META_DEFAULT, DOC_STATUS_ORDER as DOC_ORDER_DEFAULT } from '../Status.jsx';
 import PdfFormModal from './PdfFormModal.jsx';
 import NameModal from '../NameModal.jsx';
 import TitleEditButton from '../TitleEditButton.jsx';
 import { useLabels } from '../../labels/LabelsContext.jsx';
+import RestoreDialog from '../RestoreDialog.jsx';
+import FileTypePill from '../FileTypePill.jsx';
+import FileNameEdit from '../FileNameEdit.jsx';
+import ArchiveSection from '../ArchiveSection.jsx';
+import { useMarquee, MarqueeLayer } from '../MarqueeSelect.jsx';
 
 function fmtTime(d) {
   const h = d.getHours();
@@ -74,7 +79,12 @@ export default function PdfList({
   withStatus = true,
   sheetsKind = 'pdfs',
   focusItemId = null,
+  statusMeta = DOC_META_DEFAULT,
+  statusOrder = DOC_ORDER_DEFAULT,
+  sheetsLabel = null,
 }) {
+  const DOC_STATUS_META = statusMeta;
+  const DOC_STATUS_ORDER = statusOrder;
   const { t, tByText, rawByText, LabelPen } = useLabels();
   const [now, setNow] = useState(new Date());
   const [groups, setGroups] = useState([]);
@@ -148,6 +158,63 @@ export default function PdfList({
 
   const role = localStorage.getItem('role');
   const isAdmin = role === 'admin' || role === 'editor_2';
+  const mqWord = sheetsKind === 'jobs' ? 'vəzifə təlimatı' : sheetsKind === 'templates' ? 'şablon' : 'sənəd';
+  const mq = useMarquee(isAdmin);
+  const [mqBusy, setMqBusy] = useState(false);
+  // What the selection really covers: top folders (a subfolder of a selected
+  // folder is already inside it) and items that are not inside those folders.
+  function selectionScope() {
+    const gSel = new Set(mq.groupIds());
+    const roots = [...gSel].filter(id => {
+      let g = groups.find(x => x.id === id);
+      while (g && g.parentId != null) { if (gSel.has(g.parentId)) return false; g = groups.find(x => x.id === g.parentId); }
+      return !!groups.find(x => x.id === id);
+    });
+    const inFolders = new Set(roots.flatMap(id => collectDescendantGroupIds(id, groups)));
+    const folderItems = pdfs.filter(p => inFolders.has(Number(p.groupId)));
+    const items = mq.itemIds().map(id => pdfs.find(p => p.id === id)).filter(p => p && !inFolders.has(Number(p.groupId)));
+    return { roots, inFolders, folderItems, items };
+  }
+  function describe({ roots, folderItems, items }) {
+    return [items.length ? `${items.length} ${mqWord}` : '', roots.length ? `${roots.length} qovluq (içində ${folderItems.length} ${mqWord})` : ''].filter(Boolean).join(' və ');
+  }
+  function dropFolders(roots, inFolders) {
+    if (!roots.length) return;
+    setGroups(prev => prev.filter(x => !inFolders.has(x.id)));
+    setPdfs(prev => prev.filter(p => !inFolders.has(Number(p.groupId))));
+    setDirty(true); // saved by auto-save; the backend archives what was inside
+  }
+  async function archiveSelected() {
+    const sc = selectionScope();
+    if (!sc.items.length && !sc.roots.length) return;
+    if (!confirm(`${describe(sc)} arxivə köçürülsün?\nOradan bərpa etmək olar.`)) return;
+    setMqBusy(true);
+    try {
+      for (const p of sc.items) await apiClient.archive(p.id);
+      const gone = new Set(sc.items.map(p => p.id));
+      setPdfs(prev => prev.filter(p => !gone.has(p.id)));
+      dropFolders(sc.roots, sc.inFolders);
+      mq.clear();
+      if (!sc.roots.length) await load();
+    } catch (err) { alert('Arxivə köçürülə bilmədi: ' + err.message); load(); }
+    finally { setMqBusy(false); }
+  }
+  async function deleteSelected() {
+    const sc = selectionScope();
+    const all = [...sc.items, ...sc.folderItems];
+    if (!all.length && !sc.roots.length) return;
+    if (!confirm(`${describe(sc)} silinsin?\n\nSəhifədən götürülür; nüsxəsi silinənlər faylında (data / Mongo) saxlanılır.`)) return;
+    setMqBusy(true);
+    try {
+      for (const p of all) { await apiClient.remove(p.id); }
+      const gone = new Set(all.map(p => p.id));
+      setPdfs(prev => prev.filter(p => !gone.has(p.id)));
+      dropFolders(sc.roots, sc.inFolders);
+      mq.clear();
+      if (!sc.roots.length) await load();
+    } catch (err) { alert('Silinə bilmədi: ' + err.message); load(); }
+    finally { setMqBusy(false); }
+  }
 
   useEffect(() => {
     const t = setInterval(() => setNow(new Date()), 1000);
@@ -441,14 +508,29 @@ export default function PdfList({
       setArchiveOpen(true);
     } catch (err) { alert('Arxivə köçürülə bilmədi: ' + err.message); }
   }
-  async function unarchivePdf(e, p) {
+  const [restoreItem, setRestoreItem] = useState(null);
+  // "Faylı dəyiş": pick a new file -> replaces the item's file (title, folder, status stay)
+  const replaceInputRef = useRef(null);
+  const replaceTargetRef = useRef(null);
+  async function onReplacePicked(e) {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    const p = replaceTargetRef.current;
+    if (!file || !p) return;
+    if (!/\.(pdf|docx?|xlsx?)$/i.test(file.name)) { alert('Yalnız PDF, Word və ya Excel faylı yükləmək olar.'); return; }
+    if (!confirm(`"${p.title}" — köhnə fayl (${p.filename}) yeni faylla əvəz olunsun?\nYeni fayl: ${file.name}`)) return;
+    setBusy(p.id);
+    try { await apiClient.update(p.id, { file }); await load(); }
+    catch (err) { alert('Fayl dəyişdirilmədi: ' + err.message); }
+    finally { setBusy(null); }
+  }
+  function unarchivePdf(e, p) {
     e.stopPropagation();
-    try { await apiClient.unarchive(p.id); await load(); }
-    catch (err) { alert('Bərpa edilə bilmədi: ' + err.message); }
+    setRestoreItem(p); // asks which folder (or a new one) first
   }
   async function deleteArchivedPdf(e, p) {
     e.stopPropagation();
-    if (!confirm(`"${p.title}" sənədini tamamilə silmək istəyirsiniz? Geri alına bilməz.`)) return;
+    if (!confirm(`"${p.title}" arxivdən silinsin?`)) return;
     try {
       await apiClient.remove(p.id);
       setArchived(prev => prev.filter(x => x.id !== p.id));
@@ -482,12 +564,12 @@ export default function PdfList({
   function deleteGroup(g) {
     const count = itemsOfGroup(g.id).length;
     const subCount = childGroupsOf(g.id).length;
-    let msg = `"${g.name}" qrupunu silmək istəyirsiniz?`;
+    let msg = `"${g.name}" qovluğu siyahıdan götürülsün?`;
     if (count || subCount) {
-      msg = `"${g.name}" qrupunu`
-        + (subCount ? ` və ${subCount} alt qrupunu` : '')
-        + (count ? ` və içindəki ${count} sənədi` : '')
-        + ` silmək istəyirsiniz? "Yadda saxla"ya basana qədər tətbiq olunmayacaq.`;
+      msg = `"${g.name}" qovluğu`
+        + (subCount ? ` və ${subCount} alt qovluğu` : '')
+        + ` siyahıdan götürülsün?`
+        + (count ? ` İçindəki ${count} sənəd ARXİVƏ köçürüləcək (fayllar saxlanılır, oradan bərpa etmək olar).` : '');
     }
     if (!confirm(msg)) return;
     const allIds = collectDescendantGroupIds(g.id, groups);
@@ -624,7 +706,10 @@ export default function PdfList({
     const fullItems = itemsOfGroup(g.id);
     const items = fullItems.filter(matches);
     const children = childGroupsOf(g.id);
-    const total = fullItems.length;
+    // count includes subfolders, so a folder whose files sit in a subfolder doesn't show 0
+    const deepIds = new Set(collectDescendantGroupIds(g.id, groups).map(Number));
+    const total = pdfs.filter(p => deepIds.has(Number(p.groupId))).length;
+    const directCount = fullItems.length;
 
     if (q && !groupHasMatchDeep(g)) return null;
     if (!isAdmin && !groupHasAnyItemsDeep(g)) return null;
@@ -639,11 +724,12 @@ export default function PdfList({
     return (
       <div
         key={g.id}
-        className={`group-card ${isOpen ? 'open' : ''} ${isNestTarget ? 'drag-nest' : (isGroupOver ? 'drag-over' : '')} ${depth > 0 ? 'nested' : ''}`}
+        className={`group-card ${mq.isSel(`g:${g.id}`) ? 'is-selected' : ''} ${isOpen ? 'open' : ''} ${isNestTarget ? 'drag-nest' : (isGroupOver ? 'drag-over' : '')} ${depth > 0 ? 'nested' : ''}`}
         style={depth > 0 ? { marginLeft: 0, borderRadius: '12px' } : undefined}
         title={isNestTarget ? `"${draggingG.name}" bura köçürüləcək` : undefined}
       >
         <div
+          data-sel={`g:${g.id}`}
           className="group-head"
           onClick={() => toggleGroup(g.id)}
           draggable={dndOn}
@@ -665,7 +751,7 @@ export default function PdfList({
             {isOpen ? <FolderOpen size={18} /> : <Folder size={18} />}
           </span>
           <span className="group-name">{g.name}</span>
-          <span className="group-count">{total}</span>
+          <span className="group-count" title={total !== directCount ? `${directCount} bu qovluqda, ${total - directCount} alt qovluqlarda` : undefined}>{total}</span>
 
           {isAdmin && (
             <span className="group-actions" onClick={e => e.stopPropagation()}>
@@ -686,9 +772,9 @@ export default function PdfList({
                 onClick={() => setGmodal({ type: 'rename', group: g })}>
                 <Pencil size={15} />
               </button>
-              <button className="group-act-btn danger" title="Qrupu sil"
+              <button className="group-act-btn danger" title="Qovluğu götür (sənədlər arxivə)"
                 onClick={() => deleteGroup(g)}>
-                <Trash2 size={15} />
+                <Archive size={15} />
               </button>
             </span>
           )}
@@ -710,7 +796,8 @@ export default function PdfList({
                 <div
                   key={p.id}
                   ref={(el) => { itemRefs.current[p.id] = el; }}
-                  className={`process-item pdf-item ${isItemOver ? 'drag-over' : ''} ${highlightId === p.id ? 'just-opened' : ''}`}
+                  data-sel={`p:${p.id}`}
+                  className={`process-item pdf-item ${mq.isSel(`p:${p.id}`) ? 'is-selected' : ''} ${isItemOver ? 'drag-over' : ''} ${highlightId === p.id ? 'just-opened' : ''}`}
                   draggable={dndOn}
                   onDragStart={e => onItemDragStart(e, g.id, p.id)}
                   onDragOver={e => onItemDragOver(e, g.id, p.id)}
@@ -726,6 +813,22 @@ export default function PdfList({
                   <div className="label">
                     <span className="row-title">
                       {p.title}
+                      {!p.noFile && p.filename && sheetsKind === 'jobs' ? (
+                        // Vəzifə Təlimatları: the file is named after the Vəzifə — only the type pill
+                        <button type="button" className="fn-pill" onClick={(e) => { e.stopPropagation(); viewPdf(p); }} title={`Aç: ${p.filename}`}>
+                          <FileTypePill filename={p.filename} />
+                        </button>
+                      ) : !p.noFile && p.filename ? (
+                        <FileNameEdit
+                          filename={p.filename}
+                          editable={isAdmin}
+                          onOpen={() => viewPdf(p)}
+                          onRename={async (name) => {
+                            const it = await apiClient.update(p.id, { filename: name });
+                            setPdfs(prev => prev.map(x => (x.id === p.id ? { ...x, filename: it?.filename || name } : x)));
+                          }}
+                        />
+                      ) : null}
                       {p.size ? <span className="pdf-size">{fmtSize(p.size)}</span> : null}
                     </span>
                     {p.subtitle ? <span className="row-subtitle">{p.subtitle}</span> : null}
@@ -785,6 +888,13 @@ export default function PdfList({
                           </div>
                         ) : (
                           <>
+                            {!p.noFile && p.filename && (
+                              <button className="action-btn action-btn-icon nospace" title="Faylı dəyiş (yenisini yüklə)"
+                                disabled={busy === p.id}
+                                onClick={(e) => { e.stopPropagation(); replaceTargetRef.current = p; replaceInputRef.current?.click(); }}>
+                                <FileUp size={15} />
+                              </button>
+                            )}
                             <button className="action-btn action-btn-icon nospace"
                               onClick={(e) => { e.stopPropagation(); setModal({ mode: 'edit', pdf: p }); }} title="Redaktə et">
                               <Edit3 size={15} />
@@ -792,10 +902,6 @@ export default function PdfList({
                             <button className="action-btn action-btn-icon nospace"
                               onClick={(e) => requestArchive(e, p)} title="Arxivə köçür">
                               <Archive size={15} />
-                            </button>
-                            <button className="action-btn action-btn-icon action-btn-danger"
-                              onClick={(e) => removePdf(e, p)} title="Sil">
-                              <Trash2 size={15} />
                             </button>
                           </>
                         )}
@@ -888,6 +994,7 @@ export default function PdfList({
         </div>
       )}
       <br />
+      {isAdmin && <MarqueeLayer m={mq} itemWord={mqWord} busy={mqBusy} onArchive={archiveSelected} onDelete={deleteSelected} />}
       <div className="home-wrap">
         <LogoFull size="large" />
         <h2 className="home-title">
@@ -909,7 +1016,7 @@ export default function PdfList({
       {isAdmin && !loading && onOpenSheets && (
             <button className="process-item create-btn sheets-open-btn" onClick={onOpenSheets}>
               <div className="num"><FileSpreadsheet size={20} /></div>
-              <div className="label">{t('home.open_sheets', 'İş axışların hesabatı')}</div>
+              <div className="label">{sheetsLabel ? t(`${sheetsKind}.open_sheets`, sheetsLabel) : sheetsKind === 'templates' ? t('templates.open_sheets', 'Şablonların hesabatı') : t('pdfs.open_sheets', 'Normativ sənədlərin hesabatı')}</div>
             </button>
           )}
       {isAdmin && !loading && (
@@ -934,52 +1041,23 @@ export default function PdfList({
           {isAdmin && !loading && !error && archived.length > 0 && (() => {
             const items = archived.filter(Boolean).filter(matches);
             if (q && items.length === 0) return null;
-            const isOpen = q ? true : archiveOpen;
             return (
-              <div className={`group-card archive-card ${isOpen ? 'open' : ''}`}>
-                <div className="group-head" onClick={() => setArchiveOpen(v => !v)}>
-                  <span className="group-chevron">
-                    {isOpen ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-                  </span>
-                  <span className="group-folder"><Archive size={17} /></span>
-                  <span className="group-name">Arxiv</span>
-                  <span className="group-count">{archived.length}</span>
-                </div>
-                {isOpen && (
-                  <div className="group-body">
-                    {items.map((p) => (
-                      <div key={p.id} className="process-item pdf-item archived-row">
-                        <div className="num"><Archive size={14} /></div>
-                        <div className="label">
-                          <span className="row-title">
-                            {p.title}
-                            {p.size ? <span className="pdf-size">{fmtSize(p.size)}</span> : null}
-                          </span>
-                          {p.subtitle ? <span className="row-subtitle">{p.subtitle}</span> : null}
-                        </div>
-                        <div className="pdf-actions">
-                          <button className="action-btn" onClick={() => viewPdf(p)} disabled={busy === p.id} title={rawByText('Bax')}>
-                            {busy === p.id ? <Loader2 size={15} className="spin" /> : <Eye size={15} />}
-                            <span>{tByText('Bax')}</span>
-                          </button>
-                          {isAdmin && (
-                            <>
-                              <button className="action-btn action-btn-icon nospace"
-                                onClick={(e) => unarchivePdf(e, p)} title="Arxivdən çıxar">
-                                <ArchiveRestore size={15} />
-                              </button>
-                              <button className="action-btn action-btn-icon action-btn-danger"
-                                onClick={(e) => deleteArchivedPdf(e, p)} title="Tamamilə sil">
-                                <Trash2 size={15} />
-                              </button>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <ArchiveSection
+                items={items}
+                total={archived.length}
+                open={q ? true : archiveOpen}
+                onToggle={() => setArchiveOpen(v => !v)}
+                statusMeta={withStatus ? DOC_STATUS_META : null}
+                onRestore={unarchivePdf}
+                onDelete={deleteArchivedPdf}
+                meta={(p) => (p.size ? <span>{p.filename ? <FileTypePill filename={p.filename} className="ft-inline" /> : null} {fmtSize(p.size)}</span> : (p.noFile ? <span>Faylsız</span> : null))}
+                extra={(p) => (p.noFile && !p.size ? null : (
+                  <button className="action-btn" onClick={() => viewPdf(p)} disabled={busy === p.id} title={rawByText('Bax')}>
+                    {busy === p.id ? <Loader2 size={15} className="spin" /> : <Eye size={15} />}
+                    <span>{tByText('Bax')}</span>
+                  </button>
+                ))}
+              />
             );
           })()}
         </div>
@@ -1004,6 +1082,15 @@ export default function PdfList({
       {gmodal?.type === 'rename' && (
         <NameModal heading="Qrupu adlandır" nameLabel="Qrup adı" name0={gmodal.group.name}
           onClose={() => setGmodal(null)} onSave={saveGroupRename} />
+      )}
+      <input ref={replaceInputRef} type="file" hidden accept=".pdf,.doc,.docx,.xls,.xlsx" onChange={onReplacePicked} />
+      {restoreItem && (
+        <RestoreDialog
+          item={restoreItem}
+          groups={groups}
+          onConfirm={async (target) => { await apiClient.unarchive(restoreItem.id, target); await load(); }}
+          onClose={() => setRestoreItem(null)}
+        />
       )}
     </>
   );

@@ -12,6 +12,20 @@ function procName(ctx, id) {
   const p = all.find(x => Number(x.id) === Number(id));
   return p ? `"${p.title}"` : `#${id}`;
 }
+function rowName(ctx, id) {
+  const all = [...(ctx?.rows || []), ...(ctx?.archivedRows || [])];
+  const r = all.find(x => Number(x.id) === Number(id));
+  return r ? `${r.order ? `№${r.order} ` : ''}"${(r.title || 'Adsız').slice(0, 60)}"` : `#${id}`;
+}
+function rowList(ctx, a) {
+  const ids = Array.isArray(a.rowIds) ? a.rowIds : (a.rowId != null ? [a.rowId] : []);
+  const names = ids.slice(0, 6).map(id => rowName(ctx, id));
+  return `${ids.length} sətir${names.length ? ':\n' + names.join('\n') : ''}${ids.length > 6 ? `\n… və daha ${ids.length - 6}` : ''}`;
+}
+function itemName(ctx, id) {
+  const it = (ctx?.homeItems || []).find(x => Number(x.id) === Number(id));
+  return it ? `"${it.title}"` : `#${id}`;
+}
 function nodeName(ctx, id) {
   const n = (ctx?.diagram?.nodes || []).find(x => String(x.id) === String(id));
   return n ? `#${id} "${(n.text || '').slice(0, 40)}"` : `#${id}`;
@@ -47,9 +61,9 @@ export function describeAction(a, ctx) {
       };
     case 'delete_group':
       return {
-        title: 'Qovluğu sil',
-        detail: `${groupName(ctx, a.groupId)} — alt qovluqları və içindəki diaqramlarla birlikdə silinəcək.`,
-        danger: true, icon: 'trash'
+        title: 'Qovluğu götür',
+        detail: `${groupName(ctx, a.groupId)} — qovluq siyahıdan götürülür, içindəki diaqramlar ARXİVƏ köçür (bərpa etmək olar).`,
+        danger: true, icon: 'archive'
       };
     case 'create_diagram':
       return {
@@ -80,17 +94,58 @@ export function describeAction(a, ctx) {
         icon: 'archive'
       };
     case 'unarchive_diagram':
-      return { title: 'Arxivdən çıxar', detail: procName(ctx, a.processId), icon: 'archive' };
-    case 'delete_diagram':
       return {
-        title: 'Diaqramı sil',
-        detail: `${procName(ctx, a.processId)} — geri alına bilməz.`,
-        danger: true, icon: 'trash'
+        title: 'Arxivdən bərpa et',
+        detail: `${procName(ctx, a.processId)}` + (a.newGroupName ? ` → yeni qovluq "${a.newGroupName}"` : a.groupId != null ? ` → ${groupName(ctx, a.groupId)}` : ' → əvvəlki qovluğa'),
+        icon: 'archive'
       };
+    case 'delete_diagram':
+      return { title: 'Arxivə köçür', detail: `${procName(ctx, a.processId)} — birdəfəlik silinmir, arxivdən bərpa etmək olar.`, icon: 'archive' };
+    case 'delete_archived':
+      return { title: 'Arxivdən sil', detail: `${procName(ctx, a.processId)} — səhifədən götürülür, data-da saxlanılır.`, danger: true, icon: 'trash' };
+
+    /* ---- Hesabat ---- */
+    case 'create_row':
+      return { title: 'Hesabata sətir əlavə et', detail: `"${a.title || ''}"${a.strukturAdi ? ` — ${a.strukturAdi}` : ''}`, icon: 'plus' };
+    case 'update_row':
+    case 'update_rows':
+      return {
+        title: 'Hesabat sətrini yenilə',
+        detail: `${rowList(ctx, a)}\n` + ['title', 'strukturAdi', 'subtitle', 'status'].filter(f => a[f] != null).map(f => `${f} → "${a[f]}"`).join('\n'),
+        icon: 'edit'
+      };
+    case 'archive_rows':
+      return { title: 'Hesabat arxivinə köçür', detail: rowList(ctx, a) + '\nƏsas səhifəyə toxunulmur.', icon: 'archive' };
+    case 'delete_rows':
+      return { title: 'Hesabatdan sil', detail: rowList(ctx, a) + '\nData-da saxlanılır, əsas səhifəyə toxunulmur.', danger: true, icon: 'trash' };
+    case 'archive_all':
+      return { title: 'Bütün hesabatı arxivə köçür', detail: `${(ctx?.rows || []).length} sətir. Əsas səhifəyə toxunulmur.`, danger: true, icon: 'archive' };
+    case 'delete_all':
+      return { title: 'Bütün hesabatı sil', detail: `${(ctx?.rows || []).length} sətir səhifədən götürülür (data-da saxlanılır). Əsas səhifəyə toxunulmur.`, danger: true, icon: 'trash' };
+    case 'restore_rows':
+      return { title: 'Hesabat arxivindən qaytar', detail: rowList(ctx, a), icon: 'archive' };
+    case 'delete_archived_rows':
+      return { title: 'Hesabat arxivindən sil', detail: rowList(ctx, a), danger: true, icon: 'trash' };
+    case 'link_row':
+      return { title: 'Sətri bağla', detail: `${rowName(ctx, a.rowId)} → ${itemName(ctx, a.itemId)}`, icon: 'arrow' };
+    case 'unlink_rows':
+      return { title: 'Bağlantını sil', detail: rowList(ctx, a), icon: 'edit' };
+    case 'unlink_all': {
+      const n = (ctx?.rows || []).filter(r => r.linkedItemId != null).length;
+      return { title: 'Bütün bağlantıları sil', detail: `${n} bağlı sətir əlaqəsiz olacaq. Sətirlər və əsas səhifə dəyişmir.`, icon: 'edit' };
+    }
+    case 'export_excel':
+      return { title: 'Excel-ə çıxart', detail: 'Görünən sətirlər Excel faylına yazılacaq.', icon: 'save' };
+    case 'open_archive':
+      return { title: 'Arxivi aç', detail: 'Hesabat arxivi göstəriləcək.', icon: 'open' };
     case 'open_diagram':
       return { title: 'Diaqramı aç', detail: procName(ctx, a.processId), icon: 'open' };
     case 'filter':
-      return { title: 'Axtarışda filtrlə', detail: `"${a.query}"`, icon: 'search' };
+      return {
+        title: 'Filtrlə',
+        detail: [a.query ? `"${a.query}"` : null, a.status ? `status: ${a.status}` : null, a.link ? (a.link === 'linked' ? 'yalnız bağlı' : 'yalnız əlaqəsiz') : null].filter(Boolean).join(' · ') || 'filtrlər sıfırlanır',
+        icon: 'search'
+      };
     case 'add_lane':
       return { title: 'Panel əlavə et', detail: `"${a.label}"`, icon: 'plus' };
     case 'delete_lane':

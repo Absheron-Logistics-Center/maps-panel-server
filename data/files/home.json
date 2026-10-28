@@ -1,0 +1,20 @@
+{
+  "groups": [
+    {
+      "id": 1,
+      "name": "Anbar logistikası şöbəsi",
+      "parentId": null
+    }
+  ],
+  "pdfs": [
+    {
+      "id": 1,
+      "title": "Anbar logistikası şöbəsi əsasnaməsi",
+      "subtitle": "",
+      "filename": "ALM Servis xidməti.pdf",
+      "size": 3278401,
+      "groupId": 1,
+      "uploadedAt": "2026-09-09T08:38:42.855Z"
+    }
+  ]
+}

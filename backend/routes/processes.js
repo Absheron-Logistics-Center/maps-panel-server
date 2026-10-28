@@ -1,92 +1,101 @@
 import { Router } from 'express';
-import { getFile, putFile, deleteFile, attribution } from '../services/store.js';
-import { syncFromProcess, removeSheetRowsForDeletedItems } from '../services/sheetsStore.js';
+import { getFile, putFile } from '../services/store.js';
+import { homePath, homeArchivePath, diagramPath } from '../services/paths.js';
+import { linkRowToItem, autoLinkNewItem } from '../services/sheetsStore.js';
+import { keepHomeDeleted, homeDeletedIds } from '../services/homeTrash.js';
 
+/*
+  İş Axışları — Home page list (data/diagrams/home.json), its archive
+  (home-archive.json) and the diagrams themselves (items/diagram-<id>.json).
+
+  Nothing here touches the Hesabat table. Nothing is hard-deleted either:
+  "delete" on a diagram or a folder moves the diagram(s) to the archive.
+*/
 const router = Router();
-const dataPath = () => (process.env.DATA_PATH || 'data').replace(/^\/|\/$/g, '');
+const KIND = 'diagrams';
 
-const indexPath = () => `${dataPath()}/diagrams/index.json`;
-const archivePath = () => `${dataPath()}/diagrams/archive.json`;
-const processPath = id => `${dataPath()}/diagrams/processes/process-${id}.json`;
-
-/* ---------- archive helpers (archived diagrams live in archive.json) ---------- */
+/* ---------- helpers ---------- */
 async function readArchive() {
-  const file = await getFile(archivePath());
-  const c = file ? file.content : null;
-  // Filter out any null/malformed entries — old data had a stray `null` in
-  // here (from a prior bug), which crashed the frontend's archive list.
-  return (c && Array.isArray(c.items)) ? { ...c, items: c.items.filter(Boolean) } : { items: [] };
+  const c = (await getFile(homeArchivePath(KIND)))?.content;
+  return { items: (Array.isArray(c?.items) ? c.items : []).filter(Boolean) };
 }
-// `user` is the logged-in panel admin (req.user) — gets stamped onto the commit
-// so GitHub shows who made the change instead of just the token owner.
-async function writeArchive(content, message, user) {
-  return putFile(archivePath(), content, attribution(user, message));
-}
+const writeArchive = (content) => putFile(homeArchivePath(KIND), content);
 
-/* ---------- index helpers + one-time migration to groups ---------- */
 function ensureGroups(idx) {
   let changed = false;
   if (!idx || typeof idx !== 'object') idx = {};
   if (!Array.isArray(idx.processes)) { idx.processes = []; changed = true; }
   if (!Array.isArray(idx.groups)) { idx.groups = []; changed = true; }
-
   const orphans = idx.processes.filter(p => !p.groupId);
-  if (orphans.length && idx.groups.length === 0) {
-    idx.groups.push({ id: 1, name: 'Ümumi' });
-    changed = true;
-  }
-  if (orphans.length && idx.groups.length) {
-    const gid = idx.groups[0].id;
-    idx.processes.forEach(p => { if (!p.groupId) { p.groupId = gid; changed = true; } });
-  }
+  if (orphans.length && idx.groups.length === 0) { idx.groups.push({ id: 1, name: 'Ümumi', parentId: null }); changed = true; }
+  if (orphans.length) { const gid = idx.groups[0].id; orphans.forEach(p => { p.groupId = gid; }); changed = true; }
   return { idx, changed };
 }
-
 async function readIndex() {
-  const file = await getFile(indexPath());
-  const { idx } = ensureGroups(file ? file.content : null);
-  return idx;
+  return ensureGroups((await getFile(homePath(KIND)))?.content || null).idx;
 }
-
-async function writeIndex(content, message, user) {
-  return putFile(indexPath(), content, attribution(user, message));
-}
+const writeIndex = (content) => putFile(homePath(KIND), content);
 
 function nextId(list) {
   const ids = (list || []).map(x => Number(x.id)).filter(Number.isFinite);
   return ids.length ? Math.max(...ids) + 1 : 1;
 }
-
 function requireAdmin(req, res, next) {
   if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
   next();
 }
+function collectGroupIds(idx, rootId) {
+  const ids = [rootId];
+  let frontier = [rootId];
+  while (frontier.length) {
+    const kids = idx.groups.filter(g => frontier.includes(Number(g.parentId))).map(g => Number(g.id));
+    ids.push(...kids);
+    frontier = kids;
+  }
+  return ids;
+}
+// Move index entries into the archive (diagram files stay where they are).
+async function archiveEntries(idx, entries) {
+  if (!entries.length) return;
+  const ids = new Set(entries.map(e => Number(e.id)));
+  const archive = await readArchive();
+  const now = new Date().toISOString();
+  archive.items = [
+    ...archive.items.filter(a => !ids.has(Number(a.id))),
+    ...entries.map(e => ({
+      ...e,
+      groupName: idx.groups.find(g => Number(g.id) === Number(e.groupId))?.name || '',
+      archivedAt: now
+    }))
+  ];
+  await writeArchive(archive); // archive first: a crash in between leaves it visible, never lost
+  idx.processes = idx.processes.filter(p => !ids.has(Number(p.id)));
+}
 
-/* =========================== GROUPS =========================== */
+/* =========================== LIST =========================== */
 router.get('/', async (req, res, next) => {
   try {
-    const file = await getFile(indexPath());
+    const file = await getFile(homePath(KIND));
     const { idx, changed } = ensureGroups(file ? file.content : null);
-    if (changed) await writeIndex(idx, 'Migrate diagrams to groups', req.user).catch(() => {});
+    if (changed) await writeIndex(idx).catch(() => {});
     const archive = await readArchive();
-    res.json({ groups: idx.groups || [], processes: idx.processes || [], archived: archive.items || [] });
+    res.json({ groups: idx.groups, processes: idx.processes, archived: archive.items });
   } catch (e) { next(e); }
 });
 
+/* =========================== GROUPS =========================== */
 router.post('/group', requireAdmin, async (req, res, next) => {
   try {
     const name = String(req.body?.name || '').trim();
-    if (!name) return res.status(400).json({ error: 'Qrup adi teleb olunur' });
+    if (!name) return res.status(400).json({ error: 'Qrup adı tələb olunur' });
     const idx = await readIndex();
-
-    let parentId = req.body?.parentId != null ? Number(req.body.parentId) : null;
+    const parentId = req.body?.parentId != null ? Number(req.body.parentId) : null;
     if (parentId && !idx.groups.some(g => Number(g.id) === parentId)) {
       return res.status(400).json({ error: 'Valideyn qrup tapılmadı' });
     }
-
     const group = { id: nextId(idx.groups), name, parentId: parentId || null };
     idx.groups = [...idx.groups, group];
-    await writeIndex(idx, `Create group ${group.id}`, req.user);
+    await writeIndex(idx);
     res.status(201).json(group);
   } catch (e) { next(e); }
 });
@@ -96,214 +105,166 @@ router.put('/group/:gid', requireAdmin, async (req, res, next) => {
     const gid = Number(req.params.gid);
     const idx = await readIndex();
     const g = idx.groups.find(x => Number(x.id) === gid);
-    if (!g) return res.status(404).json({ error: 'Qrup tapilmadi' });
-
+    if (!g) return res.status(404).json({ error: 'Qrup tapılmadı' });
     if (req.body?.name !== undefined) {
       const name = String(req.body.name || '').trim();
-      if (!name) return res.status(400).json({ error: 'Qrup adi teleb olunur' });
+      if (!name) return res.status(400).json({ error: 'Qrup adı tələb olunur' });
       g.name = name;
     }
-
-    // Moving a group under a new parent (drag & drop nesting). Any nested
-    // subgroups/diagrams stay attached to this group's id, so they move
-    // along with it automatically — nothing else needs to change.
     if (req.body?.parentId !== undefined) {
       const newParentId = req.body.parentId === null ? null : Number(req.body.parentId);
       if (newParentId !== null) {
-        if (newParentId === gid) {
-          return res.status(400).json({ error: 'Qrup öz-özünün alt qrupu ola bilməz' });
-        }
-        if (!idx.groups.some(x => Number(x.id) === newParentId)) {
-          return res.status(400).json({ error: 'Valideyn qrup tapılmadı' });
-        }
-        // reject moving a group into one of its own descendants (would create a cycle)
-        function isDescendant(candidateId, rootId) {
-          let frontier = [rootId];
-          while (frontier.length) {
-            const kids = idx.groups.filter(x => frontier.includes(Number(x.parentId)));
-            if (kids.some(k => Number(k.id) === candidateId)) return true;
-            frontier = kids.map(k => Number(k.id));
-          }
-          return false;
-        }
-        if (isDescendant(newParentId, gid)) {
-          return res.status(400).json({ error: 'Qrupu öz alt qrupunun içinə köçürmək olmaz' });
-        }
+        if (newParentId === gid) return res.status(400).json({ error: 'Qrup öz-özünün alt qrupu ola bilməz' });
+        if (!idx.groups.some(x => Number(x.id) === newParentId)) return res.status(400).json({ error: 'Valideyn qrup tapılmadı' });
+        if (collectGroupIds(idx, gid).includes(newParentId)) return res.status(400).json({ error: 'Qrupu öz alt qrupunun içinə köçürmək olmaz' });
       }
       g.parentId = newParentId;
     }
-
-    await writeIndex(idx, `Update group ${gid}`, req.user);
+    await writeIndex(idx);
     res.json(g);
   } catch (e) { next(e); }
 });
 
+// Removing a folder archives every diagram inside it (and its subfolders).
 router.delete('/group/:gid', requireAdmin, async (req, res, next) => {
   try {
     const gid = Number(req.params.gid);
     const idx = await readIndex();
-
-    // Collect this group + every descendant subgroup (any depth).
-    function collectIds(rootId) {
-      const ids = [rootId];
-      let frontier = [rootId];
-      while (frontier.length) {
-        const children = idx.groups.filter(g => frontier.includes(Number(g.parentId)));
-        const childIds = children.map(g => Number(g.id));
-        ids.push(...childIds);
-        frontier = childIds;
-      }
-      return ids;
-    }
-    const allGroupIds = collectIds(gid);
-
-    const inGroup = idx.processes.filter(p => allGroupIds.includes(Number(p.groupId)));
-    const deletedGroupNames = idx.groups
-      .filter(g => allGroupIds.includes(Number(g.id)))
-      .map(g => String(g.name || '').trim())
-      .filter(Boolean);
-    const groupNameById = new Map(idx.groups.map(g => [Number(g.id), String(g.name || '').trim()]));
-    const deletedItemIds = inGroup.map(p => Number(p.id));
-    for (const p of inGroup) {
-      await deleteFile(processPath(p.id), attribution(req.user, `Delete process ${p.id} (group ${gid})`)).catch(() => {});
-    }
-    idx.processes = idx.processes.filter(p => !allGroupIds.includes(Number(p.groupId)));
-    idx.groups = idx.groups.filter(g => !allGroupIds.includes(Number(g.id)));
-    await writeIndex(idx, `Delete group ${gid} (+ subgroups)`, req.user);
-    await removeSheetRowsForDeletedItems('diagrams', deletedItemIds, deletedGroupNames, req.user, inGroup.map(p => ({ ...p, strukturAdi: groupNameById.get(Number(p.groupId)) || '' }))).catch((e) =>
-      console.error('[process group delete -> sheets]', e.message)
-    );
-    res.json({ ok: true, deletedDiagrams: inGroup.length, deletedGroups: allGroupIds.length });
+    const all = collectGroupIds(idx, gid);
+    const inGroup = idx.processes.filter(p => all.includes(Number(p.groupId)));
+    await archiveEntries(idx, inGroup);
+    idx.groups = idx.groups.filter(g => !all.includes(Number(g.id)));
+    await writeIndex(idx);
+    res.json({ ok: true, archivedDiagrams: inGroup.length, removedGroups: all.length });
   } catch (e) { next(e); }
 });
 
 /* =========================== REORDER =========================== */
-// Reorder the folders (groups). body: { order: [gid, gid, ...] }
 router.put('/groups/reorder', requireAdmin, async (req, res, next) => {
   try {
     const order = Array.isArray(req.body?.order) ? req.body.order.map(Number) : null;
     if (!order) return res.status(400).json({ error: 'order array required' });
     const idx = await readIndex();
     const byId = new Map(idx.groups.map(g => [Number(g.id), g]));
-    const reordered = [];
-    for (const id of order) {
-      if (byId.has(id)) { reordered.push(byId.get(id)); byId.delete(id); }
-    }
-    for (const g of byId.values()) reordered.push(g); // keep any not listed
-    idx.groups = reordered;
-    await writeIndex(idx, 'Reorder groups', req.user);
+    const out = [];
+    for (const id of order) if (byId.has(id)) { out.push(byId.get(id)); byId.delete(id); }
+    idx.groups = [...out, ...byId.values()];
+    await writeIndex(idx);
     res.json({ groups: idx.groups });
   } catch (e) { next(e); }
 });
 
-// Reorder diagrams inside one folder. body: { groupId, order: [pid, pid, ...] }
-// NOTE: must be declared before '/:id' so "reorder" isn't read as an id.
 router.put('/reorder', requireAdmin, async (req, res, next) => {
   try {
     const groupId = Number(req.body?.groupId);
     const order = Array.isArray(req.body?.order) ? req.body.order.map(Number) : null;
     if (!groupId || !order) return res.status(400).json({ error: 'groupId and order required' });
     const idx = await readIndex();
-    const groupItems = idx.processes.filter(p => Number(p.groupId) === groupId);
-    const byId = new Map(groupItems.map(p => [Number(p.id), p]));
+    const byId = new Map(idx.processes.filter(p => Number(p.groupId) === groupId).map(p => [Number(p.id), p]));
     const seq = [];
-    for (const id of order) {
-      if (byId.has(id)) { seq.push(byId.get(id)); byId.delete(id); }
-    }
-    for (const p of byId.values()) seq.push(p); // keep any not listed
-    // Re-emit the flat list, swapping this group's slots into the new order.
+    for (const id of order) if (byId.has(id)) { seq.push(byId.get(id)); byId.delete(id); }
+    seq.push(...byId.values());
     let k = 0;
-    idx.processes = idx.processes.map(p =>
-      Number(p.groupId) === groupId ? seq[k++] : p
-    );
-    await writeIndex(idx, `Reorder diagrams in group ${groupId}`, req.user);
+    idx.processes = idx.processes.map(p => (Number(p.groupId) === groupId ? seq[k++] : p));
+    await writeIndex(idx);
     res.json({ processes: idx.processes });
   } catch (e) { next(e); }
 });
 
 /* =========================== ARCHIVE =========================== */
-// Move a diagram out of the index into archive.json (data file stays).
 router.post('/:id/archive', async (req, res, next) => {
   try {
     const id = Number(req.params.id);
     const idx = await readIndex();
     const entry = idx.processes.find(p => Number(p.id) === id);
-    if (!entry) return res.status(404).json({ error: 'Process not found' });
-
-    idx.processes = idx.processes.filter(p => Number(p.id) !== id);
-    const archive = await readArchive();
-    const group = idx.groups.find(g => Number(g.id) === Number(entry.groupId));
-    archive.items = [
-      ...archive.items.filter(a => Number(a.id) !== id),
-      { ...entry, groupName: group?.name || '', archivedAt: new Date().toISOString() }
-    ];
-    await writeArchive(archive, `Archive process ${id}`, req.user);
-    await writeIndex(idx, `Remove process ${id} from index (archived)`, req.user);
-    res.json({ ok: true, archived: archive.items });
+    if (!entry) return res.status(404).json({ error: 'Diaqram tapılmadı' });
+    await archiveEntries(idx, [entry]);
+    await writeIndex(idx);
+    res.json({ ok: true });
   } catch (e) { next(e); }
 });
 
-// Restore an archived diagram back into the index.
+// Back to its old folder; if that folder is gone, to a folder with the same
+// name (created if needed); otherwise the first folder.
 router.post('/:id/unarchive', async (req, res, next) => {
   try {
     const id = Number(req.params.id);
     const archive = await readArchive();
     const entry = archive.items.find(a => Number(a.id) === id);
-    if (!entry) return res.status(404).json({ error: 'Archived process not found' });
-
+    if (!entry) return res.status(404).json({ error: 'Arxivdə tapılmadı' });
     const idx = await readIndex();
-    // put back into its old group if it still exists, otherwise the first group
-    let gid = Number(entry.groupId);
-    if (!idx.groups.some(g => Number(g.id) === gid)) {
-      if (!idx.groups.length) idx.groups.push({ id: 1, name: 'Ümumi' });
+    let gid = null;
+    // A new folder typed in the restore dialog
+    const newName = String(req.body?.newGroupName || '').trim();
+    if (newName) {
+      const ex = idx.groups.find(g => String(g.name).trim() === newName);
+      if (ex) gid = Number(ex.id);
+      else { const g = { id: nextId(idx.groups), name: newName, parentId: null }; idx.groups.push(g); gid = g.id; }
+    }
+    const wantGroup = req.body?.groupId != null ? Number(req.body.groupId) : Number(entry.groupId);
+    if (gid == null && idx.groups.some(g => Number(g.id) === wantGroup)) gid = wantGroup;
+    if (gid == null && entry.groupName) {
+      const byName = idx.groups.find(g => String(g.name).trim() === String(entry.groupName).trim());
+      if (byName) gid = Number(byName.id);
+      else {
+        const g = { id: nextId(idx.groups), name: String(entry.groupName).trim(), parentId: null };
+        idx.groups.push(g);
+        gid = g.id;
+      }
+    }
+    if (gid == null) {
+      if (!idx.groups.length) idx.groups.push({ id: 1, name: 'Ümumi', parentId: null });
       gid = Number(idx.groups[0].id);
     }
-    const { groupName, archivedAt, ...meta } = entry;
-    idx.processes = [...idx.processes, { ...meta, groupId: gid }];
+    const { groupName, archivedAt, note, ...meta } = entry;
+    idx.processes = [...idx.processes.filter(p => Number(p.id) !== id), { ...meta, groupId: gid }];
+    await writeIndex(idx);
     archive.items = archive.items.filter(a => Number(a.id) !== id);
-    await writeIndex(idx, `Restore process ${id} from archive`, req.user);
-    await writeArchive(archive, `Unarchive process ${id}`, req.user);
+    await writeArchive(archive);
+    res.json({ ok: true, groupId: gid });
+  } catch (e) { next(e); }
+});
+
+// Delete from the archive: off the page, a copy is kept in home-deleted.json
+// and the diagram file stays in data/ + Mongo.
+router.delete('/archived/:id', async (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
+    const archive = await readArchive();
+    const entry = archive.items.find(a => Number(a.id) === id);
+    if (!entry) return res.json({ ok: true, alreadyGone: true });
+    await keepHomeDeleted(KIND, [entry]);
+    archive.items = archive.items.filter(a => a !== entry);
+    await writeArchive(archive);
     res.json({ ok: true });
   } catch (e) { next(e); }
 });
 
-/* =========================== PROCESSES =========================== */
-// İş Axışları statuses (no "sign" here — that's Normativ/Şablon only).
+/* =========================== DIAGRAMS =========================== */
 const ALLOWED_STATUS = ['progress', 'prep', 'notdone', 'done', 'cancelled'];
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const file = await getFile(processPath(req.params.id));
-    if (!file) return res.status(404).json({ error: 'Process not found' });
-    // status lives on the index entry — merge it in so the diagram view has it
+    const file = await getFile(diagramPath(req.params.id));
+    if (!file) return res.status(404).json({ error: 'Diaqram tapılmadı' });
     const idx = await readIndex();
-    const entry = idx.processes.find(p => Number(p.id) === Number(req.params.id));
+    let entry = idx.processes.find(p => Number(p.id) === Number(req.params.id));
+    if (!entry) entry = (await readArchive()).items.find(p => Number(p.id) === Number(req.params.id));
     res.json({ ...file.content, status: entry?.status ?? null });
   } catch (e) { next(e); }
 });
 
-// Set (or clear) a diagram's status. body: { status: 'progress'|'done'|'notdone'|null }
 router.put('/:id/status', async (req, res, next) => {
   try {
     const id = Number(req.params.id);
     const raw = req.body?.status;
     const status = raw == null || raw === '' ? null : String(raw);
-    if (status !== null && !ALLOWED_STATUS.includes(status)) {
-      return res.status(400).json({ error: 'Yanlış status' });
-    }
+    if (status !== null && !ALLOWED_STATUS.includes(status)) return res.status(400).json({ error: 'Yanlış status' });
     const idx = await readIndex();
     const entry = idx.processes.find(p => Number(p.id) === id);
-    if (!entry) return res.status(404).json({ error: 'Process not found' });
+    if (!entry) return res.status(404).json({ error: 'Diaqram tapılmadı' });
     if (status === null) delete entry.status; else entry.status = status;
-    await writeIndex(idx, `Set status for process ${id}`, req.user);
-    const gName = idx.groups.find(g => Number(g.id) === Number(entry.groupId))?.name || '';
-    await syncFromProcess({
-      processId: id,
-      title: entry.title,
-      subtitle: entry.subtitle || '',
-      status,
-      strukturAdi: gName
-    }, req.user).catch((e) => console.error('[sheets sync status]', e.message));
+    await writeIndex(idx);
     res.json({ id, status });
   } catch (e) { next(e); }
 });
@@ -313,20 +274,16 @@ router.post('/', async (req, res, next) => {
     const idx = await readIndex();
     const groupId = Number(req.body.groupId);
     if (!groupId || !idx.groups.some(g => Number(g.id) === groupId)) {
-      return res.status(400).json({ error: 'Diaqram bir qrupa aid olmalidir' });
+      return res.status(400).json({ error: 'Diaqram bir qrupa aid olmalıdır' });
     }
-    const newId = req.body.id || nextId(idx.processes);
+    const archive = await readArchive();
+    const newId = req.body.id || nextId([...idx.processes, ...archive.items, ...(await homeDeletedIds(KIND)).map(id => ({ id }))]);
     const title = req.body.title || `Yeni proses ${newId}`;
     const subtitle = req.body.subtitle ? String(req.body.subtitle) : '';
-    const sheetId = req.body.sheetId != null ? Number(req.body.sheetId) : null;
-    const statusRaw = req.body.status;
-    const status = statusRaw == null || statusRaw === '' ? null : String(statusRaw);
-    if (status !== null && !ALLOWED_STATUS.includes(status)) {
-      return res.status(400).json({ error: 'Yanlış status' });
-    }
-    const gName = idx.groups.find(g => Number(g.id) === groupId)?.name || '';
+    const status = req.body.status == null || req.body.status === '' ? null : String(req.body.status);
+    if (status !== null && !ALLOWED_STATUS.includes(status)) return res.status(400).json({ error: 'Yanlış status' });
 
-    const process = {
+    const body = {
       id: newId, title, subtitle,
       width: req.body.width || 1600,
       height: req.body.height || 600,
@@ -334,21 +291,16 @@ router.post('/', async (req, res, next) => {
       nodes: req.body.nodes || [],
       edges: req.body.edges || []
     };
-    if (req.body.theme && typeof req.body.theme === 'object') process.theme = req.body.theme;
-    await putFile(processPath(newId), process, attribution(req.user, `Create process ${newId}`));
-    const indexEntry = { id: newId, title, subtitle, groupId };
-    if (status) indexEntry.status = status;
-    idx.processes = [...idx.processes, indexEntry];
-    await writeIndex(idx, `Add process ${newId} to index`, req.user);
-    await syncFromProcess({
-      processId: newId,
-      title,
-      subtitle,
-      status,
-      sheetId: Number.isFinite(sheetId) ? sheetId : undefined,
-      strukturAdi: gName
-    }, req.user).catch((e) => console.error('[sheets sync create]', e.message));
-    res.status(201).json({ ...process, status: status || null });
+    if (req.body.theme && typeof req.body.theme === 'object') body.theme = req.body.theme;
+    await putFile(diagramPath(newId), body);
+    const entry = { id: newId, title, subtitle, groupId };
+    if (status) entry.status = status;
+    idx.processes = [...idx.processes, entry];
+    await writeIndex(idx);
+    // Picked a Hesabat row in the dialog -> only remember the link.
+    if (req.body.sheetId != null) await linkRowToItem(KIND, req.body.sheetId, newId).catch(() => {});
+    else await autoLinkNewItem(KIND, newId, title, idx.groups.find(g => Number(g.id) === groupId)?.name || '').catch(() => {});
+    res.status(201).json({ ...body, status });
   } catch (e) { next(e); }
 });
 
@@ -357,86 +309,51 @@ router.put('/:id/meta', async (req, res, next) => {
     const id = Number(req.params.id);
     const idx = await readIndex();
     const entry = idx.processes.find(p => Number(p.id) === id);
-    if (!entry) return res.status(404).json({ error: 'Process not found' });
-
+    if (!entry) return res.status(404).json({ error: 'Diaqram tapılmadı' });
     if (typeof req.body.title === 'string') entry.title = req.body.title;
     if (typeof req.body.subtitle === 'string') entry.subtitle = req.body.subtitle;
     if (req.body.groupId !== undefined) {
       const gid = Number(req.body.groupId);
       if (idx.groups.some(g => Number(g.id) === gid)) entry.groupId = gid;
     }
-    await writeIndex(idx, `Update meta for process ${id}`, req.user);
-
-    const file = await getFile(processPath(id));
-    if (file) {
-      const body = { ...file.content, title: entry.title, subtitle: entry.subtitle };
-      await putFile(processPath(id), body, attribution(req.user, `Sync meta for process ${id}`));
-    }
-    await syncFromProcess({
-      processId: id,
-      title: entry.title,
-      subtitle: entry.subtitle || '',
-      status: entry.status ?? null,
-      strukturAdi: idx.groups.find(g => Number(g.id) === Number(entry.groupId))?.name || ''
-    }, req.user).catch((e) => console.error('[sheets sync meta]', e.message));
+    await writeIndex(idx);
+    const file = await getFile(diagramPath(id));
+    if (file) await putFile(diagramPath(id), { ...file.content, title: entry.title, subtitle: entry.subtitle || '' });
     res.json(entry);
   } catch (e) { next(e); }
 });
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const body = req.body;
-    if (!body || typeof body !== 'object') {
-      return res.status(400).json({ error: 'Process body required' });
-    }
-    body.id = Number(id);
-    await putFile(processPath(id), body, attribution(req.user, `Update process ${id}`));
-
+    if (!body || typeof body !== 'object') return res.status(400).json({ error: 'Diaqram məlumatı tələb olunur' });
+    const { status, ...diagram } = body; // status lives on the Home list
+    diagram.id = id;
+    await putFile(diagramPath(id), diagram);
     const idx = await readIndex();
-    const i = idx.processes.findIndex(p => Number(p.id) === Number(id));
-    if (i >= 0) {
+    const entry = idx.processes.find(p => Number(p.id) === id);
+    if (entry) {
       let changed = false;
-      if (typeof body.title === 'string' && idx.processes[i].title !== body.title) {
-        idx.processes[i].title = body.title; changed = true;
-      }
-      if (typeof body.subtitle === 'string' && idx.processes[i].subtitle !== body.subtitle) {
-        idx.processes[i].subtitle = body.subtitle; changed = true;
-      }
-      if (changed) {
-        await writeIndex(idx, `Sync title for process ${id}`, req.user);
-        await syncFromProcess({
-          processId: Number(id),
-          title: idx.processes[i].title,
-          subtitle: idx.processes[i].subtitle || '',
-          status: idx.processes[i].status ?? null,
-          strukturAdi: idx.groups.find(g => Number(g.id) === Number(idx.processes[i].groupId))?.name || ''
-        }, req.user).catch((e) => console.error('[sheets sync put]', e.message));
-      }
+      if (typeof diagram.title === 'string' && entry.title !== diagram.title) { entry.title = diagram.title; changed = true; }
+      if (typeof diagram.subtitle === 'string' && entry.subtitle !== diagram.subtitle) { entry.subtitle = diagram.subtitle; changed = true; }
+      if (changed) await writeIndex(idx);
     }
     res.json(body);
   } catch (e) { next(e); }
 });
 
+// No hard delete: removing a diagram archives it.
 router.delete('/:id', async (req, res, next) => {
   try {
-    const id = req.params.id;
-    await deleteFile(processPath(id), attribution(req.user, `Delete process ${id}`));
+    const id = Number(req.params.id);
     const idx = await readIndex();
-    const existing = idx.processes.find(p => Number(p.id) === Number(id));
-    const existingGroupName = idx.groups.find(g => Number(g.id) === Number(existing?.groupId))?.name || '';
-    idx.processes = idx.processes.filter(p => Number(p.id) !== Number(id));
-    await writeIndex(idx, `Remove process ${id} from index`, req.user);
-    await removeSheetRowsForDeletedItems('diagrams', [id], [], req.user, existing ? [{ ...existing, strukturAdi: existingGroupName }] : []).catch((e) =>
-      console.error('[process delete -> sheets]', e.message)
-    );
-    // also drop it from the archive, in case it was archived
-    const archive = await readArchive();
-    if (archive.items.some(a => Number(a.id) === Number(id))) {
-      archive.items = archive.items.filter(a => Number(a.id) !== Number(id));
-      await writeArchive(archive, `Remove process ${id} from archive`, req.user);
+    const entry = idx.processes.find(p => Number(p.id) === id);
+    if (entry) {
+      await archiveEntries(idx, [entry]);
+      await writeIndex(idx);
     }
-    res.json({ ok: true });
+    res.json({ ok: true, archived: !!entry });
   } catch (e) { next(e); }
 });
 

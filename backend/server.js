@@ -11,11 +11,13 @@ import authRouter, { requireAuth } from './routes/auth.js';
 import processesRouter from './routes/processes.js';
 import pdfsRouter from './routes/pdfs.js';
 import templatesRouter from './routes/templates.js';
+import jobsRouter from './routes/jobs.js';
 import settingsRouter from './routes/settings.js';
 import labelsRouter from './routes/labels.js';
 import sheetsRouter from './routes/sheets.js';
 import aiRouter from './routes/ai.js';
 import { diagnose as diagnoseMongo, status as storeStatus, startBackgroundSync } from './services/store.js';
+import { ensureLayout } from './services/migrate.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -102,6 +104,14 @@ app.get([mount('/api/debug'), mount('/debug')], async (_req, res) => {
   res.json(out);
 });
 
+// Data layout migration (old file names -> home/hesabat/…) must finish
+// before any data route reads or writes. Runs once per process; cheap after.
+app.use(async (req, res, next) => {
+  if (/\/(health|debug|login|me)$/.test(req.path)) return next();
+  try { await ensureLayout(); next(); }
+  catch (e) { console.error('[migrate] failed:', e.message); res.status(503).json({ error: 'Məlumat hazırlanır, bir az sonra yenidən cəhd edin (' + e.message + ')' }); }
+});
+
 // PUBLIC ROUTES
 app.use([mount('/api'), mount('/')], authRouter);
 
@@ -109,6 +119,7 @@ app.use([mount('/api'), mount('/')], authRouter);
 app.use([mount('/api/processes'), mount('/processes')], requireAuth, processesRouter);
 app.use([mount('/api/pdfs'), mount('/pdfs')], requireAuth, pdfsRouter);
 app.use([mount('/api/templates'), mount('/templates')], requireAuth, templatesRouter);
+app.use([mount('/api/jobs'), mount('/jobs')], requireAuth, jobsRouter);
 app.use([mount('/api/settings'), mount('/settings')], requireAuth, settingsRouter);
 app.use([mount('/api/labels'), mount('/labels')], requireAuth, labelsRouter);
 app.use([mount('/api/sheets'), mount('/sheets')], requireAuth, sheetsRouter);
@@ -154,8 +165,11 @@ app.use((err, _req, res, _next) => {
 if (!isVercel) {
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`Backend running on port ${PORT}${BASE_PATH ? ` (base path ${BASE_PATH})` : ''}`);
-    // server only: keep data/ and MongoDB in step (see services/store.js)
-    startBackgroundSync();
+    // server only: move data to the new layout first, then keep data/ and
+    // MongoDB in step (see services/store.js)
+    ensureLayout()
+      .catch((e) => console.error('[migrate] failed at start:', e.message))
+      .finally(() => startBackgroundSync());
   });
 }
 

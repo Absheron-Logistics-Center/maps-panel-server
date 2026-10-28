@@ -1,0 +1,307 @@
+{
+  "id": 54,
+  "title": "Dəmir yolu ilə daxil olan yüklərə dair sənədlərin çeşidlənməsi prosesi",
+  "width": 1820,
+  "height": 800,
+  "lanes": [
+    {
+      "id": "lane-1",
+      "label": "MPO",
+      "y": 20,
+      "h": 170
+    },
+    {
+      "id": "lane-2",
+      "label": "VPD-nin Əməliyyatlar\nvə koordinasiya şöbəsi",
+      "y": 190,
+      "h": 220
+    },
+    {
+      "id": "lane-3",
+      "label": "Müştəri",
+      "y": 410,
+      "h": 130
+    },
+    {
+      "id": "lane-4",
+      "label": "VPD-nin Müştəri\nxidmət şöbəsi",
+      "y": 540,
+      "h": 130
+    },
+    {
+      "id": "lane-5",
+      "label": "VPD-nin Müştəri xidmətinin\nşöbəsinin Xəzinəsi",
+      "y": 670,
+      "h": 110
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "x": 100,
+      "y": 60,
+      "w": 240,
+      "h": 100,
+      "text": "Qatarın Abşeron dəmir yolu stansiyasından Mərkəzin qəbul-göndərmə parkına göndərilməsi üçün məlumatın verilməsi"
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "x": 400,
+      "y": 70,
+      "w": 220,
+      "h": 80,
+      "text": "Yükə dair sənədlərin VDP-yə təhvil verilməsi"
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "x": 100,
+      "y": 220,
+      "w": 220,
+      "h": 70,
+      "text": "Yükə dair sənədlərin qəbul edilməsi"
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "x": 100,
+      "y": 320,
+      "w": 220,
+      "h": 70,
+      "text": "Yükə dair sənədlərin çeşidlənməsi"
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "x": 400,
+      "y": 220,
+      "w": 240,
+      "h": 90,
+      "text": "Yükə dair sənədlərin emal edilməsi və müvafiq məlumatların proqrama daxil edilməsi"
+    },
+    {
+      "id": "5.1",
+      "type": "stroke",
+      "x": 700,
+      "y": 220,
+      "w": 250,
+      "h": 80,
+      "text": "SMGS yük nəqliyyat qaiməsinin 1-ci və 2-ci nüsxələrinin möhürlənməsi"
+    },
+    {
+      "id": "5.2",
+      "type": "stroke",
+      "x": 980,
+      "y": 220,
+      "w": 250,
+      "h": 80,
+      "text": "SMGS yük nəqliyyat qaiməsinin 2-ci və 3-cü nüsxələrinin ADY-yə təhvil verilməsi"
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "x": 400,
+      "y": 330,
+      "w": 240,
+      "h": 80,
+      "text": "Müştəri ilə əlaqə yaradılması və yükün Mərkəzə çatması barədə məlumat verilməsi"
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "x": 400,
+      "y": 440,
+      "w": 220,
+      "h": 70,
+      "text": "Markajın gəlməsi"
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "x": 700,
+      "y": 440,
+      "w": 220,
+      "h": 70,
+      "text": "Gömrük rəsmiləşdirilməsinin həyata keçirilməsi"
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "x": 1000,
+      "y": 440,
+      "w": 220,
+      "h": 70,
+      "text": "Ödənişin həyata keçirilməsi"
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "x": 400,
+      "y": 570,
+      "w": 220,
+      "h": 80,
+      "text": "Yükə dair sənədlərin gömrük rəsmiləşdirilməsi məqsədilə müştəriyə təqdim edilməsi"
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "x": 700,
+      "y": 570,
+      "w": 240,
+      "h": 80,
+      "text": "Cəmiyyət tərəfindən göstərici rekvizitlərə dair sifariş sənədinin hazırlanması"
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "x": 1000,
+      "y": 570,
+      "w": 220,
+      "h": 80,
+      "text": "Müştərinin ödəniş icrası üçün Mərkəzin xəzinəsinə yönləndirilməsi"
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "x": 1000,
+      "y": 690,
+      "w": 220,
+      "h": 80,
+      "text": "Ödənişin qəbul edilməsi və ödənişə dair məlumatların proqrama daxil olunması"
+    },
+    {
+      "id": "13.1",
+      "type": "stroke",
+      "x": 1280,
+      "y": 440,
+      "w": 220,
+      "h": 80,
+      "text": "Müştərinin yüklənmə sahəsinə yönləndirilməsi"
+    },
+    {
+      "id": 14,
+      "type": "pill",
+      "x": 1280,
+      "y": 690,
+      "w": 220,
+      "h": 80,
+      "text": "Proqramda buraxılışın verilməsi"
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top",
+      "via": [
+        {
+          "x": 210,
+          "y": 175
+        }
+      ]
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": "5.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "5.1",
+      "to": "5.2",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "top",
+      "e": "bottom",
+      "via": [
+        {
+          "x": 810,
+          "y": 540
+        }
+      ]
+    },
+    {
+      "from": 8,
+      "to": 10,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 11,
+      "to": 13,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 13,
+      "to": 12,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 12,
+      "to": "13.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    }
+  ],
+  "subtitle": "ALM-X1-C1"
+}

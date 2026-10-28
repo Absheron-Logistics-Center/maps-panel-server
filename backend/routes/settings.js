@@ -15,7 +15,18 @@ const DEFAULTS = {
   hub_pdf_title: 'Normativ Sənədlər',
   hub_pdf_sub: 'Prosedurlar, prosesler, əsəsnamələr',
   hub_tmpl_title: 'Şablonlar',
-  hub_tmpl_sub: 'Sənəd şablonları'
+  hub_tmpl_sub: 'Sənəd şablonları',
+  jobs_page_title: 'Vəzifə Təlimatları',
+  hub_jobs_title: 'Vəzifə Təlimatları',
+  hub_jobs_sub: 'Struktur bölmələri üzrə vəzifələr'
+};
+// On/off switches. autolink_<kind>: link Hesabat rows and Home items with the
+// same name automatically (off by default — linking is manual).
+const FLAGS = {
+  autolink_diagrams: false,
+  autolink_pdfs: false,
+  autolink_templates: false,
+  autolink_jobs: false
 };
 
 function requireAdmin(req, res, next) {
@@ -25,7 +36,10 @@ function requireAdmin(req, res, next) {
 
 async function readSettings() {
   const file = await getFile(settingsPath());
-  return { ...DEFAULTS, ...(file?.content || {}) };
+  return { ...DEFAULTS, ...FLAGS, ...(file?.content || {}) };
+}
+export async function autoLinkOn(kind) {
+  try { return (await readSettings())[`autolink_${kind}`] === true; } catch { return false; }
 }
 
 // GET /api/settings — anyone logged in
@@ -43,6 +57,9 @@ router.put('/', requireAdmin, async (req, res, next) => {
     const next = { ...current };
     for (const k of Object.keys(DEFAULTS)) {
       if (typeof incoming[k] === 'string') next[k] = incoming[k];
+    }
+    for (const k of Object.keys(FLAGS)) {
+      if (typeof incoming[k] === 'boolean') next[k] = incoming[k];
     }
     await putFile(settingsPath(), next, { message: 'Update settings' });
     res.json(next);

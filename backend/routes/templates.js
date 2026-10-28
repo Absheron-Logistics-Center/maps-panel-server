@@ -3,7 +3,9 @@ import {
   getFile, putFileQueued as putFile, deleteFile, getBinary,
   putBinaryQueued as putBinary, deleteBinaryQueued as deleteBinary, attribution
 } from '../services/store.js';
-import { syncFromItem, removeSheetRowsForDeletedItems } from '../services/sheetsStore.js';
+import { linkRowToItem, autoLinkNewItem } from '../services/sheetsStore.js';
+import { homePath, homeArchivePath } from '../services/paths.js';
+import { keepHomeDeleted, homeDeletedIds } from '../services/homeTrash.js';
 
 const router = Router();
 const dataPath = () => (process.env.DATA_PATH || 'data').replace(/^\/|\/$/g, '');
@@ -54,8 +56,8 @@ function validateUpload(filename, buf) {
   return null;
 }
 
-const pdfIndexPath     = () => `${dataPath()}/templates/index.json`;
-const pdfArchivePath   = () => `${dataPath()}/templates/archive.json`;
+const pdfIndexPath     = () => homePath('templates');
+const pdfArchivePath   = () => homeArchivePath('templates');
 const pdfFilePathFiles = (id, ext = 'pdf') => `${dataPath()}/templates/pdf/pdf-${id}.${ext}`;
 const pdfFilePathLegacy  = (id) => `${dataPath()}/pdfs/files/pdf-${id}.pdf`;
 const pdfFilePathLegacy2 = (id) => `${dataPath()}/files/files/pdf-${id}.pdf`;
@@ -212,17 +214,20 @@ router.delete('/group/:gid', requireAdmin, async (req, res, next) => {
       .filter(Boolean);
     const groupNameById = new Map(idx.groups.map(g => [Number(g.id), String(g.name || '').trim()]));
     const deletedItemIds = inGroup.map(p => Number(p.id));
-    for (const p of inGroup) {
-      await deleteBinary(pdfFilePathFiles(p.id, extOf(p.filename)), attribution(req.user, `Delete pdf ${p.id} (group ${gid})`)).catch(() => {});
-      await deleteBinary(pdfFilePathLegacy(p.id)).catch(() => {});
-      await deleteBinary(pdfFilePathLegacy2(p.id)).catch(() => {});
+    // Folder removed -> its documents go to the archive (files are kept).
+    if (inGroup.length) {
+      const archive = await readArchive();
+      const ids = new Set(inGroup.map(p => Number(p.id)));
+      const now = new Date().toISOString();
+      archive.items = [
+        ...archive.items.filter(a => !ids.has(Number(a.id))),
+        ...inGroup.map(p => ({ ...p, groupName: groupNameById.get(Number(p.groupId)) || '', archivedAt: now }))
+      ];
+      await writeArchive(archive, `Archive items of group ${gid}`, req.user);
     }
     idx.pdfs = idx.pdfs.filter(p => !allGroupIds.includes(Number(p.groupId)));
     idx.groups = idx.groups.filter(g => !allGroupIds.includes(Number(g.id)));
     await writeIndex(idx, `Delete pdf group ${gid} (+ subgroups)`, req.user);
-    await removeSheetRowsForDeletedItems('templates', deletedItemIds, deletedGroupNames, req.user, inGroup.map(p => ({ ...p, strukturAdi: groupNameById.get(Number(p.groupId)) || '' }))).catch((e) =>
-      console.error('[template group delete -> sheets]', e.message)
-    );
     res.json({ ok: true, deletedPdfs: inGroup.length, deletedGroups: allGroupIds.length });
   } catch (e) { next(e); }
 });
@@ -299,13 +304,24 @@ router.post('/:id/unarchive', requireAdmin, async (req, res, next) => {
     if (!entry) return res.status(404).json({ error: 'Archived PDF not found' });
 
     const idx = await readIndex();
-    let gid = Number(entry.groupId);
-    if (!idx.groups.some(g => Number(g.id) === gid)) {
-      if (!idx.groups.length) idx.groups.push({ id: 1, name: 'Ümumi' });
+    // Folder: the one picked in the restore dialog, a new one by name, the
+    // old folder, a folder with the old name, or (last resort) the first one.
+    let gid = null;
+    const newName = String(req.body?.newGroupName || '').trim();
+    if (newName) {
+      const ex = idx.groups.find(g => String(g.name).trim() === newName);
+      if (ex) gid = Number(ex.id);
+      else { const g = { id: nextId(idx.groups), name: newName, parentId: null }; idx.groups.push(g); gid = g.id; }
+    }
+    if (gid == null && req.body?.groupId != null && idx.groups.some(g => Number(g.id) === Number(req.body.groupId))) gid = Number(req.body.groupId);
+    if (gid == null && idx.groups.some(g => Number(g.id) === Number(entry.groupId))) gid = Number(entry.groupId);
+    if (gid == null && entry.groupName) gid = Number(idx.groups.find(g => String(g.name).trim() === String(entry.groupName).trim())?.id) || null;
+    if (gid == null) {
+      if (!idx.groups.length) idx.groups.push({ id: 1, name: 'Ümumi', parentId: null });
       gid = Number(idx.groups[0].id);
     }
-    const { groupName, archivedAt, ...meta } = entry;
-    idx.pdfs = [...idx.pdfs, { ...meta, groupId: gid }];
+    const { groupName, archivedAt, note, ...meta } = entry;
+    idx.pdfs = [...idx.pdfs.filter(p => Number(p.id) !== id), { ...meta, groupId: gid }];
     archive.items = archive.items.filter(a => Number(a.id) !== id);
     await writeIndex(idx, `Restore pdf ${id} from archive`, req.user);
     await writeArchive(archive, `Unarchive pdf ${id}`, req.user);
@@ -330,13 +346,6 @@ router.put('/:id/status', requireAdmin, async (req, res, next) => {
     if (!entry) return res.status(404).json({ error: 'Template not found' });
     if (status === null) delete entry.status; else entry.status = status;
     await writeIndex(idx, `Set status for template ${id}`, req.user);
-    await syncFromItem('templates', {
-      itemId: id,
-      title: entry.title,
-      subtitle: entry.subtitle || '',
-      status,
-      strukturAdi: idx.groups.find(g => Number(g.id) === Number(entry.groupId))?.name || ''
-    }, req.user).catch((e) => console.error('[sheets sync template status]', e.message));
     res.json({ id, status });
   } catch (e) { next(e); }
 });
@@ -381,7 +390,7 @@ router.post('/', requireAdmin, blockUploadOnVercel, async (req, res, next) => {
       return res.status(400).json({ error: 'PDF bir qrupa aid olmalidir' });
     }
 
-    const newId = nextId(idx.pdfs);
+    const newId = nextId([...idx.pdfs, ...(await readArchive()).items, ...(await homeDeletedIds('templates')).map(id => ({ id }))]); // never reuse an old id
     const buf = Buffer.from(dataBase64, 'base64');
     const uploadError = validateUpload(filename, buf);
     if (uploadError) return res.status(400).json({ error: uploadError });
@@ -398,14 +407,8 @@ router.post('/', requireAdmin, blockUploadOnVercel, async (req, res, next) => {
     };
     idx.pdfs = [...idx.pdfs, entry];
     await writeIndex(idx, `Add pdf ${newId} to index`, req.user);
-    await syncFromItem('templates', {
-      itemId: newId,
-      title: entry.title,
-      subtitle: entry.subtitle || '',
-      status: entry.status ?? null,
-      sheetId: req.body?.sheetId != null ? Number(req.body.sheetId) : undefined,
-      strukturAdi: idx.groups.find(g => Number(g.id) === gid)?.name || ''
-    }, req.user).catch((e) => console.error('[sheets sync template create]', e.message));
+    if (req.body?.sheetId != null) await linkRowToItem('templates', req.body.sheetId, newId).catch(() => {});
+    else await autoLinkNewItem('templates', newId, entry.title, idx.groups.find(g => Number(g.id) === gid)?.name || '').catch(() => {});
     res.status(201).json(entry);
   } catch (e) { next(e); }
 });
@@ -421,7 +424,15 @@ router.put('/:id', requireAdmin, blockUploadOnVercel, async (req, res, next) => 
     const updated = { ...idx.pdfs[i] };
     if (typeof title === 'string') updated.title = title;
     if (typeof subtitle === 'string') updated.subtitle = subtitle;
-    if (typeof filename === 'string' && filename) updated.filename = filename;
+    if (typeof filename === 'string' && filename.trim()) {
+      if (dataBase64) updated.filename = filename;
+      else {
+        // rename only (no new file): keep the stored file's extension
+        const oldExt = extOf(idx.pdfs[i].filename);
+        const base = filename.trim().replace(/\.[a-z0-9]{2,5}$/i, '').replace(/[\\/:*?"<>|]+/g, '_').trim();
+        if (base) updated.filename = oldExt ? `${base}.${oldExt}` : base;
+      }
+    }
     if (groupId !== undefined) {
       const gid = Number(groupId);
       if (idx.groups.some(g => Number(g.id) === gid)) updated.groupId = gid;
@@ -439,37 +450,26 @@ router.put('/:id', requireAdmin, blockUploadOnVercel, async (req, res, next) => 
     }
     idx.pdfs[i] = updated;
     await writeIndex(idx, `Update pdf ${id}`, req.user);
-    await syncFromItem('templates', {
-      itemId: id,
-      title: updated.title,
-      subtitle: updated.subtitle || '',
-      status: updated.status ?? null,
-      strukturAdi: idx.groups.find(g => Number(g.id) === Number(updated.groupId))?.name || ''
-    }, req.user).catch((e) => console.error('[sheets sync template update]', e.message));
     res.json(updated);
   } catch (e) { next(e); }
 });
 
+// No hard delete: the entry leaves the list/archive, a copy goes to
+// home-deleted.json, and the uploaded file stays in data/ + Mongo.
 router.delete('/:id', requireAdmin, async (req, res, next) => {
   try {
     const id = Number(req.params.id);
     const idx = await readIndex();
-    const existing = (idx.pdfs || []).find(p => Number(p.id) === id);
-    const existingGroupName = idx.groups.find(g => Number(g.id) === Number(existing?.groupId))?.name || '';
-    idx.pdfs = (idx.pdfs || []).filter(p => Number(p.id) !== id);
-    await deleteBinary(pdfFilePathFiles(id, extOf(existing?.filename)), attribution(req.user, `Delete pdf ${id}`)).catch(() => {});
-    await removeSheetRowsForDeletedItems('templates', [id], [], req.user, existing ? [{ ...existing, strukturAdi: existingGroupName }] : []).catch((e) =>
-      console.error('[template delete -> sheets]', e.message)
-    );
-    await deleteBinary(pdfFilePathLegacy(id)).catch(() => {});
-    await deleteBinary(pdfFilePathLegacy2(id)).catch(() => {});
-    await writeIndex(idx, `Remove pdf ${id} from index`, req.user);
-    // also drop it from the archive, in case it was archived
     const archive = await readArchive();
-    if (archive.items.some(a => Number(a.id) === id)) {
-      archive.items = archive.items.filter(a => Number(a.id) !== id);
-      await writeArchive(archive, `Remove pdf ${id} from archive`, req.user);
-    }
+    const inIdx = (idx.pdfs || []).find(p => Number(p.id) === id);
+    const inArch = archive.items.find(a => Number(a.id) === id);
+    const entry = inIdx
+      ? { ...inIdx, groupName: idx.groups.find(g => Number(g.id) === Number(inIdx.groupId))?.name || '' }
+      : inArch;
+    if (!entry) return res.json({ ok: true, alreadyGone: true });
+    await keepHomeDeleted('templates', [entry]);
+    if (inIdx) { idx.pdfs = idx.pdfs.filter(p => Number(p.id) !== id); await writeIndex(idx, `Delete ${id}`, req.user); }
+    if (inArch) { archive.items = archive.items.filter(a => Number(a.id) !== id); await writeArchive(archive, `Delete ${id}`, req.user); }
     res.json({ ok: true });
   } catch (e) { next(e); }
 });
