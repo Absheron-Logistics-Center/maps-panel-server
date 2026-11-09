@@ -1,0 +1,94 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "title": "İdarə Heyətinin Sədri",
+      "subtitle": "",
+      "groupId": 1,
+      "filename": "İdarə Heyətinin Sədri.pdf",
+      "size": 398,
+      "uploadedAt": "2026-10-27T10:01:43.831Z",
+      "groupName": "İdarə Heyəti",
+      "archivedAt": "2026-10-27T10:03:09.390Z",
+      "deletedAt": "2026-10-27T10:03:13.214Z"
+    },
+    {
+      "id": 2,
+      "title": "İdarə Heyətinin Sədri",
+      "subtitle": "",
+      "groupId": 1,
+      "filename": "İdarə Heyətinin Sədri.pdf",
+      "size": 398,
+      "uploadedAt": "2026-10-27T10:37:19.988Z",
+      "groupName": "İdarə Heyəti",
+      "deletedAt": "2026-10-27T10:45:25.274Z"
+    },
+    {
+      "id": 3,
+      "title": "İH sədrinin köməkçisi",
+      "subtitle": "",
+      "groupId": 2,
+      "filename": "İH sədrinin köməkçisi.pdf",
+      "size": 398,
+      "uploadedAt": "2026-10-27T10:38:04.817Z",
+      "groupName": "Administrativ Heyət",
+      "deletedAt": "2026-10-27T10:45:25.622Z"
+    },
+    {
+      "id": 4,
+      "title": "Departament direktoru",
+      "subtitle": "",
+      "groupId": 6,
+      "filename": "Departament direktoru.pdf",
+      "size": 398,
+      "uploadedAt": "2026-10-27T10:38:18.585Z",
+      "groupName": "BD / Biznes departamenti",
+      "deletedAt": "2026-10-27T10:45:25.971Z"
+    },
+    {
+      "id": 5,
+      "title": "Şöbə müdiri",
+      "subtitle": "",
+      "groupId": 7,
+      "filename": "Şöbə müdiri.pdf",
+      "size": 398,
+      "uploadedAt": "2026-10-27T10:38:21.687Z",
+      "groupName": "BD / Beynəlxalq logistika şöbəsi",
+      "deletedAt": "2026-10-27T10:45:26.322Z"
+    },
+    {
+      "id": 6,
+      "title": "Şöbə müdiri",
+      "subtitle": "",
+      "groupId": 8,
+      "filename": "Şöbə müdiri.pdf",
+      "size": 398,
+      "uploadedAt": "2026-10-27T10:38:24.692Z",
+      "groupName": "BD / Biznesin inkişafı şöbəsi",
+      "deletedAt": "2026-10-27T10:45:26.667Z"
+    },
+    {
+      "id": 7,
+      "title": "Şöbə müdiri",
+      "subtitle": "",
+      "groupId": 9,
+      "filename": "Şöbə müdiri.pdf",
+      "size": 398,
+      "uploadedAt": "2026-10-27T10:38:27.960Z",
+      "groupName": "BD / Ölkədaxili logistika şöbəsi",
+      "deletedAt": "2026-10-27T10:45:27.016Z"
+    },
+    {
+      "id": 8,
+      "title": "Şöbə müdirii",
+      "subtitle": "",
+      "groupId": 14,
+      "filename": "Şöbə müdirii.pdf",
+      "size": 398,
+      "uploadedAt": "2026-10-27T10:51:52.701Z",
+      "groupName": "BDD / İdxal-ixrac əməliyyatları şöbəsi",
+      "archivedAt": "2026-10-27T11:29:00.243Z",
+      "deletedAt": "2026-10-27T11:29:07.061Z"
+    }
+  ]
+}

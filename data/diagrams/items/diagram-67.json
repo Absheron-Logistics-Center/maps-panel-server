@@ -1,0 +1,255 @@
+{
+  "id": 67,
+  "title": "SƏTƏM İnsidentlərinin Araşdırılması və İdarə Edilməsi İş Axını",
+  "subtitle": "ALM-İMS-SƏTƏM-001",
+  "width": 2325,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1793097156567-0",
+      "label": "Hadisə Şahidi / Əməkdaş",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1793097156567-1",
+      "label": "SƏTƏM Mütəxəssisi",
+      "y": 180,
+      "h": 200
+    },
+    {
+      "id": "lane-1793097156567-2",
+      "label": "SƏTƏM Komissiyası və Rəhbərlik",
+      "y": 380,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 85,
+      "y": 50,
+      "laneId": "lane-1793097156567-0",
+      "w": 200,
+      "h": 70,
+      "text": "Təhlükəli vəziyyət və ya insident baş verir",
+      "info": {
+        "general": [
+          "İş sahəsində bədbəxt hadisə, xəsarət və ya potensial təhlükə aşkarlanır."
+        ],
+        "risks": [
+          "Məlumatın gecikdirilməsi riskləri artırır."
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 355,
+      "y": 50,
+      "laneId": "lane-1793097156567-0",
+      "w": 200,
+      "h": 80,
+      "text": "İş dayandırılır və dərhal SƏTƏM-ə məlumat verilir",
+      "info": {
+        "general": [
+          "Təhlükəli zona təcrid edilir, zərərçəkən varsa ilk yardım göstərilir."
+        ],
+        "risks": [
+          "İşin dayandırılmaması təkrar hadisəyə səbəb ola bilər."
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 625,
+      "y": 210,
+      "laneId": "lane-1793097156567-1",
+      "w": 200,
+      "h": 80,
+      "text": "Hadisə yerinə baxış keçirilir və ilkin qiymətləndirmə aparılır",
+      "info": {
+        "general": [
+          "SƏTƏM mütəxəssisi hadisə yerini fotofaktlarla sənədləşdirir və şahidləri dindirir."
+        ],
+        "risks": [
+          "Sübutların itirilməsi və ya yanlış qiymətləndirmə."
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "diamond",
+      "style": "stroke",
+      "x": 895,
+      "y": 210,
+      "laneId": "lane-1793097156567-1",
+      "w": 150,
+      "h": 150,
+      "text": "İnsident ağır və ya kritik xarakterlidir?",
+      "info": {
+        "general": [
+          "Xəsarət dərəcəsi və ya maddi zərər dərəcəsi yoxlanılır."
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 1115,
+      "y": 210,
+      "laneId": "lane-1793097156567-1",
+      "w": 200,
+      "h": 80,
+      "text": "Yerində korrektəedici tədbirlər görülür və akt tərtib edilir",
+      "info": {
+        "general": [
+          "Kiçik risklər dərhal aradan qaldırılır və insident jurnala qeyd olunur."
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 1115,
+      "y": 410,
+      "laneId": "lane-1793097156567-2",
+      "w": 200,
+      "h": 80,
+      "text": "Araşdırma Komissiyası yaradılır və Kök Səbəb Analizi (RCA) aparılır",
+      "info": {
+        "general": [
+          "Rəhbərlik və SƏTƏM komissiyası hadisənin kök səbəblərini müəyyən edir."
+        ],
+        "risks": [
+          "Səbəblərin düzgün müəyyən edilməməsi."
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 1385,
+      "y": 410,
+      "laneId": "lane-1793097156567-2",
+      "w": 200,
+      "h": 80,
+      "text": "Qarşısıalınma üzrə Fəaliyyət Planı (CAPA) hazırlanır və təsdiqlənir",
+      "info": {
+        "general": [
+          "Oxşar hadisələrin təkrarlanmaması üçün cavabdeh şəxslər və müddətlər təyin edilir."
+        ],
+        "risks": [
+          "Tədbirlər planının gecikdirilməsi."
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1655,
+      "y": 210,
+      "laneId": "lane-1793097156567-1",
+      "w": 200,
+      "h": 80,
+      "text": "Personal üçün növbədənkənar SƏTƏM təlimi keçirilir",
+      "info": {
+        "general": [
+          "Hərbi/əmək təhlükəsizliyi qaydaları yenidən izah olunur və təlimatlar yenilənir."
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "pill",
+      "style": "solid",
+      "x": 1925,
+      "y": 210,
+      "laneId": "lane-1793097156567-1",
+      "w": 200,
+      "h": 70,
+      "text": "İnsident qapanır və hesabat arxivləşdirilir",
+      "info": {
+        "general": [
+          "Görülmüş işlər SƏTƏM reyestrinə daxil edilir və proses tamamlanır."
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left",
+      "dashed": false
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left",
+      "dashed": false
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left",
+      "dashed": false
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left",
+      "dashed": false,
+      "label": "Xeyr"
+    },
+    {
+      "from": 4,
+      "to": 6,
+      "s": "right",
+      "e": "left",
+      "dashed": false,
+      "label": "Bəli"
+    },
+    {
+      "from": 5,
+      "to": 8,
+      "s": "right",
+      "e": "left",
+      "dashed": false
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left",
+      "dashed": false
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left",
+      "dashed": false
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left",
+      "dashed": false
+    }
+  ]
+}

@@ -1,0 +1,319 @@
+/* ============================================================
+   feel.css — motion layer (loaded after styles.css).
+   Springs and easings modelled on iOS / macOS: things arrive with a
+   soft overshoot and leave quickly. Keyframes use the individual
+   `scale` / `translate` properties so they stack on top of any
+   transform an element already uses for positioning.
+   ============================================================ */
+:root {
+  --feel-out: cubic-bezier(0.16, 1, 0.3, 1);          /* expo out — arrivals */
+  --feel-in: cubic-bezier(0.5, 0, 0.75, 0);            /* quick exits */
+  --feel-spring: cubic-bezier(0.2, 1.15, 0.35, 1);     /* light overshoot */
+  --feel-spring-strong: cubic-bezier(0.18, 1.35, 0.4, 1);
+}
+
+/* ---------- shared keyframes ---------- */
+@keyframes feel-fade-in { from { opacity: 0; } }
+@keyframes feel-fade-out { to { opacity: 0; } }
+@keyframes feel-rise { from { opacity: 0; translate: 0 14px; } }
+@keyframes feel-rise-sm { from { opacity: 0; translate: 0 8px; } }
+@keyframes feel-sheet-in { from { opacity: 0; scale: 0.94; translate: 0 18px; } }
+@keyframes feel-sheet-out { to { opacity: 0; scale: 0.96; translate: 0 10px; } }
+@keyframes feel-menu-in { from { opacity: 0; scale: 0.94; translate: 0 -6px; } }
+@keyframes feel-menu-out { to { opacity: 0; scale: 0.96; translate: 0 -4px; } }
+@keyframes feel-menu-up-in { from { opacity: 0; scale: 0.94; translate: 0 6px; } }
+@keyframes feel-menu-up-out { to { opacity: 0; scale: 0.96; translate: 0 4px; } }
+@keyframes feel-slide-in-right { from { opacity: 0.4; translate: 105% 0; } }
+@keyframes feel-slide-out-right { to { opacity: 0.4; translate: 105% 0; } }
+@keyframes feel-drop-down { from { opacity: 0; translate: 0 -10px; } }
+@keyframes feel-collapse-out { to { opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; } }
+@keyframes feel-toast-in { from { opacity: 0; translate: 0 -14px; scale: 0.96; } }
+@keyframes feel-shake {
+  0%, 100% { translate: 0 0; }
+  15% { translate: -7px 0; } 30% { translate: 6px 0; } 45% { translate: -4px 0; }
+  60% { translate: 3px 0; } 75% { translate: -1px 0; }
+}
+@keyframes feel-shake-b {
+  0%, 100% { translate: 0 0; }
+  15% { translate: -7px 0; } 30% { translate: 6px 0; } 45% { translate: -4px 0; }
+  60% { translate: 3px 0; } 75% { translate: -1px 0; }
+}
+@keyframes feel-pop { 0% { scale: 1; } 40% { scale: 1.18; } 100% { scale: 1; } }
+
+/* ============================================================
+   Pages — content rises in when a screen opens
+   ============================================================ */
+.home-wrap { animation: feel-rise 0.55s var(--feel-out) backwards; }
+.sheets-wrap { animation: feel-rise 0.55s var(--feel-out) backwards; }
+.diagram-main { animation: feel-fade-in 0.45s var(--feel-out) backwards; }
+.boot-screen { animation: feel-fade-in 0.6s ease backwards; }
+
+/* hub tiles arrive one after another */
+.sections-grid > .tile-wrap { animation: feel-rise 0.6s var(--feel-out) backwards; }
+.sections-grid > .tile-wrap:nth-child(1) { animation-delay: 0.04s; }
+.sections-grid > .tile-wrap:nth-child(2) { animation-delay: 0.09s; }
+.sections-grid > .tile-wrap:nth-child(3) { animation-delay: 0.14s; }
+.sections-grid > .tile-wrap:nth-child(4) { animation-delay: 0.19s; }
+.sections-grid > .tile-wrap:nth-child(n+5) { animation-delay: 0.24s; }
+.section-tile { transition: translate 0.35s var(--feel-spring), box-shadow 0.3s var(--feel-out), border-color 0.2s ease, background 0.2s ease; }
+.section-tile:hover { translate: 0 -3px; }
+.section-tile .section-tile-icon img { transition: scale 0.45s var(--feel-spring); }
+.section-tile:hover .section-tile-icon img { scale: 1.05; }
+
+/* top-level folders on the list pages arrive in a soft cascade */
+.home-wrap > .group-card,
+.home-wrap > * > .group-card { animation: feel-rise-sm 0.5s var(--feel-out) backwards; }
+.home-wrap .group-card:nth-child(2) { animation-delay: 0.03s; }
+.home-wrap .group-card:nth-child(3) { animation-delay: 0.06s; }
+.home-wrap .group-card:nth-child(4) { animation-delay: 0.09s; }
+.home-wrap .group-card:nth-child(5) { animation-delay: 0.12s; }
+.home-wrap .group-card:nth-child(n+6) { animation-delay: 0.15s; }
+.group-body .group-card { animation: none; }
+
+/* ============================================================
+   Login
+   ============================================================ */
+/* background only fades — scaling it made the page scroll while it animated */
+.login-wrap > img { animation: feel-fade-in 1.2s var(--feel-out) backwards; }
+/* The logo inside the card is position:absolute against the PAGE, so the
+   card itself must never get a transform (it would become the logo's
+   containing block and the logo would jump onto the title). The card only
+   moves with margin + opacity; its children may use transforms freely. */
+@keyframes feel-card-in { from { opacity: 0; margin-top: 36px; } }
+@keyframes feel-card-out { to { opacity: 0; margin-top: 24px; } }
+@keyframes feel-card-shake {
+  0%, 100% { margin-left: 0; }
+  15% { margin-left: -14px; } 30% { margin-left: 12px; } 45% { margin-left: -8px; }
+  60% { margin-left: 6px; } 75% { margin-left: -2px; }
+}
+@keyframes feel-card-shake-b {
+  0%, 100% { margin-left: 0; }
+  15% { margin-left: -14px; } 30% { margin-left: 12px; } 45% { margin-left: -8px; }
+  60% { margin-left: 6px; } 75% { margin-left: -2px; }
+}
+.login-card { animation: feel-card-in 0.7s var(--feel-out) 0.05s backwards; }
+.login-card > * { animation: feel-rise-sm 0.6s var(--feel-out) backwards; }
+.login-card > :nth-child(1) { animation: feel-fade-in 0.6s var(--feel-out) 0.18s backwards; }
+.login-card > :nth-child(2) { animation-delay: 0.24s; }
+.login-card > :nth-child(3) { animation-delay: 0.29s; }
+.login-card > :nth-child(4) { animation-delay: 0.34s; }
+.login-card > :nth-child(5) { animation-delay: 0.39s; }
+.login-card > :nth-child(6) { animation-delay: 0.44s; }
+.login-card > :nth-child(n+7) { animation-delay: 0.48s; }
+.login-card.ready, .login-card.ready > * { animation: none; }
+.login-card.ready.shake { animation: feel-card-shake 0.5s var(--feel-out); }
+.login-card.ready.shake-b { animation: feel-card-shake-b 0.5s var(--feel-out); }
+.login-card .form-error { animation: feel-rise-sm 0.35s var(--feel-spring) backwards; }
+.login-card .field input { transition: border-color 0.2s ease, box-shadow 0.25s var(--feel-out), background 0.2s ease, scale 0.3s var(--feel-spring); }
+.login-card .field input:focus { scale: 1.01; }
+.login-card.leaving, .login-card.ready.leaving { animation: feel-card-out 0.3s var(--feel-in) forwards; }
+.login-btn { transition: background 0.2s ease, box-shadow 0.3s var(--feel-out), filter 0.2s ease; }
+.login-btn:hover:not(:disabled) { box-shadow: 0 10px 26px -10px color-mix(in srgb, var(--primary) 70%, transparent); }
+
+/* ============================================================
+   Folders — chevron rotates, body opens with height
+   ============================================================ */
+.group-chevron svg { transition: rotate 0.38s var(--feel-spring); }
+.group-card.open > .group-head .group-chevron svg { rotate: 90deg; }
+.group-folder svg { transition: scale 0.3s var(--feel-spring); }
+.group-card.open > .group-head .group-folder svg { animation: feel-pop 0.38s var(--feel-spring); }
+.group-card { transition: box-shadow 0.35s var(--feel-out), border-radius 0.3s var(--feel-out); }
+
+.feel-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.42s var(--feel-out), opacity 0.28s ease;
+}
+.feel-collapse.is-open { grid-template-rows: 1fr; opacity: 1; }
+.feel-collapse.is-closing { transition: grid-template-rows 0.3s var(--feel-out), opacity 0.2s ease; }
+.feel-collapse > .feel-collapse-inner { min-height: 0; overflow: hidden; }
+/* fully open: let menus inside (status dropdown) hang outside again */
+.feel-collapse.is-done { transition: none; }
+.feel-collapse.is-done > .feel-collapse-inner { overflow: visible; }
+/* rows cascade in when a folder opens */
+.feel-collapse.is-open:not(.is-done) .group-body > .process-item,
+.feel-collapse.is-open:not(.is-done) .group-body > .group-card {
+  animation: feel-rise-sm 0.42s var(--feel-out) backwards;
+}
+.feel-collapse .group-body > :nth-child(2) { animation-delay: 0.02s; }
+.feel-collapse .group-body > :nth-child(3) { animation-delay: 0.04s; }
+.feel-collapse .group-body > :nth-child(4) { animation-delay: 0.06s; }
+.feel-collapse .group-body > :nth-child(5) { animation-delay: 0.08s; }
+.feel-collapse .group-body > :nth-child(6) { animation-delay: 0.1s; }
+.feel-collapse .group-body > :nth-child(n+7) { animation-delay: 0.12s; }
+
+/* list rows: lift a touch on hover */
+.process-item { transition: translate 0.3s var(--feel-spring), box-shadow 0.25s var(--feel-out), border-color 0.18s ease, background 0.18s ease; }
+.process-item:hover { translate: 0 -1px; box-shadow: 0 6px 18px -10px rgba(28, 75, 100, 0.35); }
+.process-item.just-opened { animation: feel-pop-row 1.1s var(--feel-out); }
+@keyframes feel-pop-row { 0% { box-shadow: 0 0 0 0 var(--primary-light); } 40% { box-shadow: 0 0 0 6px var(--primary-soft); } 100% { box-shadow: 0 0 0 3px var(--primary-soft); } }
+
+/* ============================================================
+   Dialogs / sheets
+   ============================================================ */
+.modal-backdrop, .pdf-modal-backdrop, .confirm-backdrop, .ai-popup-backdrop {
+  animation: feel-fade-in 0.26s var(--feel-out) backwards;
+}
+.modal-card, .pdf-modal-card, .confirm-card, .ai-popup {
+  animation: feel-sheet-in 0.5s var(--feel-spring) backwards;
+}
+.modal-backdrop.feel-leaving, .pdf-modal-backdrop.feel-leaving,
+.confirm-backdrop.feel-leaving, .ai-popup-backdrop.feel-leaving {
+  animation: feel-fade-out 0.22s var(--feel-in) forwards;
+}
+.feel-leaving .modal-card, .feel-leaving .pdf-modal-card,
+.feel-leaving .confirm-card, .feel-leaving .ai-popup {
+  animation: feel-sheet-out 0.2s var(--feel-in) forwards;
+}
+
+/* ============================================================
+   Side panels (AI, editor sections)
+   ============================================================ */
+.aip { animation: feel-slide-in-right 0.5s var(--feel-out) backwards; }
+.aip.feel-leaving { animation: feel-slide-out-right 0.26s var(--feel-in) forwards; }
+.editor-sidebar { animation: feel-slide-in-right 0.46s var(--feel-out) backwards; }
+.editor-sidebar.feel-leaving { animation: feel-slide-out-right 0.24s var(--feel-in) forwards; }
+.admin-panel { animation: feel-drop-down 0.42s var(--feel-out) backwards; }
+
+/* AI panel inner drawers (history, learning, usage) */
+.aip-drawer { animation: feel-drop-down 0.34s var(--feel-out) backwards; overflow: auto; }
+.aip-drawer.feel-leaving { animation: feel-collapse-out 0.22s var(--feel-in) forwards; overflow: hidden; }
+/* AI chat bubbles arrive */
+.aip-thread > * { animation: feel-rise-sm 0.38s var(--feel-out) backwards; }
+
+/* ============================================================
+   Menus / popovers
+   ============================================================ */
+.gm-menu, .status-menu, .sel-ctx-menu, .multi-menu, .notif-panel, .pill-dropdown {
+  transform-origin: top center;
+  animation: feel-menu-in 0.32s var(--feel-spring) backwards;
+}
+.pill-dropdown { transform-origin: top left; }
+.pill-dropdown.align-right, .gm-menu, .notif-panel { transform-origin: top right; }
+.gm-menu.feel-leaving, .status-menu.feel-leaving, .sel-ctx-menu.feel-leaving,
+.multi-menu.feel-leaving, .notif-panel.feel-leaving, .pill-dropdown.feel-leaving {
+  animation: feel-menu-out 0.15s var(--feel-in) forwards;
+}
+/* model menu opens upward from the composer */
+.aip-menu { transform-origin: bottom left; animation: feel-menu-up-in 0.32s var(--feel-spring) backwards; }
+.aip-menu.feel-leaving { animation: feel-menu-up-out 0.15s var(--feel-in) forwards; }
+
+/* small dropdown carets turn instead of jumping */
+.pill-tab-chev, .status-btn-chevron, .aip-thought-caret, .panel-card-chev { transition: rotate 0.35s var(--feel-spring), transform 0.35s var(--feel-spring); }
+
+/* ============================================================
+   Toasts
+   ============================================================ */
+.notif-toast { animation: feel-toast-in 0.5s var(--feel-spring) backwards; }
+.notif-toast.feel-leaving { animation: feel-menu-out 0.2s var(--feel-in) forwards; }
+
+/* ============================================================
+   Small delights
+   ============================================================ */
+/* icons in top buttons bounce a little on hover */
+.icon-btn svg, .logout-btn svg, .pill-chip svg { transition: scale 0.35s var(--feel-spring), rotate 0.35s var(--feel-spring); }
+.icon-btn:hover svg, .pill-chip:hover svg { scale: 1.12; }
+.logout-btn:hover svg { translate: 2px 0; transition: translate 0.3s var(--feel-spring); }
+/* the copy button confirms with a pop */
+.copy-name.done svg { animation: feel-pop 0.4s var(--feel-spring); }
+/* switch the sound button */
+.feel-toggle svg { transition: scale 0.35s var(--feel-spring), opacity 0.2s ease; }
+.feel-toggle.off { color: var(--text-muted); }
+.feel-toggle.bump svg { animation: feel-pop 0.4s var(--feel-spring); }
+
+/* a ghost is only a picture of what just closed */
+.feel-leaving, .feel-leaving * { pointer-events: none !important; }
+
+/* ============================================================
+   Hesabat (report tables)
+   ============================================================ */
+@keyframes feel-bar-in { from { clip-path: inset(0 100% 0 0 round 999px); } to { clip-path: inset(0 0 0 0 round 999px); } }
+.hs-main > .hs-head { animation: feel-rise 0.55s var(--feel-out) backwards; }
+.hs-main > .hs-overview { animation: feel-rise 0.55s var(--feel-out) 0.06s backwards; }
+.hs-main > .hs-card { animation: feel-rise 0.6s var(--feel-out) 0.12s backwards; }
+.hs-head-actions > .hs-btn { animation: feel-rise-sm 0.45s var(--feel-out) backwards; }
+.hs-head-actions > .hs-btn:nth-child(2) { animation-delay: 0.04s; }
+.hs-head-actions > .hs-btn:nth-child(3) { animation-delay: 0.08s; }
+.hs-head-actions > .hs-btn:nth-child(4) { animation-delay: 0.12s; }
+.hs-head-actions > .hs-btn:nth-child(n+5) { animation-delay: 0.16s; }
+.hs-btn { transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.3s var(--feel-out), translate 0.3s var(--feel-spring); }
+.hs-btn:hover:not(:disabled) { translate: 0 -1px; box-shadow: 0 6px 16px -10px rgba(28, 75, 100, 0.45); }
+.hs-btn svg { transition: scale 0.35s var(--feel-spring), rotate 0.35s var(--feel-spring); }
+.hs-btn:hover svg { scale: 1.12; }
+.hs-btn.primary:hover svg { rotate: 90deg; }
+
+/* status bar sweeps in, then segments glide when numbers change */
+.hs-bar { animation: feel-bar-in 0.9s var(--feel-out) 0.2s backwards; }
+.hs-bar-seg { transition: width 0.6s var(--feel-out); }
+
+/* filter chips */
+.hs-chips > .hs-chip { animation: feel-rise-sm 0.45s var(--feel-out) backwards; }
+.hs-chips > .hs-chip:nth-child(2) { animation-delay: 0.05s; }
+.hs-chips > .hs-chip:nth-child(3) { animation-delay: 0.08s; }
+.hs-chips > .hs-chip:nth-child(4) { animation-delay: 0.11s; }
+.hs-chips > .hs-chip:nth-child(5) { animation-delay: 0.14s; }
+.hs-chips > .hs-chip:nth-child(6) { animation-delay: 0.17s; }
+.hs-chips > .hs-chip:nth-child(n+7) { animation-delay: 0.2s; }
+.hs-chip { transition: background 0.25s var(--feel-out), border-color 0.25s var(--feel-out), color 0.2s ease, box-shadow 0.3s var(--feel-out), translate 0.3s var(--feel-spring); }
+.hs-chip:hover { translate: 0 -1px; }
+.hs-chip.on { box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--primary) 70%, transparent); }
+.hs-chip.on b { animation: feel-pop 0.4s var(--feel-spring); display: inline-block; }
+
+/* table rows fade in (opacity only — the first columns are sticky) */
+@keyframes feel-row-in { from { opacity: 0; } }
+.hs-table tbody tr { animation: feel-row-in 0.4s var(--feel-out) backwards; }
+.hs-table tbody tr:nth-child(2) { animation-delay: 0.015s; }
+.hs-table tbody tr:nth-child(3) { animation-delay: 0.03s; }
+.hs-table tbody tr:nth-child(4) { animation-delay: 0.045s; }
+.hs-table tbody tr:nth-child(5) { animation-delay: 0.06s; }
+.hs-table tbody tr:nth-child(6) { animation-delay: 0.075s; }
+.hs-table tbody tr:nth-child(7) { animation-delay: 0.09s; }
+.hs-table tbody tr:nth-child(8) { animation-delay: 0.105s; }
+.hs-table tbody tr:nth-child(9) { animation-delay: 0.12s; }
+.hs-table tbody tr:nth-child(10) { animation-delay: 0.135s; }
+.hs-table tbody tr:nth-child(n+11) { animation-delay: 0.15s; }
+.hs-table tbody tr.hs-skel { animation: none; }
+.hs-table tbody td { transition: background 0.2s ease; }
+.hs-table tbody tr.hs-draft td { animation: feel-fade-in 0.35s var(--feel-out) backwards; }
+.hs-num { transition: background 0.2s ease, color 0.2s ease, scale 0.3s var(--feel-spring); }
+.hs-num:hover { scale: 1.08; }
+.hs-table .hs-actions .hs-icon { transition: color 0.2s ease, background 0.2s ease, scale 0.3s var(--feel-spring); }
+.hs-table .hs-actions .hs-icon:hover { scale: 1.12; }
+.hs-th svg { transition: scale 0.3s var(--feel-spring), color 0.2s ease; }
+.hs-th:hover svg { scale: 1.15; }
+
+/* search field grows a little when focused */
+.hs-search { transition: box-shadow 0.3s var(--feel-out), border-color 0.2s ease, scale 0.35s var(--feel-spring); }
+.hs-search:focus-within { scale: 1.01; }
+
+/* dialogs, archive drawer, menus, toast */
+.hs-modal-backdrop, .hs-drawer-backdrop, .rd-backdrop { animation: feel-fade-in 0.26s var(--feel-out) backwards; }
+.hs-modal, .rd-card { animation: feel-sheet-in 0.5s var(--feel-spring) backwards; }
+.hs-drawer { animation: feel-slide-in-right 0.5s var(--feel-out) backwards; }
+.hs-modal-backdrop.feel-leaving, .hs-drawer-backdrop.feel-leaving, .rd-backdrop.feel-leaving { animation: feel-fade-out 0.24s var(--feel-in) forwards; }
+.feel-leaving .hs-modal, .feel-leaving .rd-card { animation: feel-sheet-out 0.2s var(--feel-in) forwards; }
+.feel-leaving .hs-drawer { animation: feel-slide-out-right 0.24s var(--feel-in) forwards; }
+.hs-drawer-list > * { animation: feel-rise-sm 0.4s var(--feel-out) backwards; }
+.hs-drawer-list > :nth-child(2) { animation-delay: 0.03s; }
+.hs-drawer-list > :nth-child(3) { animation-delay: 0.06s; }
+.hs-drawer-list > :nth-child(4) { animation-delay: 0.09s; }
+.hs-drawer-list > :nth-child(n+5) { animation-delay: 0.12s; }
+.hs-info-menu, .sheets-col-filter-popup { transform-origin: top right; animation: feel-menu-in 0.32s var(--feel-spring) backwards; }
+.hs-info-menu.feel-leaving, .sheets-col-filter-popup.feel-leaving { animation: feel-menu-out 0.15s var(--feel-in) forwards; }
+.hs-toast { animation: feel-toast-up 0.5s var(--feel-spring) backwards; }
+.hs-toast.feel-leaving { animation: feel-toast-down 0.2s var(--feel-in) forwards; }
+@keyframes feel-toast-up { from { opacity: 0; translate: 0 16px; scale: 0.96; } }
+@keyframes feel-toast-down { to { opacity: 0; translate: 0 10px; } }
+
+/* ============================================================
+   Respect "reduce motion"
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .feel-leaving { display: none !important; }
+}

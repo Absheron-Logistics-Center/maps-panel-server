@@ -1,0 +1,909 @@
+{
+  "id": 47,
+  "title": "ALM sifarişi üzərindən yüklərin XİAN Abşeron şirkəti tərəfindən daşıması (Geniş təsvir)",
+  "subtitle": "XİAN-İMS-PRD-002",
+  "width": 2200,
+  "height": 2040,
+  "lanes": [
+    {
+      "id": "lane-1790583984777",
+      "label": "ALM-BDD",
+      "y": 20,
+      "h": 180
+    },
+    {
+      "id": "lane-1790584000544",
+      "label": "Müştəri",
+      "y": 200,
+      "h": 160
+    },
+    {
+      "id": "lane-1790584016327",
+      "label": "XİAN ALM Operation team",
+      "y": 360,
+      "h": 440
+    },
+    {
+      "id": "lane-1790584049400",
+      "label": "XİAN ALM RFQ Team",
+      "y": 800,
+      "h": 400
+    },
+    {
+      "id": "lane-1790584068097",
+      "label": "XİAN ALM Management",
+      "y": 1200,
+      "h": 160
+    },
+    {
+      "id": "lane-1790589890990",
+      "label": "XİAN ALM Finance team",
+      "y": 1360,
+      "h": 245
+    },
+    {
+      "id": "lane-1790589974742",
+      "label": "ALM Hüquq Dep.",
+      "y": 1605,
+      "h": 160
+    },
+    {
+      "id": "lane-1790589986997",
+      "label": "Vendor Konteyner şrikəti",
+      "y": 1765,
+      "h": 160
+    },
+    {
+      "id": "lane-1790589997797",
+      "label": "Vendor Daxili Daşıma xidməti",
+      "y": 1925,
+      "h": 180
+    },
+    {
+      "id": "lane-1790590008046",
+      "label": "Göndərən tərəf şirkət",
+      "y": 2105,
+      "h": 260
+    },
+    {
+      "id": "lane-1790590024222",
+      "label": "XİAN Port",
+      "y": 2365,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "stroke",
+      "x": 100,
+      "y": 60,
+      "laneId": "lane-1790583984777",
+      "w": 200,
+      "h": 120,
+      "text": "Müştərifən sifariş sorğusunun alınması\nvə XİAN Abşerona ötürülməsieni başlanğıc/son",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "stroke",
+      "x": 100,
+      "y": 370,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 80,
+      "text": "Sorğunun qəbul edilib detallarının\ndəqiqləşdirilməsi. ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "stroke",
+      "x": 100,
+      "y": 480,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 80,
+      "text": "Sifarişə Proqramda Referans kodun\nverilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "stroke",
+      "x": 100,
+      "y": 600,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 80,
+      "text": "Sifarişlə bağlı daxili WeChat qrupunun\nyaradılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "stroke",
+      "x": 100,
+      "y": 830,
+      "laneId": "lane-1790584049400",
+      "w": 200,
+      "h": 120,
+      "text": "Sifarişlə bağlı xidmətlər üzrə qiymət\nsorğularının göndərilməsi və toplanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "5.1",
+      "type": "subprocess",
+      "style": "dashed",
+      "x": 95,
+      "y": 970,
+      "laneId": "lane-1790584049400",
+      "w": 210,
+      "h": 210,
+      "text": "XİAN Absheron dəmir yolu xidməti\nYükləmə boşaltma xidməti\nKonteyner alış xidməti\nDaxili daşıma xidməti\nGömrük əməliyyatları xidməti\nSifariş tələbinə uyğun digər xidmətlər\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "stroke",
+      "x": 380,
+      "y": 830,
+      "laneId": "lane-1790584049400",
+      "w": 200,
+      "h": 120,
+      "text": "Toplanmış qiymətlər üzərindən RFQ\nhazırlanması və Əməliyyat komandasına\ngöndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "stroke",
+      "x": 380,
+      "y": 370,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 100,
+      "text": "RFQ ya yekun baxışın icrası və ALM\nBDD komandasına göndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "stroke",
+      "x": 380,
+      "y": 60,
+      "laneId": "lane-1790583984777",
+      "w": 200,
+      "h": 80,
+      "text": "RFQ əsasında Müştəriyə təklifin\ngöndərilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "stroke",
+      "x": 690,
+      "y": 240,
+      "laneId": "lane-1790584000544",
+      "w": 200,
+      "h": 80,
+      "text": "RFQ -nin müştəri tərəfindən\ntəsdiqlənməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "stroke",
+      "x": 690,
+      "y": 35,
+      "laneId": "lane-1790583984777",
+      "w": 200,
+      "h": 120,
+      "text": "Sifarişin təsdiqlənməsi barəsində\nXİAN Absherona məlumatın\ngöndərilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1000,
+      "y": 370,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 80,
+      "text": "Sifarişçi və Göndərici ilə bağlı əlaqə\nvasitələrinin alınması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1000,
+      "y": 480,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 120,
+      "text": " Sifarişçi və Göndərici ilə sifariş\ndetalları ilə bağlı məlumatların yekun\ndəqiqləşdirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1000,
+      "y": 1210,
+      "laneId": "lane-1790584068097",
+      "w": 200,
+      "h": 100,
+      "text": "Subpodratçılarla müqavilə işlərinin\ntəşkili və müqavilələrin hazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1000,
+      "y": 1400,
+      "laneId": "lane-1790589890990",
+      "w": 200,
+      "h": 120,
+      "text": " Subpodratçılarla alınacaq xidmət\nüzərindən müqavilələrin imzalanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1000,
+      "y": 1635,
+      "laneId": "lane-1790589974742",
+      "w": 200,
+      "h": 100,
+      "text": "Bağlanmış müqavilə əsasında Vendor\nadının proqrama əlavə edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1000,
+      "y": 1795,
+      "laneId": "lane-1790589986997",
+      "w": 200,
+      "h": 100,
+      "text": "Öncədən ödəniş əsasında konteyner\nalışının həyata keçirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1000,
+      "y": 1965,
+      "laneId": "lane-1790589997797",
+      "w": 200,
+      "h": 120,
+      "text": "Daxili daşıma ilə bağlı xidmətlərin\nalışının həyata keçirilməsi (sonradan\nödənişlə)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1330,
+      "y": 1975,
+      "laneId": "lane-1790589997797",
+      "w": 200,
+      "h": 100,
+      "text": "Daxili daşıma xidməti sürücüsünün\nKonteyner satış şirkətinə getməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1710,
+      "y": 1965,
+      "laneId": "lane-1790589997797",
+      "w": 200,
+      "h": 120,
+      "text": "Daxili daşıma xidməti sürücüsünün\nalınacaq Konteynerin vəziyyəti barəsində\nməlumat verməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "type": "rect",
+      "style": "stroke",
+      "x": 2030,
+      "y": 1990,
+      "laneId": "lane-1790589997797",
+      "w": 200,
+      "h": 70,
+      "text": "Yükün götürüləcəyi yerə gedilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "20 ",
+      "type": "rect",
+      "style": "stroke",
+      "x": 2030,
+      "y": 2135,
+      "laneId": "lane-1790590008046",
+      "w": 200,
+      "h": 100,
+      "text": "Yükün XİAN Port SƏTƏM qaydalarına\nuyğun maşına yüklənməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "type": "rect",
+      "style": "stroke",
+      "x": 2030,
+      "y": 2265,
+      "laneId": "lane-1790590008046",
+      "w": 200,
+      "h": 80,
+      "text": "Yükə aid Description of Declaration\nsənədinin doldurulması\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "type": "rect",
+      "style": "stroke",
+      "x": 2330,
+      "y": 2405,
+      "laneId": "lane-1790590024222",
+      "w": 200,
+      "h": 100,
+      "text": "XİAN Port əməkdaşlarının yükə\nSƏTƏM yönümlü baxış keçirməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "type": "rect",
+      "style": "stroke",
+      "x": 2330,
+      "y": 1990,
+      "laneId": "lane-1790589997797",
+      "w": 200,
+      "h": 70,
+      "text": "Yükün XİAN Porta çatdırılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "type": "rect",
+      "style": "stroke",
+      "x": 2490,
+      "y": 520,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 80,
+      "text": "SMQS Sənədinin ilkin formatının\nhazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "type": "rect",
+      "style": "stroke",
+      "x": 2490,
+      "y": 380,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 80,
+      "text": "Yüklə bağlı sənədləşmə işlərinin icrası\n(Packing list + İnvoice)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "type": "rect",
+      "style": "stroke",
+      "x": 2490,
+      "y": 640,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 80,
+      "text": "Online formatda yük\nbəyannaməsinin yazdırılması\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 35,
+      "type": "rect",
+      "style": "stroke",
+      "x": 3380,
+      "y": 70,
+      "laneId": "lane-1790583984777",
+      "w": 200,
+      "h": 70,
+      "text": " İnvoys əsasında ödənişin icrası",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "type": "rect",
+      "style": "stroke",
+      "x": 2790,
+      "y": 525,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 80,
+      "text": "Yekun əlavə xərclərin hesablanıb\nproqrama işlənilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": " 28",
+      "type": "rect",
+      "style": "stroke",
+      "x": 2790,
+      "y": 370,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 100,
+      "text": "XİAN Portla ETD ə uyğun yükün yola\nçıxacağı tarixin dəqiqləşdirilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 34,
+      "type": "pill",
+      "style": "stroke",
+      "x": 3760,
+      "y": 80,
+      "laneId": "lane-1790583984777",
+      "w": 220,
+      "h": 50,
+      "text": "Yükün təhvil alınması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "12.1",
+      "type": "subprocess",
+      "style": "dashed",
+      "x": 690,
+      "y": 610,
+      "laneId": "lane-1790584016327",
+      "w": 210,
+      "h": 170,
+      "text": "Yükün ölçüsü, qabariti\nXüsusi tələblərin olub omlaması\nGödnəriciyə ödənişin olunub\nolunmaması\nYükün hazır olub olmaması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "34 ",
+      "type": "rect",
+      "style": "stroke",
+      "x": 3110,
+      "y": 364,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 100,
+      "text": "Yol boyu ALM BDD yə yükün hərəkəti\nilə bağlı məlumatın verilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 33,
+      "type": "rect",
+      "style": "stroke",
+      "x": 3110,
+      "y": 480,
+      "laneId": "lane-1790584016327",
+      "w": 200,
+      "h": 70,
+      "text": "Yükün XİAN Portundan yola salınması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 30,
+      "type": "rect",
+      "style": "stroke",
+      "x": 2790,
+      "y": 1370,
+      "laneId": "lane-1790589890990",
+      "w": 200,
+      "h": 100,
+      "text": "Yekun xərclərlə birgə məlumatın 1C\nProqramına yönləndirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 31,
+      "type": "rect",
+      "style": "stroke",
+      "x": 2790,
+      "y": 1510,
+      "laneId": "lane-1790589890990",
+      "w": 200,
+      "h": 70,
+      "text": "Yekun invoysun kəsilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 32,
+      "type": "rect",
+      "style": "stroke",
+      "x": 3110,
+      "y": 1505,
+      "laneId": "lane-1790589890990",
+      "w": 200,
+      "h": 80,
+      "text": " Xərclərə uyğun Subpodratçıların\nödənişlərinin icrası",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": "5.1",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 14,
+      "to": 15,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 15,
+      "to": 16,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 17,
+      "to": 18,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 16,
+      "to": 17,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 18,
+      "to": 19,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 19,
+      "to": 20,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 20,
+      "to": "20 ",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "20 ",
+      "to": 21,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 21,
+      "to": 22,
+      "s": "bottom",
+      "e": "left"
+    },
+    {
+      "from": 22,
+      "to": 24,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 35,
+      "to": 34,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 12,
+      "to": "12.1",
+      "s": "left",
+      "e": "top"
+    },
+    {
+      "from": 25,
+      "to": 26,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 26,
+      "to": 27,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": " 28",
+      "to": 29,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 33,
+      "to": "34 ",
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": "34 ",
+      "to": 35,
+      "s": "top",
+      "e": "left"
+    },
+    {
+      "from": 31,
+      "to": 32,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 30,
+      "to": 31,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 32,
+      "to": 33,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 29,
+      "to": 30,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 27,
+      "to": " 28",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 24,
+      "to": 25,
+      "s": "top",
+      "e": "left"
+    }
+  ]
+}

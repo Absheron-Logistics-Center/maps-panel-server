@@ -1,0 +1,157 @@
+{
+  "id": 44,
+  "title": "Normativ sənədlərin qüvvədən düşməsinə dair iş axını",
+  "subtitle": "",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1789634476787",
+      "label": "Aidiyyəti struktur  vahid",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1789634521267",
+      "label": "Məsul struktur vahidi",
+      "y": 180,
+      "h": 180
+    },
+    {
+      "id": "lane-1789634567484",
+      "label": "Hüquq  departamenti",
+      "y": 360,
+      "h": 215
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 90,
+      "y": 50,
+      "laneId": "lane-1789634476787",
+      "w": 250,
+      "h": 100,
+      "text": "Normativ sənədin qüvvədən \ndüşməsi ilə bağlı məsul struktur \nvahidə müraciətin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 115,
+      "y": 230,
+      "laneId": "lane-1789634521267",
+      "w": 200,
+      "h": 70,
+      "text": "Müraciətin nəzərdən keçirilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 460,
+      "y": 215,
+      "laneId": "lane-1789634521267",
+      "w": 390,
+      "h": 100,
+      "text": "Sənədin qüvvədən düşməsi ilə bağlı müraciət uyğun \nhesab edildikdə, məsələnin İdarə Heyətində \nbaxılması üçün HD-yə müraciətin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 535,
+      "y": 445,
+      "laneId": "lane-1789634567484",
+      "w": 240,
+      "h": 100,
+      "text": "Qərar layihəsinin hazırlanması \nvə sənəd layihəsinin aidiyyəti \nüzrə təqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 1030,
+      "y": 435,
+      "laneId": "lane-1789634567484",
+      "w": 200,
+      "h": 120,
+      "text": "Qüvvədən düşmüş sənədə dair \nQərarın məsul struktur vahidə \ntəqdim edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "pill",
+      "style": "solid",
+      "x": 1030,
+      "y": 250,
+      "laneId": "lane-1789634521267",
+      "w": 200,
+      "h": 90,
+      "text": "Reyestrdə məlumatların \nyenilənməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "id": 49,
+  "title": "XİAN Absheron Xərclərin tanınması prosesi",
+  "subtitle": "XİAN-İMS-PRD-004",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1790679088610",
+      "label": "Subpodratçı ( VENDOR )",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1790679120528",
+      "label": "XİAN ALM Finance team",
+      "y": 180,
+      "h": 330
+    },
+    {
+      "id": "lane-1790679199033",
+      "label": "XİAN ALM Operation team",
+      "y": 510,
+      "h": 160
+    },
+    {
+      "id": "lane-1790679245538",
+      "label": "XİAN ALM Management",
+      "y": 670,
+      "h": 180
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "stroke",
+      "x": 100,
+      "y": 55,
+      "laneId": "lane-1790679088610",
+      "w": 200,
+      "h": 50,
+      "text": " Avans faktura tərtibi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "stroke",
+      "x": 100,
+      "y": 220,
+      "laneId": "lane-1790679120528",
+      "w": 200,
+      "h": 80,
+      "text": "Vendordan gələn avans\nvəsaitin 1 C proqramda\nkreditorda tanınması\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "stroke",
+      "x": 450,
+      "y": 45,
+      "laneId": "lane-1790679088610",
+      "w": 200,
+      "h": 70,
+      "text": "E-qaimənin\nhazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "",
+      "type": "diamond",
+      "style": "stroke",
+      "x": 475,
+      "y": 250,
+      "laneId": "lane-1790679120528",
+      "w": 150,
+      "h": 150,
+      "text": "",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "4.1",
+      "type": "rect",
+      "style": "stroke",
+      "x": 100,
+      "y": 550,
+      "laneId": "lane-1790679199033",
+      "w": 200,
+      "h": 70,
+      "text": "Əməliyyat məbləği ilə\nuyğunluğun yoxlanması\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "4.2",
+      "type": "rect",
+      "style": "stroke",
+      "x": 770,
+      "y": 285,
+      "laneId": "lane-1790679120528",
+      "w": 200,
+      "h": 80,
+      "text": "Xərc sənədinin\nyaradılması -1 C kreditorlar",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "stroke",
+      "x": 770,
+      "y": 410,
+      "laneId": "lane-1790679120528",
+      "w": 200,
+      "h": 80,
+      "text": "Avansdan silinmənin təmin\nedilməsi– 1C",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1090,
+      "y": 280,
+      "laneId": "lane-1790679120528",
+      "w": 250,
+      "h": 80,
+      "text": "Kreditor barədə hesabatın\ntəqdim edilməsi -gündəlik\nDirektor, funksional rəhbər\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "stroke",
+      "x": 1540,
+      "y": 760,
+      "laneId": "lane-1790679245538",
+      "w": 200,
+      "h": 70,
+      "text": "Avans faktura tərtibi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 3,
+      "to": "",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "",
+      "to": "4.1",
+      "s": "bottom",
+      "e": "right",
+      "label": "Zərurət olarsa"
+    },
+    {
+      "from": "",
+      "to": "4.2",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "4.2",
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "top"
+    }
+  ]
+}

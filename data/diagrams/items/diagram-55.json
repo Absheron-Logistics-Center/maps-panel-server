@@ -1,0 +1,579 @@
+{
+  "id": 55,
+  "title": "Dəmir yolu ilə idxal olunan vaqon yüklərinin yük avtomobilinə boşaldılması və müştəriyə təhvil verilməsi iş axını",
+  "width": 1880,
+  "height": 1340,
+  "lanes": [
+    {
+      "id": "lane-1",
+      "label": "ADY",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-2",
+      "label": "Manevra və\nplanlama ofisi",
+      "y": 180,
+      "h": 240
+    },
+    {
+      "id": "lane-3",
+      "label": "Vahid Pəncərə\ndepartamenti",
+      "y": 420,
+      "h": 240
+    },
+    {
+      "id": "lane-4",
+      "label": "Müştəri",
+      "y": 660,
+      "h": 160
+    },
+    {
+      "id": "lane-5",
+      "label": "Sahə əməliyyatları ofisinin\nYük əməliyyatları şöbəsi /\nDigər aidiyyəti şöbələr",
+      "y": 820,
+      "h": 380
+    },
+    {
+      "id": "lane-6",
+      "label": "DGK",
+      "y": 1200,
+      "h": 160
+    },
+    {
+      "id": "lane-7",
+      "label": "TIR park və\nMAD şöbəsi",
+      "y": 1360,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "x": 190,
+      "y": 40,
+      "w": 280,
+      "h": 80,
+      "text": "Qatarın Abşeron yük dəmiryolu stansiyasından Mərkəzin qəbulgöndərmə parkına gətirilməsi",
+      "laneId": "lane-1"
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "x": 90,
+      "y": 210,
+      "w": 220,
+      "h": 90,
+      "text": "Yükə dair sənədlərin qəbulu və hərəkət tərkibinin tormoz başmaqları ilə bərkidilməsi",
+      "laneId": "lane-2"
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "x": 360,
+      "y": 210,
+      "w": 200,
+      "h": 70,
+      "text": "Natura vərəqəsinin tərtib edilməsi",
+      "laneId": "lane-2"
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "x": 600,
+      "y": 210,
+      "w": 240,
+      "h": 90,
+      "text": "Kommersiya baxışının təşkil edilməsi və zəruri hallarda uyğunsuzluqların qeydiyyatının aparılması",
+      "laneId": "lane-2"
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "x": 90,
+      "y": 320,
+      "w": 220,
+      "h": 70,
+      "text": "Sənədlərin VPD-yə təhvil verilməsi",
+      "laneId": "lane-2"
+    },
+    {
+      "id": "5.1",
+      "type": "stroke",
+      "x": 360,
+      "y": 320,
+      "w": 260,
+      "h": 80,
+      "text": "\"UDPAS\" proqramında vaqonlara dair müvafiq məlumatların daxil edilməsi",
+      "laneId": "lane-2"
+    },
+    {
+      "id": "5.2",
+      "type": "stroke",
+      "x": 660,
+      "y": 320,
+      "w": 260,
+      "h": 80,
+      "text": "Vaqonların aidiyyəti üzrə Mərkəzin terminal yollarına yerləşdirilməsi",
+      "laneId": "lane-2"
+    },
+    {
+      "id": "5.3",
+      "type": "stroke",
+      "x": 960,
+      "y": 320,
+      "w": 260,
+      "h": 80,
+      "text": "Hərəkət tərkibinin tormoz başmaqların quraşdırılması",
+      "laneId": "lane-2"
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "x": 90,
+      "y": 450,
+      "w": 220,
+      "h": 80,
+      "text": "Yükə dair sənədlərin qəbulu və çeşidlənməsi",
+      "laneId": "lane-3"
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "x": 360,
+      "y": 450,
+      "w": 240,
+      "h": 80,
+      "text": "Sənədlərin emalı və müvafiq məlumatların \"UDPAS\" proqramına əlavə edilməsi",
+      "laneId": "lane-3"
+    },
+    {
+      "id": "7.1",
+      "type": "stroke",
+      "x": 660,
+      "y": 450,
+      "w": 260,
+      "h": 80,
+      "text": "SMGS yük nəqliyyat qaiməsinin 1-ci və 2-ci nüsxələrinin möhürlənməsi",
+      "laneId": "lane-3"
+    },
+    {
+      "id": "7.2",
+      "type": "stroke",
+      "x": 960,
+      "y": 450,
+      "w": 260,
+      "h": 80,
+      "text": "SMGS yük nəqliyyat qaiməsinin 2-ci və 3-cü nüsxələrinin ADY-yə təhvil verilməsi",
+      "laneId": "lane-3"
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "x": 90,
+      "y": 560,
+      "w": 240,
+      "h": 80,
+      "text": "Müştəri ilə əlaqə yaradılması və yükün Mərkəzə çatması barədə məlumat verilməsi",
+      "laneId": "lane-3"
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "x": 360,
+      "y": 560,
+      "w": 240,
+      "h": 80,
+      "text": "Yükə dair sənədləri gömrük rəsmiləşdirilməsi məqsədilə müştəriyə təqdim edilməsi",
+      "laneId": "lane-3"
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "x": 680,
+      "y": 560,
+      "w": 240,
+      "h": 80,
+      "text": "Cəmiyyət tərəfindən göstəriləcək xidmətlərə dair sifariş sənədinin hazırlanması",
+      "laneId": "lane-3"
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "x": 960,
+      "y": 560,
+      "w": 240,
+      "h": 80,
+      "text": "Ödənişin qəbul edilməsi və müştərinin yükaşırma sahəsinə yönləndirilməsi",
+      "laneId": "lane-3"
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "x": 360,
+      "y": 690,
+      "w": 240,
+      "h": 80,
+      "text": "Yükə dair sənədləri gömrük rəsmiləşdirilməsi məqsədilə müştəriyə təqdim edilməsi",
+      "laneId": "lane-4"
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "x": 660,
+      "y": 690,
+      "w": 240,
+      "h": 70,
+      "text": "Ödənişin həyata keçirilməsi",
+      "laneId": "lane-4"
+    },
+    {
+      "id": 14,
+      "type": "rect",
+      "x": 960,
+      "y": 690,
+      "w": 240,
+      "h": 70,
+      "text": "Müvafiq yükaşırma sahəsinə yaxınlaşması",
+      "laneId": "lane-4"
+    },
+    {
+      "id": 15,
+      "type": "rect",
+      "x": 90,
+      "y": 850,
+      "w": 240,
+      "h": 130,
+      "text": "Sənədlərin yoxlanılması və Cəmiyyət tərəfindən göstərilən xidmətlərə dair terminal rüsumların tam şəkildə ödənilməsinin nəzərdən keçirilməsi",
+      "laneId": "lane-5"
+    },
+    {
+      "id": 18,
+      "type": "rect",
+      "x": 380,
+      "y": 850,
+      "w": 240,
+      "h": 90,
+      "text": "Yükün aşırılması üçün zəruri işçi qüvvəsi və texniki resursların cəlb edilməsi",
+      "laneId": "lane-5"
+    },
+    {
+      "id": 19,
+      "type": "rect",
+      "x": 660,
+      "y": 850,
+      "w": 240,
+      "h": 90,
+      "text": "Yükaşırma əməliyyatının icra edilməsi (yüklərin vaqondan boşaldılaraq yük avtomobilinə yüklənməsi)",
+      "laneId": "lane-5"
+    },
+    {
+      "id": "5.3.1",
+      "type": "stroke",
+      "x": 1280,
+      "y": 850,
+      "w": 260,
+      "h": 90,
+      "text": "Vaqona vizual baxışın keçirilməsi",
+      "laneId": "lane-5"
+    },
+    {
+      "id": 16,
+      "type": "rect",
+      "x": 90,
+      "y": 1000,
+      "w": 240,
+      "h": 130,
+      "text": "Mərkəzin TIR parkında olan əvvəlcədən qeydiyyatda olan müştərinin nəqliyyat vasitəsinə \"UDPAS\" proqramı üzərindən çağırış verilməsi",
+      "laneId": "lane-5"
+    },
+    {
+      "id": 17,
+      "type": "rect",
+      "x": 380,
+      "y": 1000,
+      "w": 240,
+      "h": 90,
+      "text": "DGK əməkdaşları ilə birgə vaqona baxışın keçirilməsi və yükün açılması",
+      "laneId": "lane-5"
+    },
+    {
+      "id": 20,
+      "type": "rect",
+      "x": 660,
+      "y": 1000,
+      "w": 240,
+      "h": 110,
+      "text": "Yükaşırma əməliyyatı başa çatdıqdan sonra \"UDPAS\" proqramı üzərindən yük avtomobilinin Mərkəzdən çıxışına dair buraxılışın verilməsi",
+      "laneId": "lane-5"
+    },
+    {
+      "id": "20.1",
+      "type": "stroke",
+      "x": 960,
+      "y": 1000,
+      "w": 260,
+      "h": 80,
+      "text": "Vaqona vizual baxışın keçirilməsi",
+      "laneId": "lane-5"
+    },
+    {
+      "id": "20.2",
+      "type": "stroke",
+      "x": 960,
+      "y": 1090,
+      "w": 260,
+      "h": 90,
+      "text": "Yükaşırma əməliyyatının başa çatmasına dair \"UDPAS\" proqramında qeydiyyatın aparılması",
+      "laneId": "lane-5"
+    },
+    {
+      "id": "16.1",
+      "type": "stroke",
+      "x": 90,
+      "y": 1230,
+      "w": 260,
+      "h": 70,
+      "text": "Yük avtomobilinin Mərkəzə daxil olmasının təmin edilməsi",
+      "laneId": "lane-6"
+    },
+    {
+      "id": "17.1",
+      "type": "stroke",
+      "x": 480,
+      "y": 1230,
+      "w": 260,
+      "h": 70,
+      "text": "Vaqona baxışın keçirilməsi və yükün açılması",
+      "laneId": "lane-6"
+    },
+    {
+      "id": 21,
+      "type": "pill",
+      "x": 880,
+      "y": 1390,
+      "w": 220,
+      "h": 90,
+      "text": "Yük avtomobilinin Mərkəzdən çıxışının təmin edilməsi",
+      "laneId": "lane-7"
+    }
+  ],
+  "edges": [
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 2,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": "5.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "5.1",
+      "to": "5.2",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "5.2",
+      "to": "5.3",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 7,
+      "to": "7.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "7.1",
+      "to": "7.2",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": 6,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 9,
+      "to": 11,
+      "s": "right",
+      "e": "left",
+      "via": [
+        {
+          "x": 630,
+          "y": 550
+        }
+      ]
+    },
+    {
+      "from": 11,
+      "to": 13,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "s": "top",
+      "e": "bottom",
+      "via": [
+        {
+          "x": 1080,
+          "y": 620
+        }
+      ]
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 14,
+      "to": 15,
+      "s": "left",
+      "e": "top",
+      "via": [
+        {
+          "x": 210,
+          "y": 770
+        }
+      ]
+    },
+    {
+      "from": 15,
+      "to": 16,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 16,
+      "to": 17,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 17,
+      "to": 18,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 18,
+      "to": 19,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 19,
+      "to": 20,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 20,
+      "to": 21,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 16,
+      "to": "16.1",
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": 17,
+      "to": "17.1",
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": 20,
+      "to": "20.1",
+      "s": "right",
+      "e": "left",
+      "dashed": true
+    },
+    {
+      "from": "20.1",
+      "to": "20.2",
+      "s": "bottom",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": "5.3",
+      "to": "5.3.1",
+      "s": "right",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    }
+  ],
+  "subtitle": "ALM-X1-C1"
+}

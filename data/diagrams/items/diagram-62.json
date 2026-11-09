@@ -1,0 +1,34 @@
+{
+  "id": 62,
+  "title": "ALM",
+  "subtitle": "ALM",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1784617042616",
+      "label": "ALM",
+      "y": 20,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 80,
+      "y": 40,
+      "laneId": "lane-1784617042616",
+      "w": 200,
+      "h": 50,
+      "text": "ALM",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": []
+}

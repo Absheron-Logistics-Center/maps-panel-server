@@ -1,0 +1,419 @@
+{
+  "id": 30,
+  "title": "Tırdan vaqona tranzit prosesi",
+  "subtitle": "ALM-İMS-PRD-BDD/TRZ-002",
+  "width": 2200,
+  "height": 1500,
+  "lanes": [
+    {
+      "id": "lane-1785493659193",
+      "label": "TIR park qeydiyyat",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-1785493678657",
+      "label": "Mühafizə",
+      "y": 180,
+      "h": 160
+    },
+    {
+      "id": "lane-1785493694554",
+      "label": "Vahid pəncərə",
+      "y": 340,
+      "h": 160
+    },
+    {
+      "id": "lane-1785493705649",
+      "label": "Yük alan",
+      "y": 500,
+      "h": 160
+    },
+    {
+      "id": "lane-1785493727505",
+      "label": "Manevra və planlama",
+      "y": 660,
+      "h": 160
+    },
+    {
+      "id": "lane-1785493782301",
+      "label": "Yük əməliyyatçısı/anbar əməliyyatçısı",
+      "y": 820,
+      "h": 160
+    },
+    {
+      "id": "lane-1785493805237",
+      "label": "Sürücü",
+      "y": 980,
+      "h": 160
+    },
+    {
+      "id": "lane-1785493823086",
+      "label": "Gömrük baxışı",
+      "y": 1140,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 130,
+      "y": 50,
+      "laneId": "lane-1785493659193",
+      "w": 200,
+      "h": 70,
+      "text": "Nəqliyyatın sistemə qeydiyyatı ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 130,
+      "y": 200,
+      "laneId": "lane-1785493678657",
+      "w": 200,
+      "h": 80,
+      "text": "Nəqliyyatın təyinat ünvana yönəldilməsi və sənədlərin qəbulu ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 130,
+      "y": 360,
+      "laneId": "lane-1785493694554",
+      "w": 200,
+      "h": 120,
+      "text": "Sənədlərin emalı, yük alanın/Broker nümayəndə məlumatlandırılması, sənəd təqdim edilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 470,
+      "y": 385,
+      "laneId": "lane-1785493694554",
+      "w": 200,
+      "h": 70,
+      "text": "Yükə vaqon ayarılması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "4.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 250,
+      "y": 520,
+      "laneId": "lane-1785493705649",
+      "w": 200,
+      "h": 70,
+      "text": "Yükləmə sənədlərinin hazırlanması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 480,
+      "y": 680,
+      "laneId": "lane-1785493727505",
+      "w": 200,
+      "h": 70,
+      "text": "Vaqona texniki baxış,  vaqon ayrılması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 460,
+      "y": 850,
+      "laneId": "lane-1785493782301",
+      "w": 240,
+      "h": 90,
+      "text": "Nəqliyyatın yükləmə zonasına (gömrük control) yaxınlaşmasına nəzarət ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 480,
+      "y": 1030,
+      "laneId": "lane-1785493805237",
+      "w": 200,
+      "h": 70,
+      "text": "Yük maşının təyinat ünvana yaxınlaşması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 950,
+      "y": 360,
+      "laneId": "lane-1785493694554",
+      "w": 440,
+      "h": 70,
+      "text": "Sənədlər əsasında ixrac (tranzit) qaiməsinin hazırlanması,          CMR-in vaqona bağlanması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "8.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 940,
+      "y": 520,
+      "laneId": "lane-1785493705649",
+      "w": 200,
+      "h": 70,
+      "text": "Qaimə hazırlanması məlumatı ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1200,
+      "y": 510,
+      "laneId": "lane-1785493705649",
+      "w": 200,
+      "h": 70,
+      "text": "Gömrük rəsmiləşdirmə prosedurun icrası ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1500,
+      "y": 360,
+      "laneId": "lane-1785493694554",
+      "w": 200,
+      "h": 70,
+      "text": "Sifarişin işlənməsi (tranzit, anbar) ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "solid",
+      "x": 1500,
+      "y": 690,
+      "laneId": "lane-1785493727505",
+      "w": 200,
+      "h": 70,
+      "text": "Yüklü vaqonun yola salınması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "7.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1690,
+      "y": 850,
+      "laneId": "lane-1785493782301",
+      "w": 200,
+      "h": 70,
+      "text": "Yükün anbara yerləşdirilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1320,
+      "y": 850,
+      "laneId": "lane-1785493782301",
+      "w": 200,
+      "h": 70,
+      "text": "Yükün vaqona yüklənməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "9.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1490,
+      "y": 1190,
+      "laneId": "lane-1785493823086",
+      "w": 390,
+      "h": 70,
+      "text": "İnspektorun rəyi:\n-\tYükün nəqliyyat dəyişməsinin Kontrolu \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": "4.1",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": "8.1",
+      "to": 9,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "top",
+      "e": "left"
+    },
+    {
+      "from": "7.1",
+      "to": 11,
+      "s": "top",
+      "e": "right"
+    },
+    {
+      "from": "7.1",
+      "to": 8,
+      "s": "left",
+      "e": "right"
+    },
+    {
+      "from": "9.1",
+      "to": "7.1",
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": "9.1",
+      "to": 8,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 8,
+      "to": "8.1",
+      "s": "left",
+      "e": "bottom"
+    }
+  ]
+}

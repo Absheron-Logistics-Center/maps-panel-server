@@ -1,0 +1,527 @@
+{
+  "id": 21,
+  "title": "DAXİLİ DAŞIMA PROSESİ",
+  "subtitle": "ALM-İMS-DDD-PRD-001",
+  "width": 2200,
+  "height": 1140,
+  "lanes": [
+    {
+      "id": "lane-1785483027682",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 190
+    },
+    {
+      "id": "lane-1785483043034",
+      "label": "Dispetçer",
+      "y": 210,
+      "h": 160
+    },
+    {
+      "id": "lane-1785483057442",
+      "label": "Data baza admini",
+      "y": 370,
+      "h": 270
+    },
+    {
+      "id": "lane-1785483069738",
+      "label": "Nəqliyyatçı",
+      "y": 640,
+      "h": 160
+    },
+    {
+      "id": "lane-1785483090082",
+      "label": "NBM növbətçisi",
+      "y": 800,
+      "h": 170
+    },
+    {
+      "id": "lane-1785483119730",
+      "label": "Departament Direktoru",
+      "y": 970,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "style": "solid",
+      "x": 100,
+      "y": 60,
+      "laneId": "lane-1785483027682",
+      "w": 200,
+      "h": 70,
+      "text": "Sifarişin\nverilməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 100,
+      "y": 230,
+      "laneId": "lane-1785483043034",
+      "w": 200,
+      "h": 70,
+      "text": "Təklifin hazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 380,
+      "y": 50,
+      "laneId": "lane-1785483027682",
+      "w": 200,
+      "h": 70,
+      "text": "Təklifə münasibət (Razılıq və ya Rədd)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 380,
+      "y": 230,
+      "laneId": "lane-1785483043034",
+      "w": 200,
+      "h": 70,
+      "text": "Məlumatların Data baza admininə ötürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 680,
+      "y": 225,
+      "laneId": "lane-1785483043034",
+      "w": 200,
+      "h": 80,
+      "text": "Sifarişin sistemə qeydiyyatı və nəqliyyatın ayrılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "4.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 345,
+      "y": 400,
+      "laneId": "lane-1785483057442",
+      "w": 270,
+      "h": 110,
+      "text": "Sənədlərin arxivləşdirilməsi, müştəri adı, daşıma marşurutu, tarif, yük qrupu. (Müştəri və daşıyıcı yeni olarsa)",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 680,
+      "y": 672,
+      "laneId": "lane-1785483069738",
+      "w": 200,
+      "h": 70,
+      "text": "Daşıma üçün nəqliyyat ayrılması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 1000,
+      "y": 230,
+      "laneId": "lane-1785483043034",
+      "w": 200,
+      "h": 70,
+      "text": "Nəqliyyatın terminala girişinin təmin edilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 1000,
+      "y": 672,
+      "laneId": "lane-1785483069738",
+      "w": 200,
+      "h": 70,
+      "text": "Yükün nəqliyyata qəbulu",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "8.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1000,
+      "y": 830,
+      "laneId": "lane-1785483090082",
+      "w": 200,
+      "h": 120,
+      "text": "Daşıma üçün yol qaiməsini sürücüyə verilməsi və imzalanmış nüsxənin götürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1320,
+      "y": 672,
+      "laneId": "lane-1785483069738",
+      "w": 200,
+      "h": 70,
+      "text": "Daşıma əməliyyatının icrası",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1320,
+      "y": 110,
+      "laneId": "lane-1785483027682",
+      "w": 200,
+      "h": 80,
+      "text": "Yükün qəbulu və yol qaiməsinin imzalanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1560,
+      "y": 672,
+      "laneId": "lane-1785483069738",
+      "w": 200,
+      "h": 70,
+      "text": "İmzalı qaimənin dispetçerə verilməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "solid",
+      "x": 1810,
+      "y": 220,
+      "laneId": "lane-1785483043034",
+      "w": 200,
+      "h": 80,
+      "text": "Qaimənin toplanması və Data baza adminə təhvili",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "style": "solid",
+      "x": 1810,
+      "y": 420,
+      "laneId": "lane-1785483057442",
+      "w": 200,
+      "h": 170,
+      "text": "Müştəri və sürücü təhvili üzrə qaimələrin arxivləşdirmə\n \n\n\nTəhvil-təslim üzləşmə aktının hazırlanması\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "type": "rect",
+      "style": "solid",
+      "x": 2090,
+      "y": 470,
+      "laneId": "lane-1785483057442",
+      "w": 200,
+      "h": 70,
+      "text": "Təhvil-təslim üzləşmə aktının hazırlanması",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "14.1",
+      "type": "rect",
+      "style": "solid",
+      "x": 2380,
+      "y": 380,
+      "laneId": "lane-1785483057442",
+      "w": 200,
+      "h": 70,
+      "text": "Daşımaların müştəri ilə üzləşdirmə",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "14.2",
+      "type": "rect",
+      "style": "solid",
+      "x": 2380,
+      "y": 550,
+      "laneId": "lane-1785483057442",
+      "w": 200,
+      "h": 70,
+      "text": "Daşımaların nəqliyyatçı ilə üzləşdirmə",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "14.1.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 2380,
+      "y": 100,
+      "laneId": "lane-1785483027682",
+      "w": 200,
+      "h": 70,
+      "text": "Üzləşmə aktının\ntəsdiqlənməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "type": "pill",
+      "style": "solid",
+      "x": 2380,
+      "y": 1030,
+      "laneId": "lane-1785483119730",
+      "w": 200,
+      "h": 70,
+      "text": "Üzləşmə aktının\ntəsdqilənməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "14.2.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 2380,
+      "y": 700,
+      "laneId": "lane-1785483069738",
+      "w": 200,
+      "h": 70,
+      "text": "Üzləşmə aktının\ntəsdiqlənməsi\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": "9.1",
+      "type": "subprocess",
+      "style": "stroke",
+      "x": 1460,
+      "y": 230,
+      "laneId": "lane-1785483043034",
+      "w": 160,
+      "h": 80,
+      "text": "Yükün ünvana çatmasına nəzarət",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "8.1",
+      "to": 9,
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 8,
+      "to": "8.1",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 14,
+      "to": "14.1",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 14,
+      "to": "14.2",
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": "14.1",
+      "to": "14.1.1",
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": "14.2",
+      "to": "14.2.1",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": "4.1",
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": "9.1",
+      "s": "right",
+      "e": "bottom"
+    },
+    {
+      "from": 14,
+      "to": 15,
+      "s": "bottom",
+      "e": "left"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "groups": [
+    {
+      "id": 1,
+      "name": "Anbar logistikası şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 2,
+      "name": "Biznes departamenti",
+      "parentId": null
+    },
+    {
+      "id": 3,
+      "name": "Beynəlxalq daşımalar departamenti",
+      "parentId": null
+    },
+    {
+      "id": 4,
+      "name": "Daxili daşımalar departamenti",
+      "parentId": null
+    },
+    {
+      "id": 5,
+      "name": "Hüquq departamenti",
+      "parentId": null
+    },
+    {
+      "id": 6,
+      "name": "İnformasiya texnologiyaları şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 7,
+      "name": "İnsan resursları və inzibati departament",
+      "parentId": null
+    },
+    {
+      "id": 8,
+      "name": "Keyfiyyətə nəzarət və SƏTƏM şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 9,
+      "name": "Layihələrin idarə olunması departamenti",
+      "parentId": null
+    },
+    {
+      "id": 10,
+      "name": "Maliyyə departamenti",
+      "parentId": null
+    },
+    {
+      "id": 11,
+      "name": "Manevra və planlama ofisi",
+      "parentId": null
+    },
+    {
+      "id": 12,
+      "name": "Risklərə nəzarət və monitorinq şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 13,
+      "name": "Sahə əməliyyatları ofisi",
+      "parentId": null
+    },
+    {
+      "id": 14,
+      "name": "Təchizat şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 15,
+      "name": "Təhlükəsizlik şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 16,
+      "name": "Tırpark və Minik avtomobillərinin dayanacağı şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 17,
+      "name": "Təmir və texnikaya nəzarət şöbəsi",
+      "parentId": null
+    },
+    {
+      "id": 18,
+      "name": "Vahid pəncərə departamenti",
+      "parentId": null
+    },
+    {
+      "id": 19,
+      "name": "MB BROKER MMC",
+      "parentId": null
+    },
+    {
+      "id": 20,
+      "name": "Abşeron Express MMC",
+      "parentId": null
+    },
+    {
+      "id": 21,
+      "name": "Abşeron Biznes Park",
+      "parentId": null
+    },
+    {
+      "id": 22,
+      "name": "XİAN Absheron",
+      "parentId": null
+    },
+    {
+      "id": 23,
+      "name": "İnfrastruktur şöbəsi",
+      "parentId": null
+    }
+  ],
+  "pdfs": [
+    {
+      "id": 1,
+      "title": "Anbar logistikası şöbəsi əsasnaməsi",
+      "subtitle": "",
+      "filename": "ALM Servis xidməti.pdf",
+      "size": 3278401,
+      "groupId": 1,
+      "uploadedAt": "2026-09-09T08:38:42.855Z"
+    },
+    {
+      "id": 143,
+      "title": "DEBİTOR BORCLARIN İDARƏ EDİLMƏSİ PROSEDURU",
+      "subtitle": "AE-PRD-1/1",
+      "filename": "14. AE - Debitor borcların idarə edilməsi proseduru- 2026.pdf",
+      "size": 12175196,
+      "groupId": 20,
+      "uploadedAt": "2026-10-28T10:35:12.083Z"
+    }
+  ]
+}

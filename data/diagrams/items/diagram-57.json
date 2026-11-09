@@ -1,0 +1,328 @@
+{
+  "id": 57,
+  "title": "Customer Support Ticket Resolution",
+  "subtitle": "TEST-EN-SHORT-12",
+  "width": 2420,
+  "height": 690,
+  "lanes": [
+    {
+      "id": "lane-1",
+      "label": "Customer",
+      "y": 20,
+      "h": 210
+    },
+    {
+      "id": "lane-2",
+      "label": "Support Agent",
+      "y": 230,
+      "h": 210
+    },
+    {
+      "id": "lane-3",
+      "label": "Engineering",
+      "y": 440,
+      "h": 210
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "x": 90,
+      "y": 95,
+      "w": 210,
+      "h": 60,
+      "laneId": "lane-1",
+      "text": "Customer submits ticket",
+      "info": {
+        "general": [
+          "Step 1: Customer submits ticket."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "parallelogram",
+      "x": 340,
+      "y": 300,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Ticket details received",
+      "info": {
+        "general": [
+          "Step 2: Ticket details received."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      },
+      "dash": true
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "x": 590,
+      "y": 300,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Agent reviews ticket",
+      "info": {
+        "general": [
+          "Step 3: Agent reviews ticket."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "diamond",
+      "x": 840,
+      "y": 260,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-2",
+      "text": "Issue reproducible?",
+      "info": {
+        "general": [
+          "Step 4: Issue reproducible?."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "x": 1090,
+      "y": 300,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Request more information",
+      "info": {
+        "general": [
+          "Step 5: Request more information."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "parallelogram",
+      "x": 1340,
+      "y": 90,
+      "w": 210,
+      "h": 70,
+      "laneId": "lane-1",
+      "text": "Customer provides info",
+      "info": {
+        "general": [
+          "Step 6: Customer provides info."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      },
+      "dash": true
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "x": 1090,
+      "y": 510,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-3",
+      "text": "Engineer investigates",
+      "info": {
+        "general": [
+          "Step 7: Engineer investigates."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "diamond",
+      "x": 1340,
+      "y": 470,
+      "w": 150,
+      "h": 150,
+      "laneId": "lane-3",
+      "text": "Code fix needed?",
+      "info": {
+        "general": [
+          "Step 8: Code fix needed?."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "x": 1590,
+      "y": 510,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-3",
+      "text": "Deploy fix",
+      "info": {
+        "general": [
+          "Step 9: Deploy fix."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "stroke",
+      "x": 1590,
+      "y": 305,
+      "w": 200,
+      "h": 60,
+      "laneId": "lane-2",
+      "text": "Update knowledge base",
+      "info": {
+        "general": [
+          "Step 10: Update knowledge base."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "x": 1840,
+      "y": 300,
+      "w": 200,
+      "h": 70,
+      "laneId": "lane-2",
+      "text": "Notify customer",
+      "info": {
+        "general": [
+          "Step 11: Notify customer."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "pill",
+      "x": 2090,
+      "y": 95,
+      "w": 210,
+      "h": 60,
+      "laneId": "lane-1",
+      "text": "Ticket closed",
+      "info": {
+        "general": [
+          "Step 12: Ticket closed."
+        ],
+        "risks": [
+          "Delay or miscommunication at this step."
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 4,
+      "to": 7,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 6,
+      "to": 3,
+      "s": "top",
+      "e": "top",
+      "dashed": true
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 8,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 9,
+      "to": 11,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "left"
+    }
+  ]
+}

@@ -1,0 +1,318 @@
+{
+  "id": 35,
+  "title": "Dəmiryolu ilə yük daşımada ekspeditor xidməti/Azərbaycan və digər ölkə ərazilərindən idxal proseduru",
+  "subtitle": "AE-İMS-PRD-001",
+  "width": 2200,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "lane-1785844849154",
+      "label": "Müştəri",
+      "y": 20,
+      "h": 265
+    },
+    {
+      "id": "lane-1785844863041",
+      "label": "Əməliyyatçı",
+      "y": 285,
+      "h": 260
+    },
+    {
+      "id": "lane-1785844868691",
+      "label": "Nəqliyyatçı",
+      "y": 545,
+      "h": 160
+    },
+    {
+      "id": "lane-1785844874032",
+      "label": "Mühasib",
+      "y": 705,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 55,
+      "laneId": "lane-1785844849154",
+      "w": 240,
+      "h": 210,
+      "text": "Sifariş\n\n1.Vaqon ayrılması\n2.Ölkə ərazisində daşınma\n3.İnstruksiya sənədin hazırlanması müraciəti  (yük göndərən, alan, çıxış və təyinat stansiyaları, yük adı,, çəkisi, gömrük kodu, vaqon mənsubiyyəti, vaqon tipi)   \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "style": "solid",
+      "x": 120,
+      "y": 335,
+      "laneId": "lane-1785844863041",
+      "w": 240,
+      "h": 190,
+      "text": "1.\tDigər ölkədəki kontragentə vaqon ayrılması sifarişinin verilməsi\n2.\tVaqon yük çıxış stansiyasına çatdıqda, İnstruksiya sənədin alınması və müştəriyə təqdim edilməsi\n3.\tMS project proqramında sifarişin qeydiyyatı\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "style": "solid",
+      "x": 140,
+      "y": 595,
+      "laneId": "lane-1785844868691",
+      "w": 200,
+      "h": 80,
+      "text": "Vaqon ayrılması və yük çıxış stansiyasına göndərilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "style": "solid",
+      "x": 470,
+      "y": 110,
+      "laneId": "lane-1785844849154",
+      "w": 200,
+      "h": 100,
+      "text": "Təsdiq edilməsi və SMQS Abşeron Express-ə təqdim edilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "style": "solid",
+      "x": 470,
+      "y": 335,
+      "laneId": "lane-1785844863041",
+      "w": 200,
+      "h": 190,
+      "text": "Tarif üzrə daşıma kodu və dəmiryolu ilə daşıma sifarişinin işlənməsi. SMQS məlumatların qeydiyyatı.\nMS project proqramında sifarişin qeydiyyatı\n",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "style": "solid",
+      "x": 470,
+      "y": 595,
+      "laneId": "lane-1785844868691",
+      "w": 200,
+      "h": 80,
+      "text": "Sifarişin emalı və hesabın kəsilməsi-hesab faktura ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "style": "solid",
+      "x": 810,
+      "y": 600,
+      "laneId": "lane-1785844868691",
+      "w": 210,
+      "h": 70,
+      "text": "Sifarişin icrata ötürülməsi",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "style": "solid",
+      "x": 815,
+      "y": 355,
+      "laneId": "lane-1785844863041",
+      "w": 200,
+      "h": 120,
+      "text": "Ödənişin təsdiqlənməsi və yükdaşımanın təsdiqinin izlənməsi.\nMS projectdə sifariş tam qeydiyyatı \n",
+      "info": {
+        "general": [
+          ""
+        ]
+      },
+      "color": "#ea580c"
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "style": "solid",
+      "x": 1130,
+      "y": 375,
+      "laneId": "lane-1785844863041",
+      "w": 200,
+      "h": 80,
+      "text": "Vaqonun təyinat stansiyasına çatmasının izlənməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "rect",
+      "style": "solid",
+      "x": 1130,
+      "y": 755,
+      "laneId": "lane-1785844874032",
+      "w": 200,
+      "h": 70,
+      "text": "Müştəriyə hesab kəsilməsi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "style": "solid",
+      "x": 1460,
+      "y": 585,
+      "laneId": "lane-1785844868691",
+      "w": 210,
+      "h": 80,
+      "text": "Daşımalar üzrə üzləşmə sənədinin hazırlanması ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "style": "solid",
+      "x": 1460,
+      "y": 375,
+      "laneId": "lane-1785844863041",
+      "w": 210,
+      "h": 80,
+      "text": "Üzləşmə sənədinin monitorinqi ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "style": "solid",
+      "x": 1690,
+      "y": 735,
+      "laneId": "lane-1785844874032",
+      "w": 200,
+      "h": 80,
+      "text": "Üzləşmə sənədinin monitorinqi , Nəqliyyatçıya ödəniş ",
+      "info": {
+        "general": [
+          ""
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "bottom",
+      "e": "top"
+    },
+    {
+      "from": 10,
+      "to": 11,
+      "s": "right",
+      "e": "left"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "top",
+      "e": "bottom"
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "s": "right",
+      "e": "top"
+    },
+    {
+      "from": 2,
+      "to": 4,
+      "s": "right",
+      "e": "left"
+    }
+  ]
+}

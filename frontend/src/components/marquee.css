@@ -1,0 +1,48 @@
+/* Desktop-style drag selection on the Home pages (MarqueeSelect.jsx) */
+.marquee-box {
+  position: fixed; z-index: 9000; pointer-events: none;
+  border: 1px solid #2563eb; background: rgba(37, 99, 235, .12); border-radius: 2px;
+}
+body.sel-dragging, body.sel-dragging * { user-select: none !important; cursor: default !important; }
+
+.group-card.is-selected > .group-head,
+.process-item.is-selected {
+  background: rgba(37, 99, 235, .10) !important;
+  box-shadow: inset 0 0 0 2px #2563eb;
+  border-radius: 12px;
+}
+
+.sel-bar {
+  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 8000;
+  display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 16px;
+  background: #0f172a; color: #fff; border-radius: 14px; box-shadow: 0 12px 32px rgba(15, 23, 42, .28);
+  font-size: 14px; animation: sel-in .16s ease-out;
+}
+.sel-bar-count { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; margin-right: 6px; white-space: nowrap; }
+.sel-bar-count em { font-style: normal; font-weight: 400; opacity: .7; }
+.sel-btn {
+  display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border: 0; border-radius: 9px;
+  background: rgba(255, 255, 255, .1); color: #fff; font: inherit; font-weight: 600; cursor: pointer;
+}
+.sel-btn:hover:not(:disabled) { background: rgba(255, 255, 255, .2); }
+.sel-btn.danger:hover:not(:disabled) { background: #dc2626; }
+.sel-btn:disabled { opacity: .5; cursor: default; }
+.sel-x { width: 34px; height: 34px; border: 0; border-radius: 9px; background: transparent; color: #fff; cursor: pointer; display: grid; place-items: center; opacity: .75; }
+.sel-x:hover { opacity: 1; background: rgba(255, 255, 255, .12); }
+
+.sel-menu {
+  position: fixed; z-index: 9100; min-width: 200px; padding: 6px; border-radius: 12px;
+  background: #fff; border: 1px solid #e2e8f0; box-shadow: 0 14px 36px rgba(15, 23, 42, .18); animation: sel-in .12s ease-out;
+}
+.sel-menu-head { padding: 6px 10px 8px; font-size: 12px; color: #64748b; }
+.sel-menu button {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px; border: 0; border-radius: 8px;
+  background: transparent; color: #0f172a; font: inherit; font-size: 14px; cursor: pointer; text-align: left;
+}
+.sel-menu button:hover:not(:disabled) { background: #f1f5f9; }
+.sel-menu button.danger { color: #dc2626; }
+.sel-menu button.danger:hover:not(:disabled) { background: #fef2f2; }
+.sel-menu-sep { height: 1px; background: #e2e8f0; margin: 4px 2px; }
+@keyframes sel-in { from { opacity: 0; transform: translate(-50%, 6px); } }
+.sel-menu { animation-name: none; }
+@media (max-width: 640px) { .sel-bar { left: 12px; right: 12px; transform: none; flex-wrap: wrap; } }

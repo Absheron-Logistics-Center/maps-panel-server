@@ -1,0 +1,594 @@
+{
+  "id": 60,
+  "title": "HR İşə Qəbul və Adaptasiya Prosesi - Tam İş Axını",
+  "subtitle": "HR-DEPT-V1-030726",
+  "width": 2400,
+  "height": 1800,
+  "lanes": [
+    {
+      "id": "lane-hr",
+      "label": "HR Departamenti\nİnsan Resursları",
+      "y": 20,
+      "h": 160
+    },
+    {
+      "id": "lane-manager",
+      "label": "Departament Rəhbəri\nVəzifə Sahibi",
+      "y": 180,
+      "h": 160
+    },
+    {
+      "id": "lane-candidate",
+      "label": "Namizəd\nƏrizəçi",
+      "y": 340,
+      "h": 250
+    },
+    {
+      "id": "lane-interview",
+      "label": "Müsahibə Panelı\nTexniki Komissiya",
+      "y": 590,
+      "h": 210
+    },
+    {
+      "id": "lane-onboarding",
+      "label": "Adaptasiya və\nTəlim Departamenti",
+      "y": 800,
+      "h": 330
+    },
+    {
+      "id": "lane-admin",
+      "label": "İnzibati Xidmət\nKadr Sənədiyyatı",
+      "y": 1130,
+      "h": 160
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "type": "pill",
+      "x": 80,
+      "y": 40,
+      "w": 260,
+      "h": 100,
+      "text": "Vəzifə boşluğunun müəyyən edilməsi\nvə ehtiyacın təhlili",
+      "laneId": "lane-hr",
+      "color": "#2c5f7a",
+      "info": {
+        "general": [
+          "Departament rəhbərləri ilə görüş - HR departamenti şirkətin bütün departament rəhbərləri ilə fərdi görüşlər keçirərək mövcud kadr ehtiyaclarını, iş yükünü və gələcək layihələr üçün tələb olunan işçi sayını dəqiqləşdirir. Bu görüşlər zamanı hər bir departamentin qarşısında duran çağırışlar və yeni işçilərdən gözləntilər ətraflı müzakirə olunur.",
+          "Büdcə planlaması - HR və maliyyə departamentləri birgə çalışaraq yeni işçi üçün əmək haqqı, sosial paket, təlim xərcləri və digər əlaqəli büdcə maddələrini hesablayır. Büdcə planlaması zamanı bazar araşdırmaları və rəqib şirkətlərin əmək haqqı səviyyələri də nəzərə alınır.",
+          "Vəzifə təsvirinin hazırlanması - HR departamenti departament rəhbərləri ilə birgə ətraflı vəzifə təsviri hazırlayır. Bu sənəddə vəzifənin əsas funksiyaları, tələb olunan təhsil və iş təcrübəsi, zəruri bacarıqlar, hesabatlılıq strukturu və karyera inkişaf imkanları əks olunur."
+        ],
+        "detailed": "HR departamenti rəhbərliklə birlikdə şirkətin strateji məqsədlərinə uyğun olaraq yeni işçi ehtiyacını müəyyən edir. Bu mərhələdə büdcə, vaxt planlaması və vəzifə tələbləri dəqiqləşdirilir."
+      }
+    },
+    {
+      "id": 2,
+      "type": "rect",
+      "x": 460,
+      "y": 40,
+      "w": 260,
+      "h": 100,
+      "text": "Vəzifə təsvirinin hazırlanması\nvə elanın yerləşdirilməsi",
+      "laneId": "lane-hr",
+      "color": "#3a7894",
+      "info": {
+        "general": [
+          "İş elanı mətni - HR mütəxəssisləri tərəfindən cəlbedici və informativ iş elanı mətni hazırlanır. Elanda şirkətin missiyası, departamentin fəaliyyəti, vəzifənin əsas öhdəlikləri, tələblər və təklif olunan şərtlər ətraflı şəkildə təsvir olunur.",
+          "Tələb olunan bacarıqlar - Vəzifə üçün zəruri olan hard (texniki) və soft (şəxsi) bacarıqlar dəqiq müəyyən edilir. Buraya təhsil səviyyəsi, iş təcrübəsi (minimum il), kompüter bilikləri, dil bacarıqları və liderlik keyfiyyətləri daxildir.",
+          "Əmək haqqı diapazonu - Bazar araşdırmalarına əsasən əmək haqqı diapazonu müəyyən edilir və elanda göstərilir. Bu şəffaflıq namizədlərin daha dəqiq qiymətləndirilməsinə və vaxta qənaətə səbəb olur."
+        ],
+        "detailed": "HR əməkdaşları tərəfindən ətraflı vəzifə təsviri hazırlanır. Elan şirkətin saytında, iş portallarında (LinkedIn, Indeed, JobSearch) və sosial şəbəkələrdə yerləşdirilir."
+      }
+    },
+    {
+      "id": 3,
+      "type": "rect",
+      "x": 800,
+      "y": 40,
+      "w": 260,
+      "h": 100,
+      "text": "CV-lərin ilkin filtrasiyası\nvə qısa siyahının tərtibi",
+      "laneId": "lane-hr",
+      "color": "#4a8ba8",
+      "info": {
+        "general": [
+          "CV bazasının yaradılması - Daxil olan bütün CV-lər HR sistemi vasitəsilə mərkəzləşdirilmiş bazada toplanır. Hər bir CV təhlil edilərək müvafiq kateqoriyalara bölünür və sonrakı mərhələlər üçün əlçatan edilir.",
+          "Uyğunluq meyarları - CV-lər əvvəlcədən müəyyən edilmiş meyarlar əsasında (təhsil, təcrübə, bacarıqlar) avtomatik və manual olaraq filtrlənir. Uyğun olmayan CV-lər müvafiq qeydiyyatla arxivləşdirilir.",
+          "İlkin telefon müsahibəsi - Filtrdən keçən namizədlərlə HR tərəfindən qısa (10-15 dəqiqə) telefon müsahibəsi keçirilir. Bu mərhələdə namizədin ünsiyyət qabiliyyəti, motivasiyası və ümumi uyğunluğu qiymətləndirilir."
+        ],
+        "detailed": "HR departamenti daxil olan CV-ləri tələblərə uyğun olaraq filtrləyir. Uyğun namizədlərlə qısa telefon müsahibəsi keçirilir və ən güclü 5-10 namizəd seçilir."
+      }
+    },
+    {
+      "id": 4,
+      "type": "rect",
+      "x": 1200,
+      "y": 40,
+      "w": 260,
+      "h": 100,
+      "text": "Namizədlərin departament\nrəhbərinə təqdim edilməsi",
+      "laneId": "lane-hr",
+      "color": "#5a9ab8",
+      "info": {
+        "general": [
+          "Namizəd profilləri - Seçilmiş namizədlər üçün ətraflı profillər hazırlanır. Hər bir profilə CV, əlavə sənədlər, telefon müsahibəsi qeydləri və HR-in ilkin qiymətləndirməsi daxildir.",
+          "CV-lərin ötürülməsi - Bütün sənədlər departament rəhbərinə elektron poçt və ya HR sistemi vasitəsilə göndərilir. Rəhbər namizədlərlə tanış olmaq və müsahibə üçün hazırlıq aparmaq imkanı əldə edir.",
+          "Müsahibə cədvəli - HR departamenti tərəfindən hər bir namizəd üçün müsahibə vaxt cədvəli hazırlanır. Cədvəl hazırlanarkən həm departament rəhbərinin, həm də namizədlərin məşğulluğu nəzərə alınır."
+        ],
+        "detailed": "Seçilmiş namizədlərin profilləri və CV-ləri departament rəhbərinə göndərilir. İlk müsahibə üçün vaxt cədvəli tərtib edilir."
+      }
+    },
+    {
+      "id": 5,
+      "type": "rect",
+      "x": 300,
+      "y": 200,
+      "w": 260,
+      "h": 100,
+      "text": "Namizədlərlə ilkin\nmüsahibənin keçirilməsi",
+      "laneId": "lane-manager",
+      "color": "#e67e22",
+      "info": {
+        "general": [
+          "Motivasiya sorğusu - Departament rəhbəri namizədin işə niyə müraciət etməsi, şirkətdən nə gözləməsi və karyera hədəfləri barədə ətraflı sorğu aparır. Namizədin şirkətə gətirə biləcəyi dəyər və uzunmüddətli perspektivlər müzakirə olunur.",
+          "Peşəkar bacarıqlar - Namizədin əvvəlki iş təcrübəsi, nailiyyətləri və peşəkar bilikləri ətraflı araşdırılır. Konkret nümunələr əsasında namizədin problem həll etmə, qərar qəbuletmə və komanda ilə işləmə bacarıqları qiymətləndirilir.",
+          "Şirkət mədəniyyətinə uyğunluq - Namizədin şirkətin dəyərləri, iş mühiti və korporativ mədəniyyəti ilə uyğunluğu müəyyən edilir. Bu, uzunmüddətli əməkdaşlıq üçün əsas amillərdən biridir."
+        ],
+        "detailed": "Departament rəhbəri tərəfindən namizədlərlə şəxsən və ya onlayn müsahibə keçirilir. Namizədin motivasiyası, peşəkar bacarıqları və komandaya uyğunluğu qiymətləndirilir."
+      }
+    },
+    {
+      "id": 6,
+      "type": "rect",
+      "x": 730,
+      "y": 200,
+      "w": 260,
+      "h": 100,
+      "text": "Texniki tapşırığın\nverilməsi və qiymətləndirilməsi",
+      "laneId": "lane-manager",
+      "color": "#f39c12",
+      "info": {
+        "general": [
+          "Test tapşırığı - Namizədə peşəkar bacarıqlarını nümayiş etdirməsi üçün real iş vəziyyətinə əsaslanan test tapşırığı verilir. Tapşırıq müəyyən vaxt çərçivəsində (adətən 3-5 gün) hazırlanmalıdır və namizədin analitik düşüncə qabiliyyətini ölçür.",
+          "Case-studies - Namizədə şirkətin əvvəlki layihələrinə əsaslanan case-studies təqdim edilir. Bu, namizədin real iş situasiyalarında necə qərar verdiyini, problemlərə yanaşmasını və strateji düşüncəsini qiymətləndirməyə imkan verir.",
+          "Texniki bacarıq qiyməti - Namizədin texniki bilikləri və bacarıqları departamentin texniki ekspertləri tərəfindən qiymətləndirilir. Qiymətləndirmə zamanı namizədin bilik dərinliyi, praktiki təcrübəsi və yeni texnologiyalara uyğunlaşma qabiliyyəti nəzərə alınır."
+        ],
+        "detailed": "Namizədə peşəkar biliklərini yoxlamaq üçün texniki tapşırıq (test, case-study) verilir. Tapşırığın nəticələri departament rəhbəri və texniki mütəxəssislər tərəfindən qiymətləndirilir."
+      }
+    },
+    {
+      "id": 7,
+      "type": "rect",
+      "x": 1320,
+      "y": 200,
+      "w": 260,
+      "h": 100,
+      "text": "Final namizədin\nseçilməsi və təsdiqi",
+      "laneId": "lane-manager",
+      "color": "#d35400",
+      "info": {
+        "general": [
+          "Yekun qiymətləndirmə - Bütün mərhələlərdən keçmiş namizədlər üçün yekun qiymət cədvəli tərtib edilir. Burada texniki bacarıqlar, davranış xüsusiyyətləri, motivasiya və şirkətə uyğunluq meyarları üzrə bal toplanır.",
+          "Rəhbərliklə razılaşma - Seçilmiş namizəd barədə yekun qərar üst rəhbərliklə razılaşdırılır. Bu mərhələdə namizədin təklif olunan əmək haqqı və digər şərtləri də təsdiqlənir.",
+          "Vəzifə təklifi hazırlığı - Qərar verildikdən sonra namizədə rəsmi təklif məktubu hazırlanır. Məktubda əmək haqqı, iş qrafiki, sınaq müddəti, sosial paket və digər şərtlər ətraflı göstərilir."
+        ],
+        "detailed": "Bütün mərhələlərdən sonra ən uyğun namizəd seçilir. Qərar rəhbərliklə razılaşdırılır və rəsmi təklif məktubu hazırlanır."
+      }
+    },
+    {
+      "id": 8,
+      "type": "rect",
+      "x": 70,
+      "y": 350,
+      "w": 260,
+      "h": 100,
+      "text": "Ərizə və sənədlərin\ntəqdim edilməsi",
+      "laneId": "lane-candidate",
+      "color": "#27ae60",
+      "info": {
+        "general": [
+          "Ərizə forması - Namizəd şirkətin rəsmi saytında və ya iş portalında yerləşdirilmiş ərizə formasını doldurur. Formada şəxsi məlumatlar, təhsil, iş təcrübəsi və əlavə bacarıqlar barədə məlumatlar tələb olunur.",
+          "CV və portfel - Namizəd öz peşəkar fəaliyyətini əks etdirən CV və mümkün portfelini (layihələr, iş nümunələri) təqdim edir. CV-də iş yerləri, təhsil, sertifikatlar və nailiyyətlər ətraflı şəkildə göstərilir.",
+          "Tövsiyə məktubları - Namizəd əvvəlki iş yerlərindən və ya akademik müəssisələrdən tövsiyə məktubları təqdim edir. Bu məktublar namizədin peşəkar keyfiyyətlərini və iş etikasını təsdiqləyir."
+        ],
+        "detailed": "Namizəd tərəfindən ərizə, CV, portfel və mümkün tövsiyə məktubları təqdim edilir. Bütün sənədlər HR departamentinin sisteminə daxil edilir."
+      }
+    },
+    {
+      "id": 9,
+      "type": "rect",
+      "x": 640,
+      "y": 350,
+      "w": 260,
+      "h": 100,
+      "text": "Müsahibə prosesinə\nqatılım və testlərin icrası",
+      "laneId": "lane-candidate",
+      "color": "#2ecc71",
+      "info": {
+        "general": [
+          "Müsahibə hazırlığı - Namizəd şirkət, departament və vəzifə haqqında ətraflı araşdırma aparır. Şirkətin son layihələri, dəyərləri və mədəniyyəti barədə məlumat toplayaraq müsahibəyə hazırlaşır.",
+          "Test tapşırıqları - Namizəd verilən texniki test və case-study tapşırıqlarını vaxtında və keyfiyyətlə icra edir. Tapşırıqların hazırlanması zamanı namizəd öz bilik və bacarıqlarını maksimum dərəcədə nümayiş etdirməyə çalışır.",
+          "Təqdimat - Namizəd əvvəlki layihələrindən nümunələr və ya verilmiş mövzuda təqdimat hazırlayaraq komissiya qarşısında çıxış edir. Təqdimat zamanı namizədin ünsiyyət bacarıqları və peşəkar bilikləri daha dərindən qiymətləndirilir."
+        ],
+        "detailed": "Namizəd müsahibə və test mərhələlərində aktiv iştirak edir. Öz bacarıqlarını, təcrübəsini və şirkətə gətirə biləcəyi dəyəri nümayiş etdirir."
+      }
+    },
+    {
+      "id": 10,
+      "type": "document",
+      "x": 1020,
+      "y": 350,
+      "w": 260,
+      "h": 100,
+      "text": "Təklifin qəbulu\nvə razılaşmanın imzalanması",
+      "laneId": "lane-candidate",
+      "color": "#1abc9c",
+      "info": {
+        "general": [
+          "Təklif məktubunun təhlili - Namizəd əmək haqqı, iş qrafiki, sınaq müddəti, məzuniyyət, sosial paket və digər şərtləri ətraflı araşdırır. Təklif olunan şərtlər bazar standartları ilə müqayisə edilir.",
+          "Şərtlərin müzakirəsi - Namizəd və HR departamenti arasında təklif olunan şərtlər barədə müzakirələr aparılır. Zəruri hallarda əmək haqqı, iş qrafiki və ya digər şərtlərdə dəyişikliklər edilə bilər.",
+          "Razılaşma imzalanması - Bütün şərtlər razılaşdırıldıqdan sonra namizəd tərəfindən əmək müqaviləsi və digər zəruri sənədlər imzalanır. İmzalanma prosesi elektron və ya fiziki formada həyata keçirilə bilər."
+        ],
+        "detailed": "Namizəd təklif olunan şərtləri (əmək haqqı, iş qrafiki, sosial paket) qiymətləndirir və razılaşdıqda əmək müqaviləsini imzalayır."
+      },
+      "style": "solid"
+    },
+    {
+      "id": 11,
+      "type": "rect",
+      "x": 80,
+      "y": 470,
+      "w": 260,
+      "h": 100,
+      "text": "Texniki müsahibənin\ntəşkili və keçirilməsi",
+      "laneId": "lane-candidate",
+      "color": "#8e44ad",
+      "info": {
+        "general": [
+          "Texniki suallar - Texniki komissiya tərəfindən namizədə peşəkar biliklərini, təcrübəsini və problem həll etmə qabiliyyətini yoxlamaq üçün suallar verilir. Suallar vəzifənin tələblərinə uyğun olaraq hazırlanır.",
+          "Praktiki tapşırıqlar - Namizədə real iş mühitinə yaxın praktiki tapşırıqlar verilir. Tapşırıqların icrası zamanı namizədin texniki bacarıqları, yanaşması və vaxtın idarə edilməsi bacarığı qiymətləndirilir.",
+          "Qiymətləndirmə cədvəli - Hər bir namizəd üçün texniki komissiya tərəfindən bal sisteminə əsaslanan qiymət cədvəli doldurulur. Qiymətləndirmə obyektivliyi üçün bir neçə müstəqil ekspertin rəyi nəzərə alınır."
+        ],
+        "detailed": "Texniki komissiya tərəfindən namizədin peşəkar bilikləri, proqramlaşdırma bacarıqları və problem həll etmə qabiliyyəti yoxlanılır. Qiymət cədvəli doldurulur."
+      },
+      "style": "dashed"
+    },
+    {
+      "id": 12,
+      "type": "rect",
+      "x": 640,
+      "y": 470,
+      "w": 260,
+      "h": 100,
+      "text": "Davranış müsahibəsi\nvə dəyərlərin uyğunluğu",
+      "laneId": "lane-candidate",
+      "color": "#9b59b6",
+      "info": {
+        "general": [
+          "Davranış sualları - Namizədə müxtəlif iş situasiyalarında necə davrandığı, çətinliklərlə necə mübarizə apardığı və komanda ilə necə əməkdaşlıq etdiyi barədə suallar verilir. Suallar əvvəlki təcrübəyə əsaslanaraq hazırlanır.",
+          "Şirkət dəyərləri - Namizədin şəxsi dəyərləri ilə şirkətin korporativ dəyərləri arasındakı uyğunluq müəyyən edilir. Bu, namizədin uzunmüddətli perspektivdə şirkətdə qalma ehtimalını artırır.",
+          "Komanda işi bacarıqları - Namizədin əvvəlki komanda layihələrindəki rolu, töhfəsi və əməkdaşlıq tərzi qiymətləndirilir. Komanda işində çeviklik, empatiya və konstruktiv rəy vermə bacarıqları xüsusi diqqət mərkəzindədir."
+        ],
+        "detailed": "HR və komanda üzvləri tərəfindən namizədin davranış xüsusiyyətləri, şirkət dəyərlərinə uyğunluğu və komanda işinə yanaşması qiymətləndirilir."
+      }
+    },
+    {
+      "id": 13,
+      "type": "rect",
+      "x": 1320,
+      "y": 470,
+      "w": 260,
+      "h": 100,
+      "text": "Yekun qiymət və\nnamizəd haqqında rəy",
+      "laneId": "lane-candidate",
+      "color": "#af7ac5",
+      "info": {
+        "general": [
+          "Qiymət cədvəli - Bütün müsahibə mərhələlərindən toplanan ballar ümumiləşdirilir. Hər bir namizəd üçün texniki biliklər, davranış xüsusiyyətləri, motivasiya və uyğunluq üzrə ayrı-ayrı ballar hesablanır.",
+          "Güclü və zəif tərəflər - Komissiya üzvləri hər bir namizədin güclü cəhətlərini (texniki bacarıqlar, ünsiyyət qabiliyyəti) və inkişaf etdirilməli tərəflərini (təcrübə çatışmazlığı, spesifik biliklər) qeyd edirlər.",
+          "Tövsiyə - Komissiya hər bir namizəd üçün yekun tövsiyə verir. Tövsiyəyə əsasən namizədin işə götürülməsi, gözləmə siyahısında saxlanılması və ya rədd edilməsi qərara alınır."
+        ],
+        "detailed": "Müsahibə komissiyası hər bir namizəd üçün qiymət cədvəlini doldurur, güclü və inkişaf etdirilməli tərəfləri qeyd edir və yekun tövsiyə verir."
+      },
+      "style": "dashed"
+    },
+    {
+      "id": 14,
+      "type": "rect",
+      "x": 80,
+      "y": 810,
+      "w": 260,
+      "h": 110,
+      "text": "İşə başlama tarixinin\ntəyin edilməsi və xoş gəldin",
+      "laneId": "lane-onboarding",
+      "color": "#2980b9",
+      "info": {
+        "general": [
+          "İşə başlama tarixi - Yeni işçi ilə razılaşdırılmış işə başlama tarixi təyin edilir. Tarix müəyyən edilərkən həm işçinin, həm də departamentin hazırlıq müddəti nəzərə alınır.",
+          "İlk gün proqramı - Yeni işçi üçün ilk iş gününün ətraflı proqramı hazırlanır. Proqrama şirkət turu, komanda ilə tanışlıq, HR görüşü və iş yerinin təqdimatı daxildir.",
+          "İş avadanlıqlarının hazırlanması - Yeni işçi üçün kompüter, telefon, iş stolu, giriş kartları və digər zəruri avadanlıqlar əvvəlcədən hazırlanır. Bütün avadanlıqların işlək vəziyyətdə olması təmin edilir."
+        ],
+        "detailed": "Yeni işçi üçün işə başlama tarixi təyin edilir. HR tərəfindən xoş gəldin e-məktubu göndərilir, iş yeri, avadanlıqlar və giriş kartları hazırlanır."
+      },
+      "style": "dashed"
+    },
+    {
+      "id": 15,
+      "type": "rect",
+      "x": 400,
+      "y": 670,
+      "w": 260,
+      "h": 110,
+      "text": "Orientation proqramı\nvə şirkət təlimatlandırması",
+      "laneId": "lane-interview",
+      "color": "#3498db",
+      "info": {
+        "general": [
+          "Şirkət tarixi - Yeni işçiyə şirkətin yaranma tarixi, inkişaf mərhələləri, nailiyyətləri və gələcək vizyonu barədə ətraflı məlumat verilir. Şirkətin uğur hekayələri və əsas hadisələri təqdim olunur.",
+          "Qaydalar və siyasət - Şirkətin daxili qaydaları, etika kodeksi, məzuniyyət siyasəti, iş saatları və digər vacib siyasətlər barədə təlimatlandırma aparılır. İşçi şirkətin gözləntilərini və öz hüquqlarını öyrənir.",
+          "Təhlükəsizlik təlimi - İş yeri təhlükəsizliyi, yanğın təhlükəsizliyi, ilk tibbi yardım və fövqəladə hallarda davranış qaydaları barədə təlim keçirilir. Təhlükəsizlik tədbirləri və şəxsi mühafizə vasitələri barədə məlumat verilir."
+        ],
+        "detailed": "Yeni işçiyə şirkətin tarixi, missiyası, daxili qaydaları, təhlükəsizlik tədbirləri və HR siyasətləri barədə ətraflı məlumat verilir."
+      }
+    },
+    {
+      "id": 16,
+      "type": "rect",
+      "x": 720,
+      "y": 810,
+      "w": 260,
+      "h": 110,
+      "text": "İlk 30 günlük adaptasiya\nplanı və mentor təyini",
+      "laneId": "lane-onboarding",
+      "color": "#5dade2",
+      "info": {
+        "general": [
+          "Fərdi adaptasiya planı - Yeni işçi üçün ilk 30 günlük fərdiləşdirilmiş adaptasiya planı hazırlanır. Plana şirkət sistemləri ilə tanışlıq, departament proseslərinin öyrənilməsi, ilkin tapşırıqlar və təlim sessiyaları daxildir.",
+          "Mentor təyini - Təcrübəli bir işçi yeni işçiyə mentor təyin edilir. Mentor yeni işçini şirkət mühitinə adaptasiya etməkdə, suallarını cavablandırmaqda və peşəkar inkişafında dəstək olur.",
+          "Həftəlik geribildirim - Hər həftə sonu yeni işçi və mentor arasında geribildirim sessiyası keçirilir. Bu sessiyalarda irəliləyiş, çətinliklər və növbəti həftənin planları müzakirə olunur."
+        ],
+        "detailed": "Yeni işçi üçün ilk 30 günlük detallı adaptasiya planı hazırlanır. Təcrübəli bir işçi mentor təyin edilir və həftəlik geribildirim sessiyaları planlaşdırılır."
+      }
+    },
+    {
+      "id": 17,
+      "type": "rect",
+      "x": 1020,
+      "y": 670,
+      "w": 260,
+      "h": 110,
+      "text": "90 günlük sınaq müddəti\nvə performans qiymətləndirməsi",
+      "laneId": "lane-interview",
+      "color": "#85c1e9",
+      "info": {
+        "general": [
+          "Hədəflərin təyini - Sınaq müddətinin əvvəlində yeni işçi üçün aydın və ölçülə bilən hədəflər müəyyən edilir. Bu hədəflər SMART (Specific, Measurable, Achievable, Relevant, Time-bound) prinsiplərinə uyğun olaraq hazırlanır.",
+          "Əməliyyat nəticələri - Sınaq müddəti ərzində yeni işçinin əməliyyat nəticələri mütəmadi olaraq izlənilir və qeydiyyata alınır. Hər bir hədəf üzrə irəliləyiş rüblük olaraq qiymətləndirilir.",
+          "Yekun qiymət - 90 günlük sınaq müddətinin sonunda yeni işçinin ümumi performansı qiymətləndirilir. Qiymətləndirmə nəticəsində işçinin daimi işə qəbulu, sınaq müddətinin uzadılması və ya əməkdaşlığa xitam verilməsi qərara alınır."
+        ],
+        "detailed": "Yeni işçi 90 günlük sınaq müddətində müəyyən edilmiş KPI-lara uyğun olaraq qiymətləndirilir. Rəhbərlik və mentor tərəfindən yekun performans dəyərləndirməsi aparılır."
+      }
+    },
+    {
+      "id": 18,
+      "type": "rect",
+      "x": 80,
+      "y": 1010,
+      "w": 260,
+      "h": 100,
+      "text": "Əmək müqaviləsinin\nhazırlanması və imzalanması",
+      "laneId": "lane-onboarding",
+      "color": "#d35400",
+      "info": {
+        "general": [
+          "Müqavilə mətni - Kadr şöbəsi tərəfindən əmək müqaviləsinin mətni hazırlanır. Müqavilədə işçinin və işəgötürənin hüquq və öhdəlikləri, əmək haqqı, iş qrafiki, məzuniyyət şərtləri və digər vacib maddələr əks olunur.",
+          "Məxfilik sazişi - İşçi ilə məxfilik sazişi imzalanır. Bu sənəd şirkətin kommersiya sirri, müştəri məlumatları və digər məxfi məlumatların qorunmasını təmin edir.",
+          "Əlavə sənədlər - İşçi tərəfindən bank məlumatları, vergi identifikasiya nömrəsi, əmək kitabçası və digər zəruri sənədlər təqdim edilir. Bütün sənədlər kadr şöbəsi tərəfindən qeydiyyata alınır."
+        ],
+        "detailed": "Kadr şöbəsi tərəfindən əmək müqaviləsi, məxfilik sazişi və digər zəruri sənədlər hazırlanır. İşçi və rəhbərlik tərəfindən imzalanır."
+      },
+      "style": "dashed"
+    },
+    {
+      "id": 19,
+      "type": "rect",
+      "x": 490,
+      "y": 1010,
+      "w": 260,
+      "h": 100,
+      "text": "İşçi şəxsi işinin\naçılması və məlumat bazası",
+      "laneId": "lane-onboarding",
+      "color": "#e67e22",
+      "info": {
+        "general": [
+          "Şəxsi iş qovluğu - HR sistemində işçi üçün şəxsi iş qovluğu açılır. Bu qovluqda işçinin bütün sənədləri, müqavilələri, qiymətləndirmə hesabatları və digər rəsmi sənədlər saxlanılır.",
+          "Məlumat sistemi - İşçinin məlumatları şirkətin elektron kadr uçotu sisteminə daxil edilir. Bu sistem vasitəsilə işçinin işə qəbulu, məzuniyyətləri, xəstəlik vərəqələri və digər əməliyyatlar izlənilir.",
+          "Şirkət daxili portallar - İşçi üçün şirkətin daxili portallarına (intranet, e-mail, təqvim, sənəd dövriyyəsi sistemi) giriş yaradılır. İstifadəçi adı və şifrəsi təyin edilir."
+        ],
+        "detailed": "HR sistemində işçinin şəxsi işi açılır, bütün sənədlər rəqəmsallaşdırılır. Şirkətin daxili portallarına giriş və istifadəçi hesabları yaradılır."
+      }
+    },
+    {
+      "id": 20,
+      "type": "pill",
+      "x": 860,
+      "y": 1140,
+      "w": 260,
+      "h": 100,
+      "text": "Prosesin tamamlanması\nvə işçinin aktivləşdirilməsi",
+      "laneId": "lane-admin",
+      "color": "#2c5f7a",
+      "info": {
+        "general": [
+          "Proses yekunu - Bütün HR prosesləri uğurla tamamlanır. Sənədlər imzalanır, sistemlərə daxil edilir və işçi şirkətin tamhüquqlu üzvü olur.",
+          "Aktiv işçi statusu - İşçinin statusu \"aktiv\" olaraq dəyişdirilir. Bu andan etibarən işçi bütün şirkət hüquqlarından istifadə edə bilər və rəsmi olaraq şirkəti təmsil edə bilər.",
+          "Sonrakı addımlar - İşçi üçün növbəti mərhələdə karyera inkişafı planı, davamlı təlimlər və performans qiymətləndirmə prosesi başlayır. HR departamenti işçi ilə mütəmadi əlaqədə olur."
+        ],
+        "detailed": "Bütün formal mərhələlər tamamlandıqdan sonra işçi aktiv statusa keçirilir. İşçinin şirkət daxilində tam hüquqları aktivləşir və daimi əməkdaş kimi fəaliyyətə başlayır."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Təsdiq"
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Filtr"
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "2-3 gün"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "s": "bottom",
+      "e": "top",
+      "arrow": "end",
+      "label": "Müsahibə"
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Test"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "2-3 gün"
+    },
+    {
+      "from": 7,
+      "to": 10,
+      "s": "bottom",
+      "e": "top",
+      "arrow": "end",
+      "label": "Təklif"
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Göndər"
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Qəbul"
+    },
+    {
+      "from": 5,
+      "to": 11,
+      "s": "bottom",
+      "e": "right",
+      "arrow": "end",
+      "label": "Texniki"
+    },
+    {
+      "from": 11,
+      "to": 12,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Davranış"
+    },
+    {
+      "from": 12,
+      "to": 13,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Qiymət"
+    },
+    {
+      "from": 13,
+      "to": 7,
+      "s": "top",
+      "e": "bottom",
+      "arrow": "end",
+      "label": "Təsdiq"
+    },
+    {
+      "from": 10,
+      "to": 14,
+      "s": "bottom",
+      "e": "top",
+      "arrow": "end",
+      "label": "Başlanğıc"
+    },
+    {
+      "from": 14,
+      "to": 15,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "1-ci həftə"
+    },
+    {
+      "from": 15,
+      "to": 16,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "2-3 həftə"
+    },
+    {
+      "from": 16,
+      "to": 17,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "90 gün"
+    },
+    {
+      "from": 14,
+      "to": 18,
+      "s": "bottom",
+      "e": "top",
+      "arrow": "end",
+      "label": "Sənədlər"
+    },
+    {
+      "from": 18,
+      "to": 19,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Qeydiyyat"
+    },
+    {
+      "from": 19,
+      "to": 20,
+      "s": "right",
+      "e": "left",
+      "arrow": "end",
+      "label": "Aktiv"
+    }
+  ]
+}
