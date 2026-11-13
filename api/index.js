@@ -1,4 +1,4 @@
-import app from '../backend/server.js';
+import app from '../backend/app.js';
 
 // Vercel handler. With the project's vercel.json, /api/(.*) routes to this file.
 // Express server routes are mounted under /api, so this hands off cleanly.

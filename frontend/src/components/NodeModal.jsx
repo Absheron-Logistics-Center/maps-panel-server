@@ -16,7 +16,6 @@ export default function NodeModal({ node, onClose, anchorRect, presentation = fa
 
   if (!node) return null;
 
-  const sections = getSections(node).filter(s => s.items.length > 0);
   const cardStyle = computeCardStyle(anchorRect);
 
   return (
@@ -35,37 +34,7 @@ export default function NodeModal({ node, onClose, anchorRect, presentation = fa
           </button>
         )}
 
-        {node.text && (
-          <div className="modal-node-title">
-            {node.icon && (
-              <span
-                className="modal-node-icon"
-                style={node.color ? { background: `${node.color}1f`, color: node.color } : undefined}
-              >
-                <Icon name={node.icon} size={17} />
-              </span>
-            )}
-            <span>{node.text}</span>
-          </div>
-        )}
-
-        {sections.length === 0 && (
-          <p className="popup-preview-empty">Bu addım üçün məlumat əlavə edilməyib.</p>
-        )}
-
-        {sections.map(s => (
-          <div key={s.id} className={`modal-section ${s.risky ? 'risks' : ''}`}>
-            <h3 style={s.color ? { color: s.color } : undefined}>
-              <Icon name={s.icon} size={18} />
-              <span>{s.title}:</span>
-            </h3>
-            {s.type === 'list' ? (
-              <ul>{s.items.map((r, i) => <li key={i}>{r}</li>)}</ul>
-            ) : (
-              s.items.map((p, i) => <p key={i}>{p}</p>)
-            )}
-          </div>
-        ))}
+        <PopupContent node={node} />
       </div>
     </div>
   );
@@ -103,4 +72,44 @@ function computeCardStyle(anchorRect) {
     position: 'fixed', left, top, transform: 'none', margin: 0,
     maxHeight: maxH, width: Math.min(CARD_W, vw - 2 * MARGIN),
   };
+}
+/* The popup's content. Shared with the editor's "Önizləmə" tab, so the
+   preview is the real thing, not a look-alike. */
+export function PopupContent({ node }) {
+  const sections = getSections(node).filter(s => s.items.length > 0);
+  return (
+    <>
+    {node.text && (
+      <div className="modal-node-title">
+        {node.icon && (
+          <span
+            className="modal-node-icon"
+            style={node.color ? { background: `${node.color}1f`, color: node.color } : undefined}
+          >
+            <Icon name={node.icon} size={17} />
+          </span>
+        )}
+        <span>{node.text}</span>
+      </div>
+    )}
+
+    {sections.length === 0 && (
+      <p className="popup-preview-empty">Bu addım üçün məlumat əlavə edilməyib.</p>
+    )}
+
+    {sections.map(s => (
+      <div key={s.id} className={`modal-section ${s.risky ? 'risks' : ''}`}>
+        <h3 style={s.color ? { color: s.color } : undefined}>
+          <Icon name={s.icon} size={18} />
+          <span>{s.title}:</span>
+        </h3>
+        {s.type === 'list' ? (
+          <ul>{s.items.map((r, i) => <li key={i}>{r}</li>)}</ul>
+        ) : (
+          s.items.map((p, i) => <p key={i}>{p}</p>)
+        )}
+      </div>
+    ))}
+    </>
+  );
 }

@@ -5,7 +5,34 @@
 
 function groupName(ctx, id) {
   const g = (ctx?.groups || []).find(x => Number(x.id) === Number(id));
-  return g ? `"${g.name}"` : `#${id}`;
+  if (!g) return `#${id} (tapılmadı)`;
+  return `${g.no ? g.no + ' ' : ''}"${g.path || g.name}"`;
+}
+// A folder given by id OR by a ref to a folder made earlier in the same batch.
+function groupTarget(ctx, a, idKey, refKey) {
+  if (a[refKey] != null) {
+    const n = ctx?.__refs?.[String(a[refKey])];
+    return n ? `yeni "${n}"` : `yeni qovluq (${a[refKey]})`;
+  }
+  if (a[idKey] == null) return null;
+  return groupName(ctx, a[idKey]);
+}
+function placeText(ctx, a) {
+  if (a.afterRef != null) return `, ${groupTarget(ctx, { r: a.afterRef }, 'x', 'r')} qovluğundan sonra`;
+  if (a.afterGroupId != null) return `, ${groupName(ctx, a.afterGroupId)} qovluğundan sonra`;
+  if (a.beforeGroupId != null) return `, ${groupName(ctx, a.beforeGroupId)} qovluğundan əvvəl`;
+  if (a.position === 'first') return ', ən əvvələ';
+  return '';
+}
+
+/** Names of the folders a batch creates, by their ref — for the popup text. */
+export function withRefs(ctx, actions) {
+  const refs = {};
+  for (const a of actions || []) {
+    if (a.type === 'create_group' && a.ref != null) refs[String(a.ref)] = a.name;
+    if (a.type === 'create_groups' && Array.isArray(a.refs)) a.refs.forEach((r, i) => { if (r != null) refs[String(r)] = a.names?.[i]; });
+  }
+  return { ...(ctx || {}), __refs: refs };
 }
 function procName(ctx, id) {
   const all = [...(ctx?.processes || []), ...(ctx?.archived || [])];
@@ -47,28 +74,48 @@ function specSummary(a) {
  */
 export function describeAction(a, ctx) {
   switch (a.type) {
-    case 'create_group':
+    case 'create_group': {
+      const parent = groupTarget(ctx, a, 'parentId', 'parentRef');
       return {
         title: 'Yeni qovluq yarat',
-        detail: `"${a.name}"` + (a.parentId ? ` — ${groupName(ctx, a.parentId)} qovluğunun içində` : ' — əsas siyahıda'),
+        detail: `"${a.name}": ${parent ? `${parent} içində` : 'əsas siyahıda'}${placeText(ctx, a)}`,
         icon: 'folder'
       };
+    }
+    case 'create_groups': {
+      const names = (a.names || []).filter(Boolean);
+      const parent = groupTarget(ctx, a, 'parentId', 'parentRef');
+      const shown = names.slice(0, 8).map(n => `• ${n}`).join('\n');
+      return {
+        title: `${names.length} yeni qovluq yarat`,
+        detail: `Yer: ${parent ? `${parent} içində` : 'əsas siyahıda'}${placeText(ctx, a)}\n${shown}${names.length > 8 ? `\n… və daha ${names.length - 8}` : ''}`,
+        icon: 'folder'
+      };
+    }
+    case 'move_group': {
+      const what = groupTarget(ctx, a, 'groupId', 'groupRef');
+      const hasParent = 'parentId' in a || a.parentRef != null;
+      const to = hasParent ? (groupTarget(ctx, a, 'parentId', 'parentRef') ? `${groupTarget(ctx, a, 'parentId', 'parentRef')} içinə` : 'əsas siyahıya (ən üst səviyyə)') : 'eyni yerdə, yeni sıra';
+      return { title: 'Qovluğu köçür', detail: `${what} → ${to}${placeText(ctx, a)}\nİçindəki qovluq və diaqramlar onunla birlikdə gedir.`, icon: 'folder' };
+    }
     case 'rename_group':
       return {
         title: 'Qovluğun adını dəyiş',
-        detail: `${groupName(ctx, a.groupId)} → "${a.name}"`,
+        detail: `${groupTarget(ctx, a, 'groupId', 'groupRef')} → "${a.name}"`,
         icon: 'edit'
       };
     case 'delete_group':
       return {
         title: 'Qovluğu götür',
-        detail: `${groupName(ctx, a.groupId)} — qovluq siyahıdan götürülür, içindəki diaqramlar ARXİVƏ köçür (bərpa etmək olar).`,
+        detail: `${groupTarget(ctx, a, 'groupId', 'groupRef')}: qovluq siyahıdan götürülür, içindəki diaqramlar ARXİVƏ köçür (bərpa etmək olar).`,
         danger: true, icon: 'archive'
       };
+    case 'move_diagram':
+      return { title: 'Diaqramı köçür', detail: `${procName(ctx, a.processId)} → ${groupTarget(ctx, a, 'groupId', 'groupRef')}`, icon: 'folder' };
     case 'create_diagram':
       return {
         title: 'Yeni diaqram yarat',
-        detail: `"${a.title}"${a.subtitle ? ` (${a.subtitle})` : ''} — ${groupName(ctx, a.groupId)} qovluğunda.\n${specSummary(a)} qurulacaq və açılacaq.`,
+        detail: `"${a.title}"${a.subtitle ? ` (${a.subtitle})` : ''}, ${groupTarget(ctx, a, 'groupId', 'groupRef') || 'ilk qovluq'} qovluğunda.\n${specSummary(a)} qurulacaq və açılacaq.`,
         icon: 'plus'
       };
     case 'generate_diagram':
@@ -83,7 +130,7 @@ export function describeAction(a, ctx) {
         detail: `${procName(ctx, a.processId)}\n` + [
           a.title != null ? `ad → "${a.title}"` : null,
           a.subtitle != null ? `alt ad → "${a.subtitle}"` : null,
-          a.groupId != null ? `qovluq → ${groupName(ctx, a.groupId)}` : null
+          a.groupId != null || a.groupRef != null ? `qovluq → ${groupTarget(ctx, a, 'groupId', 'groupRef')}` : null
         ].filter(Boolean).join('\n'),
         icon: 'edit'
       };

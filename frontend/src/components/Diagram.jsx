@@ -18,7 +18,7 @@ import { autoNodeHeight } from './nodeMeasure.js';
 import { nodeDefaults } from './nodeStyle.js';
 import { resolveNodePlacement } from './nodeLayout.js';
 import AiButton from './ai/AiButton.jsx';
-import AiSidebar from './ai/AiSidebar.jsx';
+import { AiBinding, useAi } from './ai/AiHost.jsx';
 import { StatusControl } from './Status.jsx';
 import SaveReminder from './SaveReminder.jsx';
 import { buildFromSpec, findLane, nextNodeId as nextFreeNodeId, portsFor, safeShape, safeStyle } from './ai/aiBuild.js';
@@ -188,7 +188,7 @@ export default function Diagram({ processId, focusNodeId, onBack, onLogout }) {
   // A new edge awaiting confirmation because it would cross existing arrow(s).
   const [pendingEdge, setPendingEdge] = useState(null);
   // AI assistant sidebar (admin only).
-  const [aiOpen, setAiOpen] = useState(false);
+  const { open: aiOpen, setOpen: setAiOpen } = useAi();
 
   // Multi-select: set of node ids selected together (edit mode).
   const [selectedIds, setSelectedIds] = useState([]);
@@ -1477,9 +1477,7 @@ export default function Diagram({ processId, focusNodeId, onBack, onLogout }) {
       </div>
 
       {isAdmin && !presenting && (
-        <AiSidebar
-          open={aiOpen}
-          onClose={() => setAiOpen(false)}
+        <AiBinding
           context={aiContext}
           runActions={runAiActions}
           snapshot={aiSnapshot}

@@ -6,7 +6,7 @@
 import { useState, useEffect } from 'react';
 import { X, Trash2, Plus, Edit3, Save, Folder, Archive, Search, Play, LogOut, Check, Loader2 } from '../icons.jsx';
 import { Sparkles, ArrowRight, ExternalLink } from 'lucide-react';
-import { describeAction } from './aiActions.js';
+import { describeAction, withRefs } from './aiActions.js';
 import { buildFromSpec } from './aiBuild.js';
 import { buildDiagramSvg } from '../diagramExport.js';
 
@@ -44,7 +44,8 @@ export default function AiActionPopup({ actions, context, onCancel, onConfirm })
   const [skipped, setSkipped] = useState([]);   // indexes the admin dropped
   const [running, setRunning] = useState(false);
 
-  const described = actions.map(a => ({ a, d: describeAction(a, context) }));
+  const refCtx = withRefs(context, actions);
+  const described = actions.map(a => ({ a, d: describeAction(a, refCtx) }));
   const kept = described.filter((_, i) => !skipped.includes(i));
   const anyDanger = kept.some(x => x.d.danger);
 

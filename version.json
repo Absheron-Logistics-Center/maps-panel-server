@@ -1,0 +1,11 @@
+{
+  "version": "1.3.1",
+  "date": "2026-11-12",
+  "notes": [
+    "Əsas səhifədə sağ yuxarıda adınız, ekranınızın versiyası və zəng",
+    "Zəng həmişə açılır: yeni versiya varsa göstərir, yoxdursa ən son versiyanın sizdə olduğunu deyir",
+    "Avtomatik yenilə: açsanız yeni versiya çıxanda 10 saniyəlik geri sayımdan sonra özü keçir",
+    "Yeniləmə telefon kimi: developer quraşdırır, hər istifadəçi öz zəngindən istədiyi vaxt keçir",
+    "AI köməkçi bölmələr arasında keçəndə bağlanmır; admin daxil olanda animasiyalı salamlama"
+  ]
+}

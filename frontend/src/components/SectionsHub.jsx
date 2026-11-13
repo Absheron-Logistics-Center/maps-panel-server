@@ -5,6 +5,8 @@ import { LogOut } from './icons.jsx';
 import { api, setToken } from '../api/client.js';
 import { useLabels } from '../labels/LabelsContext.jsx';
 import TitleEditButton from './TitleEditButton.jsx';
+import { UpdateButton, HubAccount } from './UpdateCenter.jsx';
+import { AccountsButton } from './AccountsCenter.jsx';
 import Welcome1Img from '../assets/welcome/1.png';
 import Welcome2Img from '../assets/welcome/2.png';
 import Welcome3Img from '../assets/welcome/3.png';
@@ -102,6 +104,9 @@ export default function SectionsHub({ onPick, onLogout }) {
           <div className="pill-chip">{fmtDate(now)}</div>
         </div>
         <div className="top-right">
+          <HubAccount />
+          <AccountsButton />
+          <UpdateButton />
           <FeelToggle />
           <button className="logout-btn" onClick={logout}>
             <LogOut size={16} /><span>{tLabel('topbar.logout', 'Çıxış')}</span>

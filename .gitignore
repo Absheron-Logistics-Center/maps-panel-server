@@ -10,3 +10,11 @@ data/.mongo-outbox.json
 data/.write-probe.json
 backend/.env
 *.tmp
+
+# update packages, backups and install status (own server only)
+.updates/
+frontend/dist-next/
+frontend/dist-prev/
+updates/
+frontend/versions/
+frontend/versions-next/

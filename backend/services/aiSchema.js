@@ -141,13 +141,23 @@ Hər action istifadəçiyə POPUP-da təsdiq üçün göstərilir, ona görə
 əməliyyatı sərbəst təklif et — icra yalnız təsdiqdən sonra baş verir.
 
 SİYAHI EKRANI (context.view === "list") üçün:
-  { "type":"create_group",     "name":"...", "parentId":null }
-  { "type":"rename_group",     "groupId":32, "name":"..." }
-  { "type":"delete_group",     "groupId":32 }
-  { "type":"create_diagram",   "title":"...", "subtitle":"...", "groupId":6,
+  context.groups = qovluqlar EKRANDAKI SIRA ilə (ağac sırası). Hər qovluq:
+    { id, no:"3.2", name, path:"Gömrük / İdxal", parentId, depth, subfolders, diagrams }
+    "no" = ekranda qovluğun yanında görünən nömrə. İstifadəçi "3.2 qovluğu", "3-cü qovluğun içinə"
+    desə — "no"-ya görə id-ni tap. Adla desə — "name"/"path"-a görə tap (böyük-kiçik hərf fərqi yoxdur).
+  context.processes[].groupNo = diaqramın olduğu qovluğun nömrəsi.
+  context.selection = istifadəçinin ekranda seçdiyi qovluq/diaqramlar ("bunları", "seçdiklərimi").
+
+  { "type":"create_group",  "name":"...", "parentId":null, "ref":"g1" }
+  { "type":"create_groups", "names":["A","B","C"], "parentId":6, "refs":["a","b","c"] }   // ÇOXLU qovluq bir dəfəyə
+  { "type":"rename_group",  "groupId":32, "name":"..." }
+  { "type":"move_group",    "groupId":32, "parentId":6 }          // qovluğu başqa qovluğun İÇİNƏ köçür
+  { "type":"move_group",    "groupId":32, "parentId":null }       // ən üst səviyyəyə çıxar
+  { "type":"delete_group",  "groupId":32 }
+  { "type":"create_diagram","title":"...", "subtitle":"...", "groupId":6,
     "lanes":[...], "nodes":[...], "edges":[...] }        // aşağıdakı SPEC formatı
-  { "type":"rename_diagram",   "processId":107, "title":"...", "subtitle":"...", "groupId":6 }
-      // yalnız dəyişən sahələri yaz; groupId verilsə diaqram o qovluğa köçür
+  { "type":"move_diagram",  "processId":107, "groupId":6 }        // diaqramı başqa qovluğa köçür
+  { "type":"rename_diagram","processId":107, "title":"...", "subtitle":"..." }   // yalnız dəyişən sahələr
   { "type":"archive_diagram",  "processId":107 }
   { "type":"unarchive_diagram","processId":107, "groupId":6 }          // arxivdən bərpa; groupId yoxdursa əvvəlki qovluq
   { "type":"unarchive_diagram","processId":107, "newGroupName":"..." } // bərpa edib YENİ qovluğa qoy
@@ -158,6 +168,34 @@ SİYAHI EKRANI (context.view === "list") üçün:
   { "type":"open_diagram",     "processId":107 }
   { "type":"filter",           "query":"gömrük" }        // axtarış sahəsini doldurur
   { "type":"logout" }
+
+  QOVLUQ YERLƏŞDİRMƏ QAYDALARI (çox vacib — səhv yerə qoyma):
+  - "parentId" YALNIZ context.groups-dakı MÖVCUD id ola bilər və ya null (ən üst səviyyə).
+    HEÇ VAXT id uydurma və ya "növbəti id belə olacaq" deyə təxmin etmə — uydurulmuş id başqa
+    qovluğa düşür və qovluq SƏHV YERƏ gedir.
+  - EYNİ cavabda yaratdığın YENİ qovluğa istinad etmək üçün "ref" ver ("ref":"g1") və sonra
+    "parentRef":"g1" / "groupRef":"g1" / "afterRef":"g1" yaz (parentId/groupId əvəzinə). Məs. 1 əsas
+    qovluq + içində 5 alt qovluq:
+      { "type":"create_group",  "name":"Gömrük", "parentId":null, "ref":"g" },
+      { "type":"create_groups", "names":["İdxal","İxrac","Tranzit","Sənədlər","Nəzarət"], "parentRef":"g" }
+  - Sıra: yeni qovluq defolt olaraq həmin səviyyənin SONUNA düşür. Başqa yer istənsə:
+      "position":"first"            — həmin səviyyənin əvvəlinə
+      "afterGroupId":12             — 12 nömrəli qovluqdan DƏRHAL SONRA (eyni valideyndə olmalıdır)
+      "beforeGroupId":12            — 12-dən DƏRHAL ƏVVƏL
+    Bu sahələr create_group, create_groups və move_group-da işləyir. move_group-da "parentId" yazmasan
+    qovluq öz valideynində qalır, yalnız sırası dəyişir.
+  - "N qovluq əlavə et" (məs. "20 qovluq") → TAM N ədəd ad olan BİR create_groups yaz (20 ayrı action yox).
+    Adlar verilməyibsə "Yeni qovluq 1", "Yeni qovluq 2"... kimi adlandır və reply-da qeyd et.
+    Ad siyahısı verilibsə (vergül, sətir və ya nömrə ilə) — HƏR adı olduğu kimi, SIRA ilə götür.
+  - Yer: istifadəçi qovluq adı/nömrəsi deyibsə ("3.2-nin içinə", "Gömrük qovluğuna") → həmin qovluğun
+    id-si parentId olur. "Yanına", "altına (eyni səviyyədə)", "sonra" → eyni parentId + afterGroupId.
+    "İçinə", "daxilinə", "alt qovluq" → parentId = həmin qovluq. Heç nə deyilməyibsə → parentId null.
+    Verilən ad/nömrə context.groups-da TAPILMIRSA və ya iki qovluğa uyğun gəlirsə — TƏXMİN ETMƏ, "ask" ilə soruş
+    (variantlarda qovluğun nömrəsini və tam yolunu göstər: "3.2 Gömrük / İdxal").
+  - Mövcud qovluğu köçürmək üçün create+delete ETMƏ — move_group istifadə et (içindəkilər onunla gedir).
+  - Diaqramı köçürmək üçün move_diagram istifadə et.
+  - "reply"-da hər qovluğun hara düşəcəyini NÖMRƏ və YOLU ilə yaz (məs. "3.2 Gömrük / İdxal içinə 20 qovluq").
+    Daxili id-ləri (ID: 2) reply-da göstərmə, istifadəçi onları görmür.
 
 HESABAT EKRANI (context.view === "hesabat") üçün — yalnız hesabat cədvəlinə təsir edir,
 əsas səhifəyə HEÇ VAXT toxunmur. rowId = context.rows[].id (sıra nömrəsi = order).
@@ -305,7 +343,9 @@ const RULES = `
    "reply"-da nəyin dəyişəcəyini açıq yaz. Hesabat əməliyyatlarının əsas səhifəyə
    toxunmadığını, əsas səhifə əməliyyatlarının hesabata toxunmadığını bil.
 4. id-ləri UYDURMA. groupId / processId / nodeId / laneId yalnız context-dən götürülür.
-   Lazımi id context-də yoxdursa — "ask" ilə soruş.
+   Eyni cavabda yaratdığın yeni qovluq üçün "ref" + "parentRef"/"groupRef" istifadə et.
+   Lazımi id context-də yoxdursa — "ask" ilə soruş. Cavabın göstərilməzdən əvvəl sistem
+   bütün id-ləri yoxlayır; səhv olsa "[Sistem yoxlaması]" mesajı gələcək — onu düzəlt.
 5. type/style dəyərləri yalnız icazə verilən siyahıdan olsun.
 6. "Nə yaradım?" kimi ümumi sorğuda əvvəlcə sual ver, sonra qur.
 7. actions boş ola bilər — sadəcə söhbət/izahat istənirsə heç nə etmə.
@@ -498,4 +538,136 @@ function normalize(obj) {
     lesson: typeof o.lesson === 'string' && o.lesson.trim() ? o.lesson.trim().slice(0, 300) : null,
     actions
   };
+}
+
+
+/* ------------------------------------------------------------------ *
+ * Self-check of the model's actions against the live context, BEFORE the
+ * admin sees them. Problems go back to the model for one more try, so it
+ * fixes an invented parentId instead of the folder landing in a random place.
+ * ------------------------------------------------------------------ */
+const NUM_WORDS = { bir: 1, iki: 2, 'üç': 3, 'dörd': 4, 'beş': 5, 'altı': 6, yeddi: 7, 'səkkiz': 8, doqquz: 9, on: 10 };
+
+/** "20 qovluq", "add 15 folders", "beş qrup" -> 20 / 15 / 5 (or null) */
+export function requestedFolderCount(text) {
+  const t = String(text || '').toLowerCase();
+  const m = t.match(/(\d{1,3})\s*(?:ədəd\s*|eded\s*|tane\s*|dənə\s*)?(?:yeni\s*|new\s*|alt\s*|sub\s*)?(?:qovluq|qovluğ|qrup|papka|group|folder)/i);
+  if (m) return Number(m[1]);
+  const w = t.match(/\b(bir|iki|üç|dörd|beş|altı|yeddi|səkkiz|doqquz|on)\s+(?:ədəd\s+)?(?:yeni\s+)?(?:alt\s+)?(?:qovluq|qrup|papka)/i);
+  return w ? NUM_WORDS[w[1]] : null;
+}
+
+export function lintActions(actions, context, lastUserText = '') {
+  const problems = [];
+  const view = context?.view;
+  const list = Array.isArray(actions) ? actions : [];
+
+  if (view === 'list') {
+    const groups = Array.isArray(context?.groups) ? context.groups : [];
+    const gids = new Set(groups.map(g => String(g.id)));
+    const pids = new Set([...(context?.processes || []), ...(context?.archived || [])].map(p => String(p.id)));
+    const parentOf = new Map(groups.map(g => [String(g.id), g.parentId == null ? null : String(g.parentId)]));
+    const refs = new Set();
+    let created = 0;
+    const batches = [];
+    const label = (a, i) => `#${i + 1} ${a.type}`;
+    const checkGroupRef = (a, i, idKey, refKey, { allowNull = false, required = true } = {}) => {
+      const hasId = a[idKey] !== undefined && a[idKey] !== null && a[idKey] !== '';
+      const hasRef = a[refKey] != null && a[refKey] !== '';
+      if (hasId && hasRef) problems.push(`${label(a, i)}: həm ${idKey}, həm ${refKey} yazılıb — yalnız birini saxla.`);
+      if (hasRef) {
+        if (!refs.has(String(a[refKey]))) problems.push(`${label(a, i)}: ${refKey} "${a[refKey]}" bu cavabda ƏVVƏLCƏ yaradılmayıb (əvvəlki action-da "ref" ilə təyin et).`);
+        return;
+      }
+      if (hasId) {
+        if (!gids.has(String(a[idKey]))) problems.push(`${label(a, i)}: ${idKey} ${a[idKey]} context.groups-da YOXDUR (uydurulmuş id). Yeni qovluğa istinad lazımdırsa ref/${refKey} istifadə et, mövcud qovluqdursa düzgün id-ni context.groups-dan (no/name/path) tap.`);
+        return;
+      }
+      if (required && !allowNull) problems.push(`${label(a, i)}: ${idKey} göstərilməyib.`);
+    };
+    const checkSibling = (a, i) => {
+      for (const k of ['afterGroupId', 'beforeGroupId']) {
+        if (a[k] != null && !gids.has(String(a[k]))) problems.push(`${label(a, i)}: ${k} ${a[k]} context.groups-da yoxdur.`);
+      }
+      if (a.afterRef != null && !refs.has(String(a.afterRef))) problems.push(`${label(a, i)}: afterRef "${a.afterRef}" əvvəlcə yaradılmayıb.`);
+    };
+
+    list.forEach((a, i) => {
+      switch (a.type) {
+        case 'create_group':
+          if (!String(a.name || '').trim()) problems.push(`${label(a, i)}: "name" boşdur.`);
+          checkGroupRef(a, i, 'parentId', 'parentRef', { allowNull: true });
+          checkSibling(a, i);
+          if (a.ref != null) refs.add(String(a.ref));
+          created++;
+          break;
+        case 'create_groups': {
+          const names = Array.isArray(a.names) ? a.names.filter(n => String(n || '').trim()) : [];
+          if (!names.length) problems.push(`${label(a, i)}: "names" siyahısı boşdur.`);
+          checkGroupRef(a, i, 'parentId', 'parentRef', { allowNull: true });
+          checkSibling(a, i);
+          (Array.isArray(a.refs) ? a.refs : []).forEach(r => r != null && refs.add(String(r)));
+          created += names.length;
+          batches.push(names.length);
+          break;
+        }
+        case 'rename_group':
+        case 'delete_group':
+          checkGroupRef(a, i, 'groupId', 'groupRef');
+          break;
+        case 'move_group': {
+          checkGroupRef(a, i, 'groupId', 'groupRef');
+          if ('parentId' in a || 'parentRef' in a) checkGroupRef(a, i, 'parentId', 'parentRef', { allowNull: true });
+          checkSibling(a, i);
+          // into its own subtree?
+          if (a.groupId != null && a.parentId != null) {
+            let cur = String(a.parentId);
+            const seen = new Set();
+            while (cur != null && !seen.has(cur)) {
+              if (cur === String(a.groupId)) { problems.push(`${label(a, i)}: qovluğu öz alt qovluğunun içinə köçürmək olmaz.`); break; }
+              seen.add(cur);
+              cur = parentOf.get(cur) ?? null;
+            }
+          }
+          break;
+        }
+        case 'create_diagram':
+          checkGroupRef(a, i, 'groupId', 'groupRef');
+          break;
+        case 'move_diagram':
+          if (!pids.has(String(a.processId))) problems.push(`${label(a, i)}: processId ${a.processId} context-də yoxdur.`);
+          checkGroupRef(a, i, 'groupId', 'groupRef');
+          break;
+        case 'rename_diagram':
+        case 'archive_diagram':
+        case 'delete_diagram':
+        case 'open_diagram':
+        case 'unarchive_diagram':
+        case 'delete_archived':
+          if (!pids.has(String(a.processId))) problems.push(`${label(a, i)}: processId ${a.processId} context-də yoxdur.`);
+          if (a.type === 'rename_diagram' && (a.groupId != null || a.groupRef != null)) checkGroupRef(a, i, 'groupId', 'groupRef');
+          if (a.type === 'unarchive_diagram' && a.groupId != null) checkGroupRef(a, i, 'groupId', 'groupRef');
+          break;
+        default:
+          break;
+      }
+    });
+
+    const want = requestedFolderCount(lastUserText);
+    // "Müqavilələr + içində 3 alt qovluq" = 4 made, 3 asked: fine when one batch matches
+    if (want && created > 0 && created !== want && !batches.includes(want)) {
+      problems.push(`İstifadəçi ${want} qovluq istədi, sən ${created} qovluq yaradırsan. Sayı TAM ${want} et (create_groups.names).`);
+    }
+  }
+
+  if (view === 'hesabat') {
+    const rids = new Set([...(context?.rows || []), ...(context?.archivedRows || [])].map(r => String(r.id)));
+    list.forEach((a, i) => {
+      const ids = Array.isArray(a.rowIds) ? a.rowIds : (a.rowId != null ? [a.rowId] : []);
+      const bad = ids.filter(id => !rids.has(String(id)));
+      if (bad.length) problems.push(`#${i + 1} ${a.type}: rowId ${bad.slice(0, 8).join(', ')} context-də yoxdur.`);
+    });
+  }
+
+  return problems;
 }

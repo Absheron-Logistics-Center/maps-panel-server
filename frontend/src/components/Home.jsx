@@ -19,7 +19,7 @@ import { importDiagramFromExcel, downloadTemplate } from './excel.js';
 import { importDiagramFromJson } from './diagramExport.js';
 import AiButton from './ai/AiButton.jsx';
 import { useLabels } from '../labels/LabelsContext.jsx';
-import AiSidebar from './ai/AiSidebar.jsx';
+import { AiBinding, useAi } from './ai/AiHost.jsx';
 import Collapse from '../feel/Collapse.jsx';
 import { buildFromSpec } from './ai/aiBuild.js';
 
@@ -83,7 +83,7 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
     return () => window.removeEventListener('mouseup', off);
   }, []);
   const selecting = () => !!(window.getSelection && String(window.getSelection()).trim());
-  const [aiOpen, setAiOpen] = useState(false);
+  const { open: aiOpen, setOpen: setAiOpen } = useAi();
   const [sheetOptions, setSheetOptions] = useState([]);
   const searchInputRef = useRef(null);
   // ---- restoring position on return from a diagram (fix 15) ----
@@ -719,13 +719,43 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
   /* ---------- AI köməkçi ---------- */
   // Rebuilt on every turn (not memoised) so the model never reasons about a
   // group/process id that was renamed or deleted a moment ago.
+  // Folders go in screen (tree) order with the same number the admin sees
+  // next to them ("3.2") and their full path, so "put it in 3.2" or "inside
+  // Gömrük" maps to the right id instead of a guessed one.
   function aiContext() {
+    const byId = new Map(groups.map(g => [Number(g.id), g]));
+    const pathOf = (g) => {
+      const names = [];
+      let cur = g; const seen = new Set();
+      while (cur && !seen.has(cur.id)) { seen.add(cur.id); names.unshift(cur.name); const pid = normPid(cur); cur = pid != null ? byId.get(pid) : null; }
+      return names.join(' / ');
+    };
+    const tree = [];
+    const walk = (pid, depth) => {
+      childGroupsOf(pid).forEach(g => {
+        tree.push({
+          id: g.id, no: groupNumber(g), name: g.name, path: pathOf(g), parentId: normPid(g), depth,
+          subfolders: childGroupsOf(g.id).length,
+          diagrams: processes.filter(p => Number(p.groupId) === Number(g.id)).length
+        });
+        walk(g.id, depth + 1);
+      });
+    };
+    walk(null, 0);
+    const noOf = new Map(tree.map(g => [Number(g.id), g.no]));
+    let selection = null;
+    try {
+      const sg = mq.groupIds(), si = mq.itemIds();
+      if (sg.length || si.length) selection = { groupIds: sg, processIds: si };
+    } catch { /* no marquee */ }
     return {
       view: 'list',
       role,
-      groups: groups.map(g => ({ id: g.id, name: g.name, parentId: normPid(g) })),
-      processes: processes.map(p => ({ id: p.id, title: p.title, subtitle: p.subtitle, groupId: p.groupId })),
+      groups: tree,
+      processes: processes.map(p => ({ id: p.id, title: p.title, subtitle: p.subtitle, groupId: p.groupId, groupNo: noOf.get(Number(p.groupId)) || null })),
       archived: archived.map(p => ({ id: p.id, title: p.title, subtitle: p.subtitle, groupName: p.groupName || '' })),
+      selection,
+      openFolders: tree.filter(g => expanded[g.id]).map(g => g.id),
       note: 'Əsas səhifə hesabatdan AYRIDIR. Silmə = arxivə köçürmə; arxivdən silinən data-da saxlanılır.',
       unsavedFolderChanges: dirty,
       currentSearch: query || null,
@@ -733,109 +763,243 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
     };
   }
 
+  // Runs an approved batch against the server, one step after another, on a
+  // working copy of the folder list — so a folder made in step 1 really exists
+  // (with its real id) when step 2 puts 20 subfolders inside it. Folder
+  // positions are applied exactly (first / after X / before X / last).
   async function runAiActions(actions) {
     const log = [];
     let needsReload = false;
     let openAfter = null;
+    const touched = new Set();      // folders to show open afterwards
+    const madeNew = [];             // ids of folders created now
+
+    // anything still staged by hand goes to the server first
+    if (dirty) {
+      setSaving(true);
+      try { await doFlush(); } catch (e) { log.push('Xəta: yadda saxlanmamış qovluq dəyişiklikləri göndərilmədi. ' + e.message); setSaving(false); return log; }
+      setSaving(false);
+      needsReload = true;
+    }
+
+    let gs = [];
+    const fresh = async () => {
+      const data = await api.listProcesses();
+      gs = (data.groups || []).map(g => ({ id: Number(g.id), name: g.name, parentId: normPid(g) }));
+    };
+    const hasFolderWork = actions.some(a => /group|create_diagram|move_diagram|rename_diagram|unarchive/.test(a.type));
+    if (hasFolderWork) await fresh();
+
+    const refs = new Map();
+    const gName = (id) => gs.find(g => g.id === Number(id))?.name || `#${id}`;
+    const exists = (id) => gs.some(g => g.id === Number(id));
+    // id | ref -> real id; undefined = not given, null = top level, NaN = broken
+    function resolve(a, idKey, refKey) {
+      if (a[refKey] != null && a[refKey] !== '') {
+        const v = refs.get(String(a[refKey]));
+        return v == null ? NaN : v;
+      }
+      if (!(idKey in a)) return undefined;
+      if (a[idKey] === null || a[idKey] === '' || a[idKey] === 0) return null;
+      const n = Number(a[idKey]);
+      return exists(n) ? n : NaN;
+    }
+    let orderChanged = false;
+    // put `ids` (in this order) at the asked spot among their siblings
+    function place(ids, a) {
+      const after = a.afterRef != null ? refs.get(String(a.afterRef)) : (a.afterGroupId != null ? Number(a.afterGroupId) : null);
+      const before = a.beforeGroupId != null ? Number(a.beforeGroupId) : null;
+      const first = a.position === 'first';
+      if (after == null && before == null && !first) return; // default: last, already true for new ones
+      const moving = ids.map(id => gs.find(g => g.id === id)).filter(Boolean);
+      if (!moving.length) return;
+      const pid = moving[0].parentId;
+      const rest = gs.filter(g => !ids.includes(g.id));
+      const sibs = rest.filter(g => g.parentId === pid);
+      let at;
+      if (after != null && sibs.some(g => g.id === after)) at = rest.findIndex(g => g.id === after) + 1;
+      else if (before != null && sibs.some(g => g.id === before)) at = rest.findIndex(g => g.id === before);
+      else if (first && sibs.length) at = rest.findIndex(g => g.id === sibs[0].id);
+      else return;
+      rest.splice(at, 0, ...moving);
+      gs = rest;
+      orderChanged = true;
+    }
+    function isInside(child, ancestor) {
+      let cur = gs.find(g => g.id === child); const seen = new Set();
+      while (cur && !seen.has(cur.id)) { if (cur.id === ancestor) return true; seen.add(cur.id); cur = gs.find(g => g.id === cur.parentId); }
+      return false;
+    }
+    const where = (pid) => pid == null ? 'əsas siyahıda' : `"${gName(pid)}" içində`;
 
     for (const a of actions) {
-      switch (a.type) {
-        case 'create_group': {
-          // Staged exactly like the manual "Yeni qrup" flow — it lands in the
-          // tree straight away and goes to the server on "Hamısını yadda saxla".
-          const tempId = nextTempId();
-          setGroups(prev => [...prev, { id: tempId, name: a.name, parentId: a.parentId ?? null }]);
-          setExpanded(prev => ({ ...prev, [tempId]: true }));
-          setDirty(true);
-          log.push(`Qovluq yaradıldı: "${a.name}" (hələ yadda saxlanmayıb)`);
-          break;
+      try {
+        switch (a.type) {
+          case 'create_group':
+          case 'create_groups': {
+            const names = a.type === 'create_groups'
+              ? (Array.isArray(a.names) ? a.names : []).map(n => String(n || '').trim()).filter(Boolean)
+              : [String(a.name || '').trim()].filter(Boolean);
+            if (!names.length) { log.push('Xəta: qovluq adı verilməyib.'); break; }
+            const pid = resolve(a, 'parentId', 'parentRef');
+            if (Number.isNaN(pid)) { log.push(`Xəta: "${names[0]}" üçün göstərilən valideyn qovluq tapılmadı. Səhv yerə düşməsin deyə heç nə yaradılmadı.`); break; }
+            const parent = pid ?? null;
+            const ids = [];
+            for (let k = 0; k < names.length; k++) {
+              const g = await api.createGroup(names[k], parent);
+              const id = Number(g.id);
+              gs.push({ id, name: g.name, parentId: parent });
+              ids.push(id);
+              madeNew.push(id);
+              const ref = a.type === 'create_groups' ? a.refs?.[k] : a.ref;
+              if (ref != null) refs.set(String(ref), id);
+            }
+            place(ids, a);
+            if (parent != null) touched.add(parent);
+            log.push(names.length === 1
+              ? `Qovluq yaradıldı: "${names[0]}", ${where(parent)}`
+              : `${names.length} qovluq yaradıldı, ${where(parent)}`);
+            needsReload = true;
+            break;
+          }
+          case 'rename_group': {
+            const gid = resolve(a, 'groupId', 'groupRef');
+            if (gid == null || Number.isNaN(gid)) { log.push('Xəta: adı dəyişiləcək qovluq tapılmadı.'); break; }
+            await api.renameGroup(gid, a.name);
+            const g = gs.find(x => x.id === gid); if (g) g.name = a.name;
+            log.push(`Qovluq adlandırıldı: "${a.name}"`);
+            needsReload = true;
+            break;
+          }
+          case 'move_group': {
+            const gid = resolve(a, 'groupId', 'groupRef');
+            if (gid == null || Number.isNaN(gid)) { log.push('Xəta: köçürüləcək qovluq tapılmadı.'); break; }
+            const g = gs.find(x => x.id === gid);
+            const pid = resolve(a, 'parentId', 'parentRef');
+            if (Number.isNaN(pid)) { log.push(`Xəta: "${g?.name}" üçün hədəf qovluq tapılmadı, köçürülmədi.`); break; }
+            if (pid !== undefined && pid !== g.parentId) {
+              if (pid != null && (pid === gid || isInside(pid, gid))) { log.push(`Xəta: "${g.name}" öz alt qovluğunun içinə köçürülə bilməz.`); break; }
+              await api.moveGroup(gid, pid);
+              // a moved folder goes to the end of its new level unless told otherwise
+              gs = [...gs.filter(x => x.id !== gid), { ...g, parentId: pid }];
+              orderChanged = true;
+              if (pid != null) touched.add(pid);
+            }
+            place([gid], a);
+            log.push(`Qovluq köçürüldü: "${g.name}", ${where(pid === undefined ? g.parentId : pid)}`);
+            needsReload = true;
+            break;
+          }
+          case 'delete_group': {
+            const gid = resolve(a, 'groupId', 'groupRef');
+            if (gid == null || Number.isNaN(gid)) { log.push('Xəta: qovluq tapılmadı.'); break; }
+            const r = await api.deleteGroup(gid);
+            const gone = new Set([gid]);
+            let grew = true;
+            while (grew) { grew = false; gs.forEach(x => { if (x.parentId != null && gone.has(x.parentId) && !gone.has(x.id)) { gone.add(x.id); grew = true; } }); }
+            gs = gs.filter(x => !gone.has(x.id));
+            log.push(`Qovluq götürüldü${r?.archivedDiagrams ? `, ${r.archivedDiagrams} diaqram arxivə köçdü` : ''}.`);
+            needsReload = true;
+            break;
+          }
+          case 'create_diagram': {
+            let gid = resolve(a, 'groupId', 'groupRef');
+            if (gid === undefined) gid = gs[0]?.id ?? null;
+            if (gid == null || Number.isNaN(gid)) { log.push(`Xəta: "${a.title}" üçün qovluq tapılmadı, diaqram yaradılmadı.`); break; }
+            const built = buildFromSpec(a);
+            const p = await api.createProcess({
+              title: a.title || 'Yeni diaqram',
+              subtitle: a.subtitle || '',
+              groupId: gid,
+              width: built.width,
+              height: built.height,
+              lanes: built.lanes,
+              nodes: built.nodes,
+              edges: built.edges
+            });
+            touched.add(gid);
+            log.push(`Diaqram yaradıldı: "${p.title}", ${built.nodes.length} node, ${built.edges.length} əlaqə`);
+            needsReload = true;
+            openAfter = p.id;
+            break;
+          }
+          case 'move_diagram':
+          case 'rename_diagram': {
+            // Same call the "Redaktə et" modal makes — only the sent fields change.
+            const patchMeta = {};
+            if (a.title != null) patchMeta.title = a.title;
+            if (a.subtitle != null) patchMeta.subtitle = a.subtitle;
+            if (a.groupId != null || a.groupRef != null) {
+              const gid = resolve(a, 'groupId', 'groupRef');
+              if (gid == null || Number.isNaN(gid)) { log.push('Xəta: hədəf qovluq tapılmadı, diaqram köçürülmədi.'); break; }
+              patchMeta.groupId = gid;
+              touched.add(gid);
+            }
+            if (!Object.keys(patchMeta).length) { log.push('Dəyişiləcək sahə göstərilmədi.'); break; }
+            await api.updateProcessMeta(a.processId, patchMeta);
+            const title = patchMeta.title || processes.find(p => Number(p.id) === Number(a.processId))?.title || a.processId;
+            log.push(patchMeta.groupId != null && a.type === 'move_diagram'
+              ? `Diaqram köçürüldü: "${title}" → "${gName(patchMeta.groupId)}"`
+              : `Diaqram yeniləndi: "${title}"`);
+            needsReload = true;
+            break;
+          }
+          case 'archive_diagram':
+            await api.archiveProcess(a.processId);
+            log.push('Arxivə köçürüldü.');
+            needsReload = true;
+            break;
+          case 'unarchive_diagram': {
+            const gid = a.groupId != null || a.groupRef != null ? resolve(a, 'groupId', 'groupRef') : undefined;
+            if (Number.isNaN(gid)) { log.push('Xəta: bərpa üçün qovluq tapılmadı.'); break; }
+            await api.unarchiveProcess(a.processId, a.newGroupName ? { newGroupName: a.newGroupName } : (gid != null ? { groupId: gid } : {}));
+            log.push('Arxivdən çıxarıldı.');
+            needsReload = true;
+            break;
+          }
+          case 'delete_archived':
+            await api.deleteArchivedProcess(a.processId);
+            log.push('Arxivdən silindi (data-da saxlanılır).');
+            needsReload = true;
+            break;
+          case 'delete_diagram':
+            await api.archiveProcess(a.processId);
+            log.push('Diaqram arxivə köçürüldü (silinmir).');
+            needsReload = true;
+            break;
+          case 'open_diagram':
+            openAfter = a.processId;
+            log.push('Diaqram açılır...');
+            break;
+          case 'filter':
+            setQuery(a.query || '');
+            setSearchOpen(true);
+            log.push(`Filtr tətbiq olundu: "${a.query}"`);
+            break;
+          case 'logout':
+            logout();
+            return log;
+          default:
+            log.push(`Naməlum əməliyyat: ${a.type}`);
         }
-        case 'rename_group': {
-          setGroups(prev => prev.map(g => Number(g.id) === Number(a.groupId) ? { ...g, name: a.name } : g));
-          setDirty(true);
-          log.push(`Qovluq adlandırıldı: "${a.name}" (hələ yadda saxlanmayıb)`);
-          break;
-        }
-        case 'delete_group': {
-          const allIds = collectDescendantGroupIds(Number(a.groupId), groups);
-          setGroups(prev => prev.filter(x => !allIds.includes(x.id)));
-          setProcesses(prev => prev.filter(p => !allIds.includes(Number(p.groupId))));
-          setDirty(true);
-          log.push('Qovluq silindi (hələ yadda saxlanmayıb)');
-          break;
-        }
-        case 'create_diagram': {
-          // A staged folder has no server id yet, so flush first — same trick
-          // the "+" button uses.
-          const gid = await ensureGroupSaved(a.groupId ?? groups[0]?.id);
-          if (gid == null) { log.push('Xəta: qovluq təyin edilmədi.'); break; }
-          const built = buildFromSpec(a);
-          const p = await api.createProcess({
-            title: a.title || 'Yeni diaqram',
-            subtitle: a.subtitle || '',
-            groupId: gid,
-            width: built.width,
-            height: built.height,
-            lanes: built.lanes,
-            nodes: built.nodes,
-            edges: built.edges
-          });
-          log.push(`Diaqram yaradıldı: "${p.title}" — ${built.nodes.length} node, ${built.edges.length} əlaqə`);
-          needsReload = true;
-          openAfter = p.id;
-          break;
-        }
-        case 'rename_diagram': {
-          // Same call the \"Redaktə et\" modal makes — only the sent fields change.
-          const patch = {};
-          if (a.title != null) patch.title = a.title;
-          if (a.subtitle != null) patch.subtitle = a.subtitle;
-          if (a.groupId != null) patch.groupId = await ensureGroupSaved(a.groupId);
-          if (!Object.keys(patch).length) { log.push('Dəyişiləcək sahə göstərilmədi.'); break; }
-          await api.updateProcessMeta(a.processId, patch);
-          log.push(`Diaqram yeniləndi: "${patch.title || processes.find(p => Number(p.id) === Number(a.processId))?.title || a.processId}"`);
-          needsReload = true;
-          break;
-        }
-        case 'archive_diagram':
-          await api.archiveProcess(a.processId);
-          log.push('Arxivə köçürüldü.');
-          needsReload = true;
-          break;
-        case 'unarchive_diagram':
-          await api.unarchiveProcess(a.processId, a.newGroupName ? { newGroupName: a.newGroupName } : (a.groupId != null ? { groupId: a.groupId } : {}));
-          log.push('Arxivdən çıxarıldı.');
-          needsReload = true;
-          break;
-        case 'delete_archived':
-          await api.deleteArchivedProcess(a.processId);
-          log.push('Arxivdən silindi (data-da saxlanılır).');
-          needsReload = true;
-          break;
-        case 'delete_diagram':
-          await api.archiveProcess(a.processId);
-          log.push('Diaqram arxivə köçürüldü (silinmir).');
-          needsReload = true;
-          break;
-        case 'open_diagram':
-          openAfter = a.processId;
-          log.push('Diaqram açılır...');
-          break;
-        case 'filter':
-          setQuery(a.query || '');
-          setSearchOpen(true);
-          log.push(`Filtr tətbiq olundu: "${a.query}"`);
-          break;
-        case 'logout':
-          logout();
-          return log;
-        default:
-          log.push(`Naməlum əməliyyat: ${a.type}`);
+      } catch (err) {
+        log.push(`Xəta (${a.type}): ${err.message || err}`);
       }
     }
 
+    if (orderChanged) {
+      try { await api.reorderGroups(gs.map(g => g.id)); }
+      catch (e) { log.push('Xəta: qovluq sırası saxlanmadı. ' + e.message); }
+    }
     if (needsReload) await load();
-    if (openAfter != null) { setAiOpen(false); onOpen(openAfter); }
+    // open the folders that just got something, so the result is visible
+    if (touched.size || madeNew.length) {
+      const open = new Set();
+      [...touched].forEach(id => ancestorGroupIds(id, gs).forEach(x => open.add(x)));
+      madeNew.forEach(id => { const g = gs.find(x => x.id === id); if (g?.parentId != null) ancestorGroupIds(g.parentId, gs).forEach(x => open.add(x)); });
+      if (open.size) setExpanded(prev => { const o = { ...prev }; open.forEach(id => { o[id] = true; }); return o; });
+    }
+    if (openAfter != null) onOpen(openAfter); // the assistant stays open on the diagram
     return log;
   }
 
@@ -1207,9 +1371,7 @@ export default function Home({ onOpen, onLogout, onBack, onOpenSheets, focusProc
       </div>
 
       {isAdmin && (
-        <AiSidebar
-          open={aiOpen}
-          onClose={() => setAiOpen(false)}
+        <AiBinding
           context={aiContext}
           runActions={runAiActions}
           suggestions={[

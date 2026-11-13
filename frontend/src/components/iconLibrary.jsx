@@ -6,7 +6,8 @@
 //   IconPicker     – searchable popover button for choosing an icon
 //
 // Add more names to LIB below and they instantly show up in the picker.
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import { createPortal } from 'react-dom';
 import {
   // general / docs
   FileText, File, Files, FileCheck, FileWarning, FilePlus, Folder, FolderOpen,
@@ -119,13 +120,44 @@ export function hasIcon(name) { return !!LIB[name]; }
 export function IconPicker({ value, onChange, color }) {
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState('');
+  const [pos, setPos] = useState(null);
   const ref = useRef(null);
+  const btnRef = useRef(null);
+  const popRef = useRef(null);
 
   useEffect(() => {
     if (!open) return;
-    function onDoc(e) { if (ref.current && !ref.current.contains(e.target)) setOpen(false); }
+    function onDoc(e) {
+      if (ref.current?.contains(e.target) || popRef.current?.contains(e.target)) return;
+      setOpen(false);
+    }
+    function onKey(e) { if (e.key === 'Escape') { e.stopPropagation(); setOpen(false); } }
     document.addEventListener('mousedown', onDoc);
-    return () => document.removeEventListener('mousedown', onDoc);
+    document.addEventListener('keydown', onKey, true);
+    return () => { document.removeEventListener('mousedown', onDoc); document.removeEventListener('keydown', onKey, true); };
+  }, [open]);
+
+  // The list lives in <body> with fixed coordinates, so a scrolling panel or
+  // a card with overflow:hidden (the popup editor) can never cut it off.
+  useLayoutEffect(() => {
+    if (!open) { setPos(null); return; }
+    function place() {
+      const b = btnRef.current?.getBoundingClientRect();
+      if (!b) return;
+      const w = Math.min(300, window.innerWidth - 16);
+      const h = popRef.current?.offsetHeight || 300;
+      const below = window.innerHeight - b.bottom - 8;
+      const up = below < h + 6 && b.top > below;
+      let top = up ? b.top - h - 6 : b.bottom + 6;
+      top = Math.max(8, Math.min(top, window.innerHeight - h - 8));
+      const left = Math.max(8, Math.min(b.left, window.innerWidth - w - 8));
+      setPos(p => (p && p.top === top && p.left === left && p.w === w ? p : { top, left, w }));
+    }
+    place();
+    const raf = requestAnimationFrame(place);
+    window.addEventListener('scroll', place, true);
+    window.addEventListener('resize', place);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('scroll', place, true); window.removeEventListener('resize', place); };
   }, [open]);
 
   const term = q.trim().toLowerCase();
@@ -136,17 +168,25 @@ export function IconPicker({ value, onChange, color }) {
   return (
     <div className="icon-picker" ref={ref}>
       <button
+        ref={btnRef}
         type="button"
         className="icon-picker-trigger"
         onClick={() => setOpen(o => !o)}
         title="İkon seç"
+        aria-expanded={open}
       >
         <Icon name={value || DEFAULT_ICON} size={16} style={color ? { color } : undefined} />
         <span className="icon-picker-caret">▾</span>
       </button>
 
-      {open && (
-        <div className="icon-picker-pop">
+      {open && createPortal(
+        <div
+          ref={popRef}
+          className="icon-picker-pop portal"
+          style={pos ? { top: pos.top, left: pos.left, width: pos.w } : { top: -9999, left: -9999 }}
+          onMouseDown={e => e.stopPropagation()}
+          onClick={e => e.stopPropagation()}
+        >
           <div className="icon-picker-search">
             <Search size={14} />
             <input
@@ -170,7 +210,8 @@ export function IconPicker({ value, onChange, color }) {
             ))}
             {list.length === 0 && <div className="icon-picker-empty">Tapılmadı</div>}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

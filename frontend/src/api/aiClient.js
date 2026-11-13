@@ -170,6 +170,8 @@ export const aiApi = {
   chatStream: (messages, context, opts = {}) =>
     chatStream({ messages, context, model: opts.model, thinking: opts.thinking, chatId: opts.chatId }, opts),
   limits: () => request('GET', '/api/ai/limits'),
+  // live check of every provider key on THIS deployment (Vercel or server)
+  diag: () => request('GET', '/api/ai/diag'),
   models: (fresh = false) => request('GET', `/api/ai/models${fresh ? '?fresh=1' : ''}`),
   // what it learned (data/ai/knowledge.json, lessons.json, learn-log.json)
   learn: () => request('GET', '/api/ai/learn'),

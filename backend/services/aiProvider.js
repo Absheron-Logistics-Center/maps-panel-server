@@ -655,11 +655,35 @@ async function buildAutoChain(needsVision) {
   return chain.slice(0, 24);
 }
 
-const IS_VERCEL = !!process.env.VERCEL;
+const IS_VERCEL = !!(process.env.VERCEL || process.env.VERCEL_ENV || process.env.NOW_REGION);
+
+// AbortSignal.any (Node 20.3+) / AbortSignal.timeout (Node 17.3+). A Vercel
+// project can run a different Node than the own server; without these every
+// AI request would throw "is not a function" there. Fall back by hand.
+function timeoutSignal(ms) {
+  if (typeof AbortSignal.timeout === 'function') return AbortSignal.timeout(ms);
+  const ctl = new AbortController();
+  setTimeout(() => ctl.abort(Object.assign(new Error('timeout'), { name: 'TimeoutError' })), ms).unref?.();
+  return ctl.signal;
+}
+function anySignal(signals) {
+  const list = signals.filter(Boolean);
+  if (typeof AbortSignal.any === 'function') return AbortSignal.any(list);
+  const ctl = new AbortController();
+  for (const s of list) {
+    if (s.aborted) { ctl.abort(s.reason); break; }
+    s.addEventListener('abort', () => ctl.abort(s.reason), { once: true });
+  }
+  return ctl.signal;
+}
 // Leave room under the function's maxDuration (vercel.json: 120s).
-const DEADLINE_MS = IS_VERCEL ? 105000 : 10 * 60 * 1000;
+// AI_MAX_SECONDS lets a Vercel plan with a shorter function limit (Hobby
+// without Fluid compute = 60 s) still answer with a clean error instead of
+// being killed mid-stream ("connection cut").
+const VERCEL_BUDGET = Math.max(20, Number(process.env.AI_MAX_SECONDS) || 115) * 1000;
+const DEADLINE_MS = IS_VERCEL ? VERCEL_BUDGET - 10000 : 10 * 60 * 1000;
 // One model that hangs must not eat the whole budget.
-const ATTEMPT_MS = IS_VERCEL ? 75000 : 180000;
+const ATTEMPT_MS = IS_VERCEL ? Math.min(75000, DEADLINE_MS - 5000) : 180000;
 
 /**
  * Ask a model. `messages` is [{ role, content, attachments? }].
@@ -687,8 +711,8 @@ export async function askLLM({ system, messages, model, thinking = 'low', json =
     let emitted = false;
     const delta = onDelta ? t => { emitted = true; onDelta(t); } : undefined;
     const left = DEADLINE_MS - (Date.now() - started);
-    const timeout = AbortSignal.timeout(Math.max(5000, Math.min(ATTEMPT_MS, left)));
-    const attemptSignal = signal ? AbortSignal.any([signal, timeout]) : timeout;
+    const timeout = timeoutSignal(Math.max(5000, Math.min(ATTEMPT_MS, left)));
+    const attemptSignal = signal ? anySignal([signal, timeout]) : timeout;
     try {
       const args = { system, messages, model: m, apiKey, thinking, json, onDelta: delta, onThought, signal: attemptSignal };
       const out = provider === 'gemini'
@@ -731,4 +755,74 @@ export async function askLLM({ system, messages, model, thinking = 'low', json =
     }
   }
   throw httpError('Heç bir model cavab vermədi.', 502);
+}
+
+
+/* ------------------------------------------------------------------ *
+ * Diagnostics — "why does the assistant not answer here?"
+ * Sends one tiny request to every configured provider and reports the
+ * real reason (missing key, invalid key, quota, region, timeout...).
+ * ------------------------------------------------------------------ */
+function explain(status, msg) {
+  const m = String(msg || '');
+  if (/api key not valid|invalid api key|invalid_api_key|unauthorized|incorrect api key/i.test(m) || status === 401) return 'Açar etibarsızdır (səhv və ya ləğv edilib). Yeni açar yaradıb mühit dəyişəninə yazın.';
+  if (status === 403 || /permission|forbidden|leaked|disabled/i.test(m)) return 'Açara icazə yoxdur (bloklanıb, sızdırılmış kimi işarələnib və ya region icazəsi yoxdur).';
+  if (status === 429 || /quota|rate.?limit|exhaust/i.test(m)) return 'Limit dolub (kvota). Bir az sonra yenə yoxlayın və ya başqa açar əlavə edin.';
+  if (status === 404 || /not found|no longer available|unavailable/i.test(m)) return 'Bu model artıq mövcud deyil və ya pulsuz deyil. Avtomatik rejim başqa modeli sınayacaq; AI_MODEL təyin edilibsə onu silin.';
+  if (/timeout|aborted/i.test(m)) return 'Cavab gecikdi (timeout).';
+  if (/fetch failed|ENOTFOUND|ECONN|network/i.test(m)) return 'Şəbəkə xətası: server provayderə qoşula bilmir.';
+  return null;
+}
+
+export async function diagnose() {
+  const out = {
+    where: IS_VERCEL ? 'vercel' : 'server',
+    node: process.version,
+    abortSignalAny: typeof AbortSignal.any === 'function',
+    budgetSeconds: Math.round(DEADLINE_MS / 1000),
+    forcedProvider: (process.env.AI_PROVIDER || '').trim() || null,
+    aiModel: (process.env.AI_MODEL || '').trim() || null,
+    active: pickProvider(),
+    providers: []
+  };
+  await Promise.all(ORDER.map(async name => {
+    const p = PROVIDERS[name];
+    const row = { name, label: p.label, envKey: p.envKey, configured: isConfigured(name), ok: false, model: null, ms: null, error: null, hint: null };
+    out.providers.push(row);
+    if (!row.configured) { row.hint = `${p.envKey} bu mühitdə təyin edilməyib.`; return; }
+    let model = resolveModel(name);
+    try {
+      const list = await listModels(name);
+      if (list.length && !list.some(m => m.id === model)) model = list[0].id;
+    } catch { /* keep the default */ }
+    row.model = model;
+    const t0 = Date.now();
+    try {
+      const args = {
+        system: 'Reply with the single word OK.',
+        messages: [{ role: 'user', content: 'ping' }],
+        model, apiKey: process.env[p.envKey], thinking: 'low', json: false,
+        signal: timeoutSignal(20000)
+      };
+      const r = name === 'gemini' ? await callGemini({ ...args, noThinking: true }) : await callOpenAICompatible({ ...args, provider: name });
+      row.ok = !!r.text;
+    } catch (e) {
+      row.error = String(e?.message || e).slice(0, 300);
+      row.status = e?.status || null;
+      row.hint = explain(e?.status, e?.message);
+    }
+    row.ms = Date.now() - t0;
+  }));
+  out.providers.sort((a, b) => ORDER.indexOf(a.name) - ORDER.indexOf(b.name));
+  out.ok = out.providers.some(p => p.ok);
+  if (!out.providers.some(p => p.configured)) {
+    out.summary = IS_VERCEL
+      ? 'Vercel-də heç bir AI açarı yoxdur. Vercel → Project → Settings → Environment Variables bölməsinə serverdəki .env faylındakı GEMINI_API_KEY (və ya GROQ_API_KEY / OPENROUTER_API_KEY) dəyərini əlavə edib Redeploy edin.'
+      : 'Serverdə heç bir AI açarı yoxdur. .env faylına GEMINI_API_KEY əlavə edin.';
+  } else if (!out.ok) {
+    out.summary = 'Açarlar var, amma heç bir provayder cavab vermədi. Aşağıdakı səbəbə baxın.';
+  } else {
+    out.summary = 'AI işləyir.';
+  }
+  return out;
 }

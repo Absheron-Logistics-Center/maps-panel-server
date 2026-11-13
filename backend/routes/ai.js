@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import {
-  askLLM, pickProvider, providerInfo, allProviders, getUsage, allModels, parseModelId
+  askLLM, pickProvider, providerInfo, allProviders, getUsage, allModels, parseModelId, diagnose
 } from '../services/aiProvider.js';
-import { buildSystemPrompt, parseModelJson } from '../services/aiSchema.js';
+import { buildSystemPrompt, parseModelJson, lintActions } from '../services/aiSchema.js';
 import {
   recordUsage, readUsage, listChats, readChat, saveChat, hideChat,
   saveChatFile, loadChatFile, validHash, validId, extFor
@@ -13,7 +13,7 @@ import {
 } from '../services/aiLearn.js';
 
 const router = Router();
-const isVercel = !!process.env.VERCEL;
+const isVercel = !!(process.env.VERCEL || process.env.VERCEL_ENV || process.env.NOW_REGION);
 
 // Same guard style as processes.js / settings.js — requireAuth already ran in
 // server.js, so req.user is populated here.
@@ -41,6 +41,16 @@ router.get('/limits', async (_req, res) => {
     stored,                     // saved in data/ai/usage.json — all PCs, survives restarts
     usageNote: 'Sayğaclar data/ai/usage.json faylında saxlanılır — bütün kompüterlərdə eynidir. Bir model cavab verməsə, növbəti model avtomatik sınanır.'
   });
+});
+
+/**
+ * GET /api/ai/diag
+ * Live check: which keys this deployment has, and what each provider really
+ * answers to a one-word request. Shown in the panel when the chat fails, so
+ * "works on the server but not on Vercel" has a visible reason.
+ */
+router.get('/diag', async (_req, res, next) => {
+  try { res.json(await diagnose()); } catch (e) { next(e); }
 });
 
 /* ---------------- chat history (data/ai/) ---------------- */
@@ -221,7 +231,27 @@ router.post('/chat', async (req, res, next) => {
     return res.status(400).json({ error: 'Son mesaj istifadəçidən olmalıdır' });
   }
 
-  await storeFiles(clean);
+  // ---- SSE plumbing (no-op in JSON mode) ----
+  if (stream) {
+    res.status(200);
+    res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-cache, no-transform');
+    res.setHeader('Connection', 'keep-alive');
+    res.setHeader('X-Accel-Buffering', 'no');
+    res.flushHeaders?.();
+  }
+  const send = (event, data) => {
+    if (!stream || res.writableEnded) return;
+    res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
+  };
+  // Keep proxies (IIS/nginx) from closing an idle stream while the model thinks.
+  const ping = stream ? setInterval(() => { if (!res.writableEnded) res.write(': ping\n\n'); }, 10000) : null;
+
+  // Headers go out first, so a slow database (cold Vercel function + Mongo)
+  // shows up as "thinking" in the panel instead of a silent wait.
+  if (stream) send('status', { type: 'prepare' });
+
+  try { await storeFiles(clean); } catch (e) { console.warn('[ai] storeFiles failed:', e.message); }
   try { await rehydrate(clean); } catch (e) { console.warn('[ai] rehydrate failed:', e.message); }
 
   const level = thinking === 'high' ? 'high' : 'low';
@@ -234,7 +264,12 @@ router.post('/chat', async (req, res, next) => {
   });
   const ctl = new AbortController();
   // Client hit "Dayandır" or closed the panel → stop paying for tokens.
-  res.on('close', () => { if (!res.writableFinished) ctl.abort(); });
+  // Only a really gone client counts: some hosts emit 'close' on the request
+  // side early, which used to cancel a perfectly good answer.
+  res.on('close', () => {
+    if (res.writableFinished) return;
+    if (res.destroyed || req.socket?.destroyed || !res.writable) ctl.abort();
+  });
 
   // ---- what the assistant has learned + the most similar team diagrams ----
   const last = clean[clean.length - 1];
@@ -251,22 +286,6 @@ router.post('/chat', async (req, res, next) => {
   if (building) {
     try { examples = await findExamples(query, { limit: 2, exclude: context?.diagram?.id != null ? [context.diagram.id] : [] }); } catch { examples = []; }
   }
-
-  // ---- SSE plumbing (no-op in JSON mode) ----
-  if (stream) {
-    res.status(200);
-    res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
-    res.setHeader('Cache-Control', 'no-cache, no-transform');
-    res.setHeader('Connection', 'keep-alive');
-    res.setHeader('X-Accel-Buffering', 'no');
-    res.flushHeaders?.();
-  }
-  const send = (event, data) => {
-    if (!stream || res.writableEnded) return;
-    res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
-  };
-  // Keep proxies (IIS/nginx) from closing an idle stream while the model thinks.
-  const ping = stream ? setInterval(() => { if (!res.writableEnded) res.write(': ping\n\n'); }, 10000) : null;
 
   const ask = (system, msgs) => askLLM({
     system, messages: msgs, model, thinking: level, signal: ctl.signal,
@@ -286,6 +305,7 @@ router.post('/chat', async (req, res, next) => {
     let tokensIn = 0, tokensOut = 0;
     const attempts = [];
     const readIds = new Set();
+    let lintProblems = [], lintRounds = 0;
 
     for (let round = 0; round < 4; round++) {
       const system = buildSystemPrompt(context, { knowledge, examples, toolResults });
@@ -320,6 +340,21 @@ router.post('/chat', async (req, res, next) => {
         msgs = clean;
         continue;
       }
+
+      // Self-check: invented folder ids, refs used before they exist, wrong
+      // counts ("20 qovluq" but 12 made)… go back to the model once or twice
+      // instead of letting a folder land in the wrong place.
+      lintProblems = lintActions((parsed.actions || []).filter(a => a.type !== 'read_diagram'), context, last.content);
+      if (lintProblems.length && lintRounds < 2 && round < 3) {
+        lintRounds++;
+        send('reset', {});
+        send('status', { type: 'retry', reason: 'lint', problems: lintProblems.slice(0, 6) });
+        msgs = [...clean, { role: 'assistant', content: String(out.text).slice(0, 30000) },
+          { role: 'user', content: '[Sistem yoxlaması: təklif etdiyin əməliyyatlarda səhv var — istifadəçiyə hələ göstərilməyib]\n' +
+            lintProblems.slice(0, 20).map(p => '- ' + p).join('\n') +
+            '\nHamısını düzəlt və TAM cavabı (reply + bütün actions) yenidən YALNIZ JSON kimi qaytar. Lazımi qovluq tapılmırsa "ask" ilə soruş.' }];
+        continue;
+      }
       break;
     }
 
@@ -340,7 +375,9 @@ router.post('/chat', async (req, res, next) => {
         limits: providerInfo(out.provider)?.limits || null,
         read: [...readIds],
         examples: examples.map(e => ({ id: e.id, title: e.title })),
-        lessonSaved: lessonSaved ? lessonSaved.text : null
+        lessonSaved: lessonSaved ? lessonSaved.text : null,
+        lint: lintProblems.length ? lintProblems.slice(0, 10) : null,
+        selfChecks: lintRounds
       }
     };
     if (stream) send('done', done);
@@ -348,7 +385,7 @@ router.post('/chat', async (req, res, next) => {
   } catch (e) {
     if (!ctl.signal.aborted) await track(null, false, e);
     if (stream) {
-      if (!ctl.signal.aborted) send('error', { error: e.message || 'AI cavab vermədi', status: e.status || 500 });
+      send('error', { error: e.message || 'AI cavab vermədi', status: e.status || 500, where: isVercel ? 'vercel' : 'server' });
     } else if (e.status) {
       res.status(e.status >= 400 && e.status < 600 ? e.status : 502).json({ error: e.message });
     } else {

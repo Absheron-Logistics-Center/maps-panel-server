@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { SHAPES, STYLES, SHAPE_LABEL, STYLE_LABEL, nodeView, nodeDefaults } from './nodeStyle.js';
 import { IconPicker, Icon } from './iconLibrary.jsx';
-import { makeSection } from './infoModel.js';
+import PopupEditor from './PopupEditor.jsx';
 import { ColorField } from './AdminPanel.jsx';
 import { repackLanes } from './laneRepack.js';
 import { autoNodeHeight } from './nodeMeasure.js';
@@ -342,7 +342,6 @@ function EdgeMenu({ index, process, updateProcess, openItem, setOpenItem, side, 
 /* ===================== Node ===================== */
 function NodeMenu({ node, process, updateProcess, openItem, setOpenItem, side, onDelete }) {
   const { t } = useLabels();
-  const [showPreview, setShowPreview] = useState(false);
   if (!node) return <div className="sel-ctx-empty">Node tapılmadı.</div>;
   const { shape, style } = nodeView(node);
 
@@ -367,7 +366,7 @@ function NodeMenu({ node, process, updateProcess, openItem, setOpenItem, side, o
       return { ...p, nodes: r.nodes, lanes: r.lanes };
     }, `node-${node.id}-shapestyle`);
   }
-  function patchInfo(field, value) { patch('info', { ...(node.info || {}), [field]: value }); }
+  function patchInfoFields(fields) { patch('info', { ...(node.info || {}), ...fields }); }
 
   /** Text edits keep the width fixed and grow the height to fit. */
   function patchText(value) {
@@ -417,20 +416,6 @@ function NodeMenu({ node, process, updateProcess, openItem, setOpenItem, side, o
       return { ...p, nodes: r.nodes, edges: newEdges, lanes: r.lanes };
     });
     onDelete();
-  }
-
-  const info = node.info || {};
-  const sections = info.sections || [];
-  function setSections(next) { patchInfo('sections', next); }
-  function addSection() { setSections([...sections, makeSection()]); }
-  function patchSection(i, fields) { setSections(sections.map((s, idx) => idx === i ? { ...s, ...fields } : s)); }
-  function removeSection(i) { setSections(sections.filter((_, idx) => idx !== i)); }
-  function moveSection(i, dir) {
-    const j = i + dir;
-    if (j < 0 || j >= sections.length) return;
-    const next = [...sections];
-    [next[i], next[j]] = [next[j], next[i]];
-    setSections(next);
   }
 
   return (
@@ -498,130 +483,10 @@ function NodeMenu({ node, process, updateProcess, openItem, setOpenItem, side, o
       </MenuItem>
 
       <MenuItem pid="popup" icon={<PopupIcon size={14} />} label={t('nodemenu.popup_tab', 'Popup')} openItem={openItem} setOpenItem={setOpenItem} side={side}>
-        {/* General — no longer a mandatory/fixed block: it has a colour and can
-            be emptied like any other section. */}
-        <div className="sec-editor">
-          <div className="sec-editor-head">
-            <IconPicker value={info.generalIcon || 'FileText'} color={info.generalColor} onChange={v => patchInfo('generalIcon', v)} />
-            <input className="sec-title" value={info.generalTitle || 'Ümumi məlumat'}
-              onChange={e => patchInfo('generalTitle', e.target.value)} placeholder="Bölmə adı" />
-            <div className="sec-actions">
-              <button className="icon-btn ghost danger" title="Boşalt"
-                onClick={() => patchInfo('general', [])}><Trash2 size={13} /></button>
-            </div>
-          </div>
-          <div className="sec-editor-row">
-            <ColorField label="" value={info.generalColor || ''}
-              onChange={v => patchInfo('generalColor', v)} onClear={() => patchInfo('generalColor', '')} />
-          </div>
-          <textarea rows={4} placeholder="Hər abzas boş sətirlə ayrılır"
-            value={(info.general || []).join('\n\n')}
-            onChange={e => patchInfo('general', e.target.value.split('\n\n').filter(Boolean))} />
-        </div>
-
-        {/* Custom sections */}
-        {sections.map((s, i) => (
-          <div className="sec-editor" key={s.id || i}>
-            <div className="sec-editor-head">
-              <IconPicker value={s.icon} color={s.color} onChange={v => patchSection(i, { icon: v })} />
-              <input className="sec-title" value={s.title}
-                onChange={e => patchSection(i, { title: e.target.value })} placeholder="Bölmə adı" />
-              <div className="sec-actions">
-                <button className="icon-btn ghost" title="Yuxarı" onClick={() => moveSection(i, -1)}><ArrowUp size={13} /></button>
-                <button className="icon-btn ghost" title="Aşağı" onClick={() => moveSection(i, 1)}><ArrowDown size={13} /></button>
-                <button className="icon-btn ghost danger" title="Sil" onClick={() => removeSection(i)}><Trash2 size={13} /></button>
-              </div>
-            </div>
-            <div className="sec-editor-row">
-              <div className="seg-toggle sm">
-                <button type="button" className={s.type !== 'list' ? 'on' : ''} onClick={() => patchSection(i, { type: 'text' })}>
-                  <Type size={12} /> Mətn
-                </button>
-                <button type="button" className={s.type === 'list' ? 'on' : ''} onClick={() => patchSection(i, { type: 'list' })}>
-                  <ListOrdered size={12} /> Siyahı
-                </button>
-              </div>
-              <ColorField label="" value={s.color || ''}
-                onChange={v => patchSection(i, { color: v })} onClear={() => patchSection(i, { color: '' })} />
-            </div>
-            <textarea rows={3}
-              placeholder={s.type === 'list' ? 'Hər sətir ayrı bənd' : 'Hər abzas boş sətirlə ayrılır'}
-              value={(s.items || []).join(s.type === 'list' ? '\n' : '\n\n')}
-              onChange={e => patchSection(i, {
-                items: e.target.value.split(s.type === 'list' ? '\n' : '\n\n').filter(Boolean)
-              })} />
-          </div>
-        ))}
-
-        {/* Risks — also optional now; leave empty to hide it entirely. */}
-        <div className="sec-editor">
-          <div className="sec-editor-head">
-            <IconPicker value={info.risksIcon || 'AlertTriangle'} color={info.risksColor} onChange={v => patchInfo('risksIcon', v)} />
-            <input className="sec-title" value={info.risksTitle || 'Mümkün risklər'}
-              onChange={e => patchInfo('risksTitle', e.target.value)} placeholder="Bölmə adı (məcburi deyil)" />
-            <div className="sec-actions">
-              <button className="icon-btn ghost danger" title="Boşalt"
-                onClick={() => patchInfo('risks', [])}><Trash2 size={13} /></button>
-            </div>
-          </div>
-          <div className="sec-editor-row">
-            <ColorField label="" value={info.risksColor || ''}
-              onChange={v => patchInfo('risksColor', v)} onClear={() => patchInfo('risksColor', '')} />
-          </div>
-          <textarea rows={3} placeholder="Hər sətir ayrı risk (boş buraxsanız görünməyəcək)"
-            value={(info.risks || []).join('\n')}
-            onChange={e => patchInfo('risks', e.target.value.split('\n').filter(Boolean))} />
-        </div>
-
-        <button className="btn" onClick={addSection}><Plus size={14} /> Yeni bölmə əlavə et</button>
-        <button className="btn preview-btn" style={{ marginTop: 8 }} onClick={() => setShowPreview(v => !v)}>
-          <Eye size={14} /><span>{showPreview ? 'Önizləməni bağla' : 'Popup önizləməsi'}</span>
-        </button>
-        {showPreview && <PopupPreview node={node} />}
+        <PopupEditor node={node} patchInfo={patchInfoFields} />
       </MenuItem>
 
       <MenuItem pid="node-del" icon={<Trash2 size={14} />} label={t('nodemenu.delete', 'Sil')} danger action={deleteNode} />
     </>
-  );
-}
-
-/* live popup preview inside the editor */
-function PopupPreview({ node }) {
-  const info = node.info || {};
-  const general = (info.general || []).filter(Boolean);
-  const risks = (info.risks || []).filter(Boolean);
-  const sections = (info.sections || []);
-  return (
-    <div className="popup-preview-card">
-      <div className="popup-preview-title">
-        <Icon name={node.icon || 'Square'} size={15} style={node.color ? { color: node.color } : undefined} /> {node.text}
-      </div>
-      {general.length > 0 && (
-        <>
-          <div className="popup-preview-heading" style={info.generalColor ? { color: info.generalColor } : undefined}><Icon name={info.generalIcon || 'FileText'} size={13} /> {info.generalTitle || 'Ümumi məlumat'}</div>
-          {general.map((p, i) => <p key={i} className="popup-preview-p">{p}</p>)}
-        </>
-      )}
-      {sections.map((s, i) => {
-        const items = (s.items || []).filter(Boolean);
-        if (!items.length) return null;
-        return (
-          <div key={s.id || i}>
-            <div className="popup-preview-heading" style={s.color ? { color: s.color } : undefined}>
-              <Icon name={s.icon} size={13} /> {s.title}
-            </div>
-            {s.type === 'list'
-              ? <ul className="popup-preview-list">{items.map((r, j) => <li key={j}>{r}</li>)}</ul>
-              : items.map((p, j) => <p key={j} className="popup-preview-p">{p}</p>)}
-          </div>
-        );
-      })}
-      {risks.length > 0 && (
-        <div className="popup-preview-risk-box">
-          <div className="popup-preview-heading preview-risks" style={info.risksColor ? { color: info.risksColor } : undefined}><Icon name={info.risksIcon || 'AlertTriangle'} size={13} /> {info.risksTitle || 'Mümkün risklər'}</div>
-          <ul className="popup-preview-list">{risks.map((r, i) => <li key={i}>{r}</li>)}</ul>
-        </div>
-      )}
-    </div>
   );
 }

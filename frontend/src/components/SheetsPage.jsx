@@ -16,7 +16,7 @@ import SheetColumnFilter, { BLANK_FILTER_VALUE, uniqueColumnValues } from './She
 import './hesabat.css';
 import './homeArchive.css';
 import AiButton from './ai/AiButton.jsx';
-import AiSidebar from './ai/AiSidebar.jsx';
+import { AiBinding, useAi } from './ai/AiHost.jsx';
 import FileTypePill from './FileTypePill.jsx';
 
 /*
@@ -603,7 +603,7 @@ export default function SheetsPage({ kind = 'diagrams', onBack, onLogout, onOpen
   const [clearOpen, setClearOpen] = useState(false);
   const [linkFilter, setLinkFilter] = useState(null); // null | 'linked' | 'unlinked'
   const [infoOpen, setInfoOpen] = useState(false);
-  const [aiOpen, setAiOpen] = useState(false);
+  const { open: aiOpen, setOpen: setAiOpen } = useAi();
   const [archivedRows, setArchivedRows] = useState([]); // for the AI context
   const [drawerKey, setDrawerKey] = useState(0);
   const infoRef = useRef(null);
@@ -1512,9 +1512,7 @@ export default function SheetsPage({ kind = 'diagrams', onBack, onLogout, onOpen
       )}
 
       {isAdmin && (
-        <AiSidebar
-          open={aiOpen}
-          onClose={() => setAiOpen(false)}
+        <AiBinding
           context={aiContext}
           runActions={runAiActions}
           suggestions={[

@@ -10,6 +10,11 @@ import TemplateList from './components/pdfs/TemplateList.jsx';
 import JobList from './components/pdfs/JobList.jsx';
 import SheetsPage from './components/SheetsPage.jsx';
 import EditorBar from './components/EditorBar.jsx';
+import { syncMyInterface, AutoUpdater } from './components/UpdateCenter.jsx';
+import PresenceLayer from './components/PresenceLayer.jsx';
+import { AiProvider } from './components/ai/AiHost.jsx';
+import WelcomeSplash from './components/WelcomeSplash.jsx';
+import { ChangePasswordModal } from './components/AccountsCenter.jsx';
 import { LabelsProvider } from './labels/LabelsContext.jsx';
 
 // ---------------------------------------------------------------------
@@ -25,7 +30,9 @@ import { LabelsProvider } from './labels/LabelsContext.jsx';
 // BASE_PATH). Vite bakes this in from VITE_BASE at build time. Every
 // pushed/parsed URL below is relative to this — it must stay in front
 // of the app's own routes rather than get replaced by them.
-const BASE = (import.meta.env.BASE_URL || '/').replace(/\/+$/, ''); // '' or e.g. '/maps-panel'
+// '' or e.g. '/maps-panel'. An interface version is served from
+// <base>/ui/<version>/ (its files), but its page addresses stay <base>/…
+const BASE = (import.meta.env.BASE_URL || '/').replace(/\/ui\/[^/]+\/?$/, '').replace(/\/+$/, '');
 
 function withBase(subPath) {
   return BASE + subPath;
@@ -78,6 +85,17 @@ function viewFromPath(pathname) {
   return null;
 }
 
+// who is logged in, for the parts that read it straight from localStorage
+function rememberUser(u) {
+  localStorage.setItem('role', u.role);
+  localStorage.setItem('username', u.username);
+  localStorage.setItem('displayName', u.name || u.username);
+  if (u.dev) localStorage.setItem('dev', '1'); else localStorage.removeItem('dev');
+}
+function forgetUser() {
+  ['role', 'username', 'displayName', 'dev'].forEach(k => localStorage.removeItem(k));
+}
+
 export default function App() {
   // views: 'login' | 'hub' | 'diagrams' | 'pdfs' | 'templates' | 'files' | 'diagram' | 'sheets'
   const [view, setView] = useState('login');
@@ -95,6 +113,13 @@ export default function App() {
   const [templatesFocusId, setTemplatesFocusId] = useState(null);
   const [jobsFocusId, setJobsFocusId] = useState(null);
   const [bootChecking, setBootChecking] = useState(true);
+  const [welcome, setWelcome] = useState(null); // admin name, shown once right after login
+  function takeWelcome() {
+    try {
+      const n = sessionStorage.getItem('mp-welcome');
+      if (n) { sessionStorage.removeItem('mp-welcome'); setWelcome(n); }
+    } catch { /* ignore */ }
+  }
   // A diagram id parsed from a share link (?d=<id>&n=<nodeId>), pending until
   // the user is authenticated. Kept in a ref so it survives re-renders.
   const pendingShare = useRef(null);
@@ -150,15 +175,16 @@ export default function App() {
       }
       try {
         const me = await api.me();
+        // this user is on another interface version than this page → load theirs
+        if (await syncMyInterface()) return;
         setUser(me);
-        localStorage.setItem('role', me.role);
-        localStorage.setItem('username', me.username);
+        rememberUser(me);
+        takeWelcome();
         if (!consumeShare()) restoreFromUrl();
       } catch (e) {
         console.error(e);
         setToken(null);
-        localStorage.removeItem('role');
-        localStorage.removeItem('username');
+        forgetUser();
       } finally {
         setBootChecking(false);
       }
@@ -190,17 +216,19 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  function onLogin(data) {
+  async function onLogin(data) {
+    rememberUser(data);
+    // the welcome survives the reload onto this user's own interface version
+    if (data.role === 'admin') { try { sessionStorage.setItem('mp-welcome', data.name || data.username); } catch { /* ignore */ } }
+    if (await syncMyInterface()) return;
     setUser(data);
-    localStorage.setItem('role', data.role);
-    localStorage.setItem('username', data.username);
+    takeWelcome();
     if (!consumeShare()) restoreFromUrl();
   }
 
   function onLogout() {
     setToken(null);
-    localStorage.removeItem('role');
-    localStorage.removeItem('username');
+    forgetUser();
     setUser(null);
     setProcessId(null);
     setView('login');
@@ -351,8 +379,21 @@ export default function App() {
 
   return (
     <LabelsProvider enabled={!!user}>
+      <AiProvider enabled={user?.role === 'admin' && view !== 'login'}>
       {user?.role === 'editor_2' && <EditorBar onLogout={onLogout} />}
       {renderView()}
+      {user && view !== 'login' && (
+        <PresenceLayer
+          page={pathForView(view, { processId, sheetsKind })}
+          me={user}
+        />
+      )}
+      {user?.mustChange && (
+        <ChangePasswordModal forced onDone={() => setUser(u => ({ ...u, mustChange: false }))} onLogout={onLogout} />
+      )}
+      {user && view !== 'login' && <AutoUpdater />}
+      {welcome && <WelcomeSplash name={welcome} onDone={() => setWelcome(null)} />}
+      </AiProvider>
     </LabelsProvider>
   );
 }

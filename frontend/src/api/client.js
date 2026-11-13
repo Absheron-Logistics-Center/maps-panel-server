@@ -19,7 +19,7 @@ async function request(method, path, body) {
     method !== 'GET' &&
     localStorage.getItem('role') === 'editor_2' &&
     !path.startsWith('/api/labels') &&
-    path !== '/api/login' && path !== '/api/me'
+    path !== '/api/login' && path !== '/api/me' && path !== '/api/account/password'
   ) {
     return null;
   }
@@ -69,6 +69,11 @@ async function request(method, path, body) {
 export const api = {
   login: (username, password) => request('POST', '/api/login', { username, password }),
   me:    () => request('GET',  '/api/me'),
+  changePassword: (current, next) => request('POST', '/api/account/password', { current, next }),
+  // developer only
+  listUsers: () => request('GET', '/api/users'),
+  createUser: (data) => request('POST', '/api/users', data),
+  updateUser: (username, patch) => request('PUT', `/api/users/${encodeURIComponent(username)}`, patch),
   getHealth: () => request('GET', '/api/health'),
   // Returns { groups, processes }
   listProcesses: () => request('GET', '/api/processes'),

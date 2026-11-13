@@ -22,7 +22,7 @@ import {
   Sparkles, ArrowUp, Square, Paperclip, Camera, Brain, ChevronDown, Check, Copy,
   RotateCcw, History, SquarePen, Maximize2, Minimize2, FileText, FileSpreadsheet,
   X, Gauge, Trash2, AlertCircle, Loader2, ChevronRight, Pencil, Search, RefreshCw,
-  Eye, ListTree, Zap, ImagePlus, Cpu, ScanEye, GraduationCap, BookOpen, Plus
+  Eye, ListTree, Zap, ImagePlus, Cpu, ScanEye, GraduationCap, BookOpen, Plus, Stethoscope
 } from 'lucide-react';
 import { aiApi, peekReply } from '../../api/aiClient.js';
 import AiActionPopup from './AiActionPopup.jsx';
@@ -156,6 +156,7 @@ function viewLabel(ctx) {
   if (ctx.view === 'diagram') return ctx.diagram?.title ? `Diaqram · ${ctx.diagram.title}` : 'Diaqram';
   if (ctx.view === 'list') return 'İş axışları';
   if (ctx.view === 'hesabat') return 'Hesabat';
+  if (ctx.view === 'other') return 'Ümumi söhbət';
   return ctx.view || '';
 }
 
@@ -186,7 +187,7 @@ function actionsSummary(m) {
 
 /* ================================================================== */
 
-export default function AiSidebar({ open, onClose, context, runActions, suggestions = [], snapshot }) {
+export default function AiSidebar({ open, onClose, context, runActions, suggestions = [], snapshot, pageKey, onBusyChange }) {
   const [chats, setChats] = useState(loadChats);
   const [chatId, setChatId] = useState(() => {
     const id = lsGet(LS.active);
@@ -272,6 +273,15 @@ export default function AiSidebar({ open, onClose, context, runActions, suggesti
     setTimeout(() => inputRef.current?.focus(), 120);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
+
+  // the AI button shows a spinner while an answer runs in the background
+  useEffect(() => { onBusyChange?.(busy); }, [busy, onBusyChange]);
+
+  // moved to another section: the header shows where you are now
+  useEffect(() => {
+    try { setCtxLabel(viewLabel(context?.())); } catch { setCtxLabel(''); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageKey]);
 
   useEffect(() => {
     if (!busy) return;
@@ -539,7 +549,7 @@ export default function AiSidebar({ open, onClose, context, runActions, suggesti
         onStatus: s => {
           if (s.type === 'failover') patch(asstId, m => ({ failovers: [...(m.failovers || []), s] }));
           if (s.type === 'read') patch(asstId, m => ({ status: `Diaqram oxunur: #${s.id}${s.title ? ` ${s.title}` : ''}`, reads: [...(m.reads || []), { id: s.id, title: s.title }] }));
-          if (s.type === 'retry') patch(asstId, { status: 'Cavab düzgün formatda yenidən yazılır…' });
+          if (s.type === 'retry') patch(asstId, { status: s.reason === 'lint' ? 'Özünü yoxlayır: səhv yer/id tapıldı, düzəldilir…' : 'Cavab düzgün formatda yenidən yazılır…' });
         }
       });
 
@@ -692,6 +702,20 @@ export default function AiSidebar({ open, onClose, context, runActions, suggesti
   /* ---------- actions ---------- */
   async function confirmActions(actions) {
     const msgId = pending?.msgId;
+    // proposed on another screen? run them only there, never on this one
+    let here = null;
+    try { here = context(); } catch { /* ignore */ }
+    const from = pending?.ctx;
+    if (from?.view && here && (from.view !== here.view
+      || (from.view === 'diagram' && String(from.diagram?.id) !== String(here.diagram?.id))
+      || (from.view === 'hesabat' && from.kind !== here.kind))) {
+      setPending(null);
+      setMessages(m => [...m, {
+        id: uid('s'), role: 'system', error: true, at: Date.now(),
+        content: `Bu əməliyyatlar "${viewLabel(from)}" səhifəsi üçündür. Həmin səhifəyə qayıdın və "Bax və təsdiq et" ilə yenidən açın.`
+      }]);
+      return;
+    }
     setPending(null);
     setBusy(true);
     try {
@@ -1178,7 +1202,10 @@ function AssistantMessage({ m, isLast, busy, elapsed, hadAttachments, onCopy, on
             <div>
               <div className="aip-error-text">{m.error}</div>
               {isLast && !busy && (
-                <button className="aip-link" onClick={onRegenerate}><RotateCcw size={12} /> Yenidən cəhd et</button>
+                <div className="aip-error-links">
+                  <button className="aip-link" onClick={onRegenerate}><RotateCcw size={12} /> Yenidən cəhd et</button>
+                  <DiagButton />
+                </div>
               )}
             </div>
           </div>
@@ -1562,6 +1589,46 @@ function LearnPanel({ onToast }) {
           )}
         </>
       )}
+    </div>
+  );
+}
+
+
+/* "Why doesn't it answer here?" — runs /api/ai/diag on this deployment and
+   lists each provider key with the real reason it fails. */
+function DiagButton() {
+  const [state, setState] = useState(null); // null | 'busy' | result | {error}
+  async function run() {
+    setState('busy');
+    try { setState(await aiApi.diag()); }
+    catch (e) { setState({ error: e.message || 'Yoxlama alınmadı' }); }
+  }
+  if (state === null) {
+    return <button className="aip-link" onClick={run}><Stethoscope size={12} /> Səbəbi yoxla</button>;
+  }
+  if (state === 'busy') {
+    return <span className="aip-link"><Loader2 size={12} className="aip-spin" /> Yoxlanılır…</span>;
+  }
+  if (state.error) return <div className="aip-diag"><div className="aip-diag-sum bad">{state.error}</div></div>;
+  return (
+    <div className="aip-diag">
+      <div className={`aip-diag-sum ${state.ok ? 'good' : 'bad'}`}>{state.summary}</div>
+      <div className="aip-diag-rows">
+        {state.providers.map(p => (
+          <div key={p.name} className={`aip-diag-row ${p.ok ? 'ok' : p.configured ? 'fail' : 'off'}`}>
+            <span className="aip-diag-dot" />
+            <div className="aip-diag-main">
+              <b>{p.label}</b>
+              <span>{p.ok ? `İşləyir · ${p.model} · ${(p.ms / 1000).toFixed(1)} san` : p.hint || p.error || ''}</span>
+              {!p.ok && p.error && p.hint && <code>{p.error}</code>}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="aip-diag-foot">
+        {state.where === 'vercel' ? 'Vercel' : 'Öz server'} · Node {state.node} · limit {state.budgetSeconds} san
+        <button className="aip-link" onClick={run}><RotateCcw size={11} /> Yenə yoxla</button>
+      </div>
     </div>
   );
 }
